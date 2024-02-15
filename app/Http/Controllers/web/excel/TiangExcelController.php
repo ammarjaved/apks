@@ -45,10 +45,10 @@ class TiangExcelController extends Controller
 
             $res = $result->whereNotNull('review_date')
             ->join('savr_all_images', 'tbl_savr.id', '=', 'savr_all_images.id') // Replace 'your_model' with your actual table name
-    ->select(
-        'tbl_savr.*', 
-        'savr_all_images.images as images'
-    )
+            ->select( 
+                'tbl_savr.*', 
+                'savr_all_images.images as images'
+            )
             ->get()->makeHidden(['geom' , 'tiang_defect_image' , 'talian_defect_image' ,
              'umbang_defect_image' , 'ipc_defect_image' ,'jumper_image','kilat_defect_image',
              'servis_defect_image' ,'pembumian_defect_image','blackbox_defect_image','bekalan_dua_defect_image',

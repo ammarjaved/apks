@@ -362,7 +362,7 @@
                                         </thead>
                                         {{-- POLE --}}
                                         <tr>
-                                            <th rowspan="6">{{ __('messages.pole') }}</th>
+                                            <th rowspan="7">{{ __('messages.pole') }}</th>
 
                                             {!! getImageShow('cracked', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'cracked') !!}
 
@@ -382,6 +382,8 @@
                                             {!! getImageShow('creepers', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'creepers') !!}
 
                                         </tr>
+                                        <tr>{!! getImageShow('creepers_after', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'Creepers') !!}</tr>              
+
                                         <tr>
                                             {!! getImageShow('current_leakage', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'current_leakage') !!}
                                         </tr>
@@ -433,7 +435,7 @@
                                         {{-- Umbang --}}
 
                                         <tr>
-                                            <th rowspan="6">{{ __('messages.Umbang') }}</th>
+                                            <th rowspan="7">{{ __('messages.Umbang') }}</th>
                                             {!! getImageShow(
                                                 'breaking',
                                                 $data->umbang_defect,
@@ -447,6 +449,8 @@
                                             {!! getImageShow('creepers', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'Creepers') !!}
 
                                         </tr>
+
+                                        <tr>{!! getImageShow('creepers_after', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'Creepers') !!}</tr>              
 
                                         <tr>
                                             {!! getImageShow(

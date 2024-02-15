@@ -215,6 +215,12 @@
                     input_2.removeClass('d-none');
                     input_val.removeClass('d-none');
                     total_defects += 1;
+                    if (id == 'umbang_defect_creepers' || id == 'tiang_defect_creepers') {
+                    console.log(`${id}_after-image`);
+                    $(`#${id}_after-image`).removeClass('d-none')
+                    $(`#${id}_after-image-2`).removeClass('d-none')
+
+                }
                 }
             } else {
 
@@ -236,6 +242,10 @@
                     if (span_val.length > 0) {
                         span.html('')
                     }
+                    if (id == 'umbang_defect_creepers' || id == 'tiang_defect_creepers') {
+                        $(`#${id}_after-image`).addClass('d-none')
+                        $(`#${id}_after-image-2`).addClass('d-none')
+                    } 
                 }
                 console.log('unchecked');
             }

@@ -42,57 +42,57 @@ class TiangLKSController extends Controller
                 [
                     'defect_name'=>'tiang_defect',
                     'title'=>'Tiang',
-                    'defects'=>['cracked','leaning','dim','creepers','other' ,'other2']
+                    'defects'=>['cracked','leaning','dim','creepers','other'  ]
                 ],
                 [
                     'defect_name'=>'talian_defect',
                     'title'=>'Line',
-                    'defects'=>['joint','need_rentis','ground','other','other2']
+                    'defects'=>['joint','need_rentis','ground','other' ]
                 ],
                 [
                     'defect_name'=>'umbang_defect',
                     'title'=>'Umbang',
-                    'defects'=>['breaking','creepers','cracked','stay_palte', 'other','other2']
+                    'defects'=>['breaking','creepers','cracked','stay_palte', 'other' ]
                 ],
                 [
                     'defect_name'=>'ipc_defect',
                     'title'=>'IPC',
-                    'defects'=>['burn','other','other2']
+                    'defects'=>['burn','other' ]
                 ],
                 [
                     'defect_name'=>'blackbox_defect',
                     'title'=>'Blackbox',
-                    'defects'=>['cracked','other','other2']
+                    'defects'=>['cracked','other' ]
                 ],
                 [
                     'defect_name'=>'jumper',
                     'title'=>'Jumper',
-                    'defects'=>['sleeve','burn','other','other2']
+                    'defects'=>['sleeve','burn','other' ]
                 ],
                 [
                     'defect_name'=>'kilat_defect',
                     'title'=>'Kilat',
-                    'defects'=>['broken','other','other2']
+                    'defects'=>['broken','other' ]
                 ],
                 [
                     'defect_name'=>'servis_defect',
                     'title'=>'Servis',
-                    'defects'=>['roof','won_piece','other','other2']
+                    'defects'=>['roof','won_piece','other' ]
                 ],
                 [
                     'defect_name'=>'pembumian_defect',
                     'title'=>'Pembumian',
-                    'defects'=>['netural','other','other2']
+                    'defects'=>['netural','other' ]
                 ],
                 [
                     'defect_name'=>'bekalan_dua_defect',
                     'title'=>'Papan tanda',
-                    'defects'=>['damage','other','other2']
+                    'defects'=>['damage','other' ]
                 ],
                 [
                     'defect_name'=>'kaki_lima_defect',
                     'title'=>'Sesalur Kaki Lima',
-                    'defects'=>['date_wire','burn','other','other2']
+                    'defects'=>['date_wire','burn','other' ]
                 ],
             ];
 
@@ -202,7 +202,7 @@ class TiangLKSController extends Controller
             $fpdf->Ln();
 
             $imagePath = public_path('assets/web-images/main-logo.png');
-            $fpdf->Image($imagePath, 190, 20, 57, 0);
+            // $fpdf->Image($imagePath, 190, 20, 57, 0);
             $fpdf->SetFont('Arial', 'B', 9);
 
 
@@ -595,32 +595,12 @@ class TiangLKSController extends Controller
 
                     if ($row->{$defectName} == 'Ya' && $row->{$defectImage} != '') // check if defect is 'Yes' and Defect Image column is  not empty
                     {
+                        $json_dec = json_decode($row->{$defectImage});    // image column is json so decode json
 
-
-
-                      $json_dec = json_decode($row->{$defectImage});    // image column is json so decode json
-
-
-
-                        if (is_object($json_dec)) {
-                            // Access the property using -> (object syntax)
-                            $imagePath = isset($json_dec->{$defect}) ? $json_dec->{$defect} : '';
-                        } elseif (is_array($json_dec)) {
-                            // Access the property using array syntax
-                            $imagePath = isset($json_dec[$defect]) ? $json_dec[$defect] : '';
-                        }
-
-                        if ($imagePath && file_exists(public_path($imagePath))) // check image path is not empty and image exists
-                        {
-                            $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18); //add image
-                        }
-
-                        $fpdf->Cell(25, 7, $value['title'].' '.$defect, 1);
-                        $len = $len + 25;
-
-                        if($defect=='other'){
-                           // return $defect;
-                            $defect='other2';
+                         
+                        for ($i=0; $i < 2; $i++) 
+                        { 
+                            $defect = $i == 1 ? $defect.'2' : $defect;
 
                             if (is_object($json_dec)) {
                                 // Access the property using -> (object syntax)
@@ -632,43 +612,53 @@ class TiangLKSController extends Controller
 
                             if ($imagePath && file_exists(public_path($imagePath))) // check image path is not empty and image exists
                             {
-                              //   return $imagePath;
                                 $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18); //add image
-                                $fpdf->Cell(25, 7,$value['title'].' '.$defect, 1);
-                                $len = $len + 25;
+                                $fpdf->Cell(35, 7, $value['title'].' '.$defect, 1);
+                                $len = $len + 35;
+                            }
+
+                            if ($len == 275)
+                        {
+                        $len = 0 ;
+                        $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln();
+                        }   
+                        }
+
+                        
+                        if($defect=='creepers' || $defect=='creepers2')
+                        {
+                            $defect = 'creepers_after1';
+                            for ($i=0; $i < 2; $i++) 
+                            { 
+                                $defect = $i == 1 ? 'creepers_after2' : $defect;
+    
+                                if (is_object($json_dec)) {
+                                    // Access the property using -> (object syntax)
+                                    $imagePath = isset($json_dec->{$defect}) ? $json_dec->{$defect} : '';
+                                } elseif (is_array($json_dec)) {
+                                    // Access the property using array syntax
+                                    $imagePath = isset($json_dec[$defect]) ? $json_dec[$defect] : '';
+                                }
+    
+                                if ($imagePath && file_exists(public_path($imagePath))) // check image path is not empty and image exists
+                                {
+                                    $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18); //add image
+                                    $fpdf->Cell(35, 7, $value['title'].' '.$defect, 1);
+                                    $len = $len + 35;
+                                }
+    
+                                if ($len == 275)
+                                {
+                                    $len = 0 ;
+                                    $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln();
+                                }
                             }
                         }
 
-                        if($defect=='creepers'){
-                            // return $defect;
-                             $defect='creepers_after1';
-
-                             if (is_object($json_dec)) {
-                                 // Access the property using -> (object syntax)
-                                 $imagePath = isset($json_dec->{$defect}) ? $json_dec->{$defect} : '';
-                             } elseif (is_array($json_dec)) {
-                                 // Access the property using array syntax
-                                 $imagePath = isset($json_dec[$defect]) ? $json_dec[$defect] : '';
-                             }
-
-                             if ($imagePath && file_exists(public_path($imagePath))) // check image path is not empty and image exists
-                             {
-                               //   return $imagePath;
-                                 $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18); //add image
-                                 $fpdf->Cell(35, 7,$value['title'].' '.$defect, 1);
-                                 $len = $len + 25;
-                             }
-                         }
-
 
                     }
 
-                    if ($len == 275)
-                    {
-                        $len = 0 ;
-                        $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln();
-                    }
-
+                
                 }
 
             }

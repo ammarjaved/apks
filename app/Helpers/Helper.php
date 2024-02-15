@@ -109,23 +109,31 @@ function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
     $lab_name = __('messages.' . $lab_name);
     $html = '';
 
-    // Check for checked checkbox
-    $key_exist = !empty($arr) && array_key_exists($key, $arr) && $arr[$key] == true;
+    
 
     $id = $arr_name . '_' . $key;
     $name = $arr_name . '[' . $key . ']';
-    $image_name = $arr_name . '_image[' . $key . ']';
+    $image1 = $key == 'creepers_after' ? 'creepers_after1' : $key;
+
+    $image_name = $arr_name . '_image[' . $image1 . ']';
     $image_name_2 = "{$arr_name}_image[{$key}2]";
 
     // Check if $key is "other" to decide the CSS classes
     $class = $key != 'other' ? 'd-flex' : '';
 
-    $html .=
-        "<td class='$class'>
-                <input type='checkbox' name='$name' id='$id' " .
-        ($key_exist? 'checked' : '') .
-        " class='form-check'>
+    if ($key  !== 'creepers_after') {
+        // Check for checked checkbox
+        $key_exist = !empty($arr) && array_key_exists($key, $arr) && $arr[$key] == true;
+        $html .= "<td class='$class'>
+                        <input type='checkbox' name='$name' id='$id' " . ($key_exist? 'checked' : '') . " class='form-check'>
                 <label class='text-capitalize' for='$id'> $lab_name</label>";
+    }else{
+        // Check for checked checkbox
+        $key_exist = !empty($arr) && array_key_exists('creepers', $arr) && $arr['creepers'] == true;
+        $html .=
+        "<td class='$class'><label class='text-capitalize' for='$id'> $lab_name After</label>";
+    }
+   
 
     if ($key == 'other') {
         $key2 = $key . '_value';
@@ -133,39 +141,29 @@ function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
         $html .= "<input type='text' name='{$arr_name}[{$key2}]' id='{$id}-input'  value='$otherValue' class='form-control " . ($key_exist ? '' : 'd-none') . "' placeholder='mention other defect'>";
     }
 
+
     $html .=
         "</td>
-              <td>
-                <input type='file' name='$image_name' id='{$id}-image' class='" .
-        ($key_exist ? '' : 'd-none') .
-        " form-control'>
-                <input type='file' name='$image_name_2' id='{$id}-image-2' class='" .
-        ($key_exist ? '' : 'd-none') .
-        " form-control'>
-              </td>
-              <td>";
+            <td>
+                <input type='file' name='$image_name' id='{$id}-image' class='" . ($key_exist ? '' : 'd-none') . " form-control' accept='image/*'>
+                <input type='file' name='$image_name_2' id='{$id}-image-2' class='" . ($key_exist ? '' : 'd-none') . " form-control' accept='image/*'>
+            </td>
+            <td>";
 
-    if ($key_exist && $arr[$key] == true && $img_arr != '') {
-        if (array_key_exists($key, $img_arr) && file_exists(public_path($img_arr[$key])) && $img_arr[$key] != '') {
+    if ($key_exist   && $img_arr != '') { 
+        if (array_key_exists($image1, $img_arr) && file_exists(public_path($img_arr[$image1])) && $img_arr[$image1] != '') {
+             
             $html .=
-                "<a href='" .
-                URL::asset($img_arr[$key]) .
-                "' data-lightbox='roadtrip'>
-                <img src='" .
-                URL::asset($img_arr[$key]) .
-                "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
-            </a>";
+                "<a href='" . URL::asset($img_arr[$image1]) . "' data-lightbox='roadtrip'>
+                    <img src='" . URL::asset($img_arr[$image1]) . "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
+                </a>";
         }
 
         if (array_key_exists($key . '2', $img_arr) && file_exists(public_path($img_arr[$key . '2'])) && $img_arr[$key . '2'] != '') {
             $html .=
-                "<a href='" .
-                URL::asset($img_arr[$key . '2']) .
-                "' data-lightbox='roadtrip'>
-                <img src='" .
-                URL::asset($img_arr[$key . '2']) .
-                "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
-            </a>";
+                "<a href='" . URL::asset($img_arr[$key . '2']) . "' data-lightbox='roadtrip'>
+                    <img src='" . URL::asset($img_arr[$key . '2']) . "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
+                </a>";
         }
         # code...
     }
@@ -188,13 +186,18 @@ function getImageShow($key, $arr, $arr_name, $img_arr, $lab_name)
     // Check if $key is "other" to decide the CSS classes
     $class = $key != 'other' ? 'd-flex' : '';
 
-    $html .=
-        "<td class='$class'>
-                <input type='checkbox' name='$name' id='$id' " .
-        ($key_exist ? 'checked' : '') .
-        " class='form-check' disabled>
+    if ($key  !== 'creepers_after') {
+        // Check for checked checkbox
+        $key_exist = !empty($arr) && array_key_exists($key, $arr) && $arr[$key] == true;
+        $html .= "<td class='$class'>
+                        <input type='checkbox' name='$name' id='$id' " . ($key_exist? 'checked' : '') . " disabled class='form-check'>
                 <label class='text-capitalize' for='$id'> $lab_name</label>";
-
+    }else{
+        // Check for checked checkbox
+        $key_exist = !empty($arr) && array_key_exists('creepers', $arr) && $arr['creepers'] == true;
+        $html .=
+        "<td class='$class'><label class='text-capitalize' for='$id'> $lab_name After</label>";
+    }
     if ($key == 'other') {
         $key2 = $key . '_value';
         $otherValue = isset($arr[$key2]) ? $arr[$key2] : '';
@@ -205,14 +208,12 @@ function getImageShow($key, $arr, $arr_name, $img_arr, $lab_name)
     <td class=''>";
 
     if ($key_exist && $img_arr != '') {
-        if (array_key_exists($key, $img_arr) && file_exists(public_path($img_arr[$key])) && $img_arr[$key] != '') {
+        $image1 = $key == 'creepers_after' ? 'creepers_after1' : $key;
+        if (array_key_exists($image1, $img_arr) && file_exists(public_path($img_arr[$image1])) && $img_arr[$image1] != '') {
+             
             $html .=
-                "<a href='" .
-                URL::asset($img_arr[$key]) .
-                "' data-lightbox='roadtrip'>
-                    <img src='" .
-                URL::asset($img_arr[$key]) .
-                "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
+                "<a href='" . URL::asset($img_arr[$image1]) . "' data-lightbox='roadtrip'>
+                    <img src='" . URL::asset($img_arr[$image1]) . "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
                 </a>";
         }
 
