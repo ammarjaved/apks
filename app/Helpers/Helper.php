@@ -52,7 +52,7 @@ function excelCheckBOc($key, $array)
 
     // return $array;
     if ($array != null && isset($array->{$key})) {
-       return $array->{$key} ? '/':'';
+       return $array->{$key} ? 'Yes':'No';
     }
     return "";
 

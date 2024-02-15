@@ -598,9 +598,9 @@ class TiangLKSController extends Controller
                         $json_dec = json_decode($row->{$defectImage});    // image column is json so decode json
 
                          
-                        for ($i=0; $i < 2; $i++) 
-                        { 
-                            $defect = $i == 1 ? $defect.'2' : $defect;
+                        // for ($i=0; $i < 2; $i++) 
+                        // { 
+                        //     $defect = $i == 1 ? $defect.'2' : $defect;
 
                             if (is_object($json_dec)) {
                                 // Access the property using -> (object syntax)
@@ -618,19 +618,45 @@ class TiangLKSController extends Controller
                             }
 
                             if ($len == 275)
-                        {
-                        $len = 0 ;
-                        $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln();
-                        }   
-                        }
+                                {
+                                $len = 0 ;
+                                $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln();
+                                }   
+                        // }
 
                         
-                        if($defect=='creepers' || $defect=='creepers2')
+                        if($defect=='other' )
+                        {
+                            $defect = 'other2';
+                           
+                                if (is_object($json_dec)) {
+                                    // Access the property using -> (object syntax)
+                                    $imagePath = isset($json_dec->{$defect}) ? $json_dec->{$defect} : '';
+                                } elseif (is_array($json_dec)) {
+                                    // Access the property using array syntax
+                                    $imagePath = isset($json_dec[$defect]) ? $json_dec[$defect] : '';
+                                }
+    
+                                if ($imagePath && file_exists(public_path($imagePath))) // check image path is not empty and image exists
+                                {
+                                    $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18); //add image
+                                    $fpdf->Cell(35, 7, $value['title'].' '.$defect, 1);
+                                    $len = $len + 35;
+                                }
+    
+                                if ($len == 275)
+                                {
+                                    $len = 0 ;
+                                    $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln();
+                                }
+                        }
+
+                        if($defect=='creepers' )
                         {
                             $defect = 'creepers_after1';
-                            for ($i=0; $i < 2; $i++) 
-                            { 
-                                $defect = $i == 1 ? 'creepers_after2' : $defect;
+                            // for ($i=0; $i < 2; $i++) 
+                            // { 
+                            //     $defect = $i == 1 ? 'creepers_after2' : $defect;
     
                                 if (is_object($json_dec)) {
                                     // Access the property using -> (object syntax)
@@ -652,7 +678,7 @@ class TiangLKSController extends Controller
                                     $len = 0 ;
                                     $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln();
                                 }
-                            }
+                            // }
                         }
 
 

@@ -45,11 +45,9 @@ class TiangExcelController extends Controller
 
             $res = $result->whereNotNull('review_date')
             ->join('savr_all_images', 'tbl_savr.id', '=', 'savr_all_images.id') // Replace 'your_model' with your actual table name
-            ->select( 
-                'tbl_savr.*', 
-                'savr_all_images.images as images'
-            )
-            ->get()->makeHidden(['geom' , 'tiang_defect_image' , 'talian_defect_image' ,
+            ->select(  'tbl_savr.*',  'savr_all_images.images as images' )
+            ->get()
+            ->makeHidden(['geom' , 'tiang_defect_image' , 'talian_defect_image' ,
              'umbang_defect_image' , 'ipc_defect_image' ,'jumper_image','kilat_defect_image',
              'servis_defect_image' ,'pembumian_defect_image','blackbox_defect_image','bekalan_dua_defect_image',
              'kaki_lima_defect_image','tapak_road_img','tapak_sidewalk_img','tapak_sidewalk_img','tapak_no_vehicle_entry_img','kawasan_bend_img',
@@ -77,8 +75,6 @@ class TiangExcelController extends Controller
             ->selectRaw("SUM(CASE WHEN (umbang_defect->'breaking')::text <> '' AND (bare_span->'breaking')::text <> 'null'THEN 0 ELSE 1 END) as bare_s7132")
             ->selectRaw("SUM(CASE WHEN (blackbox_defect->'cracked')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (blackbox_defect->'other')::text = 'true' THEN 1 ELSE 0 END) as blackbox")
             ->selectRaw("SUM(CASE WHEN (ipc_defect->'burn')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (ipc_defect->'other')::text = 'true' THEN 1 ELSE 0 END) as ipc")
-
-
             ->selectRaw("SUM(CASE WHEN (umbang_defect->'breaking')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (umbang_defect->'creepers')::text = 'true' THEN 1 ELSE 0 END
             + CASE WHEN (umbang_defect->'cracked')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (umbang_defect->'stay_palte')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (umbang_defect->'other')::text = 'true' THEN 1 ELSE 0 END
             ) as umbagan")
@@ -263,7 +259,6 @@ class TiangExcelController extends Controller
                     }
                     // $secondWorksheet->setCellValue('AK' . $i, $secondRec->total_defects);
                     $secondWorksheet->setCellValue('BC' . $i, $secondRec->images);
-
                     $secondWorksheet->setCellValue('BD' . $i, $secondRec->coords);
 
                     // $secondWorksheet->setCellValue('BH' . $i, $secondRec->remarks);
@@ -333,17 +328,17 @@ $secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
 
                     if ($rec->tapak_condition != '') {
                         $tapak_condition = json_decode($rec->tapak_condition);
-                        $thirdWorksheet->setCellValue('F' . $i, excelCheckBOc('road', $tapak_condition));
-                        $thirdWorksheet->setCellValue('G' . $i, excelCheckBOc('side_walk', $tapak_condition));
-                        $thirdWorksheet->setCellValue('H' . $i, excelCheckBOc('vehicle_entry', $tapak_condition));
+                        $thirdWorksheet->setCellValue('F' . $i, excelCheckBOc('road', $tapak_condition) == 'Yes' ?? '/' );
+                        $thirdWorksheet->setCellValue('G' . $i, excelCheckBOc('side_walk', $tapak_condition) == 'Yes' ?? '/' );
+                        $thirdWorksheet->setCellValue('H' . $i, excelCheckBOc('vehicle_entry', $tapak_condition) == 'Yes' ?? '/' );
                     }
 
                     if ($rec->kawasan != '') {
                         $kawasan = json_decode($rec->kawasan);
-                        $thirdWorksheet->setCellValue('I' . $i, excelCheckBOc('bend', $kawasan));
-                        $thirdWorksheet->setCellValue('J' . $i, excelCheckBOc('raod', $kawasan));
-                        $thirdWorksheet->setCellValue('K' . $i, excelCheckBOc('forest', $kawasan));
-                        $thirdWorksheet->setCellValue('L' . $i, excelCheckBOc('other', $kawasan));
+                        $thirdWorksheet->setCellValue('I' . $i, excelCheckBOc('bend', $kawasan) == 'Yes' ?? '/' );
+                        $thirdWorksheet->setCellValue('J' . $i, excelCheckBOc('raod', $kawasan) == 'Yes' ?? '/' );
+                        $thirdWorksheet->setCellValue('K' . $i, excelCheckBOc('forest', $kawasan) == 'Yes' ?? '/' );
+                        $thirdWorksheet->setCellValue('L' . $i, excelCheckBOc('other', $kawasan) == 'Yes' ?? '/' );
                     }
 
                     $thirdWorksheet->setCellValue('M' . $i, $rec->jarak_kelegaan);
