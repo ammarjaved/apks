@@ -555,7 +555,7 @@
                             <label for="area_other">{{ __('messages.others') }} </label>
                             @if (checkCheckBox('other', $data->kawasan) != 'checked')
                             @endif
-                            <input type="text" name="kawasan[other_input]"
+                            <input type="text" name="kawasan[other_value]"
                                 value="{{ checkCheckBox('other', $data->kawasan) != 'checked' ? '' : $data->kawasan['other'] }}"
                                 id="area_other-input"
                                 class="form-control {{ checkCheckBox('other', $data->kawasan) != 'checked' ? 'd-none' : '' }}"

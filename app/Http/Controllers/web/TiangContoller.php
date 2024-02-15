@@ -146,7 +146,7 @@ class TiangContoller extends Controller
                 }
 
                 if ($key != 'tapak_condition') {
-                    $def['other_input'] = $request->{"$key.other_input"};
+                    $def['other_value'] = $request->{"$key.other_value"};
                 }
                 $data->{$key} = json_encode($def);
 
@@ -319,7 +319,7 @@ class TiangContoller extends Controller
         
 
                 if ($key != 'tapak_condition') {
-                    $def['other_input'] = $request->{"$key.other_input"};
+                    $def['other_value'] = $request->{"$key.other_value"};
                 }
                 $data->{$key} = json_encode($def);
 
