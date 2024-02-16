@@ -255,9 +255,37 @@ class TiangExcelController extends Controller
                         $secondWorksheet->setCellValue('AY' . $i, excelCheckBOc('burn', $kaki_lima_defect));
                     }
                     // $secondWorksheet->setCellValue('AK' . $i, $secondRec->total_defects);
-                    $secondWorksheet->setCellValue('BC' . $i, $secondRec->images);
-                    $secondWorksheet->setCellValue('BD' . $i, $secondRec->coords);
-                    // $secondWorksheet->setCellValue('BH' . $i, $secondRec->remarks);
+                    $secondWorksheet->setCellValue('BL' . $i, $secondRec->images);
+                    $secondWorksheet->setCellValue('BC' . $i, $secondRec->coords);
+                    $repair_date = $rec->repair_date != ''?date('Y-m-d', strtotime($rec->repair_date)) : '';
+                    $secondWorksheet->setCellValue('BF' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AN' . $i, $secondRec->remarks);
+
+
+                    $secondWorksheet->setCellValue('L' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('N' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('P' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('R' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('T' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('V' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('X' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('Z' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AB' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AD' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AF' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AH' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AJ' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AL' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AN' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AP' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AR' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AT' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AV' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AX' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('AZ' . $i, $repair_date);
+                    $secondWorksheet->setCellValue('BB' . $i, $repair_date);
+
+
                     $i++;
                 }
                 $secondWorksheet->calculateColumnWidths();
@@ -324,17 +352,17 @@ class TiangExcelController extends Controller
 
                     if ($rec->tapak_condition != '') {
                         $tapak_condition = json_decode($rec->tapak_condition);
-                        $thirdWorksheet->setCellValue('F' . $i, excelCheckBOc('road', $tapak_condition) == 'Yes' ?? '/' );
-                        $thirdWorksheet->setCellValue('G' . $i, excelCheckBOc('side_walk', $tapak_condition) == 'Yes' ?? '/' );
-                        $thirdWorksheet->setCellValue('H' . $i, excelCheckBOc('vehicle_entry', $tapak_condition) == 'Yes' ?? '/' );
+                        $thirdWorksheet->setCellValue('F' . $i, excelCheckBOc('road', $tapak_condition) == '1' ?? '/' );
+                        $thirdWorksheet->setCellValue('G' . $i, excelCheckBOc('side_walk', $tapak_condition) == '1' ?? '/' );
+                        $thirdWorksheet->setCellValue('H' . $i, excelCheckBOc('vehicle_entry', $tapak_condition) == '1' ?? '/' );
                     }
 
                     if ($rec->kawasan != '') {
                         $kawasan = json_decode($rec->kawasan);
-                        $thirdWorksheet->setCellValue('I' . $i, excelCheckBOc('bend', $kawasan) == 'Yes' ?? '/' );
-                        $thirdWorksheet->setCellValue('J' . $i, excelCheckBOc('raod', $kawasan) == 'Yes' ?? '/' );
-                        $thirdWorksheet->setCellValue('K' . $i, excelCheckBOc('forest', $kawasan) == 'Yes' ?? '/' );
-                        $thirdWorksheet->setCellValue('L' . $i, excelCheckBOc('other', $kawasan) == 'Yes' ?? '/' );
+                        $thirdWorksheet->setCellValue('I' . $i, excelCheckBOc('bend', $kawasan) == '1' ?? '/' );
+                        $thirdWorksheet->setCellValue('J' . $i, excelCheckBOc('raod', $kawasan) == '1' ?? '/' );
+                        $thirdWorksheet->setCellValue('K' . $i, excelCheckBOc('forest', $kawasan) == '1' ?? '/' );
+                        $thirdWorksheet->setCellValue('L' . $i, excelCheckBOc('other', $kawasan) == '1' ?? '/' );
                     }
 
                     $thirdWorksheet->setCellValue('M' . $i, $rec->jarak_kelegaan);

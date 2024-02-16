@@ -82,8 +82,8 @@ class SubstationExcelController extends Controller
                     // $worksheet->setCellValue('O' . $i, $rec->building_status);
                     $worksheet->setCellValue('U' . $i, $rec->advertise_poster_status);
                     $worksheet->setCellValue('V' . $i, $rec->total_defects);
-
-                    $worksheet->setCellValue('W' . $i, 'http://121.121.232.53:8090/'.$rec->substation_image_1
+                    $worksheet->setCellValue('W' . $i, $rec->repair_date != ''?date('Y-m-d', strtotime($rec->repair_date)) : '');
+                    $worksheet->setCellValue('X' . $i, 'http://121.121.232.53:8090/'.$rec->substation_image_1
                     .' http://121.121.232.53:8090/'.$rec->substation_image_2
                     .' http://121.121.232.53:8090/'.$rec->image_gate
                     .' http://121.121.232.53:8090/'.$rec->image_gate_2

@@ -58,8 +58,9 @@ class FeederPillarExcelController extends Controller
                     $worksheet->setCellValue('R' . $i, $rec->rust_status);
                     $worksheet->setCellValue('S' . $i, $rec->paint_status);
                     $worksheet->setCellValue('T' . $i, $rec->advertise_poster_status);
+                    $worksheet->setCellValue('U' . $i, $rec->repair_date != ''?date('Y-m-d', strtotime($rec->repair_date)) : '');
 
-                    $worksheet->setCellValue('U' . $i, 'http://121.121.232.53:8090/'.$rec->feeder_pillar_image_1
+                    $worksheet->setCellValue('V' . $i, 'http://121.121.232.53:8090/'.$rec->feeder_pillar_image_1
                     .' , http://121.121.232.53:8090/'.$rec->feeder_pillar_image_2
                     .' , http://121.121.232.53:8090/'.$rec->image_name_plate
                     .' , http://121.121.232.53:8090/'.$rec->image_gate
