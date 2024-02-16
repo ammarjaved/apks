@@ -113,6 +113,7 @@ class TiangMapController extends Controller
                     }
                 }
         
+                
 
                 if ($key != 'tapak_condition') {
                     $def['other_value'] = $request->{"$key.other_value"};
