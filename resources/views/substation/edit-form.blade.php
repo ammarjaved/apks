@@ -1,4 +1,5 @@
-@extends('layouts.app')
+@extends('layouts.map_layout', ['page_title' => 'Substation'])
+
 
 @section('css')
     <!-- Fonts and icons -->
