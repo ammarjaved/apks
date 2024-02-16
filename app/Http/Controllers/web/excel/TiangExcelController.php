@@ -215,16 +215,13 @@ class TiangExcelController extends Controller
                         $secondWorksheet->setCellValue('AA' . $i, excelCheckBOc('cracked', $umbang_defect));
                         $secondWorksheet->setCellValue('AC' . $i, excelCheckBOc('stay_palte', $umbang_defect));
                         // $secondWorksheet->setCellValue('Y' . $i, excelCheckBOc('current_leakage', $umbang_defect));
-
                     }
 
                     if ($secondRec->ipc_defect != '') {
-
                         $secondWorksheet->setCellValue('AE' . $i, excelCheckBOc('burn', json_decode($secondRec->ipc_defect)));
                     }
 
                     if ($secondRec->blackbox_defect != '') {
-
                         $secondWorksheet->setCellValue('AG' . $i, excelCheckBOc('cracked', json_decode($secondRec->blackbox_defect)));
                     }
 
@@ -260,7 +257,6 @@ class TiangExcelController extends Controller
                     // $secondWorksheet->setCellValue('AK' . $i, $secondRec->total_defects);
                     $secondWorksheet->setCellValue('BC' . $i, $secondRec->images);
                     $secondWorksheet->setCellValue('BD' . $i, $secondRec->coords);
-
                     // $secondWorksheet->setCellValue('BH' . $i, $secondRec->remarks);
                     $i++;
                 }
@@ -274,44 +270,44 @@ class TiangExcelController extends Controller
                 $i = 11;
                 $thirdWorksheet = $spreadsheet->getSheet(2);
 
-//                 $commonStyle = $thirdWorksheet->getDefaultStyle()->getAlignment();
-// $commonStyle->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-// $commonStyle->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
+                //                 $commonStyle = $thirdWorksheet->getDefaultStyle()->getAlignment();
+                // $commonStyle->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+                // $commonStyle->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
 
-// // Set font size for all cells
-// $commonStyle->setFont(['size' => 12]);
-
-
-$thirdWorksheet->getStyle('A:O')->getAlignment()->setHorizontal('center');
-$secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
+                // // Set font size for all cells
+                // $commonStyle->setFont(['size' => 12]);
 
 
-// $borderStyle = [
-//     'borders' => [
-//         'outline' => [
-//             'borderStyle' => Border::BORDER_THICK,
-//             'color' => ['argb' => 'FFFF0000'], // You can adjust the color code as needed
-//         ],
-//     ],
-// ];
+                $thirdWorksheet->getStyle('A:O')->getAlignment()->setHorizontal('center');
+                $secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
 
-// $thirdWorksheet->getStyle('A:O')->applyFromArray($borderStyle);
-// $thirdWorksheet->getStyle('A:O')->getBorders()
-// ->getOutline()
-// ->setBorderStyle(Border::BORDER_THICK)
-// ->setColor(new Color('FFFF0000'));
 
-// $thirdWorksheet->getStyle('A:O')->applyFromArray([
-//     'alignment' => [
-//         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-//         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-//     ],
-//     'borders' => [
-//         'allBorders' => [
-//             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-//         ],
-//     ],
-// ]);
+                // $borderStyle = [
+                //     'borders' => [
+                //         'outline' => [
+                //             'borderStyle' => Border::BORDER_THICK,
+                //             'color' => ['argb' => 'FFFF0000'], // You can adjust the color code as needed
+                //         ],
+                //     ],
+                // ];
+
+                // $thirdWorksheet->getStyle('A:O')->applyFromArray($borderStyle);
+                // $thirdWorksheet->getStyle('A:O')->getBorders()
+                // ->getOutline()
+                // ->setBorderStyle(Border::BORDER_THICK)
+                // ->setColor(new Color('FFFF0000'));
+
+                // $thirdWorksheet->getStyle('A:O')->applyFromArray([
+                //     'alignment' => [
+                //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
+                //         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
+                //     ],
+                //     'borders' => [
+                //         'allBorders' => [
+                //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
+                //         ],
+                //     ],
+                // ]);
                 // $thirdWorksheet->setCellValue('K4' , date('Y-m-d'));
 
                 foreach ($res as $rec) {
