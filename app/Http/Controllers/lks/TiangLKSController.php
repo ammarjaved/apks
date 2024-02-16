@@ -202,7 +202,7 @@ class TiangLKSController extends Controller
             $fpdf->Ln();
 
             $imagePath = public_path('assets/web-images/main-logo.png');
-            // $fpdf->Image($imagePath, 190, 20, 57, 0);
+            $fpdf->Image($imagePath, 190, 20, 57, 0);
             $fpdf->SetFont('Arial', 'B', 9);
 
 
