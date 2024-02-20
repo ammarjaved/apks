@@ -684,11 +684,11 @@
                             data[i].link_box + '</td><td>' + data[i].cable_bridge + '</td></tr>';
 
                         totals.patroling += parseFloat(data[i].patroling) || 0;
-                        totals.substation += parseFloat(data[i].substation) || 0;
-                        totals.feeder_pillar += parseFloat(data[i].feeder_pillar) || 0;
-                        totals.tiang += parseFloat(data[i].tiang) || 0;
-                        totals.link_box += parseFloat(data[i].link_box) || 0;
-                        totals.cable_bridge += parseFloat(data[i].cable_bridge) || 0;
+                        totals.substation += parseInt(data[i].substation) || 0;
+                        totals.feeder_pillar += parseInt(data[i].feeder_pillar) || 0;
+                        totals.tiang += parseInt(data[i].tiang) || 0;
+                        totals.link_box += parseInt(data[i].link_box) || 0;
+                        totals.cable_bridge += parse(data[i].cable_bridge) || 0;
                     }
 
                     $('#stats_table').html(str);

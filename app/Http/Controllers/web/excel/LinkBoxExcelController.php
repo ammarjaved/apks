@@ -60,8 +60,9 @@ class LinkBoxExcelController extends Controller
 
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
-                $writer->save(public_path('assets/updated-excels/') . 'qr-link-box.xlsx');
-                return response()->download(public_path('assets/updated-excels/') . 'qr-link-box.xlsx');
+                $filename = 'qr-link-box'.rand(2,10000).'.xlsx';
+                $writer->save(public_path('assets/updated-excels/') . $filename);
+                return response()->download(public_path('assets/updated-excels/') . $filename)->deleteFileAfterSend(true);
             } else {
                 return redirect()
                     ->back()
