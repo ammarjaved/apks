@@ -113,9 +113,9 @@ class TiangExcelController extends Controller
 
 
                 $worksheet->setCellValue('D4', $ba);
-                $i = 8;
+                $i = 5;
                 foreach ($roadStatistics as $rec) {
-                    $worksheet->setCellValue('B' . $i, $i - 7);
+                    $worksheet->setCellValue('B' . $i, $i - 4);
                     $worksheet->setCellValue('H' . $i, $rec->road);
                     // $worksheet->setCellValue('F' . $i, $rec->fp_name);
                     // $worksheet->setCellValue('I' . $i, $rec->section_from );
@@ -171,7 +171,7 @@ class TiangExcelController extends Controller
                 $worksheet->calculateColumnWidths();
 
 
-                $i = 8;
+                $i = 9;
                 $secondWorksheet = $spreadsheet->getSheet(1);
                 $secondWorksheet->getStyle('B:AL')->getAlignment()->setHorizontal('center');
                 $secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
@@ -184,7 +184,7 @@ class TiangExcelController extends Controller
                 foreach ($res as $secondRec) {
                     // echo "test <br>";
 
-                    $secondWorksheet->setCellValue('B' . $i, $i - 7);
+                    $secondWorksheet->setCellValue('B' . $i, $i - 8);
                     $secondWorksheet->setCellValue('F' . $i, $secondRec->fp_name);
                     $secondWorksheet->setCellValue('G' . $i, $secondRec->fp_road);
                     $secondWorksheet->setCellValue('H' . $i, $secondRec->section_from);
@@ -290,56 +290,21 @@ class TiangExcelController extends Controller
                 }
                 $secondWorksheet->calculateColumnWidths();
                 //sheet 3
-                // return;
-                //$i = 11
 
 
 
-                $i = 11;
+                $i = 5;
                 $thirdWorksheet = $spreadsheet->getSheet(2);
 
-                //                 $commonStyle = $thirdWorksheet->getDefaultStyle()->getAlignment();
-                // $commonStyle->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-                // $commonStyle->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
-
-                // // Set font size for all cells
-                // $commonStyle->setFont(['size' => 12]);
 
 
                 $thirdWorksheet->getStyle('A:O')->getAlignment()->setHorizontal('center');
                 $secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
 
 
-                // $borderStyle = [
-                //     'borders' => [
-                //         'outline' => [
-                //             'borderStyle' => Border::BORDER_THICK,
-                //             'color' => ['argb' => 'FFFF0000'], // You can adjust the color code as needed
-                //         ],
-                //     ],
-                // ];
-
-                // $thirdWorksheet->getStyle('A:O')->applyFromArray($borderStyle);
-                // $thirdWorksheet->getStyle('A:O')->getBorders()
-                // ->getOutline()
-                // ->setBorderStyle(Border::BORDER_THICK)
-                // ->setColor(new Color('FFFF0000'));
-
-                // $thirdWorksheet->getStyle('A:O')->applyFromArray([
-                //     'alignment' => [
-                //         'horizontal' => \PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER,
-                //         'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
-                //     ],
-                //     'borders' => [
-                //         'allBorders' => [
-                //             'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
-                //         ],
-                //     ],
-                // ]);
-                // $thirdWorksheet->setCellValue('K4' , date('Y-m-d'));
-
+           
                 foreach ($res as $rec) {
-                    $thirdWorksheet->setCellValue('A' . $i, $i - 10);
+                    $thirdWorksheet->setCellValue('A' . $i, $i - 4);
                     $thirdWorksheet->setCellValue('B' . $i, $rec->review_date);
                     $thirdWorksheet->setCellValue('C' . $i, $rec->fp_name);
                     $thirdWorksheet->setCellValue('D' . $i, $rec->section_from);
@@ -352,17 +317,17 @@ class TiangExcelController extends Controller
 
                     if ($rec->tapak_condition != '') {
                         $tapak_condition = json_decode($rec->tapak_condition);
-                        $thirdWorksheet->setCellValue('F' . $i, excelCheckBOc('road', $tapak_condition) == '1' ?? '/' );
-                        $thirdWorksheet->setCellValue('G' . $i, excelCheckBOc('side_walk', $tapak_condition) == '1' ?? '/' );
-                        $thirdWorksheet->setCellValue('H' . $i, excelCheckBOc('vehicle_entry', $tapak_condition) == '1' ?? '/' );
+                        $thirdWorksheet->setCellValue('F' . $i, excelCheckBOc('road', $tapak_condition) == '1' ?: '/' );
+                        $thirdWorksheet->setCellValue('G' . $i, excelCheckBOc('side_walk', $tapak_condition) == '1' ?: '/' );
+                        $thirdWorksheet->setCellValue('H' . $i, excelCheckBOc('vehicle_entry', $tapak_condition) == '1' ?: '/' );
                     }
 
                     if ($rec->kawasan != '') {
                         $kawasan = json_decode($rec->kawasan);
-                        $thirdWorksheet->setCellValue('I' . $i, excelCheckBOc('bend', $kawasan) == '1' ?? '/' );
-                        $thirdWorksheet->setCellValue('J' . $i, excelCheckBOc('raod', $kawasan) == '1' ?? '/' );
-                        $thirdWorksheet->setCellValue('K' . $i, excelCheckBOc('forest', $kawasan) == '1' ?? '/' );
-                        $thirdWorksheet->setCellValue('L' . $i, excelCheckBOc('other', $kawasan) == '1' ?? '/' );
+                        $thirdWorksheet->setCellValue('I' . $i, excelCheckBOc('bend', $kawasan) == '1' ?: '/' );
+                        $thirdWorksheet->setCellValue('J' . $i, excelCheckBOc('raod', $kawasan) == '1' ?: '/' );
+                        $thirdWorksheet->setCellValue('K' . $i, excelCheckBOc('forest', $kawasan) == '1' ?: '/' );
+                        $thirdWorksheet->setCellValue('L' . $i, excelCheckBOc('other', $kawasan) == '1' ?: '/' );
                     }
 
                     $thirdWorksheet->setCellValue('M' . $i, $rec->jarak_kelegaan);
@@ -372,10 +337,10 @@ class TiangExcelController extends Controller
                         $thirdWorksheet->setCellValue('O' . $i, $rec->talian_spec == "uncomply" ? '/' : '');
                     }
 
-                    $thirdWorksheet->setCellValue('O' . $i, $rec->arus_pada_tiang == "Yes" ? '1' : '');
+                    $thirdWorksheet->setCellValue('P' . $i, $rec->arus_pada_tiang == "Yes" ? '/' : '');
                     $thirdWorksheet->setCellValue('S' . $i, 'AEROSYNERGY SOLUTIONS');
-                    $thirdWorksheet->setCellValue('S' . $i, $rec->fp_road);
-                    $thirdWorksheet->setCellValue('S' . $i, $rec->coords);
+                    $thirdWorksheet->setCellValue('T' . $i, $rec->fp_road);
+                    $thirdWorksheet->setCellValue('U' . $i, $rec->coords);
 
 
 
@@ -393,9 +358,10 @@ class TiangExcelController extends Controller
                 $thirdWorksheet->calculateColumnWidths();
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
-                $writer->save(public_path('assets/updated-excels/') . 'qr-tiang-talian.xlsx');
-              //  ob_end_clean();
-                return response()->download(public_path('assets/updated-excels/') . 'qr-tiang-talian.xlsx');
+                $filename = 'qr-tiang-talian'.rand(2,10000).'.xlsx';
+                $writer->save(public_path('assets/updated-excels/') . $filename);
+                return response()->download(public_path('assets/updated-excels/') . $filename)->deleteFileAfterSend(true);
+                
             } else {
                 return redirect()
                     ->back()

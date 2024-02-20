@@ -59,8 +59,10 @@ class CableBridgeExcelController extends Controller
                 }
 
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
-                $writer->save(public_path('assets/updated-excels/') . 'qr-cable-bridge.xlsx');
-                return response()->download(public_path('assets/updated-excels/') . 'qr-cable-bridge.xlsx');
+                
+                $filename = 'qr-cable-bridge'.rand(2,10000).'.xlsx';
+                $writer->save(public_path('assets/updated-excels/') . $filename);
+                return response()->download(public_path('assets/updated-excels/') . $filename)->deleteFileAfterSend(true);
 
             }
             else 
