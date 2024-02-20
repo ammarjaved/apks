@@ -54,7 +54,7 @@ function excelCheckBOc($key, $array)
     if ($array != null && isset($array->{$key})) {
        return $array->{$key} ? '1':'0';
     }
-    return "0";
+    return "";
 
 }
 
