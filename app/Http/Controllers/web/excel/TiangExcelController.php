@@ -24,6 +24,7 @@ class TiangExcelController extends Controller
         try{
 // return date('Y-m-d');
 
+
         $ba = $req->filled('ba') ? $req->ba : Auth::user()->ba;
 
         $result = Tiang::query();
@@ -148,7 +149,7 @@ class TiangExcelController extends Controller
                     ->where('talian_utama_connection' ,'main_line')
                     ->count();
 
-                    
+
 
                     ($rec->road);
                     $array = json_decode($rec, true);
