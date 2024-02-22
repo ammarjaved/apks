@@ -55,6 +55,7 @@ class TiangExcelController extends Controller
             // return $res;
 
             $query = Tiang::select('fp_road as road')
+            ->selectRaw("string_agg(fp_name, ' , ') as fp_name")
             ->selectRaw("SUM(CASE WHEN size_tiang = '7.5' THEN 1 ELSE 0 END) as size_tiang_75")
             ->selectRaw("SUM(CASE WHEN size_tiang = '9' THEN 1 ELSE 0 END) as size_tiang_9")
             ->selectRaw("SUM(CASE WHEN size_tiang = '10' THEN 1 ELSE 0 END) as size_tiang_10")
@@ -117,8 +118,9 @@ class TiangExcelController extends Controller
                 $i = 5;
                 foreach ($roadStatistics as $rec) {
                     $worksheet->setCellValue('B' . $i, $i - 4);
+                    $worksheet->setCellValue('G' . $i, $rec->fp_name);
+
                     $worksheet->setCellValue('H' . $i, $rec->road);
-                    $worksheet->setCellValue('G' . $i, $rec->road);
 
                     // $worksheet->setCellValue('F' . $i, $rec->fp_name);
                     $worksheet->setCellValue('I' . $i, $rec->section_from );
