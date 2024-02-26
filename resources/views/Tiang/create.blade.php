@@ -401,7 +401,7 @@
                                         </thead>
                                         {{-- POLE --}}
                                         <tr>
-                                            <th rowspan="7">{{ __('messages.pole') }}</th>
+                                            <th rowspan="6">{{ __('messages.pole') }}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[cracked]" id="cracked" class="form-check">
                                                 <label for="cracked"> {{ __('messages.cracked') }}</label>
@@ -451,7 +451,7 @@
                                                 <input type="file" name="tiang_defect_image[creepers_after2]" id="after2_creepers-image-2" class="d-none form-control" accept="image/*">
                                             </td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[current_leakage]" id="current_leakage" class="form-check">
                                                 <label for="current_leakage"> {{ __('messages.current_leakage') }}</label>
@@ -460,7 +460,7 @@
                                                 <input type="file" name="tiang_defect_image[current_leakage]" id="current_leakage-image" accept="image/*" class="d-none form-control">
                                                 <input type="file" name="tiang_defect_image[current_leakage2]" id="current_leakage-image-2" accept="image/*" class="d-none form-control">
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="tiang_defect[other]" id="other_tiang_defect" class="form-check">
@@ -523,7 +523,7 @@
                                         {{-- Umbang --}}
 
                                         <tr>
-                                            <th rowspan="7">{{ __('messages.Umbang') }}</th>
+                                            <th rowspan="6">{{ __('messages.Umbang') }}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[breaking]" id="umbang_breaking" class="form-check ">
                                                 <label for="umbang_breaking">{{ __('messages.Sagging_Breaking') }}</label>
@@ -573,7 +573,7 @@
                                                 <input type="file" name="umbang_defect_image[stay_palte2]" id="stay_palte-image-2" class="d-none form-control" accept="image/*">
                                             </td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[current_leakage]" id="umb_current_leakage" class="form-check">
                                                 <label for="umb_current_leakage"> {{ __('messages.current_leakage') }}</label>
@@ -582,7 +582,7 @@
                                                 <input type="file" name="umbang_defect_image[current_leakage]" id="umb_current_leakage-image" accept="image/*" class="d-none form-control">
                                                 <input type="file" name="umbang_defect_image[current_leakage2]" id="umb_current_leakage-image-2" accept="image/*" class="d-none form-control">
                                             </td>
-                                        </tr>
+                                        </tr> --}}
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="umbang_defect[other]" id="other_umbang_defect" class="form-check">
@@ -961,17 +961,41 @@
                                     <div class="col-md-8">
                                         <div class="row">
                                             <div class="col-md-4 d-flex">
-                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_no" class="form-check" value="No">
+                                                <input type="radio" name="tiang_defect_current_leakage" id="arus_pada_tiang_no" class="form-check" value="No">
                                                 <label for="arus_pada_tiang_no">{{ __('messages.no') }}</label>
                                             </div>
                                             <div class="col-md-4 d-flex">
-                                                <input type="radio" name="arus_pada_tiang" id="arus_pada_tiang_yes" class="form-check" value="Yes">
+                                                <input type="radio" name="tiang_defect_current_leakage" id="arus_pada_tiang_yes" class="form-check" value="Yes">
                                                 <label for="arus_pada_tiang_yes">{{ __('messages.yes') }}</label>
                                             </div>
 
                                             <div class="col-md-4 d-none  " id="arus_pada_tiang_amp_div">
                                                 <label for="arus_pada_tiang_amp">{{ __('messages.Amp') }}</label>
-                                                <input type="text" name="arus_pada_tiang_amp" id="arus_pada_tiang_amp" class="form-control" required>
+                                                <input type="text" name="tiang_defect[current_leakage_val]" id="arus_pada_tiang_amp" class="form-control" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="">{{ __('messages.Inspection_of_current_leakage_on_the_umbanf') }}</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-4 d-flex">
+                                                <input type="radio" name="umbang_defect_current_leakage" value="No" id="arus_pada_umbgan_no" class="form-check"  >
+                                                <label for="arus_pada_umbgan_no">{{ __('messages.no') }}</label>
+                                            </div>
+                                            <div class="col-md-4 d-flex">
+                                                <input type="radio" name="umbang_defect_current_leakage" value="Yes" id="arus_pada_umbgan_yes" class="form-check"  >
+                                                <label for="arus_pada_umbgan_yes">{{ __('messages.yes') }}</label>
+                                            </div>
+
+                                            <div class="col-md-4 d-none  " id="arus_pada_umbgan_amp_div">
+                                                <label for="arus_pada_umbgan_amp">{{ __('messages.Amp') }}</label>
+                                                <input type="text" name="umbang_defect[current_leakage_val]" id="arus_pada_umbgan_amp" class="form-control" required>
                                             </div>
                                         </div>
                                     </div>
@@ -1175,7 +1199,7 @@
                 addReomveImageHighClearanceField(this)
 
             })
-            $('input[name="arus_pada_tiang"]').on('change', function() {
+            $('input[name="tiang_defect_current_leakage"]').on('change', function() {
                 if (this.value == 'Yes') {
                     if ($('#arus_pada_tiang_amp_div').hasClass('d-none')) {
                         $('#arus_pada_tiang_amp_div').removeClass('d-none');
@@ -1183,6 +1207,18 @@
                 } else {
                     if (!$('#arus_pada_tiang_amp_div').hasClass('d-none')) {
                         $('#arus_pada_tiang_amp_div').addClass('d-none');
+                    }
+                }
+            })
+
+            $('input[name="umbang_defect_current_leakage"]').on('change', function() {
+                if (this.value == 'Yes') {
+                    if ($('#arus_pada_umbgan_amp_div').hasClass('d-none')) {
+                        $('#arus_pada_umbgan_amp_div').removeClass('d-none');
+                    }
+                } else {
+                    if (!$('#arus_pada_umbgan_amp_div').hasClass('d-none')) {
+                        $('#arus_pada_umbgan_amp_div').addClass('d-none');
                     }
                 }
             })

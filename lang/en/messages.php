@@ -256,9 +256,12 @@ return [
 
     'Kebocoran_Arus' => 'Kebocoran Arus',
     'Inspection_of_current_leakage_on_the_pole' => 'Pemeriksaan Kebocoran Arus pada Tiang',
+    'Inspection_of_current_leakage_on_the_umbang' =>'Pemeriksaan Kebocoran Arus pada Umbang',
     'no' => 'No',
     'yes' => 'Yes',
     'Amp' => '(Amp)',
+
+
 
     /*******************ENd tiang */
 

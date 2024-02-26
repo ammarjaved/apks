@@ -33,7 +33,7 @@ class TiangMapController extends Controller
     editMapStore(Request $request, $language,  $id)
     {
         //
-        // return 'sdfsdf';
+        //
         try {
             //  return $request->abc_span;
             //code...
@@ -47,7 +47,7 @@ class TiangMapController extends Controller
                         if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
                             $uploadedFile = $file;
                             $img_ext = $uploadedFile->getClientOriginalExtension();
-                            $filename = $key . '-' . strtotime(now()) . '.' . $img_ext;
+                            $filename = $key . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
                             $uploadedFile->move($destinationPath, $filename);
                             $json[$key] = $destinationPath . $filename;
                         }
@@ -58,7 +58,7 @@ class TiangMapController extends Controller
                     if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
                         $uploadedFile = $mainvalue;
                         $img_ext = $uploadedFile->getClientOriginalExtension();
-                        $filename = $mainkey . '-' . strtotime(now()) . '.' . $img_ext;
+                        $filename = $mainkey . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
                         $uploadedFile->move($destinationPath, $filename);
                         $data[$mainkey] = $destinationPath . $filename;
                     }
@@ -66,12 +66,13 @@ class TiangMapController extends Controller
             }
 
             $data->ba = $request->ba;
-            $data->fp_name = $request->fp_name;
             $user = Auth::user()->id;
             if ($data->qa_status == '') {
                 $data->qa_status = 'pending';
             }
             $data->updated_by = $user;
+            $data->fp_name = $request->fp_name;
+
             $data->fp_road = $request->fp_road;
             $data->section_from = $request->section_from;
             $data->section_to = $request->section_to;
@@ -85,19 +86,19 @@ class TiangMapController extends Controller
             $data->bare_span = $request->has('bare_span') ? json_encode($request->bare_span) : null;
 
             $defectsKeys = [];
-            $defectsKeys['tiang_defect'] = ['cracked', 'leaning', 'dim', 'creepers', 'other'];
-            $defectsKeys['talian_defect'] = ['joint', 'need_rentis', 'ground', 'other'];
-            $defectsKeys['umbang_defect'] = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other'];
-            $defectsKeys['ipc_defect'] = ['burn', 'other'];
-            $defectsKeys['blackbox_defect'] = ['cracked', 'other'];
-            $defectsKeys['jumper'] = ['sleeve', 'burn', 'other'];
-            $defectsKeys['kilat_defect'] = ['broken', 'other'];
-            $defectsKeys['servis_defect'] = ['roof', 'won_piece', 'other'];
-            $defectsKeys['pembumian_defect'] = ['netural', 'other'];
-            $defectsKeys['bekalan_dua_defect'] = ['damage', 'other'];
-            $defectsKeys['kaki_lima_defect'] = ['date_wire', 'burn', 'other'];
-            $defectsKeys['tapak_condition'] = ['road', 'side_walk', 'vehicle_entry'];
-            $defectsKeys['kawasan'] = ['road', 'bend', 'forest', 'other'];
+            $defectsKeys['tiang_defect']        = ['cracked', 'leaning', 'dim', 'creepers', 'other'];
+            $defectsKeys['talian_defect']       = ['joint', 'need_rentis', 'ground', 'other'];
+            $defectsKeys['umbang_defect']       = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other'];
+            $defectsKeys['ipc_defect']          = ['burn', 'other'];
+            $defectsKeys['blackbox_defect']     = ['cracked', 'other'];
+            $defectsKeys['jumper']              = ['sleeve', 'burn', 'other'];
+            $defectsKeys['kilat_defect']        = ['broken', 'other'];
+            $defectsKeys['servis_defect']       = ['roof', 'won_piece', 'other'];
+            $defectsKeys['pembumian_defect']    = ['netural', 'other'];
+            $defectsKeys['bekalan_dua_defect']  = ['damage', 'other'];
+            $defectsKeys['kaki_lima_defect']    = ['date_wire', 'burn', 'other'];
+            $defectsKeys['tapak_condition']     = ['road', 'side_walk', 'vehicle_entry'];
+            $defectsKeys['kawasan']             = ['road', 'bend', 'forest', 'other'];
 
             $total_defects = 0;
             foreach ($defectsKeys as $key => $defect) {
@@ -105,35 +106,45 @@ class TiangMapController extends Controller
                 $arr = [];
 
                 foreach ($defect as $item) {
-                    if ($request->has("$key.$item")) {
+                    if ($request->has("$key.$item")) 
+                    {
                         $def[$item] = true;
                         $total_defects++;
-                    } else {
+                    } else 
+                    {
                         $def[$item] = false;
                     }
                 }
-        
-                
 
-                if ($key != 'tapak_condition') {
+                if ($key != 'tapak_condition') 
+                {
                     $def['other_value'] = $request->{"$key.other_value"};
                 }
-                $data->{$key} = json_encode($def);
 
+                if ($key == 'tiang_defect'  || $key == 'umbang_defect') 
+                {
+                    if ($request->has('tiang_defect_current_leakage') && $request->{$key.'_current_leakage'} == 'Yes') {
+                        $def['current_leakage'] = true;
+                        $total_defects++;
+                    }
+                    else
+                    {
+                        $def['current_leakage'] = false;
+                    }
+                    $def['current_leakage_val'] = $request->{"$key.current_leakage_val"};
+                    if ($key == 'tiang_defect') {
+                        $data->arus_pada_tiang = $def['current_leakage'] == true ?'Yes':'No';
+                        $data->arus_pada_tiang_amp = $def['current_leakage_val'];
+                    }
+                }
+                $data->{$key} = json_encode($def);
             }
 
-            $request->arus_pada_tiang == 'Yes' ? $total_defects++ : '';
-        
             $data->total_defects = $total_defects;
-            // return $data;
             $data->jarak_kelegaan = $request->jarak_kelegaan;
-
             $data->talian_spec = $request->talian_spec;
 
-            $data->arus_pada_tiang = $request->arus_pada_tiang;
-
             $data->update();
-
             return view('components.map-messages',['id'=>$id,'success'=>true , 'url'=>'tiang-talian-vt-and-vr'])
                 ->with('success', 'Form Update');
         } catch (\Throwable $th) {

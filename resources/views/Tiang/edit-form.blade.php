@@ -220,7 +220,7 @@
 
             })
 
-            $('input[name="arus_pada_tiang"]').on('change', function() {
+            $('input[name="tiang_defect_current_leakage"]').on('change', function() {
                 if (this.value == 'Yes') {
                     if ($('#arus_pada_tiang_amp_div').hasClass('d-none')) {
                         $('#arus_pada_tiang_amp_div').removeClass('d-none');
@@ -228,6 +228,18 @@
                 } else {
                     if (!$('#arus_pada_tiang_amp_div').hasClass('d-none')) {
                         $('#arus_pada_tiang_amp_div').addClass('d-none');
+                    }
+                }
+            })
+
+            $('input[name="umbang_defect_current_leakage"]').on('change', function() {
+                if (this.value == 'Yes') {
+                    if ($('#arus_pada_umbgan_amp_div').hasClass('d-none')) {
+                        $('#arus_pada_umbgan_amp_div').removeClass('d-none');
+                    }
+                } else {
+                    if (!$('#arus_pada_umbgan_amp_div').hasClass('d-none')) {
+                        $('#arus_pada_umbgan_amp_div').addClass('d-none');
                     }
                 }
             })
