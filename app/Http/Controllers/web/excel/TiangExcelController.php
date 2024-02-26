@@ -4,6 +4,7 @@ namespace App\Http\Controllers\web\excel;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tiang;
+use App\Models\TiangRepairDate;
 use App\Traits\Filter;
 use Illuminate\Http\Request;
 use PhpOffice\PhpSpreadsheet\IOFactory;
@@ -306,31 +307,74 @@ class TiangExcelController extends Controller
                     $secondWorksheet->setCellValue('BM' . $i, $secondRec->review_date);
 
 
+                    $dates =  TiangRepairDate::where('savr_id', $secondRec->id)->select('name','date')->get();
+
+                    $sortedDates = [];
+    
+                    foreach ($dates as $value) {
+                        $sortedDates[$value->name] = $value->date;
+                        // return getRepairDate('tiang_defect_dim' ,$sortedDates );
+                        // return $sortedDates;
+                    }
+    
+    
+                    $secondWorksheet->setCellValue('L' . $i, getRepairDate('tiang_defect_cracked' ,$sortedDates ));
+                    $secondWorksheet->setCellValue('N' . $i, getRepairDate('tiang_defect_leaning' ,$sortedDates ));
+                    $secondWorksheet->setCellValue('P' . $i, getRepairDate('tiang_defect_dim' ,$sortedDates ));
+    
+                    $secondWorksheet->setCellValue('R' . $i, getRepairDate('talian_defect_joint' ,$sortedDates ));
+                    $secondWorksheet->setCellValue('T' . $i, getRepairDate('talian_defect_need_rentis' ,$sortedDates ));
+                    $secondWorksheet->setCellValue('V' . $i, getRepairDate('talian_defect_ground' ,$sortedDates ));
+    
+                    $secondWorksheet->setCellValue('X' . $i, getRepairDate('umbang_defect_breaking' ,$sortedDates ));
+                    $secondWorksheet->setCellValue('Z' . $i, getRepairDate('umbang_defect_creepers' ,$sortedDates ));
+                    $secondWorksheet->setCellValue('AB' . $i, getRepairDate('umbang_defect_cracked' ,$sortedDates ));
+                    $secondWorksheet->setCellValue('AD' . $i, getRepairDate('umbang_defect_stay_palte' ,$sortedDates ));
+    
+                    $secondWorksheet->setCellValue('AF' . $i, getRepairDate('ipc_defect_burn' ,$sortedDates ));
+    
+                    $secondWorksheet->setCellValue('AH' . $i, getRepairDate('blackbox_defect_cracked' ,$sortedDates ));
+                    
+                    $secondWorksheet->setCellValue('AJ' . $i, getRepairDate('jumper_sleeve' ,$sortedDates ));
+                    $secondWorksheet->setCellValue('AL' . $i, getRepairDate('jumper_burn' ,$sortedDates ));
+    
+                    $secondWorksheet->setCellValue('AN' . $i, getRepairDate('kilat_defect_broken' ,$sortedDates ));
+    
+                    $secondWorksheet->setCellValue('AP' . $i, getRepairDate('servis_defect_roof' ,$sortedDates ));
+                    $secondWorksheet->setCellValue('AR' . $i, getRepairDate('servis_defect_won_piece' ,$sortedDates ));
+                    
+                    $secondWorksheet->setCellValue('AT' . $i, getRepairDate('pembumian_defect_netural' ,$sortedDates ));
+    
+                    $secondWorksheet->setCellValue('AV' . $i, getRepairDate('bekalan_dua_defect_damage' ,$sortedDates ));
+    
+                    $secondWorksheet->setCellValue('AX' . $i, getRepairDate('kaki_lima_defect_date_wire' ,$sortedDates ));
+                    $secondWorksheet->setCellValue('AZ' . $i, getRepairDate('kaki_lima_defect_burn' ,$sortedDates ));
+                    // $secondWorksheet->setCellValue('BB' . $i, getRepairDate('talian_defect_ground' ,$sortedDates ));
+    
 
 
-
-                    $secondWorksheet->setCellValue('L' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('N' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('P' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('R' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('T' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('V' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('X' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('Z' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AB' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AD' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AF' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AH' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AJ' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AL' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AN' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AP' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AR' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AT' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AV' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AX' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('AZ' . $i, $repair_date);
-                    $secondWorksheet->setCellValue('BB' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('L' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('N' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('P' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('R' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('T' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('V' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('X' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('Z' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AB' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AD' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AF' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AH' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AJ' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AL' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AN' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AP' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AR' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AT' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AV' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AX' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('AZ' . $i, $repair_date);
+                    // $secondWorksheet->setCellValue('BB' . $i, $repair_date);
 
 
                     $i++;

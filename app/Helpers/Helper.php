@@ -331,3 +331,13 @@ function tiangSpanRadio($value , $key , $subkey , $status)
         }
         return $html;
     }
+
+
+    function getRepairDate($key , $array){
+        // return $key;
+        if ($array != null && array_key_exists($key , $array)) {
+            return  $array[$key];
+         }
+         return "";
+    
+    }
