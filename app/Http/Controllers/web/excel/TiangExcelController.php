@@ -408,17 +408,17 @@ class TiangExcelController extends Controller
 
                     if ($rec->tapak_condition != '') {
                         $tapak_condition = json_decode($rec->tapak_condition);
-                        $thirdWorksheet->setCellValue('F' . $i, excelCheckBOc('road', $tapak_condition) == '1' ?: '/' );
-                        $thirdWorksheet->setCellValue('G' . $i, excelCheckBOc('side_walk', $tapak_condition) == '1' ?: '/' );
-                        $thirdWorksheet->setCellValue('H' . $i, excelCheckBOc('vehicle_entry', $tapak_condition) == '1' ?: '/' );
+                        $thirdWorksheet->setCellValue('F' . $i, excelCheckBOc('road', $tapak_condition) == '1' ?'/' : '' );
+                        $thirdWorksheet->setCellValue('G' . $i, excelCheckBOc('side_walk', $tapak_condition) == '1' ? '/' : '' );
+                        $thirdWorksheet->setCellValue('H' . $i, excelCheckBOc('vehicle_entry', $tapak_condition) == '1' ? '/' : '' );
                     }
 
                     if ($rec->kawasan != '') {
                         $kawasan = json_decode($rec->kawasan);
-                        $thirdWorksheet->setCellValue('I' . $i, excelCheckBOc('bend', $kawasan) == '1' ?: '/' );
-                        $thirdWorksheet->setCellValue('J' . $i, excelCheckBOc('raod', $kawasan) == '1' ?: '/' );
-                        $thirdWorksheet->setCellValue('K' . $i, excelCheckBOc('forest', $kawasan) == '1' ?: '/' );
-                        $thirdWorksheet->setCellValue('L' . $i, excelCheckBOc('other', $kawasan) == '1' ?: '/' );
+                        $thirdWorksheet->setCellValue('I' . $i, excelCheckBOc('bend', $kawasan) == '1' ? '/' : '' );
+                        $thirdWorksheet->setCellValue('J' . $i, excelCheckBOc('raod', $kawasan) == '1' ? '/' : '' );
+                        $thirdWorksheet->setCellValue('K' . $i, excelCheckBOc('forest', $kawasan) == '1' ? '/' : '' );
+                        $thirdWorksheet->setCellValue('L' . $i, excelCheckBOc('other', $kawasan) == '1' ? '/' : '' );
                     }
 
                     $thirdWorksheet->setCellValue('M' . $i, $rec->jarak_kelegaan);

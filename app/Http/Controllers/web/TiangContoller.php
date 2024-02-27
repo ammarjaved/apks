@@ -70,7 +70,7 @@ class TiangContoller extends Controller
     public function store(Request $request)
     {
         // return $request;
-
+// return $request->tiang_defect['current_leakage'];
         try {
             // $this->tiangRepository->store($request->all());
 
@@ -99,9 +99,9 @@ class TiangContoller extends Controller
             $data->talian_utama_connection = $request->talian_utama_connection;
 
             $defectsKeys = [];
-            $defectsKeys['tiang_defect'] = ['cracked', 'leaning', 'dim', 'creepers', 'other', 'current_leakage'];
+            $defectsKeys['tiang_defect'] = ['cracked', 'leaning', 'dim', 'creepers', 'other'];
             $defectsKeys['talian_defect'] = ['joint', 'need_rentis', 'ground', 'other'];
-            $defectsKeys['umbang_defect'] = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other','current_leakage'];
+            $defectsKeys['umbang_defect'] = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other'];
 
             $defectsKeys['ipc_defect'] = ['burn', 'other'];
             $defectsKeys['blackbox_defect'] = ['cracked', 'other'];
@@ -148,6 +148,25 @@ class TiangContoller extends Controller
                 if ($key != 'tapak_condition') {
                     $def['other_value'] = $request->{"$key.other_value"};
                 }
+
+            
+                if ($key == 'tiang_defect'  || $key == 'umbang_defect') {
+                    // return "$key.'current_leakage'";
+                    if ($request->has('tiang_defect_current_leakage') && $request->{$key.'_current_leakage'} == 'Yes') {
+                        $def['current_leakage'] = true;
+                        $total_defects++;
+                    }else{
+                        $def['current_leakage'] = false;
+                    }
+              
+
+                    $def['current_leakage_val'] = $request->{"$key.current_leakage_val"};
+
+                    if ($key == 'tiang_defect') {
+                        $data->arus_pada_tiang = $def['current_leakage'] == true ?'Yes':'No';
+                        $data->arus_pada_tiang_amp = $def['current_leakage_val'];
+                    }
+                }
                 $data->{$key} = json_encode($def);
 
                 $total_defects++;
@@ -165,8 +184,8 @@ class TiangContoller extends Controller
                     $data->{$file} = $destinationPath . $filename;
                 }
             }
-            $request->arus_pada_tiang == 'Yes' ? $total_defects++ : '';
-            $data->arus_pada_tiang = $request->arus_pada_tiang;
+            // $request->arus_pada_tiang == 'Yes' ? $total_defects++ : '';
+            // $data->arus_pada_tiang = $request->arus_pada_tiang;
             // return $data;
             $data->total_defects = $total_defects;
             
@@ -185,7 +204,7 @@ class TiangContoller extends Controller
                 ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
-            // return $th->getMessage();
+            return $th->getMessage();
             return redirect()
                 ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
@@ -289,9 +308,9 @@ class TiangContoller extends Controller
             $data->bare_span = $request->has('bare_span') ? json_encode($request->bare_span) : null;
 
             $defectsKeys = [];
-            $defectsKeys['tiang_defect']        = ['cracked', 'leaning', 'dim', 'creepers', 'other','current_leakage'];
+            $defectsKeys['tiang_defect']        = ['cracked', 'leaning', 'dim', 'creepers', 'other'];
             $defectsKeys['talian_defect']       = ['joint', 'need_rentis', 'ground', 'other'];
-            $defectsKeys['umbang_defect']       = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other','current_leakage'];
+            $defectsKeys['umbang_defect']       = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other'];
             $defectsKeys['ipc_defect']          = ['burn', 'other'];
             $defectsKeys['blackbox_defect']     = ['cracked', 'other'];
             $defectsKeys['jumper']              = ['sleeve', 'burn', 'other'];
@@ -321,11 +340,31 @@ class TiangContoller extends Controller
                 if ($key != 'tapak_condition') {
                     $def['other_value'] = $request->{"$key.other_value"};
                 }
+
+                
+                if ($key == 'tiang_defect'  || $key == 'umbang_defect') {
+                    // return "$key.'current_leakage'";
+                    if ($request->has('tiang_defect_current_leakage') && $request->{$key.'_current_leakage'} == 'Yes') {
+                        $def['current_leakage'] = true;
+                        $total_defects++;
+                    }else{
+                        $def['current_leakage'] = false;
+                    }
+              
+
+                    $def['current_leakage_val'] = $request->{"$key.current_leakage_val"};
+
+                    if ($key == 'tiang_defect') {
+                        $data->arus_pada_tiang = $def['current_leakage'] == true ?'Yes':'No';
+                        $data->arus_pada_tiang_amp = $def['current_leakage_val'];
+                    }
+                }
+
                 $data->{$key} = json_encode($def);
 
             }
 
-            $request->arus_pada_tiang == 'Yes' ? $total_defects++ : '';
+            // $request->arus_pada_tiang == 'Yes' ? $total_defects++ : '';
         
             $data->total_defects = $total_defects;
             // return $data;
@@ -333,7 +372,7 @@ class TiangContoller extends Controller
 
             $data->talian_spec = $request->talian_spec;
 
-            $data->arus_pada_tiang = $request->arus_pada_tiang;
+            // $data->arus_pada_tiang = $request->arus_pada_tiang;
 
             $data->update();
 
