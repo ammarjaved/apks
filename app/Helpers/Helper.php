@@ -306,7 +306,7 @@ function tiangSpanRadio($value , $key , $subkey , $status)
 
                     if ( $image != '' && file_exists(public_path($image))){
                         $html.="<a href='".URL::asset($image) ."' data-lightbox='roadtrip'>
-                        <img src='".URL::asset($image) ."' alt=''
+                        <img src='".URL::asset($image) ."' alt='' style='height:70px'
                             height='70' class='adjust-height ml-5'></a>";
                     }else{
                         $html.="<strong>".__('messages.no_image_found') ."</strong>";
@@ -341,3 +341,29 @@ function tiangSpanRadio($value , $key , $subkey , $status)
          return "";
     
     }
+
+
+    function tiangDefactCheckBox($key, $arr, $arr_name,  $lab_name , $disabled)
+    {
+    $lab_name = __('messages.' . $lab_name);
+    $html = '';
+
+    $id = $arr_name . '_' . $key;
+    $name = $arr_name . '[' . $key . ']'; 
+ 
+    $key_exist = !empty($arr) && array_key_exists($key, $arr) && $arr[$key] == true;
+        $html .= "<td class='d-flex'>
+                        <input type='checkbox' name='$name' id='$id' " . ($key_exist? 'checked' : '') . " class='form-check' ".($disabled ? '' : 'disabled').">
+                <label class='text-capitalize' for='$id'> $lab_name</label>";
+
+
+    if ($key == 'other') {
+        $key2 = $key . '_value';
+        $otherValue = isset($arr[$key2]) ? $arr[$key2] : '';
+        $html .= "<input type='text' name='{$arr_name}[{$key2}]' id='{$id}-input'  value='$otherValue' class='form-control " . ($key_exist ? '' : 'd-none') . "' placeholder='mention other defect' ".($disabled ? '' : 'disabled').">";
+    }
+
+    $html .= '</td>';
+
+    return $html;
+}

@@ -53,8 +53,7 @@
 
         td.d-flex {
             border-bottom: 0px !important;
-            border-left: 0px !important;
-            border-right: 0px !important;
+            border-left: 0px !important; 
         }
 
         .defects input[type="file"] { margin-bottom: 5px !important; }
@@ -226,7 +225,7 @@
                                 </div>
 
 
-                                <div class="row">
+                                {{-- <div class="row">
                                     <div class="col-md-4">
                                         <label for="pole_image-1">{{ __('messages.pole') }} Image 1 </label>
                                     </div>
@@ -242,7 +241,7 @@
                                     <div class="col-md-5 p-2 pr-5">
                                         <input type="file" name="pole_image_2" id="pole_image_2" required accept="image/*" class="form-control">
                                     </div>
-                                </div>
+                                </div> --}}
 
                                 <div class="row">
                                     <div class="col-md-4">
@@ -266,6 +265,68 @@
 
                             </fieldset>
                             {{-- END Info (1) --}}
+
+
+                            {{-- IMAGES --}}
+                            <h3>{{__('messages.images')}}</h3>
+                            <fieldset class="form-input">
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="pole_image-1">{{ __('messages.pole') }} Image 1 </label>
+                                    </div>
+                                    <div class="col-md-4 p-2 pr-5">
+                                        <input type="file" name="pole_image_1" id="pole_image_1" required accept="image/*" class="form-control">
+                                    </div>
+                                    <div class="col-md-4" id="pole_image_1_div"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="pole_image-2">{{ __('messages.pole') }} Image 2</label>
+                                    </div>
+                                    <div class="col-md-4 p-2 pr-5">
+                                        <input type="file" name="pole_image_2" id="pole_image_2" required accept="image/*" class="form-control">
+                                    </div>
+                                    <div class="col-md-4" id="pole_image_2_div"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="pole_image-1">{{ __('messages.pole') }} Image 3 </label>
+                                    </div>
+                                    <div class="col-md-4 p-2 pr-5">
+                                        <input type="file" name="pole_image_3" id="pole_image_3"  accept="image/*" class="form-control">
+                                    </div>
+                                    <div class="col-md-4" id="pole_image_3_div"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="pole_image-2">{{ __('messages.pole') }} Image 4</label>
+                                    </div>
+                                    <div class="col-md-4 p-2 pr-5">
+                                        <input type="file" name="pole_image_4" id="pole_image_4"  accept="image/*" class="form-control">
+                                    </div>
+                                    <div class="col-md-4" id="pole_image_4_div"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="pole_image-1">{{ __('messages.pole') }} Image 5 </label>
+                                    </div>
+                                    <div class="col-md-4 p-2 pr-5">
+                                        <input type="file" name="pole_image_5" id="pole_image_5"  accept="image/*" class="form-control">
+                                    </div>
+                                    <div class="col-md-4" id="pole_image_5_div"></div>
+
+                                </div>
+
+                            </fieldset>
+
+                            {{-- END IMAGES --}}
+
+
                             <h3> {{ __('messages.Asset_Register') }} </h3>
 
 
@@ -396,19 +457,14 @@
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
                                             <th class="col-4">{{ __('messages.title') }}</th>
-                                            <th class="col-4">{{ __('messages.defects') }}</th>
-                                            <th class="col-4">{{ __('messages.images') }}</th>
+                                            <th class="col-4">{{ __('messages.defects') }}</th> 
                                         </thead>
                                         {{-- POLE --}}
                                         <tr>
-                                            <th rowspan="6">{{ __('messages.pole') }}</th>
+                                            <th rowspan="5">{{ __('messages.pole') }}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[cracked]" id="cracked" class="form-check">
                                                 <label for="cracked"> {{ __('messages.cracked') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[cracked]" id="cracked-image" accept="image/*" class="d-none form-control">
-                                                <input type="file" name="tiang_defect_image[cracked2]" id="cracked-image-2" accept="image/*" class="d-none form-control">
                                             </td>
                                         </tr>
                                         <tr>
@@ -416,60 +472,30 @@
                                                 <input type="checkbox" name="tiang_defect[leaning]" id="leaning" class="form-check">
                                                 <label for="leaning"> {{ __('messages.leaning') }}</label>
                                             </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[leaning]" id="leaning-image" accept="image/*" class="d-none form-control">
-                                                <input type="file" name="tiang_defect_image[leaning2]" id="leaning-image-2" accept="image/*" class="d-none form-control">
-                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[dim]" id="dim" class="form-check">
                                                 <label for="dim"> {{ __('messages.no_dim_post_none') }}</label>
                                             </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[dim]" id="dim-image" accept="image/*" class="d-none form-control">
-                                                <input type="file" name="tiang_defect_image[dim2]" id="dim-image-2" accept="image/*" class="d-none form-control">
-                                            </td>
-
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="tiang_defect[creepers]" id="creepers" class="form-check">
                                                 <label for="creepers"> {{ __('messages.Creepers') }} </label>
                                             </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[creepers]" id="creepers-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="tiang_defect_image[creepers2]" id="creepers-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
                                         </tr>
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="d-flex"> 
                                                 <label for="creepers_after"> {{ __('messages.Creepers') }} After </label>
                                             </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[creepers_after1]" id="after1_creepers-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="tiang_defect_image[creepers_after2]" id="after2_creepers-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
-                                        </tr>
-                                        {{-- <tr>
-                                            <td class="d-flex">
-                                                <input type="checkbox" name="tiang_defect[current_leakage]" id="current_leakage" class="form-check">
-                                                <label for="current_leakage"> {{ __('messages.current_leakage') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[current_leakage]" id="current_leakage-image" accept="image/*" class="d-none form-control">
-                                                <input type="file" name="tiang_defect_image[current_leakage2]" id="current_leakage-image-2" accept="image/*" class="d-none form-control">
-                                            </td>
                                         </tr> --}}
+
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="tiang_defect[other]" id="other_tiang_defect" class="form-check">
                                                 <label for="other_tiang_defect"> {{ __('messages.others') }} </label>
                                                 <input type="text" name="tiang_defect[other_value]" id="other_tiang_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td>
-                                            <td>
-                                                <input type="file" name="tiang_defect_image[other]" id="other_tiang_defect-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="tiang_defect_image[other2]" id="other_tiang_defect-image-2" class="d-none form-control" accept="image/*">
                                             </td>
                                         </tr>
 
@@ -481,19 +507,11 @@
                                                 <input type="checkbox" name="talian_defect[joint]" id="joint" class="form-check">
                                                 <label for="joint"> {{ __('messages.joint') }}</label>
                                             </td>
-                                            <td>
-                                                <input type="file" name="talian_defect_image[joint]" id="joint-image" class="d-none  form-control" accept="image/*">
-                                                <input type="file" name="talian_defect_image[joint2]" id="joint-image-2" class="d-none  form-control" accept="image/*">
-                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="talian_defect[need_rentis]" id="need_rentis" class="form-check">
                                                 <label for="need_rentis"> {{ __('messages.need_rentis') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="talian_defect_image[need_rentis]" id="need_rentis-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="talian_defect_image[need_rentis2]" id="need_rentis-image-2" class="d-none form-control" accept="image/*">
                                             </td>
                                         </tr>
 
@@ -502,10 +520,6 @@
                                                 <input type="checkbox" name="talian_defect[ground]" id="ground" class="form-check">
                                                 <label for="ground">{{ __('messages.Does_Not_Comply_With_Ground_Clearance') }}</label>
                                             </td>
-                                            <td>
-                                                <input type="file" name="talian_defect_image[ground]" id="ground-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="talian_defect_image[ground2]" id="ground-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
@@ -513,24 +527,16 @@
                                                 <label for="other_talian_defect"> {{ __('messages.others') }} </label>
                                                 <input type="text" name="talian_defect[other_value]" id="other_talian_defect-input" placeholder="mention other defect" required class="form-control d-none">
                                             </td>
-                                            <td>
-                                                <input type="file" name="talian_defect_image[other]" id="other_talian_defect-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="talian_defect_image[other2]" id="other_talian_defect-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
                                         </tr>
 
 
                                         {{-- Umbang --}}
 
                                         <tr>
-                                            <th rowspan="6">{{ __('messages.Umbang') }}</th>
+                                            <th rowspan="5">{{ __('messages.Umbang') }}</th>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[breaking]" id="umbang_breaking" class="form-check ">
                                                 <label for="umbang_breaking">{{ __('messages.Sagging_Breaking') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="umbang_defect_image[breaking]" id="umbang_breaking-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="umbang_defect_image[breaking2]" id="umbang_breaking-image-2" class="d-none form-control" accept="image/*">
                                             </td>
                                         </tr>
                                         <tr>
@@ -538,40 +544,28 @@
                                                 <input type="checkbox" name="umbang_defect[creepers]" id="umbang_creepers" class="form-check ">
                                                 <label for="umbang_creepers">{{ __('messages.Creepers') }}</label>
                                             </td>
-                                            <td>
-                                                <input type="file" name="umbang_defect_image[creepers]" id="umbang_creepers-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="umbang_defect_image[creepers2]" id="umbang_creepers-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
                                         </tr>
 
-                                        <tr>
+                                        {{-- <tr>
                                             <td class="d-flex"> <label for="umbang_creepers">{{ __('messages.Creepers') }} After</label>
                                             </td>
                                             <td>
                                                 <input type="file" name="umbang_defect_image[creepers_after1]" id="after1_umbang_creepers-image" class="d-none form-control" accept="image/*">
                                                 <input type="file" name="umbang_defect_image[creepers_after2]" id="after2_umbang_creepers-image-2" class="d-none form-control" accept="image/*">
                                             </td>
-                                        </tr>
+                                        </tr> --}}
 
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[cracked]" id="umbang_cracked" class="form-check ">
                                                 <label for="umbang_cracked">{{__('messages.No_Stay_Insulator_Damaged') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="umbang_defect_image[cracked]" id="umbang_cracked-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="umbang_defect_image[cracked2]" id="umbang_cracked-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[stay_palte]" id="stay_palte" class="form-check">
                                                 <label for="stay_palte">{{ __('messages.Stay_Plate_Base_Stay_Blocked') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="umbang_defect_image[stay_palte]" id="stay_palte-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="umbang_defect_image[stay_palte2]" id="stay_palte-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         {{-- <tr>
                                             <td class="d-flex">
@@ -588,11 +582,7 @@
                                                 <input type="checkbox" name="umbang_defect[other]" id="other_umbang_defect" class="form-check">
                                                 <label for="other_umbang_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="umbang_defect[other_value]" id="other_umbang_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td>
-                                            <td>
-                                                <input type="file" name="umbang_defect_image[other]" id="other_umbang_defect-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="umbang_defect_image[other2]" id="other_umbang_defect-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
 
                                         {{-- IPC --}}
@@ -601,22 +591,14 @@
                                             <td>
                                                 <input type="checkbox" name="ipc_defect[burn]" id="ipc_burn"class="form-check">
                                                 <label for="ipc_burn">{{ __('messages.Burn Effect') }} Burn Effect</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="ipc_defect_image[burn]" id="ipc_burn-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="ipc_defect_image[burn2]" id="ipc_burn-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="ipc_defect[other]" id="other_ipc_defect" class="form-check">
                                                 <label for="other_ipc_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="ipc_defect[other_value]" id="other_ipc_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td>
-                                            <td>
-                                                <input type="file" name="ipc_defect_image[other]" id="other_ipc_defect-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="ipc_defect_image[other2]" id="other_ipc_defect-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
 
                                         {{-- Black Box --}}
@@ -626,22 +608,14 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="blackbox_defect[cracked]" id="black_box_cracked" class="form-check">
                                                 <label for="black_box_cracked">{{ __('messages.Kesan_Bakar') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="blackbox_defect_image[cracked]" id="black_box_cracked-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="blackbox_defect_image[cracked2]" id="black_box_cracked-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="blackbox_defect[other]" id="other_blackbox_defect" class="form-check">
                                                 <label for="other_blackbox_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="blackbox_defect[other_value]"  id="other_blackbox_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td>
-                                            <td>
-                                                <input type="file" name="blackbox_defect_image[other]" id="other_blackbox_defect-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="blackbox_defect_image[other2]" id="other_blackbox_defect-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
 
                                         {{-- Jumper --}}
@@ -650,32 +624,20 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="jumper[sleeve]" id="jumper_sleeve" class="form-check">
                                                 <label for="jumper_sleeve">{{ __('messages.no_uv_sleeve') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="jumper_image[sleeve]" id="jumper_sleeve-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="jumper_image[sleeve2]" id="jumper_sleeve-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="jumper[burn]" id="jumper_burn" class="form-check">
                                                 <label for="jumper_burn">{{ __('messages.Burn Effect') }} </label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="jumper_image[burn]" id="jumper_burn-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="jumper_image[burn2]" id="jumper_burn-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="jumper[other]" id="other_jumper" class="form-check">
                                                 <label for="other_jumper">{{ __('messages.others') }}</label>
                                                 <input type="text" name="jumper[other_value]" id="other_jumper-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td>
-                                            <td>
-                                                <input type="file" name="jumper_image[other]" id="other_jumper-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="jumper_image[other2]" id="other_jumper-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
 
                                         {{-- Lightning catcher --}}
@@ -685,22 +647,14 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kilat_defect[broken]" id="lightning_broken" class="form-check">
                                                 <label for="lightning_broken">{{ __('messages.broken') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="kilat_defect_image[broken]" id="lightning_broken-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="kilat_defect_image[broken2]" id="lightning_broken-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="kilat_defect[other]" id="other_kilat_defect" class="form-check">
                                                 <label for="other_kilat_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="kilat_defect[other_value]" id="other_kilat_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td>
-                                            <td>
-                                                <input type="file" name="kilat_defect_image[other]" id="other_kilat_defect-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="kilat_defect_image[other2]" id="other_kilat_defect-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
 
                                         {{-- Service --}}
@@ -710,32 +664,20 @@
                                             <td class="d-felx">
                                                 <input type="checkbox" name="servis_defect[roof]" id="service_roof" class="form-check">
                                                 <label for="service_roof">{{ __('messages.the_service_line_is_on_the_roof') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="servis_defect_image[roof]" id="service_roof-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="servis_defect_image[roof2]" id="service_roof-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <td class="d-felx">
                                                 <input type="checkbox" name="servis_defect[won_piece]" id="service_won_piece" class="form-check">
                                                 <label for="service_won_piece">{{ __('messages.won_piece_date') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="servis_defect_image[won_piece]" id="service_won_piece-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="servis_defect_image[won_piece2]" id="service_won_piece-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="servis_defect[other]" id="other_servis_defect" class="form-check">
                                                 <label for="other_servis_defect">{{ __('messages.others') }} </label>
                                                 <input type="text" name="servis_defect[other_value]" id="other_servis_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td>
-                                            <td>
-                                                <input type="file" name="servis_defect_image[other]" id="other_servis_defect-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="servis_defect_image[other2]" id="other_servis_defect-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         {{-- Grounding --}}
                                         <tr>
@@ -743,22 +685,14 @@
                                             <td>
                                                 <input type="checkbox" name="pembumian_defect[netural]" id="grounding_netural" class="form-check">
                                                 <label for="grounding_netural">{{ __('messages.no_connection_to_neutral') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="pembumian_defect_image[netural]" id="grounding_netural-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="pembumian_defect_image[netural2]" id="grounding_netural-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="pembumian_defect[other]" id="other_pembumian_defect" class="form-check">
                                                 <label for="other_pembumian_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="pembumian_defect[other_value]" id="other_pembumian_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td>
-                                            <td>
-                                                <input type="file" name="pembumian_defect_image[other]" id="other_pembumian_defect-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="pembumian_defect_image[other2]" id="other_pembumian_defect-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
 
                                         {{-- Signage - OFF Point / Two Way Supply --}}
@@ -767,11 +701,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="bekalan_dua_defect[damage]" id="signage_damage" class="form-check">
                                                 <label for="signage_damage">{{ __('messages.faded_damaged_missing_signage') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="bekalan_dua_defect_image[damage]" id="signage_damage-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="bekalan_dua_defect_image[damage2]" id="signage_damage-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
 
                                         <tr>
@@ -779,11 +709,7 @@
                                                 <input type="checkbox" name="bekalan_dua_defect[other]" id="other_bekalan_dua_defect" class="form-check">
                                                 <label for="other_bekalan_dua_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="bekalan_dua_defect[other_value]" id="other_bekalan_dua_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td>
-                                            <td>
-                                                <input type="file" name="bekalan_dua_defect_image[other]" id="other_bekalan_dua_defect-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="bekalan_dua_defect_image[other2]" id="other_bekalan_dua_defect-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
 
                                         {{-- Main Street --}}
@@ -793,32 +719,20 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[date_wire]" id="street_date_wire" class="form-check">
                                                 <label for="street_date_wire">{{ __('messages.date_wire') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="kaki_lima_defect_image[date_wire]" id="street_date_wire-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="kaki_lima_defect_image[date_wire2]" id="street_date_wire-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[burn]" id="street_burn" class="form-check">
                                                 <label for="street_burn">{{ __('messages.junction_box_date_burn_effect') }}</label>
-                                            </td>
-                                            <td>
-                                                <input type="file" name="kaki_lima_defect_image[burn]" id="street_burn-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="kaki_lima_defect_image[burn2]" id="street_burn-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="kaki_lima_defect[other]" id="other_kaki_lima_defect_image" class="form-check">
                                                 <label for="other_kaki_lima_defect_image">{{ __('messages.others') }}</label>
                                                 <input type="text" name="kaki_lima_defect[other_value]" id="other_kaki_lima_defect_image-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td>
-                                            <td>
-                                                <input type="file" name="kaki_lima_defect_image[other]" id="other_kaki_lima_defect_image-image" class="d-none form-control" accept="image/*">
-                                                <input type="file" name="kaki_lima_defect_image[other2]" id="other_kaki_lima_defect_image-image-2" class="d-none form-control" accept="image/*">
-                                            </td>
+                                            </td> 
                                         </tr>
                                     </table>
                                 </div>
@@ -834,8 +748,7 @@
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
                                             <th class="col-4">{{ __('messages.title') }}</th>
-                                            <th class="col-4">{{ __('messages.defects') }}</th>
-                                            <th class="col-4">{{ __('messages.images') }}</th>
+                                            <th class="col-4">{{ __('messages.defects') }}</th> 
                                         </thead>
                                         <tbody>
 
@@ -847,27 +760,21 @@
                                                     <input type="checkbox" name="tapak_condition[road]" id="site_road" class="form-check">
                                                     <label for="site_road">{{ __('messages.Crossing_the_Road') }}</label>
                                                 </td>
-                                                <td>
-                                                    <input type="file" name="tapak_road_img" id="site_road-img" class="form-control d-none" accept="image/*">
-                                                </td>
+                                                 
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="tapak_condition[side_walk]"  id="side_walk" class="form-check">
                                                     <label for="side_walk">{{ __('messages.Sidewalk') }}</label>
                                                 </td>
-                                                <td>
-                                                    <input type="file" name="tapak_sidewalk_img" id="side_walk-img" class="form-control d-none" accept="image/*">
-                                                </td>
+                                                 
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="tapak_condition[vehicle_entry]" id="vehicle_entry" class="form-check">
                                                     <label for="vehicle_entry">{{ __('messages.No_vehicle_entry_area') }}</label>
                                                 </td>
-                                                <td>
-                                                    <input type="file" name="tapak_no_vehicle_entry_img" id="vehicle_entry-img" class="form-control d-none">
-                                                </td>
+                                                 
                                             </tr>
 
                                             {{-- Area --}}
@@ -877,27 +784,21 @@
                                                     <input type="checkbox" name="kawasan[bend]" id="area_bend" class="form-check">
                                                     <label for="area_bend">{{ __('messages.Bend') }}</label>
                                                 </td>
-                                                <td>
-                                                    <input type="file" name="kawasan_bend_img" id="area_bend-img" class="form-control d-none" accept="image/*">
-                                                </td>
+                                                 
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="kawasan[road]" id="area_road" class="form-check">
                                                     <label for="area_road"> {{ __('messages.Road') }}</label>
                                                 </td>
-                                                <td>
-                                                    <input type="file" name="kawasan_road_img" id="area_road-img" class="form-control d-none" accept="image/*">
-                                                </td>
+                                                 
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="kawasan[forest]" id="area_forest" class="form-check">
                                                     <label for="area_forest">{{ __('messages.Forest') }} </label>
                                                 </td>
-                                                <td>
-                                                    <input type="file" name="kawasan_forest_img" id="area_forest-img" class="form-control d-none" accept="image/*">
-                                                </td>
+                                                 
                                             </tr>
                                             <tr>
                                                 <td>
@@ -905,9 +806,7 @@
                                                     <label for="area_other">{{ __('messages.others') }}  {{-- (please state) --}} </label>
                                                     <input type="text" name="kawasan[other_value]" id="area_other-input" class="form-control d-none" required placeholder="(please state)">
                                                 </td>
-                                                <td>
-                                                    <input type="file" name="kawasan_other_img" id="area_other-img" class="form-control d-none" accept="image/*">
-                                                </td>
+                                                 
                                             </tr>
                                         </tbody>
                                     </table>
@@ -980,7 +879,7 @@
 
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="">{{ __('messages.Inspection_of_current_leakage_on_the_umbanf') }}</label>
+                                        <label for="">{{ __('messages.Inspection_of_current_leakage_on_the_umbang') }}</label>
                                     </div>
                                     <div class="col-md-8">
                                         <div class="row">
@@ -1239,57 +1138,58 @@
                 }
             });
 
+            $('input[type="file"]').on('change', function() {
+                showUploadedImage(this)
+            })
+
         });
+
+        // DISPALY UPLOADED IMAGE
+        function showUploadedImage(param) {
+            const file = param.files[0];
+            const id = $(`#${param.id}_div`);
+
+            if (file) {
+                id.empty()
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    var img =
+                        `<a class="text-right"  href="${e.target.result}" data-lightbox="roadtrip"><span class="close-button" onclick="removeImage('${param.id}')">X</span><img src="${e.target.result}" style="height:50px;"/></a>`;
+                    id.append(img)
+                };
+
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // REMOVE UPLOADED IMAGES
+        function removeImage(id) {
+            console.log(id);
+            $(`#${id}`).val('');
+            $(`#${id}_div`).empty();
+        }
 
         var total_defects = 0;
 
         function addReomveImageField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id');
-            var input = $(`#${id}-image`)
-            var input_2 = $(`#${id}-image-2`)
+            var id = element.attr('id'); 
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {
-                if (input.hasClass('d-none')) {
-                    input.removeClass('d-none');
-                    input_2.removeClass('d-none');
+                if (input_val.hasClass('d-none')) { 
                     input_val.removeClass('d-none');
 
-                    if (id == 'creepers' || id == 'umbang_creepers') {
-                        $(`#after1_${id}-image`).removeClass('d-none');
-                        $(`#after2_${id}-image-2`).removeClass('d-none'); 
-                    }
                     total_defects += 1;
                 }
             } else {
 
-                if (!input.hasClass('d-none')) {
-                    input.addClass('d-none');
-                    input_2.addClass('d-none');
+                if (!input_val.hasClass('d-none')) { 
                     input_val.addClass('d-none');
                     input_val.val('');
-                    total_defects -= 1;
-                    if (input.hasClass('error')) {
-                        input.removeClass('error')
-                        input_2.removeClass('error')
-                    }
-                    var span = input.parent().find('label');
-                    if (span.length > 0) {
-                        span.html('')
-                    }
-                    var span_val = $(`#${id}-input-error`);
-                    if (span_val.length > 0) {
-                        span_val.html('')
-                    }
-
-
-                    if (id == 'creepers' || id == 'umbang_creepers') {
-                        $(`#after1_${id}-image`).addClass('d-none');
-                        $(`#after2_${id}-image-2`).addClass('d-none'); 
-                    }
-                }
-                console.log('unchecked');
+                    total_defects -= 1;  
+ 
+                } 
             }
 
             $('#total_defects').val(total_defects)
@@ -1299,30 +1199,20 @@
 
         function addReomveImageHighClearanceField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id');
-            var input = $(`#${id}-img`)
+            var id = element.attr('id'); 
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {
-                if (input.hasClass('d-none')) {
-                    input.removeClass('d-none');
-
+                if (input_val.hasClass('d-none')) {
                     input_val.removeClass('d-none');
-
                 }
             } else {
 
-                if (!input.hasClass('d-none')) {
-                    input.addClass('d-none');
-
+                if (!input_val.hasClass('d-none')) {
 
                     input_val.addClass('d-none');
                     input_val.val('');
 
-                    if (input.hasClass('error')) {
-                        input.removeClass('error')
-
-                    }
                     var span = input.parent().find('label');
                     if (span.length > 0) {
                         span.html('')

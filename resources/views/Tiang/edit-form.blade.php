@@ -275,98 +275,46 @@
 
         function addReomveImageField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id');
-            var input = $(`#${id}-image`)
-            var input_2 = $(`#${id}-image-2`)
+            var id = element.attr('id'); 
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {
-                if (input.hasClass('d-none')) {
-                    input.removeClass('d-none');
-                    input_2.removeClass('d-none');
+                if (input_val.hasClass('d-none')) { 
                     input_val.removeClass('d-none');
+
                     total_defects += 1;
-                }
-
-                if (id == 'umbang_defect_creepers' || id == 'tiang_defect_creepers') {
-                    console.log(`${id}_after-image`);
-                    $(`#${id}_after-image`).removeClass('d-none')
-                    $(`#${id}_after-image-2`).removeClass('d-none')
-
                 }
             } else {
 
-                if (!input.hasClass('d-none')) {
-                    input.addClass('d-none');
-                    input_2.addClass('d-none');
+                if (!input_val.hasClass('d-none')) { 
                     input_val.addClass('d-none');
-
-                    total_defects -= 1;
-                    if (input.hasClass('error')) {
-                        input.removeClass('error')
-                        input_2.removeClass('error')
-                    }
-                    var span = input.parent().find('label');
-                    if (span.length > 0) {
-                        span.html('')
-                    }
-                    var span_val = $(`#${id}-input-error`);
-                    if (span_val.length > 0) {
-                        span.html('')
-                    }
-
-                    if (id == 'umbang_defect_creepers' || id == 'tiang_defect_creepers') {
-                        $(`#${id}_after-image`).addClass('d-none')
-                        $(`#${id}_after-image-2`).addClass('d-none')
-                    }   
-                }
-                console.log('unchecked');
+                    input_val.val('');
+                    total_defects -= 1;  
+ 
+                } 
             }
 
-            $('.select-radio-value').on('change',function(){
-                var val = this.value;
-                var id = `${this.name}_input`;
-                var input = $(`#${id}`)
-                if (val === 'other') {
-                    input.val('');
-                    input.removeClass('d-none');
-                }else{
-                    input.val(val);
-                    if (!input.hasClass('d-none')) {
-                        input.addClass('d-none')
-                    }
-                }
-            });
             $('#total_defects').val(total_defects)
 
         }
 
+
         function addReomveImageHighClearanceField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id');
-            var input = $(`#${id}-img`)
+            var id = element.attr('id'); 
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {
-                if (input.hasClass('d-none')) {
-                    input.removeClass('d-none');
-
+                if (input_val.hasClass('d-none')) {
                     input_val.removeClass('d-none');
-
                 }
             } else {
 
-                if (!input.hasClass('d-none')) {
-                    input.addClass('d-none');
-
+                if (!input_val.hasClass('d-none')) {
 
                     input_val.addClass('d-none');
                     input_val.val('');
 
-                    if (input.hasClass('error')) {
-                        input.removeClass('error')
-
-                    }
                     var span = input.parent().find('label');
                     if (span.length > 0) {
                         span.html('')

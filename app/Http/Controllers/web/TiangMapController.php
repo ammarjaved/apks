@@ -32,36 +32,19 @@ class TiangMapController extends Controller
     
     editMapStore(Request $request, $language,  $id)
     {
-        //
-        //
         try {
-            //  return $request->abc_span;
-            //code...
+
             $destinationPath = 'assets/images/tiang/';
             $data = Tiang::find($id);
-            foreach ($request->all() as $mainkey => $mainvalue) {
-                if (is_array($mainvalue)) {
-                    $json = json_decode($data[$mainkey], true) ?? []; // Decode existing JSON or create an empty array if not exists
-
-                    foreach ($mainvalue as $key => $file) {
-                        if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
-                            $uploadedFile = $file;
-                            $img_ext = $uploadedFile->getClientOriginalExtension();
-                            $filename = $key . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
-                            $uploadedFile->move($destinationPath, $filename);
-                            $json[$key] = $destinationPath . $filename;
-                        }
-                    }
-
-                    $data[$mainkey] = json_encode($json);
-                } else {
-                    if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
-                        $uploadedFile = $mainvalue;
-                        $img_ext = $uploadedFile->getClientOriginalExtension();
-                        $filename = $mainkey . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
-                        $uploadedFile->move($destinationPath, $filename);
-                        $data[$mainkey] = $destinationPath . $filename;
-                    }
+           
+            $defectsImg = ['pole_image_1', 'pole_image_2', 'pole_image_3', 'pole_image_4', 'pole_image_5'];
+            foreach ($defectsImg as $file) {
+                if (is_a($request->{$file}, 'Illuminate\Http\UploadedFile') && $request->{$file}->isValid()) {
+                    $uploadedFile = $request->{$file};
+                    $img_ext = $request->{$file}->getClientOriginalExtension();
+                    $filename = $file . '-' . strtotime(now()) .rand(10,100) . '.' . $img_ext;
+                    $uploadedFile->move($destinationPath, $filename);
+                    $data->{$file} = $destinationPath . $filename;
                 }
             }
 
@@ -106,48 +89,39 @@ class TiangMapController extends Controller
                 $arr = [];
 
                 foreach ($defect as $item) {
-                    if ($request->has("$key.$item")) 
-                    {
+                    if ($request->has("$key.$item")) {
                         $def[$item] = true;
-                        if ($key != 'tapak_condition' || $key!= 'kawasan') {
-                            $total_defects++;
-
-                        }
-                    } else 
-                    {
-                        $def[$item] = false;
-                    }
+                        if ($key != 'tapak_condition' || $key!= 'kawasan') {  $total_defects++; }
+                    } else { $def[$item] = false; }
                 }
+        
+                if ($key != 'tapak_condition') {  $def['other_value'] = $request->{"$key.other_value"};  }
 
-                if ($key != 'tapak_condition') 
-                {
-                    $def['other_value'] = $request->{"$key.other_value"};
-                }
-
-                if ($key == 'tiang_defect'  || $key == 'umbang_defect') 
-                {
-                    if ($request->has('tiang_defect_current_leakage') && $request->{$key.'_current_leakage'} == 'Yes') {
+                
+                if ($key == 'tiang_defect'  || $key == 'umbang_defect') {
+                    if ($request->has($key.'_current_leakage') && $request->{$key.'_current_leakage'} == 'Yes') {
                         $def['current_leakage'] = true;
                         $total_defects++;
-                    }
-                    else
-                    {
+                    }else{
                         $def['current_leakage'] = false;
                     }
+              
                     $def['current_leakage_val'] = $request->{"$key.current_leakage_val"};
                     if ($key == 'tiang_defect') {
                         $data->arus_pada_tiang = $def['current_leakage'] == true ?'Yes':'No';
                         $data->arus_pada_tiang_amp = $def['current_leakage_val'];
                     }
                 }
+
                 $data->{$key} = json_encode($def);
+
             }
-
-            $data->total_defects = $total_defects;
-            $data->jarak_kelegaan = $request->jarak_kelegaan;
-            $data->talian_spec = $request->talian_spec;
-
+ 
+            $data->total_defects = $total_defects; 
+            $data->jarak_kelegaan = $request->jarak_kelegaan; 
+            $data->talian_spec = $request->talian_spec; 
             $data->update();
+ 
             return view('components.map-messages',['id'=>$id,'success'=>true , 'url'=>'tiang-talian-vt-and-vr'])
                 ->with('success', 'Form Update');
         } catch (\Throwable $th) {

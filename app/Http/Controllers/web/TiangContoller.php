@@ -116,30 +116,17 @@ class TiangContoller extends Controller
             $defectsKeys['tapak_condition'] = ['road', 'side_walk', 'vehicle_entry'];
             $defectsKeys['kawasan'] = ['road', 'bend', 'forest', 'other'];
 
-            $defectsImg = ['tapak_road_img', 'tapak_sidewalk_img', 'tapak_no_vehicle_entry_img', 'kawasan_bend_img', 'kawasan_road_img', 'kawasan_forest_img', 'kawasan_other_img', 'pole_image_1', 'pole_image_2'];
+            $defectsImg = ['pole_image_1', 'pole_image_2', 'pole_image_3', 'pole_image_4', 'pole_image_5'];
 
             $total_defects = 0;
-            foreach ($defectsKeys as $key => $defect) {
+            foreach ($defectsKeys as $key => $defect) 
+            {
                 $def = [];
-                $arr = [];
 
-                foreach ($defect as $item) {
+                foreach ($defect as $item) 
+                {
                     if ($request->has("$key.$item")) {
                         $def[$item] = true;
-
-                        if ($key != 'tapak_condition' && $key != 'kawasan') {
-                            if ($request->{$key . '_image'} != '') {
-                                foreach ($request->{$key . '_image'} as $keyy => $file) {
-                                    if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
-                                        $uploadedFile = $file;
-                                        $img_ext = $uploadedFile->getClientOriginalExtension();
-                                        $filename = $keyy . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
-                                        $uploadedFile->move($destinationPath, $filename);
-                                        $arr[$keyy] = $destinationPath . $filename;
-                                    }
-                                }
-                            }
-                        }
                     } else {
                         $def[$item] = false;
                     }
@@ -149,17 +136,14 @@ class TiangContoller extends Controller
                     $def['other_value'] = $request->{"$key.other_value"};
                 }
 
-            
                 if ($key == 'tiang_defect'  || $key == 'umbang_defect') {
-                    // return "$key.'current_leakage'";
-                    if ($request->has('tiang_defect_current_leakage') && $request->{$key.'_current_leakage'} == 'Yes') {
+                    if ($request->has($key.'_current_leakage') && $request->{$key.'_current_leakage'} == 'Yes') {
                         $def['current_leakage'] = true;
                         $total_defects++;
                     }else{
                         $def['current_leakage'] = false;
                     }
               
-
                     $def['current_leakage_val'] = $request->{"$key.current_leakage_val"};
 
                     if ($key == 'tiang_defect') {
@@ -167,14 +151,10 @@ class TiangContoller extends Controller
                         $data->arus_pada_tiang_amp = $def['current_leakage_val'];
                     }
                 }
-                $data->{$key} = json_encode($def);
 
+                $data->{$key} = json_encode($def);
                 if ($key != 'tapak_condition' || $key!= 'kawasan') {
                     $total_defects++;
-
-                }
-                if ($key != 'tapak_condition' && $key != 'kawasan') {
-                    $data->{$key . '_image'} = json_encode($arr);
                 }
             }
 
@@ -187,27 +167,22 @@ class TiangContoller extends Controller
                     $data->{$file} = $destinationPath . $filename;
                 }
             }
-            // $request->arus_pada_tiang == 'Yes' ? $total_defects++ : '';
-            // $data->arus_pada_tiang = $request->arus_pada_tiang;
-            // return $data;
-            $data->total_defects = $total_defects;
-            
 
+            $data->total_defects = $total_defects; 
             $data->talian_spec = $request->talian_spec;
 
             if ($request->lat != '' && $request->log != '') {
                 $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
                 $data->coords = number_format( $request->log , 5 )  .' , ' . number_format( $request->lat , 5);
             }
-            // return "Sds";
+
             $data->save();
-            // return 'asdasd';
 
             return redirect()
                 ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('success', 'Form Intserted');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return redirect()
                 ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
                 ->with('failed', 'Form Intserted Failed');
@@ -260,33 +235,18 @@ class TiangContoller extends Controller
     {
         //
         try {
-            //  return $request->abc_span;
-            //code...
+
             $destinationPath = 'assets/images/tiang/';
             $data = Tiang::find($id);
-            foreach ($request->all() as $mainkey => $mainvalue) {
-                if (is_array($mainvalue)) {
-                    $json = json_decode($data[$mainkey], true) ?? []; // Decode existing JSON or create an empty array if not exists
-
-                    foreach ($mainvalue as $key => $file) {
-                        if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
-                            $uploadedFile = $file;
-                            $img_ext = $uploadedFile->getClientOriginalExtension();
-                            $filename = $key . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
-                            $uploadedFile->move($destinationPath, $filename);
-                            $json[$key] = $destinationPath . $filename;
-                        }
-                    }
-
-                    $data[$mainkey] = json_encode($json);
-                } else {
-                    if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
-                        $uploadedFile = $mainvalue;
-                        $img_ext = $uploadedFile->getClientOriginalExtension();
-                        $filename = $mainkey . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
-                        $uploadedFile->move($destinationPath, $filename);
-                        $data[$mainkey] = $destinationPath . $filename;
-                    }
+           
+            $defectsImg = ['pole_image_1', 'pole_image_2', 'pole_image_3', 'pole_image_4', 'pole_image_5'];
+            foreach ($defectsImg as $file) {
+                if (is_a($request->{$file}, 'Illuminate\Http\UploadedFile') && $request->{$file}->isValid()) {
+                    $uploadedFile = $request->{$file};
+                    $img_ext = $request->{$file}->getClientOriginalExtension();
+                    $filename = $file . '-' . strtotime(now()) .rand(10,100) . '.' . $img_ext;
+                    $uploadedFile->move($destinationPath, $filename);
+                    $data->{$file} = $destinationPath . $filename;
                 }
             }
 
@@ -350,7 +310,7 @@ class TiangContoller extends Controller
                 
                 if ($key == 'tiang_defect'  || $key == 'umbang_defect') {
                     // return "$key.'current_leakage'";
-                    if ($request->has('tiang_defect_current_leakage') && $request->{$key.'_current_leakage'} == 'Yes') {
+                    if ($request->has($key.'_current_leakage') && $request->{$key.'_current_leakage'} == 'Yes') {
                         $def['current_leakage'] = true;
                         $total_defects++;
                     }else{
@@ -369,17 +329,10 @@ class TiangContoller extends Controller
                 $data->{$key} = json_encode($def);
 
             }
-
-            // $request->arus_pada_tiang == 'Yes' ? $total_defects++ : '';
-        
-            $data->total_defects = $total_defects;
-            // return $data;
-            $data->jarak_kelegaan = $request->jarak_kelegaan;
-
-            $data->talian_spec = $request->talian_spec;
-
-            // $data->arus_pada_tiang = $request->arus_pada_tiang;
-
+ 
+            $data->total_defects = $total_defects; 
+            $data->jarak_kelegaan = $request->jarak_kelegaan; 
+            $data->talian_spec = $request->talian_spec; 
             $data->update();
 
             return redirect()
