@@ -109,7 +109,10 @@ class TiangMapController extends Controller
                     if ($request->has("$key.$item")) 
                     {
                         $def[$item] = true;
-                        $total_defects++;
+                        if ($key != 'tapak_condition' || $key!= 'kawasan') {
+                            $total_defects++;
+
+                        }
                     } else 
                     {
                         $def[$item] = false;

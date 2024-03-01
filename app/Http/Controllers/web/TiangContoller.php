@@ -169,7 +169,10 @@ class TiangContoller extends Controller
                 }
                 $data->{$key} = json_encode($def);
 
-                $total_defects++;
+                if ($key != 'tapak_condition' || $key!= 'kawasan') {
+                    $total_defects++;
+
+                }
                 if ($key != 'tapak_condition' && $key != 'kawasan') {
                     $data->{$key . '_image'} = json_encode($arr);
                 }
@@ -330,7 +333,10 @@ class TiangContoller extends Controller
                 foreach ($defect as $item) {
                     if ($request->has("$key.$item")) {
                         $def[$item] = true;
-                        $total_defects++;
+                        if ($key != 'tapak_condition' || $key!= 'kawasan') {
+                            $total_defects++;
+
+                        }
                     } else {
                         $def[$item] = false;
                     }
