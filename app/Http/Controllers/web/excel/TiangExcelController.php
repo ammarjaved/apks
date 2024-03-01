@@ -29,24 +29,14 @@ class TiangExcelController extends Controller
 
         $result = Tiang::query();
 
-      //  $result = $this->filter($result , 'review_date',$req);
+       $result = $this->filter($result , 'review_date',$req);
 
-        if ($req->filled('ba')) {
-         $result->where('ba', $ba);
-        }
-
-        if ($req->filled('from_date')) {
-            $result->where('review_date', '>=', $req->from_date);
-        }
-
-        if ($req->filled('to_date')) {
-            $result->where('review_date', '<=', $req->to_date);
-        }
+            $defectsImg = ['pole_image_1', 'pole_image_2', 'pole_image_3', 'pole_image_4', 'pole_image_5'];
 
 
             $res = $result->whereNotNull('review_date')
-            ->join('savr_all_images', 'tbl_savr.id', '=', 'savr_all_images.id') // Replace 'your_model' with your actual table name
-            ->select(  'tbl_savr.*',  'savr_all_images.images as images' )
+            // ->join('savr_all_images', 'tbl_savr.id', '=', 'savr_all_images.id') // Replace 'your_model' with your actual table name
+            // ->select(  'tbl_savr.*',  'savr_all_images.images as images' )
             ->get()
             ->makeHidden(['geom' , 'tiang_defect_image' , 'talian_defect_image' ,
              'umbang_defect_image' , 'ipc_defect_image' ,'jumper_image','kilat_defect_image',
@@ -295,8 +285,14 @@ class TiangExcelController extends Controller
                     $secondWorksheet->setCellValue('BC' . $i, $secondRec->coords);
                     $secondWorksheet->setCellValue('BD' . $i, $secondRec->total_defects);
 
+                    $images = '';
+                    foreach ($defectsImg as $defImg) {
+                        if ($secondRec->{$defImg} != '') {
+                            $images .=' http://121.121.232.53:8090/'.$secondRec->{$defImg}; 
 
-                    $secondWorksheet->setCellValue('BN' . $i, $secondRec->images);
+                        }
+                    }
+                    $secondWorksheet->setCellValue('BN' . $i, $images);
                     $repair_date = $rec->repair_date != ''?date('Y-m-d', strtotime($rec->repair_date)) : '';
                     $secondWorksheet->setCellValue('BF' . $i, $repair_date);
                     $secondWorksheet->setCellValue('AN' . $i, $secondRec->remarks);
