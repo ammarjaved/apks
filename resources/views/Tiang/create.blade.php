@@ -198,7 +198,7 @@
                                         <label for="review_date">{{ __('messages.visit_date') }}</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="date" name="review_date" id="review_date" class="form-control" required>
+                                        <input type="date" name="review_date" value="{{ now('Asia/Kuala_Lumpur')->format('Y-m-d') }}" id="review_date" class="form-control" required>
                                     </div>
                                 </div>
 
