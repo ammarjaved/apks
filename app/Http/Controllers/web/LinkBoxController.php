@@ -82,7 +82,7 @@ class LinkBoxController extends Controller
             $data->end_date = $request->end_date;
             $data->type = $request->type;
             $data->qa_status = 'pending';
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
 
             $data->created_by = $user;
             $data->coordinate = $request->coordinate;
@@ -172,7 +172,7 @@ class LinkBoxController extends Controller
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
 
             $data->updated_by = $user;
             if ($data->qa_status == '') {

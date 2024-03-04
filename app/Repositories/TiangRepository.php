@@ -61,7 +61,7 @@ class TiangRepository
     public function store($request){
         $data = new Tiang();
         $data->qa_status = 'pending';
-        $user = Auth::user()->id;
+        $user = Auth::user()->name;
         $data->created_by = $user;
         if ($request->lat != '' && $request->log != '') {
             $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");

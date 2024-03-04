@@ -88,7 +88,7 @@ class CableBridgeController extends Controller
         {
             $data = new CableBridge();
             $data->coords = $request->coordinate;
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
 
             $data->created_by = $user;
             $data->qa_status = 'pending';
@@ -142,7 +142,7 @@ class CableBridgeController extends Controller
         try 
         {
             $data = CableBridge::find($id);
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
 
             $data->updated_by = $user;
             $cableBridge->store($data,$request);

@@ -32,7 +32,7 @@ class FeederPillarMapController extends Controller
 
         try {
             $data = FeederPillar::find($id);
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
 
             $data->updated_by = $user;
             $feederPillar->store($data, $request);
