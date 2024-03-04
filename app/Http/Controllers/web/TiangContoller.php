@@ -176,6 +176,7 @@ class TiangContoller extends Controller
                 $data->coords = number_format( $request->log , 5 )  .' , ' . number_format( $request->lat , 5);
             }
 
+            //return $data;
             $data->save();
 
             return redirect()
