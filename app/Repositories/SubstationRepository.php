@@ -115,16 +115,16 @@ class SubstationRepository
         return $data;
     }
 
-public function getSubstation($id )  {
-    
+    public function getSubstation($id )  {
+        
 
-    $data = Substation::find($id);
-    if ($data) {
-        $data->gate_status = json_decode($data->gate_status);
-        $data->building_status = json_decode($data->building_status);
-      
-        return $data;
+        $data = Substation::find($id);
+        if ($data) {
+            $data->gate_status = json_decode($data->gate_status);
+            $data->building_status = json_decode($data->building_status);
+        
+            return $data;
+        }
+        return '';
     }
-    return '';
-}
 }

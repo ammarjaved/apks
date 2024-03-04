@@ -114,7 +114,7 @@
         </div>
 
         {{-- POLE IMAGE 1 --}}
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1</label></div>
             <div class="col-md-5 p-2 pr-5">
                 <input type="file" name="pole_image_1" id="pole_image_1" class="form-control">
@@ -129,10 +129,10 @@
                     <strong>{{ __('messages.no_image_found') }} </strong>
                 @endif
             </div>
-        </div>
+        </div> --}}
 
         {{-- POLE IMAGE 2 --}}
-        <div class="row">
+        {{-- <div class="row">
             <div class="col-md-4"><label for="pole_image-2">{{ __('messages.pole') }} Image
                     2</label>
             </div>
@@ -148,10 +148,53 @@
                     <strong>{{ __('messages.no_image_found') }} </strong>
                 @endif
             </div>
-        </div>
+        </div> --}}
     </fieldset>
     {{-- END Info (1) --}}
 
+
+    {{-- IMAGES --}}
+    <h3>{{__('messages.images')}}</h3>
+
+    <fieldset class="form-input">
+        
+        {{-- POLE IMAGE 1 --}}
+        <div class="row">
+            <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1 </label></div>
+            <div class="col-md-8 row">{!!  viewAndUpdateImage($data->pole_image_1 , 'pole_image_1' , false )  !!}</div>
+        </div>
+
+        {{-- POLE IMAGE 2 --}}
+
+        <div class="row">
+            <div class="col-md-4"><label for="pole_image-2">{{ __('messages.pole') }} Image 2</label></div>
+            <div class="col-md-8 row">{!!  viewAndUpdateImage($data->pole_image_1 , 'pole_image_1' , false )  !!}</div>
+
+        </div>
+
+        {{-- POLE IMAGE 3 --}}
+
+        <div class="row">
+            <div class="col-md-4"><label for="pole_image-3">{{ __('messages.pole') }} Image 3 </label></div>
+            <div class="col-md-8 row">{!!  viewAndUpdateImage($data->pole_image_3 , 'pole_image_3' , false )  !!}</div>
+        </div>
+
+        {{-- POLE IMAGE 4 --}}
+        <div class="row">
+            <div class="col-md-4"><label for="pole_image-4">{{ __('messages.pole') }} Image 4</label></div>
+            <div class="col-md-8 row">{!!  viewAndUpdateImage($data->pole_image_4 , 'pole_image_4' , false )  !!}</div>
+        </div>
+
+        {{-- POLE IMAGE 5 --}}
+        <div class="row">
+            <div class="col-md-4"><label for="pole_image-5">{{ __('messages.pole') }} Image 5 </label></div>
+            <div class="col-md-8 row">{!!  viewAndUpdateImage($data->pole_image_5 , 'pole_image_5' , false )  !!}</div>
+        </div>
+
+    </fieldset>
+
+    {{-- END IMAGES --}}
+    
     <h3> {{ __('messages.Asset_Register') }} </h3>
 
     {{-- START Asset Register (2) --}}
@@ -297,102 +340,97 @@
             <table class="table table-bordered w-100">
                 <thead style="background-color: #E4E3E3 !important">
                     <th class="col-4">{{ __('messages.title') }}</th>
-                    <th class="col-4">{{ __('messages.defects') }}</th>
-                    <th class="col-3">{{ __('messages.images') }}</th>
-                    <th class="col-1">{{ __('messages.images') }}</th>
+                    <th class="col-4">{{ __('messages.defects') }}</th> 
                 </thead>
                 {{-- POLE --}}
                 <tr>
-                    <th rowspan="6">{{ __('messages.pole') }}</th>
-                    {!! getImage2('cracked', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'cracked') !!}
+                    <th rowspan="5">{{ __('messages.pole') }}</th>
+                    {!! tiangDefactCheckBox('cracked', $data->tiang_defect, 'tiang_defect',  'cracked',true ) !!}
                 </tr>
-                <tr>{!! getImage2('leaning', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'leaning') !!}</tr>
-                <tr>{!! getImage2('dim', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'no_dim_post_none') !!}</tr>
-                <tr>{!! getImage2('creepers', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'creepers') !!}</tr>
-                <tr>{!! getImage2('creepers_after', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'Creepers') !!}</tr>              
-                <tr>{!! getImage2('current_leakage', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'current_leakage') !!}</tr>
-                <tr>{!! getImage2('other', $data->tiang_defect, 'tiang_defect', $data->tiang_defect_image, 'others') !!}</tr>
+                <tr>{!! tiangDefactCheckBox('leaning', $data->tiang_defect, 'tiang_defect', 'leaning',true ) !!}</tr>
+                <tr>{!! tiangDefactCheckBox('dim', $data->tiang_defect, 'tiang_defect', 'no_dim_post_none',true ) !!}</tr>
+                <tr>{!! tiangDefactCheckBox('creepers', $data->tiang_defect, 'tiang_defect',  'creepers',true ) !!}</tr>             
+                <tr>{!! tiangDefactCheckBox('other', $data->tiang_defect, 'tiang_defect', 'others',true ) !!}</tr>
 
                 {{-- Line (Main / Service) --}}
                 <tr>
                     <th rowspan="4">{{ __('messages.line_main_service') }}</th>
-                    {!! getImage2('joint', $data->talian_defect, 'talian_defect', $data->talian_defect_image, 'joint') !!}
+                    {!! tiangDefactCheckBox('joint', $data->talian_defect, 'talian_defect', 'joint',true ) !!}
                 </tr>
-                <tr>{!! getImage2('need_rentis', $data->talian_defect, 'talian_defect', $data->talian_defect_image, 'need_rentis') !!}</tr>
-                <tr>{!! getImage2( 'ground', $data->talian_defect, 'talian_defect', $data->talian_defect_image, 'Does_Not_Comply_With_Ground_Clearance',) !!}</tr>
-                <tr>{!! getImage2('other', $data->talian_defect, 'talian_defect', $data->talian_defect_image, 'others') !!}</tr>
+                <tr>{!! tiangDefactCheckBox('need_rentis', $data->talian_defect, 'talian_defect', 'need_rentis',true ) !!}</tr>
+                <tr>{!! tiangDefactCheckBox( 'ground', $data->talian_defect, 'talian_defect', 'Does_Not_Comply_With_Ground_Clearance',true ) !!}</tr>
+                <tr>{!! tiangDefactCheckBox('other', $data->talian_defect, 'talian_defect', 'others',true ) !!}</tr>
 
                 {{-- Umbang --}}
                 <tr>
-                    <th rowspan="6">{{ __('messages.Umbang') }}</th>
-                    {!! getImage2('breaking', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'Sagging_Breaking') !!}
+                    <th rowspan="5">{{ __('messages.Umbang') }}</th>
+                    {!! tiangDefactCheckBox('breaking', $data->umbang_defect, 'umbang_defect', 'Sagging_Breaking',true ) !!}
                 </tr>
-                <tr>{!! getImage2('creepers', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'Creepers') !!}</tr>
-                <tr>{!! getImage2('creepers_after', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'Creepers') !!}</tr>              
-                <tr>{!! getImage2( 'cracked', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'No_Stay_Insulator_Damaged') !!}</tr>
-                <tr>{!! getImage2( 'stay_palte', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'Stay_Plate_Base_Stay_Blocked') !!}</tr>
-                {{-- <tr>{!! getImage2('current_leakage', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'current_leakage') !!}</tr> --}}
-                <tr>{!! getImage2('other', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'others') !!}</tr>
+                <tr>{!! tiangDefactCheckBox('creepers', $data->umbang_defect, 'umbang_defect', 'Creepers',true ) !!}</tr>             
+                <tr>{!! tiangDefactCheckBox( 'cracked', $data->umbang_defect, 'umbang_defect', 'No_Stay_Insulator_Damaged',true ) !!}</tr>
+                <tr>{!! tiangDefactCheckBox( 'stay_palte', $data->umbang_defect, 'umbang_defect', 'Stay_Plate_Base_Stay_Blocked',true ) !!}</tr>
+                {{-- <tr>{!! tiangDefactCheckBox('current_leakage', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'current_leakage',true ) !!}</tr> --}}
+                <tr>{!! tiangDefactCheckBox('other', $data->umbang_defect, 'umbang_defect', 'others',true ) !!}</tr>
 
                 {{-- IPC --}}
                 <tr>
                     <th rowspan="2">{{ __('messages.IPC') }}</th>
-                    {!! getImage2('burn', $data->ipc_defect, 'ipc_defect', $data->ipc_defect_image, 'Burn Effect') !!}
+                    {!! tiangDefactCheckBox('burn', $data->ipc_defect, 'ipc_defect', 'Burn Effect',true ) !!}
                 </tr>
-                <tr>{!! getImage2('other', $data->ipc_defect, 'ipc_defect', $data->ipc_defect_image, 'others') !!}</tr>
+                <tr>{!! tiangDefactCheckBox('other', $data->ipc_defect, 'ipc_defect', 'others',true ) !!}</tr>
 
                 {{-- Black Box --}}
 
                 <tr>
                     <th rowspan="2">{{ __('messages.Black_Box') }}</th>
-                    {!! getImage2('cracked', $data->blackbox_defect, 'blackbox_defect', $data->blackbox_defect_image, 'Kesan_Bakar') !!}
+                    {!! tiangDefactCheckBox('cracked', $data->blackbox_defect, 'blackbox_defect', 'Kesan_Bakar',true ) !!}
                 </tr>
-                <tr>{!! getImage2('other', $data->blackbox_defect, 'blackbox_defect', $data->blackbox_defect_image, 'others') !!}</tr>
+                <tr>{!! tiangDefactCheckBox('other', $data->blackbox_defect, 'blackbox_defect', 'others',true ) !!}</tr>
 
                 {{-- Jumper --}}
                 <tr>
                     <th rowspan="3">{{ __('messages.jumper') }}</th>
-                    {!! getImage2('sleeve', $data->jumper, 'jumper', $data->jumper_image, 'no_uv_sleeve') !!}
+                    {!! tiangDefactCheckBox('sleeve', $data->jumper, 'jumper', 'no_uv_sleeve',true ) !!}
                 </tr>
-                <tr>{!! getImage2('burn', $data->jumper, 'jumper', $data->jumper_image, 'Burn Effect') !!}</tr>
-                <tr>{!! getImage2('other', $data->jumper, 'jumper', $data->jumper_image, 'others') !!}</tr>
+                <tr>{!! tiangDefactCheckBox('burn', $data->jumper, 'jumper', 'Burn Effect',true ) !!}</tr>
+                <tr>{!! tiangDefactCheckBox('other', $data->jumper, 'jumper', 'others',true ) !!}</tr>
 
                 {{-- Lightning catcher --}}
                 <tr>
                     <th rowspan="2">{{ __('messages.lightning_catcher') }}</th>
-                    {!! getImage2('broken', $data->kilat_defect, 'kilat_defect', $data->kilat_defect_image, 'broken') !!}
+                    {!! tiangDefactCheckBox('broken', $data->kilat_defect, 'kilat_defect', 'broken',true ) !!}
                 </tr>
-                <tr>{!! getImage2('other', $data->kilat_defect, 'kilat_defect', $data->kilat_defect_image, 'others') !!}</tr>
+                <tr>{!! tiangDefactCheckBox('other', $data->kilat_defect, 'kilat_defect', 'others',true ) !!}</tr>
 
                 {{-- Service --}}
                 <tr>
                     <th rowspan="3">{{ __('messages.Service') }}</th>
-                    {!! getImage2('roof', $data->servis_defect, 'servis_defect', $data->servis_defect_image, 'the_service_line_is_on_the_roof',) !!}
+                    {!! tiangDefactCheckBox('roof', $data->servis_defect, 'servis_defect', 'the_service_line_is_on_the_roof',true ) !!}
                 </tr>
-                <tr>{!! getImage2('won_piece', $data->servis_defect, 'servis_defect', $data->servis_defect_image, 'won_piece_date') !!}</tr>
-                <tr>{!! getImage2('other', $data->servis_defect, 'servis_defect', $data->servis_defect_image, 'others') !!}</tr>
+                <tr>{!! tiangDefactCheckBox('won_piece', $data->servis_defect, 'servis_defect',  'won_piece_date',true ) !!}</tr>
+                <tr>{!! tiangDefactCheckBox('other', $data->servis_defect, 'servis_defect', 'others',true ) !!}</tr>
 
                 {{-- Grounding --}}
                 <tr>
                     <th rowspan="2">{{ __('messages.grounding') }}</th>
-                    {!! getImage2('netural', $data->pembumian_defect, 'pembumian_defect', $data->pembumian_defect_image,'no_connection_to_neutral',) !!}
+                    {!! tiangDefactCheckBox('netural', $data->pembumian_defect, 'pembumian_defect', 'no_connection_to_neutral',true ) !!}
                 </tr>
-                <tr>{!! getImage2('other', $data->pembumian_defect, 'pembumian_defect', $data->pembumian_defect_image, 'others') !!}</tr>
+                <tr>{!! tiangDefactCheckBox('other', $data->pembumian_defect, 'pembumian_defect', 'others',true ) !!}</tr>
 
                 {{-- Signage - OFF Point / Two Way Supply --}}
                 <tr>
                     <th rowspan="2">{{ __('messages.signage_off_point_two_way_supply') }}</th>
-                    {!! getImage2('damage', $data->bekalan_dua_defect, 'bekalan_dua_defect', $data->bekalan_dua_defect_image, 'faded_damaged_missing_signage',) !!}
+                    {!! tiangDefactCheckBox('damage', $data->bekalan_dua_defect, 'bekalan_dua_defect', 'faded_damaged_missing_signage',true ) !!}
                 </tr>
-                <tr>{!! getImage2('other', $data->bekalan_dua_defect, 'bekalan_dua_defect', $data->bekalan_dua_defect_image,'others',) !!}</tr>
+                <tr>{!! tiangDefactCheckBox('other', $data->bekalan_dua_defect, 'bekalan_dua_defect', 'others',true ) !!}</tr>
 
                 {{-- Main Street --}}
                 <tr>
                     <th rowspan="3">{{ __('messages.main_street') }}</th>
-                    {!! getImage2('date_wire', $data->kaki_lima_defect, 'kaki_lima_defect', $data->kaki_lima_defect_image, 'date_wire',) !!}
+                    {!! tiangDefactCheckBox('date_wire', $data->kaki_lima_defect, 'kaki_lima_defect', 'date_wire',true ) !!}
                 </tr>
-                <tr>{!! getImage2('burn', $data->kaki_lima_defect, 'kaki_lima_defect', $data->kaki_lima_defect_image, 'junction_box_date_burn_effect',) !!}</tr>
-                <tr>{!! getImage2('other', $data->kaki_lima_defect, 'kaki_lima_defect', $data->kaki_lima_defect_image, 'others') !!}</tr>
+                <tr>{!! tiangDefactCheckBox('burn', $data->kaki_lima_defect, 'kaki_lima_defect',   'junction_box_date_burn_effect',true ) !!}</tr>
+                <tr>{!! tiangDefactCheckBox('other', $data->kaki_lima_defect, 'kaki_lima_defect',  'others',true ) !!}</tr>
             </table>
         </div>
         <input type="hidden" name="total_defects" id="total_defects">
@@ -412,218 +450,70 @@
             <table class="table table-bordered w-100">
                 <thead style="background-color: #E4E3E3 !important">
                     <th class="col-4">{{ __('messages.title') }}</th>
-                    <th class="col-4">{{ __('messages.defects') }}</th>
-                    <th class="col-3" colspan="2">{{ __('messages.images') }}</th>
+                    <th class="col-4">{{ __('messages.defects') }}</th> 
                 </thead>
                 <tbody>
                     {{-- Site Conditions --}}
                     <tr>
                         <th rowspan="3">{{ __('messages.Site_Conditions') }} </th>
                         {{-- CROSSING THE ROAD --}}
-                        <td class="d-flex">
-                            <input type="checkbox" name="tapak_condition[road]" id="site_road" class="form-check" {{ checkCheckBox('road', $data->tapak_condition) }}>
-                            <label for="site_road">{{ __('messages.Crossing_the_Road') }}</label>
-                        </td>
-
-                        {{-- CROSSING THE ROAD IMAGE --}}
-                        <td>
-                            <input type="file" name="tapak_road_img" id="site_road-img" class="form-control @if (checkCheckBox('road', $data->tapak_condition) != 'checked') d-none @endif">
-                        </td>
-                        <td>
-                            @if ($data->tapak_road_img != '' && file_exists(public_path($data->tapak_road_img)))
-                                <a href="{{ URL::asset($data->tapak_road_img) }}" data-lightbox="roadtrip">
-                                    <img src="{{ URL::asset($data->tapak_road_img) }}" alt="" class="adjust-height " style="height:30px; width:30px !important">
-                                </a>
-                            @endif
-                        </td>
+                        {!! tiangDefactCheckBox('road', $data->tapak_condition, 'tapak_condition',  'Crossing_the_Road',true ) !!}
                     </tr>
                     <tr>
-                        <td>
-                            <input type="checkbox" name="tapak_condition[side_walk]"
-                                id="side_walk" class="form-check"
-                                {{ checkCheckBox('side_walk', $data->tapak_condition) }}>
-                            <label for="side_walk">{{ __('messages.Sidewalk') }}</label>
-                        </td>
-                        <td>
-                            <input type="file" name="tapak_sidewalk_img" id="side_walk-img"
-                                class="form-control @if (checkCheckBox('side_walk', $data->tapak_condition) != 'checked') d-none @endif">
-                        </td>
-                        <td>
-                            @if ($data->tapak_sidewalk_img != '' && file_exists(public_path($data->tapak_sidewalk_img)))
-                                <a href="{{ URL::asset($data->tapak_sidewalk_img) }}"
-                                    data-lightbox="roadtrip">
-                                    <img src="{{ URL::asset($data->tapak_sidewalk_img) }}"
-                                        alt="" class="adjust-height "
-                                        style="height:30px; width:30px !important">
-                                </a>
-                            @endif
-                        </td>
+                        {!! tiangDefactCheckBox('side_walk', $data->tapak_condition, 'tapak_condition',  'Sidewalk',true ) !!}
                     </tr>
                     <tr>
-                        <td>
-                            <input type="checkbox" name="tapak_condition[vehicle_entry]"
-                                id="vehicle_entry" class="form-check"
-                                {{ checkCheckBox('vehicle_entry', $data->tapak_condition) }}>
-                            <label for="vehicle_entry">{{ __('messages.No_vehicle_entry_area') }}
-                            </label>
-                        </td>
-                        <td>
-                            <input type="file" name="tapak_no_vehicle_entry_img"
-                                id="vehicle_entry-img"
-                                class="form-control @if (checkCheckBox('vehicle_entry', $data->tapak_condition) != 'checked') d-none @endif">
-                        </td>
-                        <td>
-                            @if ($data->tapak_no_vehicle_entry_img != '' && file_exists(public_path($data->tapak_no_vehicle_entry_img)))
-                                <a href="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}"
-                                    data-lightbox="roadtrip">
-                                    <img src="{{ URL::asset($data->tapak_no_vehicle_entry_img) }}"
-                                        alt="" class="adjust-height "
-                                        style="height:30px; width:30px !important">
-                                </a>
-                            @endif
-                        </td>
+                        {!! tiangDefactCheckBox('vehicle_entry', $data->tapak_condition, 'tapak_condition',  'No_vehicle_entry_area',true ) !!}
                     </tr>
+                    
 
                     {{-- Area --}}
                     <tr>
                         <th rowspan="4">{{ __('messages.Area') }}</th>
-                        <td class="d-flex">
-                            <input type="checkbox" name="kawasan[bend]" id="area_bend"
-                                class="form-check" {{ checkCheckBox('bend', $data->kawasan) }}>
-                            <label for="area_bend">{{ __('messages.Bend') }}</label>
-                        </td>
-                        <td>
-                            <input type="file" name="kawasan_bend_img" id="area_bend-img"
-                                class="form-control @if (checkCheckBox('bend', $data->kawasan) != 'checked') d-none @endif">
-                        </td>
-                        <td>
-                            @if ($data->kawasan_bend_img != '' && file_exists(public_path($data->kawasan_bend_img)))
-                                <a href="{{ URL::asset($data->kawasan_bend_img) }}"
-                                    data-lightbox="roadtrip">
-                                    <img src="{{ URL::asset($data->kawasan_bend_img) }}"
-                                        alt="" class="adjust-height "
-                                        style="height:30px; width:30px !important">
-                                </a>
-                            @endif
-                        </td>
+                        {!! tiangDefactCheckBox('bend', $data->kawasan, 'kawasan',  'Bend',true ) !!}
                     </tr>
                     <tr>
-                        <td>
-                            
-                            <input type="checkbox" name="kawasan[road]" id="area_road"
-                                class="form-check" {{ checkCheckBox('road', $data->kawasan) }}>
-                            <label for="area_road"> {{ __('messages.Road') }}</label>
-                        </td>
-                        <td>
-                            <input type="file" name="kawasan_road_img" id="area_road-img"
-                                class="form-control @if (checkCheckBox('road', $data->kawasan) != 'checked') d-none @endif">
-                        </td>
-                        <td>
-                            @if ($data->kawasan_road_img != '' && file_exists(public_path($data->kawasan_road_img)))
-                                <a href="{{ URL::asset($data->kawasan_road_img) }}"
-                                    data-lightbox="roadtrip">
-                                    <img src="{{ URL::asset($data->kawasan_road_img) }}"
-                                        alt="" class="adjust-height "
-                                        style="height:30px; width:30px !important">
-                                </a>
-                            @endif
-                        </td>
+                        {!! tiangDefactCheckBox('road', $data->kawasan, 'kawasan',  'Road',true ) !!}
                     </tr>
                     <tr>
-                        <td>
-                            <input type="checkbox" name="kawasan[forest]" id="area_forest"
-                                class="form-check" {{ checkCheckBox('forest', $data->kawasan) }}>
-                            <label for="area_forest">{{ __('messages.Forest') }} </label>
-                        </td>
-                        <td>
-                            <input type="file" name="kawasan_forest_img" id="area_forest-img"
-                                class="form-control @if (checkCheckBox('forest', $data->kawasan) != 'checked') d-none @endif">
-                        </td>
-                        <td>
-                            @if ($data->kawasan_forest_img != '' && file_exists(public_path($data->kawasan_forest_img)))
-                                <a href="{{ URL::asset($data->kawasan_forest_img) }}"
-                                    data-lightbox="roadtrip">
-                                    <img src="{{ URL::asset($data->kawasan_forest_img) }}"
-                                        alt="" class="adjust-height "
-                                        style="height:30px; width:30px !important">
-                                </a>
-                            @endif
-                        </td>
+                        {!! tiangDefactCheckBox('forest', $data->kawasan, 'kawasan',  'Forest',true ) !!}
                     </tr>
                     <tr>
-                        <td>
-                            <input type="checkbox" name="kawasan[other]" id="area_other"
-                                class="form-check" {{ checkCheckBox('other', $data->kawasan) }}>
-                            <label for="area_other">{{ __('messages.others') }} </label>
-                            @if (checkCheckBox('other', $data->kawasan) != 'checked')
-                            @endif
-                            <input type="text" name="kawasan[other_value]"
-                                value="{{ checkCheckBox('other', $data->kawasan) != 'checked' ? '' : $data->kawasan['other'] }}"
-                                id="area_other-input"
-                                class="form-control {{ checkCheckBox('other', $data->kawasan) != 'checked' ? 'd-none' : '' }}"
-                                required placeholder="(please state)">
-                        </td>
-                        <td>
-                            <input type="file" name="kawasan_other_img" id="area_other-img"
-                                class="form-control @if (checkCheckBox('other', $data->kawasan) != 'checked') d-none @endif">
-                        </td>
-                        <td>
-                            @if ($data->kawasan_other_img != '' && file_exists(public_path($data->kawasan_other_img)))
-                                <a href="{{ URL::asset($data->kawasan_other_img) }}"
-                                    data-lightbox="roadtrip">
-                                    <img src="{{ URL::asset($data->kawasan_other_img) }}"
-                                        alt="" class="adjust-height "
-                                        style="height:30px; width:30px !important">
-                                </a>
-                            @endif
-                        </td>
+                        {!! tiangDefactCheckBox('other', $data->kawasan, 'kawasan',  'others',true ) !!}
+
                     </tr>
 
                 </tbody>
             </table>
-                                </div>
+        </div>
 
 
+        {{-- CLEARANCE DISTANCE --}}
+        <div class="row">
+            <div class="col-md-6"><label for="jarak_kelegaan">{{ __('messages.Clearance_Distance') }}</label></div>
+            <div class="col-md-6">
+                <input type="number" name="jarak_kelegaan" value="{{ $data->jarak_kelegaan }}" id="jarak_kelegaan" class="form-control">
+            </div>
+        </div>
 
 
+        <div class="row">
+            <div class="col-md-6"><label for="">{{ __('messages.Line_clearance_specifications') }}</label></div>
+            <div class="col-md-8">
+                <div class="row">
+                    <div class="col-md-6 d-flex">
+                        <input type="radio" name="talian_spec" id="line-comply" {{ $data->talian_spec == 'comply' ? 'checked' : '' }} value="comply" class="form-check">
+                        <label for="line-comply">{{ __('messages.Comply') }}</label>
+                    </div>
+                    <div class="col-md-6 d-flex">
+                        <input type="radio" name="talian_spec" {{ $data->talian_spec == 'uncomply' ? 'checked' : '' }} value="uncomply" id="line-disobedient" class="form-check">
+                        <label for="line-disobedient"> Uncomply </label>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-
-                                <div class="row">
-                                    <div class="col-md-6"><label
-                                            for="jarak_kelegaan">{{ __('messages.Clearance_Distance') }}</label></div>
-                                    <div class="col-md-6"><input type="number" name="jarak_kelegaan"
-                                            value="{{ $data->jarak_kelegaan }}" id="jarak_kelegaan"
-                                            class="form-control"></div>
-                                </div>
-
-
-                                <div class="row">
-                                    <div class="col-md-6"><label for="">
-                                            {{ __('messages.Line_clearance_specifications') }}</label>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <div class="row">
-                                            <div class="col-md-6 d-flex">
-                                                <input type="radio" name="talian_spec" id="line-comply"
-                                                    {{ $data->talian_spec == 'comply' ? 'checked' : '' }} value="comply"
-                                                    class="form-check"><label for="line-comply">
-                                                    {{ __('messages.Comply') }}</label>
-                                            </div>
-
-                                            <div class="col-md-6 d-flex">
-                                                <input type="radio" name="talian_spec"
-                                                    {{ $data->talian_spec == 'uncomply' ? 'checked' : '' }}
-                                                    value="uncomply" id="line-disobedient" class="form-check">
-                                                <label for="line-disobedient"> Uncomply </label>
-                                            </div>
-
-
-
-                                        </div>
-                                    </div>
-                                </div>
-
-                            </fieldset>
+    </fieldset>
 
                             {{-- END Heigh Clearance (4) --}}
 
