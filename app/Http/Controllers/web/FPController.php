@@ -186,9 +186,9 @@ class FPController extends Controller
             {
                 $qa_data->reject_remarks = $req->reject_remakrs;
             }
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
             
-            $qa_data->updated_by = $user;
+            $qa_data->qc_by = $user;
             $qa_data->update();
 
             return redirect()->back();
