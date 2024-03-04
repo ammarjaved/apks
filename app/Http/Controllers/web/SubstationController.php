@@ -83,8 +83,7 @@ class SubstationController extends Controller
     public function store(Request $request)
     {
         try {
-            $user = Auth::user()->id;
-
+            $user = Auth::user()->name;
             $data = new Substation();
             $data->created_by = $user;
             $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
@@ -153,7 +152,7 @@ class SubstationController extends Controller
                return abort(404);
             }
         
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
             $data->updated_by = $user;
            
             $res = $this->substationRepository->store($data, $request);
@@ -179,7 +178,7 @@ class SubstationController extends Controller
         try {
             Substation::find($id)->delete();
 
-        Session::flash('success', 'Request Success');
+            Session::flash('success', 'Request Success');
 
         } catch (\Throwable $th) {
             Session::flash('failed', 'Request Failed');

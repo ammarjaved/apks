@@ -25,6 +25,9 @@ class LinkBoxMapController extends Controller
         $currentDate = Carbon::now()->toDateString();
         $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
         try {
+            $defects = [];
+            $defects =['leaning_status','vandalism_status','advertise_poster_status','rust_status','bushes_status' ,'cover_status' , 'paint_status'];
+            $total_defects = 0;
             $data = LinkBox::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
@@ -32,21 +35,22 @@ class LinkBoxMapController extends Controller
             $data->visit_date = $request->visit_date;
             $data->patrol_time = $combinedDateTime;
             $data->feeder_involved = $request->feeder_involved;
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
+
+            $data->updated_by = $user;
             if ($data->qa_status == '') {
                 $data->qa_status = 'pending';
             }
-            $data->updated_by = $user;
             $data->start_date = $request->start_date;
             $data->end_date = $request->end_date;
             $data->type = $request->type;
             $data->coordinate = $request->coordinate;
-            // $data->gate_status = $request->gate_status;
-            $data->vandalism_status = $request->vandalism_status;
-            $data->leaning_staus = $request->leaning_staus;
-            $data->rust_status = $request->rust_status;
-            $data->advertise_poster_status = $request->advertise_poster_status;
-            $data->bushes_status = $request->bushes_status;
+            foreach ($defects as  $value) {
+                $data->{$value} = $request->{$value};
+               $request->has($value)&& $request->{$value} == 'Yes' ? $total_defects++ : '';
+            }
+           $data->total_defects = $total_defects;
+           $data->leaning_angle = $request->leaning_angle;
             $destinationPath = 'assets/images/link-box/';
 
             foreach ($request->all() as $key => $file) {
@@ -64,7 +68,7 @@ class LinkBoxMapController extends Controller
 
             return view('components.map-messages', ['id' => $id, 'success' => true, 'url' => 'link-box-pelbagai-voltan'])->with('success', 'Form Update');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return view('components.map-messages', ['id' => $id, 'success' => false, 'url' => 'link-box-pelbagai-voltan'])->with('failed', 'Form Update Failed');
         }
     }

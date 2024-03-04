@@ -33,7 +33,7 @@ class CableBridgeMapController extends Controller
             $data = CableBridge::find($id);
             $data->zone = $request->zone;
             $data->ba = $request->ba;
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
 
             $data->updated_by = $user;
             // $data->team = $request->team;

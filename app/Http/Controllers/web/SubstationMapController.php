@@ -31,7 +31,7 @@ class SubstationMapController extends Controller
                 return abort(404);
             }
 
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
             $data->updated_by = $user;
 
             $res = $substationRepository->store($data, $request);

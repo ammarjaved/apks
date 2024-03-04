@@ -79,7 +79,7 @@ class FPController extends Controller
         {
             $data = new FeederPillar();      
             $data->coordinate = $request->coordinate;
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
 
             $data->created_by = $user;
             $data->qa_status = 'pending';
@@ -141,7 +141,7 @@ class FPController extends Controller
         try 
         {
             $data = FeederPillar::find($id);
-            $user = Auth::user()->id;
+            $user = Auth::user()->name;
             $data->updated_by = $user;
             $feederPillar->store($data,$request);
             $data->update();
