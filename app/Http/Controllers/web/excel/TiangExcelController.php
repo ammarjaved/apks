@@ -148,12 +148,12 @@ class TiangExcelController extends Controller
 
                     
 
-                    ($rec->road);
-                    $array = json_decode($rec, true);
+                     
+                    $spanCount =$rec->size_tiang_75 + $rec->size_tiang_9  + $rec->size_tiang_10 +$rec->jenis_tiang_spun + $rec->jenis_tiang_concrete + $rec->jenis_tiang_iron + $rec->jenis_tiang_wood +$rec->abc_s3186 +
+                     $rec->abc_s3195+ $rec->abc_s316 + $rec->abc_s116 + $rec->pvc_s9064 + $rec->pvc_s7083+$rec->pvc_s7044+ $rec->bare_s7173 + $rec->bare_s7122 + $rec->bare_s7132 ;
 
-                    // Sum the values
-                    $totalSum = array_sum($array);
-                    $worksheet->setCellValue('AB' . $i, $totalSum );
+
+                    $worksheet->setCellValue('AB' . $i, $spanCount );
                     $worksheet->setCellValue('AC' . $i, $one_line > 0 ? 'M' : "S" );
                     $worksheet->setCellValue('AD' . $i, $rec->umbagan  );
                     $worksheet->setCellValue('AE' . $i, $rec->blackbox  );
