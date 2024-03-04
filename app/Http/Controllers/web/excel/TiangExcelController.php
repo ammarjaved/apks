@@ -77,17 +77,19 @@ class TiangExcelController extends Controller
 
             ->whereNotNull('review_date')
             ->whereNotNull('fp_road');
-                if ($ba != '') {
-                    $query->where('ba',$ba);
-                }
+            $query = $this->filter($query , 'review_date',$req);
 
-                if ($req->filled('from_date')) {
-                    $query->where('review_date', '>=', $req->from_date);
-                }
+                // if ($ba != '') {
+                //     $query->where('ba',$ba);
+                // }
 
-                if ($req->filled('to_date')) {
-                    $query->where('review_date', '<=', $req->to_date);
-                }
+                // if ($req->filled('from_date')) {
+                //     $query->where('review_date', '>=', $req->from_date);
+                // }
+
+                // if ($req->filled('to_date')) {
+                //     $query->where('review_date', '<=', $req->to_date);
+                // }
 
                 $roadStatistics = $query->groupBy('fp_road' )->get();
 
