@@ -196,9 +196,9 @@ class SubstationController extends Controller
             if ($req->status == 'Reject') {
                 $qa_data->reject_remarks = $req->reject_remakrs;
             }
-            $user = Auth::user()->id;
-
-            $qa_data->updated_by = $user;
+            $user = Auth::user()->name;
+            
+            $qa_data->qc_by = $user;
             $qa_data->update();
 
             return redirect()->back();
