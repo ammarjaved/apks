@@ -89,7 +89,7 @@
 
 
             <div class="row">
-                @include('components.lks-filter', ['url' => 'generate-patrolling-lks'])
+                @include('components.lks-filter')
 
 
 

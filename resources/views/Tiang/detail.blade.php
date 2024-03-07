@@ -105,15 +105,12 @@
                             {{-- START Info (1) --}}
                             <fieldset class=" form-input">
 
-
                                 <div class="row">
                                     <div class="col-md-4"><label for="ba">{{ __('messages.ba') }}</label></div>
                                     <div class="col-md-4">
                                         <input class="form-control" value="{{ $data->ba }}" disabled>
                                     </div>
                                 </div>
-
-
 
                                 <div class="row">
                                     <div class="col-md-4">
@@ -172,18 +169,21 @@
                                     <div class="col-md-4">
                                         <label for="main_line">{{__('messages.main_line_service_line')}}</label>
                                     </div>
-                                    <div class="col-md-4">
-                                        <select name="talian_utama_connection" id="main_line" class="form-control"   disabled>
-                                            <option value="{{$data->talian_utama_connection ?? ''}}" hidden>{{$data->talian_utama_connection ?? 'select'}}</option>
-                                            <option value="main_line">Main Line</option>
-                                            <option value="service_line">Service Line</option>
-                                        </select>
+                                    <div class="col-md-5 d-sm-flex">
+                                        <div class="col-md-6">
+                                            <input type="checkbox" name="main_line" id="main_line" disabled {{$data->service_line != '' ? 'checked' : ''}}>
+                                            <label for="main_line">Main Line</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="checkbox" name="service_line" id="service_line" disabled  {{$data->main_line != '' ? 'checked' : ''}}>
+                                            <label for="service_line">Service Line</label>
+                                        </div>
                                     </div>
                                 </div>
 
                                 <div class="row " >
                                     <div class="col-md-4">
-                                        <label for="">  Number of Services Involves 1 user only </label>
+                                        <label for="">Number of Services Involves 1 user only </label>
                                     </div>
                                     <div class="col-md-4 d-flex mt-2">
                                         <input type="number" disabled  value="{{$data->talian_utama}}" class="form-control" >

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\web\excel;
+namespace App\Http\Controllers\web\Substation;
 
 use App\Http\Controllers\Controller;
 use App\Models\Substation;

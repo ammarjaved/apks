@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\lks;
+namespace App\Http\Controllers\web\CableBridge;
 
 use App\Http\Controllers\Controller;
 use App\Models\CableBridge;
@@ -17,7 +17,11 @@ class CableBridgeLKSController extends Controller
 
     public function index()
     {
-        return view('lks.generate-lks',['title'=>'cable_bridge' , 'url'=>'cable-bridge']);
+        $button =[];
+        $button=[ 
+            ['url'=>'generate-cable-bridge-lks' , 'name'=>'Generate LKS'],
+        ];
+        return view('lks.generate-lks',['title'=>'cable_bridge' ,'buttons'=>$button]);
 
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\lks;
+namespace App\Http\Controllers\web\FeederPillar;
 
 use App\Http\Controllers\Controller;
 use App\Models\FeederPillar;
@@ -21,7 +21,11 @@ class FeederPillarLKSController extends Controller
 
     public function index()
     {
-        return view('lks.generate-lks',['title'=>'feeder_pillar' , 'url'=>'feeder-pillar']);
+        $button =[];
+        $button=[ 
+            ['url'=>'generate-feeder-pillar-lks' , 'name'=>'Generate LKS'],
+        ];
+        return view('lks.generate-lks',['title'=>'feeder_pillar' ,'buttons'=>$button]);
 
     }
 

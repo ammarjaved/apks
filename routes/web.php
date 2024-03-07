@@ -1,47 +1,49 @@
 <?php
 
 use App\Http\Controllers\AdminDashboard;
-use App\Http\Controllers\lks\CableBridgeLKSController;
-use App\Http\Controllers\lks\FeederPillarLKSController;
-use App\Http\Controllers\lks\LinkBoxLKSController;
-use App\Http\Controllers\lks\PatrollingLKSController;
+use App\Http\Controllers\web\CableBridge\CableBridgeLKSController;
+use App\Http\Controllers\web\FeederPillar\FeederPillarLKSController;
+use App\Http\Controllers\web\LinkBox\LinkBoxLKSController;
+use App\Http\Controllers\web\Patrolling\PatrollingLKSController;
 use App\Http\Controllers\lks\RemoveLKSController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\web\admin\TeamController;
 use App\Http\Controllers\web\admin\TeamUsersController;
-use App\Http\Controllers\web\CableBridgeController;
-use App\Http\Controllers\web\CableBridgeMapController;
+use App\Http\Controllers\web\CableBridge\CableBridgeController;
+use App\Http\Controllers\web\CableBridge\CableBridgeMapController;
 use App\Http\Controllers\web\Dashboard;
-use App\Http\Controllers\web\excel\CableBridgeExcelController;
+use App\Http\Controllers\web\CableBridge\CableBridgeExcelController;
 use App\Http\Controllers\web\excel\DigingExcelController;
-use App\Http\Controllers\web\excel\FeederPillarExcelController;
-use App\Http\Controllers\web\excel\LinkBoxExcelController;
-use App\Http\Controllers\web\excel\SubstationExcelController;
+use App\Http\Controllers\web\FeederPillar\FeederPillarExcelController;
+use App\Http\Controllers\web\LinkBox\LinkBoxExcelController;
+use App\Http\Controllers\web\Substation\SubstationExcelController;
 use App\Http\Controllers\web\excel\ThirdPartyExcelController;
-use App\Http\Controllers\web\excel\TiangExcelController;
-use App\Http\Controllers\web\FeederPillarMapController;
-use App\Http\Controllers\web\LinkBoxController;
+use App\Http\Controllers\web\Tiang\TiangExcelController;
+use App\Http\Controllers\web\FeederPillar\FeederPillarMapController;
+use App\Http\Controllers\web\LinkBox\LinkBoxController;
 use App\Http\Controllers\web\map\GeneratePDFController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\map\MapController;
 use App\Http\Controllers\web\map\RoadController;
 use App\Http\Controllers\web\map\WPController;
-use App\Http\Controllers\web\TiangContoller;
+use App\Http\Controllers\web\Tiang\TiangContoller;
 use App\Http\Controllers\web\tnbes\StatusController;
 use App\Http\Controllers\web\ThirdPartyDiggingController;
-use App\Http\Controllers\web\SubstationController;
-use App\Http\Controllers\lks\SubstationLKSController;
-use App\Http\Controllers\lks\TiangLKSController;
-use App\Http\Controllers\web\FPController;
+use App\Http\Controllers\web\Substation\SubstationController;
+use App\Http\Controllers\web\Substation\SubstationLKSController;
+use App\Http\Controllers\web\Tiang\TiangLKSController;
+use App\Http\Controllers\web\FeederPillar\FPController;
 use App\Http\Controllers\web\GenerateNoticeController;
-use App\Http\Controllers\web\LinkBoxMapController;
-use App\Http\Controllers\web\PatrollingController;
+use App\Http\Controllers\web\LinkBox\LinkBoxMapController;
+use App\Http\Controllers\web\Patrolling\PatrollingController;
 use App\Http\Controllers\web\POController;
-use App\Http\Controllers\web\SubstationMapController;
-use App\Http\Controllers\web\TiangMapController;
+use App\Http\Controllers\web\Substation\SubstationMapController;
+use App\Http\Controllers\web\Tiang\TiangMapController;
 use App\Models\ThirdPartyDiging;
 use Illuminate\Support\Facades\App;
-use App\Http\Controllers\web\excel\PatrollingExcelController;
+use App\Http\Controllers\web\Patrolling\PatrollingExcelController;
+use App\Http\Controllers\web\Tiang\TiangDocumentsRedirectController;
+use App\Http\Controllers\web\Tiang\TiangSBUMReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -116,6 +118,9 @@ Route::group(
                 Route::any('/generate-tiang-talian-vt-and-vr-lks', [TiangLKSController::class, 'gene'])->name('generate-tiang-talian-vt-and-vr-lks');
                 Route::get('/tiang-talian-vt-and-vr-lks',[TiangLKSController::class,'index'])->name('tiang-talian-vt-and-vr-lks');
                 Route::get('/generate-tiang-talian-vt-and-vr-lks-by-visit-date', [TiangLKSController::class, 'generateByVisitDate'])->name('generate-tiang-talian-vt-and-vr-lks-by-visit-date');
+                Route::post('/tiang-test',[TiangDocumentsRedirectController::class,'redirectFunction'])->name('tiang-test');
+                Route::post('/tiang-talian-vt-and-vr-SBUM-report',[TiangSBUMReportController::class,'generateSBUMReport'])->name('tiang-talian-vt-and-vr-SBUM-report');
+
 
 
                 //// Link Box
