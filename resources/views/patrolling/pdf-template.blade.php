@@ -26,14 +26,14 @@
                 <tr>
                     <td>
                         @if (file_exists(public_path($datas->image_reading_start)) && $datas->image_reading_start != '')
-                          <img src="{{ URL::asset($datas->image_reading_start) }}" alt="" height="80" class="adjust-height ml-5  " >
+                          <img src="{{ URL::asset($datas->image_reading_start) }}" alt="" height="140" width="140" class="adjust-height ml-5  " >
                         @else
                           <strong>{{ __('messages.no_image_found') }}</strong>
                         @endif
                     </td>
                     <td>
                         @if (file_exists(public_path($datas->image_reading_end)) && $datas->image_reading_end != '')
-                          <img src="{{ URL::asset($datas->image_reading_end) }}" alt="" height="80" class="adjust-height ml-5  ">
+                          <img src="{{ URL::asset($datas->image_reading_end) }}" alt="" height="140" width="140" class="adjust-height ml-5  ">
                         @else
                           <strong>{{ __('messages.no_image_found') }}</strong>
                         @endif
