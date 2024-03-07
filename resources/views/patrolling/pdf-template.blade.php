@@ -13,8 +13,27 @@
 <body>
     <h4 class="text-center">{{$ba}} PATROLLING LKS  ( {{ $from_date }} - {{ $to_date }} )</h4>
         @foreach ($data as $datas)
+
+        
+        
         <div class="container py-4">
 
+            <table>
+                <tr>
+                    <td>@if (file_exists(public_path($datas->image_reading_start)) && $datas->image_reading_start != '')
+                        <img src="{{ URL::asset($datas->image_reading_start) }}" alt=""
+                            height="70" class="adjust-height ml-5  " >
+                @else
+                <strong>{{ __('messages.no_image_found') }}</strong>
+                @endif</td>
+                <td>@if (file_exists(public_path($datas->image_reading_end)) && $datas->image_reading_end != '')
+                        <img src="{{ URL::asset($datas->image_reading_end) }}" alt=""
+                            height="70" class="adjust-height ml-5  ">
+                @else
+                <strong>{{ __('messages.no_image_found') }}</strong>
+                @endif</td> 
+                </tr>
+            </table>
 
             <table class="table table-bordered">
                 <thead>
@@ -25,8 +44,8 @@
                     <th>READING START</th>
                     <th>READING END</th>
                     <th>CYCLE</th>
-                    <th>READING START</th>
-                    <th>READING END</th>
+                    {{-- <th>READING START</th>
+                    <th>READING END</th> --}}
                 </thead>
                 <tbody>
                     <tr>
@@ -37,18 +56,6 @@
                         <td>{{$datas->reading_start}} </td>
                         <td>{{$datas->reading_end}} </td>
                         <td>{{$datas->cycle}} </td>
-                        <td>@if (file_exists(public_path($datas->image_reading_start)) && $datas->image_reading_start != '')
-                                <img src="{{ URL::asset($datas->image_reading_start) }}" alt=""
-                                    height="70" class="adjust-height ml-5  " >
-                        @else
-                        <strong>{{ __('messages.no_image_found') }}</strong>
-                        @endif</td>
-                        <td>@if (file_exists(public_path($datas->image_reading_end)) && $datas->image_reading_end != '')
-                                <img src="{{ URL::asset($datas->image_reading_end) }}" alt=""
-                                    height="70" class="adjust-height ml-5  ">
-                        @else
-                        <strong>{{ __('messages.no_image_found') }}</strong>
-                        @endif</td> --}}
                     </tr>
                 </tbody>
             </table>

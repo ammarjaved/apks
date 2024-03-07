@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\lks;
+namespace App\Http\Controllers\web\Patrolling;
 
 use App\Http\Controllers\Controller;
 use App\Models\Patroling;
@@ -18,8 +18,11 @@ class PatrollingLKSController extends Controller
     //
     use Filter;
     public function index(){
-
-        return view('patrolling.lks');
+        $button =[];
+        $button=[ 
+            ['url'=>'generate-patrolling-lks' , 'name'=>'Generate LKS'],
+        ];
+        return view('lks.generate-lks',['title'=>'patrolling','buttons'=>$button]);
     }
 
     public function genet(Request $req)
@@ -60,7 +63,7 @@ class PatrollingLKSController extends Controller
 
 
         //   $datas = $result->select('id','time' ,'vist_date' , 'wp_name','cycle','reading_end','reading_start','image_reading_start','image_reading_end' ,DB::raw('st_x(st_centroid(ST_Envelope(geom))) as x'),DB::raw('st_y(st_centroid(ST_Envelope(geom))) as y'))->get();
-        //   return view('patrolling.pdf-template', ['data'=>$datas,'ba'=>$req->ba , 'from_date' =>$from_date , 'to_date'=>$to_date]);
+          return view('patrolling.pdf-template', ['data'=>$datas,'ba'=>$req->ba , 'from_date' =>$from_date , 'to_date'=>$to_date]);
         $html = View::make('patrolling.pdf-template', ['data'=>$datas,'ba'=>$req->ba , 'from_date' =>$from_date , 'to_date'=>$to_date])->render();
 
         $pdf = SnappyPdf::loadHTML($html);

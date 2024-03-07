@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\web\excel;
+namespace App\Http\Controllers\web\LinkBox;
 
 use App\Http\Controllers\Controller;
 use App\Models\LinkBox;

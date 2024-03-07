@@ -206,12 +206,21 @@
                                     <div class="col-md-4">
                                         <label for="main_line">{{ __('messages.main_line_service_line') }}</label>
                                     </div>
-                                    <div class="col-md-4">
-                                        <select name="talian_utama_connection" id="main_line" class="form-control">
+                                    <div class="col-md-5 d-sm-flex">
+                                        <div class="col-md-6">
+                                            <input type="checkbox" name="main_line" id="main_line">
+                                            <label for="main_line">Main Line</label>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="checkbox" name="service_line" id="service_line">
+                                            <label for="service_line">Service Line</label>
+                                        </div>
+
+                                        {{-- <select name="talian_utama_connection" id="main_line" class="form-control">
                                             <option value="" hidden>select</option>
                                             <option value="main_line">Main Line</option>
                                             <option value="service_line">Service Line</option>
-                                        </select>
+                                        </select> --}}
                                     </div>
                                 </div>
 

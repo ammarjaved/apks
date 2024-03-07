@@ -26,7 +26,7 @@
 
 
             <div class="row">
-                @include('components.lks-filter', ['url' => "generate-$url-lks"])
+                @include('components.lks-filter')
 
                 <div class="col-12-">
                     <div class="card">
@@ -45,6 +45,19 @@
 
 
 
+@endsection
+
+@section('script')
+
+<script>
+    function submitForm(param){
+        let url =`/{{app()->getLocale()}}/${param}`
+        $('#generate-lks-form').attr('action',url)
+        $('#generate-lks-form').submit();
+console.log(param);
+    }
+ 
+</script>
 @endsection
 
 

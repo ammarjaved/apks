@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\lks;
+namespace App\Http\Controllers\web\LinkBox;
 
 use App\Http\Controllers\Controller;
 use App\Models\LinkBox;
@@ -17,8 +17,11 @@ class LinkBoxLKSController extends Controller
     use Filter;
 
     public function index(){
-
-        return view('lks.generate-lks',['title'=>'link_box' , 'url'=>'link-box']);
+        $button =[];
+        $button=[ 
+            ['url'=>'generate-link-box-lks' , 'name'=>'Generate LKS'],
+        ];
+        return view('lks.generate-lks',['title'=>'link_box' ,'buttons'=>$button]);
 
     }
 

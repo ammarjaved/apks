@@ -7,7 +7,7 @@
 <div class="col-12">
     <div id="collapseQr">
         <div class="card card-body">
-            <form action="{{ isset($url) ? route($url, app()->getLocale()) : '#' }}" target="_blank"  id="generate-lks-form"
+            <form action="#" target="_blank"  id="generate-lks-form"
                   method="post">
                 @csrf
                 <div class="row form-input ">
@@ -44,18 +44,21 @@
                         <label for="excel_to_date">To Date : </label>
                         <input type="date" name="to_date" id="excel_to_date" onchange="setMaxDate(this.value)" class="form-control">
                     </div>
-                    @isset($url)
+                    @isset($buttons)
                     <div class="col-md-1 pt-2 ">
 
                         <button type="button" class="btn text-white btn-sm mt-4 " class="form-control"
                             style="background-color: #708090" onclick="$('#excel_to_date ,#excel_from_date').val('')">Reset</button>
                     </div>
 
-                    <div class="col-md-2 pt-2 ">
+                    @foreach ($buttons as $button)
+                        <div class="col-md-2 pt-2 ">
 
-                        <button type="submit" class="btn text-white btn-sm mt-4 " class="form-control"
-                            style="background-color: #708090"   >Generate LKS</button>
-                    </div>
+                            <button type="button" class="btn text-white btn-sm mt-4 " class="form-control submit-button"  
+                                style="background-color: #708090"  value="{{$button['url']}}" onclick="submitForm('{{$button['url']}}')" >{{$button['name']}}</button>
+                        </div>
+                    @endforeach
+                    
 
 
                     @endisset

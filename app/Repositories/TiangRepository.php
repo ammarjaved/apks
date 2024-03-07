@@ -6,6 +6,7 @@ use App\Constants\TiangConstants;
 use App\Models\Tiang;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Termwind\Components\Dd;
 
 class TiangRepository
 {
@@ -51,6 +52,13 @@ class TiangRepository
             $data['bekalan_dua_defect_image'] = json_decode($data->bekalan_dua_defect_image, true);
             $data['kaki_lima_defect_image'] = json_decode($data->kaki_lima_defect_image, true);
 
+            $talian = $data->talian_utama_connection ;
+            $talian = $talian != '' ? explode(',',$talian) : '';
+            
+            $data['service_line'] = isset($talian[0]) ? $talian[0] : '';
+            $data['main_line'] = isset($talian[1]) ? $talian[1] : '';
+          
+
         }
 
         return $data;
@@ -89,9 +97,18 @@ class TiangRepository
         $data->size_tiang = $request->size_tiang;
         $data->jenis_tiang = $request->jenis_tiang;
         $data->talian_utama = $request->talian_utama;
-        $data->talian_utama_connection = $request->talian_utama_connection;
+
+        $talian = '';
+        $talian .= $request->has('service_line') ? 's' : '';
+        $talian .= $request->has('service_line') && $request->has('main_line') ? ',' : '';
+        $talian .= $request->has('main_line') ? 'm' : '';
+
+        $data->talian_utama_connection = $talian;
 
         $defectsKeys = TiangConstants::TIANG_DEFECT;
+
+        
+
         $total_defects = 0;
 
         // START DEFECT FOR EACH

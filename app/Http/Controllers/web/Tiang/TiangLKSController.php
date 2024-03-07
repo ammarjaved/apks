@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\lks;
+namespace App\Http\Controllers\web\Tiang;
 
 use App\Http\Controllers\Controller;
 use App\Models\Tiang;
@@ -21,7 +21,12 @@ class TiangLKSController extends Controller
 
     public function index()
     {
-        return view('lks.generate-lks',['title'=>'tiang' , 'url'=>'tiang-talian-vt-and-vr']);
+        $button =[];
+        $button=[ 
+            ['url'=>'generate-tiang-talian-vt-and-vr-lks' , 'name'=>'Generate LKS'],
+            ['url'=>'tiang-talian-vt-and-vr-SBUM-report' , 'name'=>'SBUM Report'],
+        ];
+        return view('lks.generate-lks',['title'=>'tiang' , 'url'=>'tiang-talian-vt-and-vr-lks','buttons'=>$button]);
     }
 
 
@@ -29,6 +34,7 @@ class TiangLKSController extends Controller
 
     public function generateByVisitDate(Fpdf $fpdf, Request $req){
 
+        // dd($req);
 
         // return Tiang::first();
 
