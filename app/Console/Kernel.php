@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('iamgeTable:query')->dailyAt('3:43');
+        $schedule->command('iamgeTable:query')->dailyAt('1:38');
         // $schedule->command('inspire')->hourly();
     }
 

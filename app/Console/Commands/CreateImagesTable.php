@@ -28,7 +28,7 @@ class CreateImagesTable extends Command
      */
     public function handle()
     {
-        $query = "insert into tbl_savr ( ba ) Values  ('testing command ')";
+        $query = "insert into test ( ba ) Values  ('testing')";
 
         // Execute the query
         DB::statement($query);
