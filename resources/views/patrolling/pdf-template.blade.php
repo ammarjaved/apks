@@ -9,6 +9,11 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="https://unpkg.com/leaflet-geoserver-request"></script>
+    <style>
+        .page-break {
+            page-break-before: always;
+        }
+    </style>
 </head>
 <body>
     <h4 class="text-center">{{$ba}} PATROLLING LKS  ( {{ $from_date }} - {{ $to_date }} )</h4>
@@ -21,19 +26,19 @@
             <table>
                 <tr>
                     <th>READING START</th>
-                    <th>READING END</th>
+                    <th class="pl-5">READING END</th>
                 </tr>
                 <tr>
                     <td>
                         @if (file_exists(public_path($datas->image_reading_start)) && $datas->image_reading_start != '')
-                          <img src="{{ URL::asset($datas->image_reading_start) }}" alt="" height="140" width="140" class="adjust-height ml-5  " >
+                          <img src="{{ URL::asset($datas->image_reading_start) }}" alt="" height="200"  class="adjust-height ml-5  " >
                         @else
                           <strong>{{ __('messages.no_image_found') }}</strong>
                         @endif
                     </td>
-                    <td>
+                    <td class="pl-5">
                         @if (file_exists(public_path($datas->image_reading_end)) && $datas->image_reading_end != '')
-                          <img src="{{ URL::asset($datas->image_reading_end) }}" alt="" height="140" width="140" class="adjust-height ml-5  ">
+                          <img src="{{ URL::asset($datas->image_reading_end) }}" alt="" height="200"   class="adjust-height ml-5  ">
                         @else
                           <strong>{{ __('messages.no_image_found') }}</strong>
                         @endif
@@ -66,7 +71,7 @@
                 </tbody>
             </table>
             <div class="container px-5 ms-auto">
-                <div id="map-{{$datas->id}}" class="map" style="height: 300px; width: 800px; "></div>
+                <div id="map-{{$datas->id}}" class="map" style="height: 400px; width: 800px; "></div>
             </div>
 
             <script>
@@ -91,6 +96,7 @@
 
             </script>
         </div>
+        <div class="page-break"></div>
     @endforeach
 
 </body>
