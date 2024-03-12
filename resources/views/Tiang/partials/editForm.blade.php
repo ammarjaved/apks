@@ -171,7 +171,7 @@
 
         <div class="row">
             <div class="col-md-4"><label for="pole_image-2">{{ __('messages.pole') }} Image 2</label></div>
-            <div class="col-md-8 row">{!!  viewAndUpdateImage($data->pole_image_1 , 'pole_image_1' , false )  !!}</div>
+            <div class="col-md-8 row">{!!  viewAndUpdateImage($data->pole_image_2 , 'pole_image_2' , false )  !!}</div>
 
         </div>
 
