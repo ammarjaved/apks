@@ -149,7 +149,7 @@ class TiangExcelController extends Controller
 
 
 
-                     
+
                     $spanCount =$rec->size_tiang_75 + $rec->size_tiang_9  + $rec->size_tiang_10 +$rec->jenis_tiang_spun + $rec->jenis_tiang_concrete + $rec->jenis_tiang_iron + $rec->jenis_tiang_wood +$rec->abc_s3186 +
                      $rec->abc_s3195+ $rec->abc_s316 + $rec->abc_s116 + $rec->pvc_s9064 + $rec->pvc_s7083+$rec->pvc_s7044+ $rec->bare_s7173 + $rec->bare_s7122 + $rec->bare_s7132 ;
 
@@ -222,7 +222,7 @@ class TiangExcelController extends Controller
 
                         // $secondWorksheet->setCellValue('Y' . $i, excelCheckBOc('current_leakage', $umbang_defect));
                     }
-                    
+
 
                     if ($secondRec->ipc_defect != '') {
                         $ipc_defect = json_decode($secondRec->ipc_defect);
@@ -291,7 +291,7 @@ class TiangExcelController extends Controller
                     $images = '';
                     foreach ($defectsImg as $defImg) {
                         if ($secondRec->{$defImg} != '') {
-                            $images .=' http://121.121.232.53:8090/'.$secondRec->{$defImg}; 
+                            $images .=' http://121.121.232.53:8090/'.$secondRec->{$defImg};
 
                         }
                     }
@@ -308,47 +308,47 @@ class TiangExcelController extends Controller
                     $dates =  TiangRepairDate::where('savr_id', $secondRec->id)->select('name','date')->get();
 
                     $sortedDates = [];
-    
+
                     foreach ($dates as $value) {
                         $sortedDates[$value->name] = $value->date;
                         // return getRepairDate('tiang_defect_dim' ,$sortedDates );
                         // return $sortedDates;
                     }
-    
-    
+
+
                     $secondWorksheet->setCellValue('L' . $i, getRepairDate('tiang_defect_cracked' ,$sortedDates ));
                     $secondWorksheet->setCellValue('N' . $i, getRepairDate('tiang_defect_leaning' ,$sortedDates ));
                     $secondWorksheet->setCellValue('P' . $i, getRepairDate('tiang_defect_dim' ,$sortedDates ));
-    
+
                     $secondWorksheet->setCellValue('R' . $i, getRepairDate('talian_defect_joint' ,$sortedDates ));
                     $secondWorksheet->setCellValue('T' . $i, getRepairDate('talian_defect_need_rentis' ,$sortedDates ));
                     $secondWorksheet->setCellValue('V' . $i, getRepairDate('talian_defect_ground' ,$sortedDates ));
-    
+
                     $secondWorksheet->setCellValue('X' . $i, getRepairDate('umbang_defect_breaking' ,$sortedDates ));
                     $secondWorksheet->setCellValue('Z' . $i, getRepairDate('umbang_defect_creepers' ,$sortedDates ));
                     $secondWorksheet->setCellValue('AB' . $i, getRepairDate('umbang_defect_cracked' ,$sortedDates ));
                     $secondWorksheet->setCellValue('AD' . $i, getRepairDate('umbang_defect_stay_palte' ,$sortedDates ));
-    
+
                     $secondWorksheet->setCellValue('AF' . $i, getRepairDate('ipc_defect_burn' ,$sortedDates ));
-    
+
                     $secondWorksheet->setCellValue('AH' . $i, getRepairDate('blackbox_defect_cracked' ,$sortedDates ));
-                    
+
                     $secondWorksheet->setCellValue('AJ' . $i, getRepairDate('jumper_sleeve' ,$sortedDates ));
                     $secondWorksheet->setCellValue('AL' . $i, getRepairDate('jumper_burn' ,$sortedDates ));
-    
+
                     $secondWorksheet->setCellValue('AN' . $i, getRepairDate('kilat_defect_broken' ,$sortedDates ));
-    
+
                     $secondWorksheet->setCellValue('AP' . $i, getRepairDate('servis_defect_roof' ,$sortedDates ));
                     $secondWorksheet->setCellValue('AR' . $i, getRepairDate('servis_defect_won_piece' ,$sortedDates ));
-                    
+
                     $secondWorksheet->setCellValue('AT' . $i, getRepairDate('pembumian_defect_netural' ,$sortedDates ));
-    
+
                     $secondWorksheet->setCellValue('AV' . $i, getRepairDate('bekalan_dua_defect_damage' ,$sortedDates ));
-    
+
                     $secondWorksheet->setCellValue('AX' . $i, getRepairDate('kaki_lima_defect_date_wire' ,$sortedDates ));
                     $secondWorksheet->setCellValue('AZ' . $i, getRepairDate('kaki_lima_defect_burn' ,$sortedDates ));
                     // $secondWorksheet->setCellValue('BB' . $i, getRepairDate('talian_defect_ground' ,$sortedDates ));
-    
+
 
 
                     // $secondWorksheet->setCellValue('L' . $i, $repair_date);
@@ -391,7 +391,7 @@ class TiangExcelController extends Controller
                 $secondWorksheet->getStyle('B:AL')->getFont()->setSize(9);
 
 
-           
+
                 foreach ($res as $rec) {
                     $thirdWorksheet->setCellValue('A' . $i, $i - 4);
                     $thirdWorksheet->setCellValue('B' . $i, $rec->review_date);
