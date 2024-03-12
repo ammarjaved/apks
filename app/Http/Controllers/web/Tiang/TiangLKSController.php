@@ -43,81 +43,10 @@ class TiangLKSController extends Controller
 
 
 
-
-            $img_arr = [
-                [
-                    'defect_name'=>'tiang_defect',
-                    'title'=>'Tiang',
-                    'defects'=>['cracked','leaning','dim','creepers','other'  ]
-                ],
-                [
-                    'defect_name'=>'talian_defect',
-                    'title'=>'Line',
-                    'defects'=>['joint','need_rentis','ground','other' ]
-                ],
-                [
-                    'defect_name'=>'umbang_defect',
-                    'title'=>'Umbang',
-                    'defects'=>['breaking','creepers','cracked','stay_palte', 'other' ]
-                ],
-                [
-                    'defect_name'=>'ipc_defect',
-                    'title'=>'IPC',
-                    'defects'=>['burn','other' ]
-                ],
-                [
-                    'defect_name'=>'blackbox_defect',
-                    'title'=>'Blackbox',
-                    'defects'=>['cracked','other' ]
-                ],
-                [
-                    'defect_name'=>'jumper',
-                    'title'=>'Jumper',
-                    'defects'=>['sleeve','burn','other' ]
-                ],
-                [
-                    'defect_name'=>'kilat_defect',
-                    'title'=>'Kilat',
-                    'defects'=>['broken','other' ]
-                ],
-                [
-                    'defect_name'=>'servis_defect',
-                    'title'=>'Servis',
-                    'defects'=>['roof','won_piece','other' ]
-                ],
-                [
-                    'defect_name'=>'pembumian_defect',
-                    'title'=>'Pembumian',
-                    'defects'=>['netural','other' ]
-                ],
-                [
-                    'defect_name'=>'bekalan_dua_defect',
-                    'title'=>'Papan tanda',
-                    'defects'=>['damage','other' ]
-                ],
-                [
-                    'defect_name'=>'kaki_lima_defect',
-                    'title'=>'Sesalur Kaki Lima',
-                    'defects'=>['date_wire','burn','other' ]
-                ],
-            ];
-
-            $imageSingle = [
-                ['name'=>'Crossing the Road' , 'key'=>'tapak_road_img' , 'arr'=>'tapak_condition_road'],
-                ['name'=>'Sidewalk' , 'key'=>'tapak_no_vehicle_entry_img' , 'arr'=>'tapak_condition_side_walk'],
-                ['name'=>'No vehicle entry' , 'key'=>'tapak_no_vehicle_entry_img' , 'arr'=>'tapak_condition_vehicle_entry'],
-
-                ['name'=>'Area bend' , 'key'=>'kawasan_bend_img' , 'arr'=>'kawasan_bend'],
-                ['name'=>'Aera Road' , 'key'=>'kawasan_road_img' , 'arr'=>'kawasan_road'],
-                ['name'=>'No vehicle entry' , 'key'=>'kawasan_forest_img' , 'arr'=>'kawasan_forest'],
-                ['name'=>'No vehicle entry' , 'key'=>'kawasan_other_img' , 'arr'=>'kawasan_other'],
-
-            ];
-
           $data = $result
 
            ->select('id','fp_road','fp_name','tiang_no','review_date','section_from','section_to','total_defects','talian_utama_connection','talian_utama',
-           'pole_image_1','pole_image_2',
+           'pole_image_1','pole_image_2','pole_image_3','pole_image_4','pole_image_5',
            'size_tiang','jenis_tiang','abc_span','pvc_span','bare_span',
            'jarak_kelegaan','talian_spec','arus_pada_tiang',
            'tiang_defect_image','talian_defect_image','umbang_defect_image','ipc_defect_image','blackbox_defect_image','jumper_image','kilat_defect_image',
@@ -207,8 +136,8 @@ class TiangLKSController extends Controller
             $fpdf->Ln();
             $fpdf->Ln();
 
-            $imagePath = public_path('assets/web-images/main-logo.png');
-            $fpdf->Image($imagePath, 190, 20, 57, 0);
+            // $imagePath = public_path('assets/web-images/main-logo.png');
+            // $fpdf->Image($imagePath, 190, 20, 57, 0);
             $fpdf->SetFont('Arial', 'B', 9);
 
 
@@ -216,23 +145,27 @@ class TiangLKSController extends Controller
         foreach ($data as $row) {
 
             $sr_no++;
-            $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
+            $fpdf->Cell(100, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(40, 6, 'Tiang Gambar 1' ,0);
-            $fpdf->Cell(40, 6, 'Tiang Gambar 2' ,0);
+            $fpdf->Cell(38, 6, 'Tiang Gambar 1' ,0);
+            $fpdf->Cell(38, 6, 'Tiang Gambar 2' ,0);
+            $fpdf->Cell(38, 6, 'Tiang Gambar 3' ,0);
+            $fpdf->Cell(38, 6, 'Tiang Gambar 4' ,0);
+            $fpdf->Cell(38, 6, 'Tiang Gambar 5' ,0);
+
             $fpdf->Ln();
 
 
 
-            $fpdf->Cell(165, 6, 'ID : SAVR-'.$row->id );
+            $fpdf->Cell(100, 6, 'ID : SAVR-'.$row->id );
 
             if ($row->pole_image_1 != '' && file_exists(public_path($row->pole_image_1)))
             {
 
                 $fpdf->Image(public_path($row->pole_image_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
-            $fpdf->Cell(40,6);
+            $fpdf->Cell(38,6);
             // $fpdf->Ln();
 
 
@@ -240,6 +173,29 @@ class TiangLKSController extends Controller
             {
                 $fpdf->Image(public_path($row->pole_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
+            $fpdf->Cell(38,6);
+
+
+            if ($row->pole_image_3 != '' && file_exists(public_path($row->pole_image_3)))
+            {
+
+                $fpdf->Image(public_path($row->pole_image_3), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            }
+            $fpdf->Cell(38,6);
+
+            if ($row->pole_image_4 != '' && file_exists(public_path($row->pole_image_4)))
+            {
+
+                $fpdf->Image(public_path($row->pole_image_4), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            }
+            $fpdf->Cell(38,6);
+
+            if ($row->pole_image_5 != '' && file_exists(public_path($row->pole_image_5)))
+            {
+
+                $fpdf->Image(public_path($row->pole_image_5), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            }
+      
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Tarikh Lawatan : '.$row->review_date);          //VISIT  DATE
             $fpdf->Ln();
@@ -592,143 +548,22 @@ class TiangLKSController extends Controller
 
 
             $len = 0 ;
-            foreach ($img_arr as $value)
-            {
-                foreach ($value['defects'] as $defect) // run loop for defects
+         
+                for ($j = 0 ; $j < 5 ; $j++) // run loop for defects
                 {
-                    $defectName = $value['defect_name'].'_'.$defect;   // name that get from DB::raw(made up name)
-                    $defectImage = $value['defect_name'].'_image';     // image name that is in db > image column > json
 
-                    if ($row->{$defectName} == 'Ya' && $row->{$defectImage} != '') // check if defect is 'Yes' and Defect Image column is  not empty
+                    $img = 'pole_image_'.$j+1;      
+
+                    if ($img && file_exists(public_path($img))) // check image path is not empty and image exists
                     {
-                        $json_dec = json_decode($row->{$defectImage});    // image column is json so decode json
-
-                         
-                        // for ($i=0; $i < 2; $i++) 
-                        // { 
-                        //     $defect = $i == 1 ? $defect.'2' : $defect;
-
-                            if (is_object($json_dec)) {
-                                // Access the property using -> (object syntax)
-                                $imagePath = isset($json_dec->{$defect}) ? $json_dec->{$defect} : '';
-                            } elseif (is_array($json_dec)) {
-                                // Access the property using array syntax
-                                $imagePath = isset($json_dec[$defect]) ? $json_dec[$defect] : '';
-                            }
-
-                            if ($imagePath && file_exists(public_path($imagePath))) // check image path is not empty and image exists
-                            {
-                                $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18); //add image
-                                $fpdf->Cell(35, 7, $value['title'].' '.$defect, 1);
-                                $len = $len + 35;
-                            }
-
-                            if ($len == 275)
-                                {
-                                $len = 0 ;
-                                $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln();
-                                }   
-                        // }
-
-                        
-                        if($defect=='other' )
-                        {
-                            $defect = 'other2';
-                           
-                                if (is_object($json_dec)) {
-                                    // Access the property using -> (object syntax)
-                                    $imagePath = isset($json_dec->{$defect}) ? $json_dec->{$defect} : '';
-                                } elseif (is_array($json_dec)) {
-                                    // Access the property using array syntax
-                                    $imagePath = isset($json_dec[$defect]) ? $json_dec[$defect] : '';
-                                }
-    
-                                if ($imagePath && file_exists(public_path($imagePath))) // check image path is not empty and image exists
-                                {
-                                    $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18); //add image
-                                    $fpdf->Cell(35, 7, $value['title'].' '.$defect, 1);
-                                    $len = $len + 35;
-                                }
-    
-                                if ($len == 275)
-                                {
-                                    $len = 0 ;
-                                    $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln();
-                                }
-                        }
-
-                        if($defect=='creepers' )
-                        {
-                            $defect = 'creepers_after1';
-                            // for ($i=0; $i < 2; $i++) 
-                            // { 
-                            //     $defect = $i == 1 ? 'creepers_after2' : $defect;
-    
-                                if (is_object($json_dec)) {
-                                    // Access the property using -> (object syntax)
-                                    $imagePath = isset($json_dec->{$defect}) ? $json_dec->{$defect} : '';
-                                } elseif (is_array($json_dec)) {
-                                    // Access the property using array syntax
-                                    $imagePath = isset($json_dec[$defect]) ? $json_dec[$defect] : '';
-                                }
-    
-                                if ($imagePath && file_exists(public_path($imagePath))) // check image path is not empty and image exists
-                                {
-                                    $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18); //add image
-                                    $fpdf->Cell(35, 7, $value['title'].' '.$defect, 1);
-                                    $len = $len + 35;
-                                }
-    
-                                if ($len == 275)
-                                {
-                                    $len = 0 ;
-                                    $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln(); $fpdf->Ln();
-                                }
-                            // }
-                        }
-
-
+                        $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 30, 30); //add image
+                        $fpdf->Cell(35, 7, 'Pole Image ' .$j+1, 1);
+                        $len = $len + 35;
                     }
-
-                
-                }
-
-            }
-
-
-
-
-            foreach ($imageSingle as $sinVal) {
-                if ($len == 275) {
-                    $len = 0 ;
-                        $fpdf->Ln();
-                        $fpdf->Ln();
-                        $fpdf->Ln();
-                        $fpdf->Ln();
-
-                   }
-
-
-                if ($row->{$sinVal['arr']} == 'Yes' && $row->{$sinVal['key']} != '' ) {
-
-
-                    $imagePath = $row->{$sinVal['key']};
-
-                    if (file_exists(public_path($imagePath))) {
-                        // $fpdf->Cell(1);
-                        $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 19, 18);
-
-                        $fpdf->Cell(25, 7, $sinVal['name'], 1);
-                $len = $len + 25;
-                    }
-
 
                 }
 
-
-
-
-            }
+          
 
             $fpdf->Ln();
             $fpdf->Ln();
