@@ -46,6 +46,19 @@ class TiangExcelController extends Controller
             'kawasan_road_img' , 'kawasan_forest_img' , 'kawasan_other_img']);
             // return $res;
 
+            // $abc1="SUM(CASE WHEN (abc_span->'s3_185')::text <> '' AND (abc_span->'s3_185')::text <> 'null'  AND (abc_span->'s3_185')::text <> '"+'""'+"' THEN (abc_span->>'s3_185')::integer ELSE 0 END) as abc_s3186";
+            // $abc2="SUM(CASE WHEN (abc_span->'s3_95')::text <> '' AND (abc_span->'s3_95')::text <> 'null' AND (abc_span->'s3_95')::text <> '"+'""'+"' THEN (abc_span->>'s3_95')::integer ELSE 0 END) as abc_s3195";
+            // $abc3="SUM(CASE WHEN (abc_span->'s3_16')::text <> '' AND (abc_span->'s3_16')::text <> 'null' AND (abc_span->'s3_16')::text <> '"+'""'+"'  THEN (abc_span->>'s3_16')::integer ELSE 0 END) as abc_s316";
+            // $abc4="SUM(CASE WHEN (abc_span->'s1_16')::text <> '' AND (abc_span->'s1_16')::text <> 'null' AND (abc_span->'s1_16')::text <> '"+'""'+"' THEN (abc_span->>'s1_16')::integer ELSE 0 END) as abc_s116";
+
+            // $pvc1="SUM(CASE WHEN (pvc_span->'s19_064')::text <> '' AND (pvc_span->'s19_064')::text <> 'null' AND (pvc_span->'s19_064')::text <> '"+'""'+"'  THEN (pvc_span->>'s19_064')::integer ELSE 0 END) as pvc_s9064";
+            // $pvc2="SUM(CASE WHEN (pvc_span->'s7_083')::text <> '' AND (pvc_span->'s7_083')::text <> 'null'  AND (pvc_span->'s7_083')::text <> '"+'""'+"'  THEN (pvc_span->>'s7_083')::integer ELSE 0 END) as pvc_s7083";
+            // $pvc3="SUM(CASE WHEN (pvc_span->'s7_044')::text <> '' AND (pvc_span->'s7_044')::text <> 'null'  AND (pvc_span->'s7_044')::text <> '"+'""'+"'  THEN (pvc_span->>'s7_044')::integer ELSE 0 END) as pvc_s7044";
+
+            // $bare1="SUM(CASE WHEN (bare_span->'s7_173')::text <> '' AND (bare_span->'s7_173')::text <> 'null' AND (bare_span->'s7_173')::text <> '"+'""'+"'  THEN (bare_span->>'s7_173')::integer ELSE 0 END) as bare_s7173";
+            // $bare2="SUM(CASE WHEN (bare_span->'s7_122')::text <> '' AND (bare_span->'s7_122')::text <> 'null' AND (bare_span->'s7_122')::text <> '"+'""'+"' THEN  (bare_span->>'s7_122')::integer ELSE 0 END) as bare_s7122";
+            // $bare3="SUM(CASE WHEN (bare_span->'s3_132')::text <> '' AND (bare_span->'s3_132')::text <> 'null' AND (bare_span->'s3_132')::text <> '"+'""'+"' THEN (bare_span->>'s3_132')::integer ELSE 0 END) as bare_s7132";
+
             $query = Tiang::select('fp_road as road')
             ->selectRaw("string_agg(distinct fp_name, ' , ') as fp_name")
             ->selectRaw("SUM(CASE WHEN size_tiang = '7.5' THEN 1 ELSE 0 END) as size_tiang_75")
@@ -55,20 +68,31 @@ class TiangExcelController extends Controller
             ->selectRaw("SUM(CASE WHEN jenis_tiang = 'concrete' THEN 1 ELSE 0 END) as jenis_tiang_concrete")
             ->selectRaw("SUM(CASE WHEN jenis_tiang = 'spun' THEN 1 ELSE 0 END) as jenis_tiang_spun")
             ->selectRaw("SUM(CASE WHEN jenis_tiang = 'wood' THEN 1 ELSE 0 END) as jenis_tiang_wood")
+            // ->selectRaw($abc1)
+            // ->selectRaw($abc2)
+            // ->selectRaw($abc3)
+            // ->selectRaw($abc4)
 
-            ->selectRaw("SUM(CASE WHEN (abc_span->'s3_185')::text <> '' AND (abc_span->'s3_185')::text <> 'null' THEN (abc_span->>'s3_185')::integer ELSE 0 END) as abc_s3186")
-            ->selectRaw("SUM(CASE WHEN (abc_span->'s3_95')::text <> '' AND (abc_span->'s3_95')::text <> 'null' THEN (abc_span->>'s3_95')::integer ELSE 0 END) as abc_s3195")
-            ->selectRaw("SUM(CASE WHEN (abc_span->'s3_16')::text <> '' AND (abc_span->'s3_16')::text <> 'null' THEN (abc_span->>'s3_16')::integer ELSE 0 END) as abc_s316")
-            ->selectRaw("SUM(CASE WHEN (abc_span->'s1_16')::text <> '' AND (abc_span->'s1_16')::text <> 'null' THEN (abc_span->>'s1_16')::integer ELSE 0 END) as abc_s116")
+            ->selectRaw("SUM(CASE WHEN (abc_span->'s3_185')::text <> '' AND (abc_span->'s3_185')::text <> 'null'  AND (abc_span->'s3_185')::text <> '".'""'."' THEN (abc_span->>'s3_185')::integer ELSE 0 END) as abc_s3186")
+            ->selectRaw("SUM(CASE WHEN (abc_span->'s3_95')::text <> '' AND (abc_span->'s3_95')::text <> 'null' AND (abc_span->'s3_95')::text <> '".'""'."' THEN (abc_span->>'s3_95')::integer ELSE 0 END) as abc_s3195")
+            ->selectRaw("SUM(CASE WHEN (abc_span->'s3_16')::text <> '' AND (abc_span->'s3_16')::text <> 'null' AND (abc_span->'s3_16')::text <> '".'""'."'  THEN (abc_span->>'s3_16')::integer ELSE 0 END) as abc_s316")
+            ->selectRaw("SUM(CASE WHEN (abc_span->'s1_16')::text <> '' AND (abc_span->'s1_16')::text <> 'null' AND (abc_span->'s1_16')::text <> '".'""'."' THEN (abc_span->>'s1_16')::integer ELSE 0 END) as abc_s116")
 
-            ->selectRaw("SUM(CASE WHEN (pvc_span->'s19_064')::text <> '' AND (pvc_span->'s19_064')::text <> 'null' THEN (pvc_span->>'s19_064')::integer ELSE 0 END) as pvc_s9064")
-            ->selectRaw("SUM(CASE WHEN (pvc_span->'s7_083')::text <> '' AND (pvc_span->'s7_083')::text <> 'null' THEN (pvc_span->>'s7_083')::integer ELSE 0 END) as pvc_s7083")
-            ->selectRaw("SUM(CASE WHEN (pvc_span->'s7_044')::text <> '' AND (pvc_span->'s7_044')::text <> 'null' THEN (pvc_span->>'s7_044')::integer ELSE 0 END) as pvc_s7044")
+            ->selectRaw("SUM(CASE WHEN (pvc_span->'s19_064')::text <> '' AND (pvc_span->'s19_064')::text <> 'null' AND (pvc_span->'s19_064')::text <> '".'""'."'  THEN (pvc_span->>'s19_064')::integer ELSE 0 END) as pvc_s9064")
+            ->selectRaw("SUM(CASE WHEN (pvc_span->'s7_083')::text <> '' AND (pvc_span->'s7_083')::text <> 'null'  AND (pvc_span->'s7_083')::text <> '".'""'."'  THEN (pvc_span->>'s7_083')::integer ELSE 0 END) as pvc_s7083")
+            ->selectRaw("SUM(CASE WHEN (pvc_span->'s7_044')::text <> '' AND (pvc_span->'s7_044')::text <> 'null'  AND (pvc_span->'s7_044')::text <> '".'""'."'  THEN (pvc_span->>'s7_044')::integer ELSE 0 END) as pvc_s7044")
 
-            ->selectRaw("SUM(CASE WHEN (bare_span->'s7_173')::text <> '' AND (bare_span->'s7_173')::text <> 'null'THEN (bare_span->>'s7_173')::integer ELSE 0 END) as bare_s7173")
-            ->selectRaw("SUM(CASE WHEN (bare_span->'s7_122')::text <> '' AND (bare_span->'s7_122')::text <> 'null'THEN (bare_span->>'s7_122')::integer ELSE 0 END) as bare_s7122")
-            ->selectRaw("SUM(CASE WHEN (bare_span->'s3_132')::text <> '' AND (bare_span->'s3_132')::text <> 'null'THEN (bare_span->>'s3_132')::integer ELSE 0 END) as bare_s7132")
+            //  ->selectRaw($pvc1)
+            // ->selectRaw($pvc2)
+            // ->selectRaw($pvc3)
 
+            ->selectRaw("SUM(CASE WHEN (bare_span->'s7_173')::text <> '' AND (bare_span->'s7_173')::text <> 'null' AND (bare_span->'s7_173')::text <> '".'""'."'  THEN (bare_span->>'s7_173')::integer ELSE 0 END) as bare_s7173")
+            ->selectRaw("SUM(CASE WHEN (bare_span->'s7_122')::text <> '' AND (bare_span->'s7_122')::text <> 'null' AND (bare_span->'s7_122')::text <> '".'""'."' THEN  (bare_span->>'s7_122')::integer ELSE 0 END) as bare_s7122")
+            ->selectRaw("SUM(CASE WHEN (bare_span->'s3_132')::text <> '' AND (bare_span->'s3_132')::text <> 'null' AND (bare_span->'s3_132')::text <> '".'""'."' THEN (bare_span->>'s3_132')::integer ELSE 0 END) as bare_s7132")
+
+            // ->selectRaw($bare1)
+            // ->selectRaw($bare2)
+            // ->selectRaw($bare3)
             // ->selectRaw("SUM(CASE WHEN (umbang_defect->'breaking')::text <> '' AND (bare_span->'breaking')::text <> 'null' THEN 1 ELSE 0 END) as bare_s7132")
             ->selectRaw("SUM(CASE WHEN (blackbox_defect->'cracked')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (blackbox_defect->'other')::text = 'true' THEN 1 ELSE 0 END) as blackbox")
             ->selectRaw("SUM(CASE WHEN (ipc_defect->'burn')::text = 'true' THEN 1 ELSE 0 END + CASE WHEN (ipc_defect->'other')::text = 'true' THEN 1 ELSE 0 END) as ipc")
