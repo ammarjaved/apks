@@ -54,11 +54,11 @@
             height: 33px !important;
         }
 
-        td.d-flex {
+        /* td.d-flex {
             border-bottom: 0px !important;
             border-left: 0px !important;
             border-right: 0px !important;
-        }
+        } */
 
         textarea {
             border: 1px solid #999999 !important;
@@ -237,7 +237,7 @@
                             <h3>{{__('messages.images')}}</h3>
 
                             <fieldset class="form-input">
-                                
+
                                 {{-- POLE IMAGE 1 --}}
                                 <div class="row">
                                     <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1 </label></div>
@@ -276,7 +276,7 @@
                             {{-- END IMAGES --}}
 
 
-                            
+
                             {{-- START Asset Register (2) --}}
                             <h3>{{ __('messages.Asset_Register') }} </h3>
 
@@ -369,7 +369,7 @@
                                                 {!! tiangSpanRadio(  $data->pvc_span, 'pvc_span', 's7_044',  false) !!}
 
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div class="col-md-6">
                                         <div class="card p-4">
 
@@ -402,7 +402,7 @@
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
                                             <th class="col-4">{{ __('messages.title') }}</th>
-                                            <th class="col-4">{{ __('messages.defects') }}</th> 
+                                            <th class="col-4">{{ __('messages.defects') }}</th>
                                         </thead>
                                         {{-- POLE --}}
                                         <tr>
@@ -411,9 +411,9 @@
                                         </tr>
                                         <tr>{!! tiangDefactCheckBox('leaning', $data->tiang_defect, 'tiang_defect', 'leaning',false ) !!}</tr>
                                         <tr>{!! tiangDefactCheckBox('dim', $data->tiang_defect, 'tiang_defect', 'no_dim_post_none',false ) !!}</tr>
-                                        <tr>{!! tiangDefactCheckBox('creepers', $data->tiang_defect, 'tiang_defect',  'creepers',false ) !!}</tr>             
+                                        <tr>{!! tiangDefactCheckBox('creepers', $data->tiang_defect, 'tiang_defect',  'creepers',false ) !!}</tr>
                                         <tr>{!! tiangDefactCheckBox('other', $data->tiang_defect, 'tiang_defect', 'others',false ) !!}</tr>
-                        
+
                                         {{-- Line (Main / Service) --}}
                                         <tr>
                                             <th rowspan="4">{{ __('messages.line_main_service') }}</th>
@@ -422,33 +422,33 @@
                                         <tr>{!! tiangDefactCheckBox('need_rentis', $data->talian_defect, 'talian_defect', 'need_rentis',false ) !!}</tr>
                                         <tr>{!! tiangDefactCheckBox( 'ground', $data->talian_defect, 'talian_defect', 'Does_Not_Comply_With_Ground_Clearance',false ) !!}</tr>
                                         <tr>{!! tiangDefactCheckBox('other', $data->talian_defect, 'talian_defect', 'others',false ) !!}</tr>
-                        
+
                                         {{-- Umbang --}}
                                         <tr>
                                             <th rowspan="5">{{ __('messages.Umbang') }}</th>
                                             {!! tiangDefactCheckBox('breaking', $data->umbang_defect, 'umbang_defect', 'Sagging_Breaking',false ) !!}
                                         </tr>
-                                        <tr>{!! tiangDefactCheckBox('creepers', $data->umbang_defect, 'umbang_defect', 'Creepers',false ) !!}</tr>             
+                                        <tr>{!! tiangDefactCheckBox('creepers', $data->umbang_defect, 'umbang_defect', 'Creepers',false ) !!}</tr>
                                         <tr>{!! tiangDefactCheckBox( 'cracked', $data->umbang_defect, 'umbang_defect', 'No_Stay_Insulator_Damaged',false ) !!}</tr>
                                         <tr>{!! tiangDefactCheckBox( 'stay_palte', $data->umbang_defect, 'umbang_defect', 'Stay_Plate_Base_Stay_Blocked',false ) !!}</tr>
                                         {{-- <tr>{!! tiangDefactCheckBox('current_leakage', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'current_leakage',false ) !!}</tr> --}}
                                         <tr>{!! tiangDefactCheckBox('other', $data->umbang_defect, 'umbang_defect', 'others',false ) !!}</tr>
-                        
+
                                         {{-- IPC --}}
                                         <tr>
                                             <th rowspan="2">{{ __('messages.IPC') }}</th>
                                             {!! tiangDefactCheckBox('burn', $data->ipc_defect, 'ipc_defect', 'Burn Effect',false ) !!}
                                         </tr>
                                         <tr>{!! tiangDefactCheckBox('other', $data->ipc_defect, 'ipc_defect', 'others',false ) !!}</tr>
-                        
+
                                         {{-- Black Box --}}
-                        
+
                                         <tr>
                                             <th rowspan="2">{{ __('messages.Black_Box') }}</th>
                                             {!! tiangDefactCheckBox('cracked', $data->blackbox_defect, 'blackbox_defect', 'Kesan_Bakar',false ) !!}
                                         </tr>
                                         <tr>{!! tiangDefactCheckBox('other', $data->blackbox_defect, 'blackbox_defect', 'others',false ) !!}</tr>
-                        
+
                                         {{-- Jumper --}}
                                         <tr>
                                             <th rowspan="3">{{ __('messages.jumper') }}</th>
@@ -456,14 +456,14 @@
                                         </tr>
                                         <tr>{!! tiangDefactCheckBox('burn', $data->jumper, 'jumper', 'Burn Effect',false ) !!}</tr>
                                         <tr>{!! tiangDefactCheckBox('other', $data->jumper, 'jumper', 'others',false ) !!}</tr>
-                        
+
                                         {{-- Lightning catcher --}}
                                         <tr>
                                             <th rowspan="2">{{ __('messages.lightning_catcher') }}</th>
                                             {!! tiangDefactCheckBox('broken', $data->kilat_defect, 'kilat_defect', 'broken',false ) !!}
                                         </tr>
                                         <tr>{!! tiangDefactCheckBox('other', $data->kilat_defect, 'kilat_defect', 'others',false ) !!}</tr>
-                        
+
                                         {{-- Service --}}
                                         <tr>
                                             <th rowspan="3">{{ __('messages.Service') }}</th>
@@ -471,21 +471,21 @@
                                         </tr>
                                         <tr>{!! tiangDefactCheckBox('won_piece', $data->servis_defect, 'servis_defect',  'won_piece_date',false ) !!}</tr>
                                         <tr>{!! tiangDefactCheckBox('other', $data->servis_defect, 'servis_defect', 'others',false ) !!}</tr>
-                        
+
                                         {{-- Grounding --}}
                                         <tr>
                                             <th rowspan="2">{{ __('messages.grounding') }}</th>
                                             {!! tiangDefactCheckBox('netural', $data->pembumian_defect, 'pembumian_defect', 'no_connection_to_neutral',false ) !!}
                                         </tr>
                                         <tr>{!! tiangDefactCheckBox('other', $data->pembumian_defect, 'pembumian_defect', 'others',false ) !!}</tr>
-                        
+
                                         {{-- Signage - OFF Point / Two Way Supply --}}
                                         <tr>
                                             <th rowspan="2">{{ __('messages.signage_off_point_two_way_supply') }}</th>
                                             {!! tiangDefactCheckBox('damage', $data->bekalan_dua_defect, 'bekalan_dua_defect', 'faded_damaged_missing_signage',false ) !!}
                                         </tr>
                                         <tr>{!! tiangDefactCheckBox('other', $data->bekalan_dua_defect, 'bekalan_dua_defect', 'others',false ) !!}</tr>
-                        
+
                                         {{-- Main Street --}}
                                         <tr>
                                             <th rowspan="3">{{ __('messages.main_street') }}</th>
@@ -510,7 +510,7 @@
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
                                             <th class="col-4">{{ __('messages.title') }}</th>
-                                            <th class="col-4">{{ __('messages.defects') }}</th> 
+                                            <th class="col-4">{{ __('messages.defects') }}</th>
                                         </thead>
                                         <tbody>
                                             {{-- Site Conditions --}}
@@ -525,8 +525,8 @@
                                             <tr>
                                                 {!! tiangDefactCheckBox('vehicle_entry', $data->tapak_condition, 'tapak_condition',  'No_vehicle_entry_area',false ) !!}
                                             </tr>
-                                            
-                        
+
+
                                             {{-- Area --}}
                                             <tr>
                                                 <th rowspan="4">{{ __('messages.Area') }}</th>
@@ -540,9 +540,9 @@
                                             </tr>
                                             <tr>
                                                 {!! tiangDefactCheckBox('other', $data->kawasan, 'kawasan',  'others',false ) !!}
-                        
+
                                             </tr>
-                        
+
                                         </tbody>
                                     </table>
                                 </div>
@@ -599,7 +599,7 @@
                             {{-- START Kebocoran Arus (5) --}}
 
                             <fieldset class="form-input">
-{{-- 
+{{--
                                 <div class="row">
                                     <div class="col-md-4"><label
                                             for="">{{ __('messages.Inspection_of_current_leakage_on_the_pole') }}</label>
@@ -681,12 +681,12 @@
                                             <div class="col-md-4 d-flex">
                                                 <input type="radio" name="umbang_defect_current_leakage" id="arus_pada_umbgan_yes"
                                                     class="form-check" value="Yes" disabled
-                                                    {{ array_key_exists('current_leakage' , $data->umbang_defect) && $data->umbang_defect['current_leakage'] === false ? 'checked' : '' }}>
+                                                    {{ array_key_exists('current_leakage' , $data->umbang_defect) && $data->umbang_defect['current_leakage'] === true ? 'checked' : '' }}>
 
                                                 <label for="arus_pada_umbgan_yes">{{ __('messages.yes') }}</label>
                                             </div>
 
-                                            <div class="col-md-4 @if(!array_key_exists('current_leakage' , $data->umbang_defect) || $data->umbang_defect['current_leakage'] !== false) d-none @endif"
+                                            <div class="col-md-4 @if(!array_key_exists('current_leakage' , $data->umbang_defect) || $data->umbang_defect['current_leakage'] !== true) d-none @endif"
                                                 id="arus_pada_umbgan_amp_div">
                                                 <label for="arus_pada_tiang_amp">{{ __('messages.Amp') }}</label>
                                                 <input type="text" name="umbang_defect[current_leakage_val]" id="arus_pada_tiang_amp" disabled
@@ -700,19 +700,64 @@
                                 </div>
 
 
-                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="five_feet_away">{{ __('messages.five_feet_away') }} </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="five_feet_away" value="{{$data->five_feet_away}}" disabled id="five_feet_away" class="form-control">
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="ffa_no_of_houses">{{ __('messages.ffa_no_of_houses') }} </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="ffa_no_of_houses" value="{{$data->ffa_no_of_houses}}" disabled id="ffa_no_of_houses" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 ">
+                                        <label for="ffa_house_no">{{ __('messages.ffa_house_no') }} </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="ffa_house_no" value="{{$data->ffa_house_no}}" disabled id="ffa_house_no" class="form-control">
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="clean_banner_image">{{ __('messages.clean_banner') }} Image </label></div>
+                                    <div class="col-md-8 row">{!!  viewAndUpdateImage($data->clean_banner_image , 'clean_banner_image' , true )  !!}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="remove_creepers_image">{{ __('messages.remove_creepers') }} Image </label></div>
+                                    <div class="col-md-8 row">{!!  viewAndUpdateImage($data->remove_creepers_image , 'remove_creepers_image' , true )  !!}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="current_leakage_image">{{ __('messages.current_leakage') }} Image </label></div>
+                                    <div class="col-md-8 row">{!!  viewAndUpdateImage($data->current_leakage_image , 'current_leakage_image' , true )  !!}</div>
+                                </div>
+
+
+
                         <div class="row">
                             <div class="col-md-4">
                                 <label for="zone">QA Status</label>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-4" style="height: 200px">
 
-                            
+
 
                                 @if ($data->review_date != '' && $data->pole_image_1 != '')
 
-                                
-                                <button type="button" class="btn  text-left form-control {{$data->qa_status == 'Accept' ? 'btn-success' :($data->qa_status == 'Reject' ? 'btn-danger' :'btn-primary') }} " 
+
+                                <button type="button" class="btn  text-left form-control {{$data->qa_status == 'Accept' ? 'btn-success' :($data->qa_status == 'Reject' ? 'btn-danger' :'btn-primary') }} "
                                     data-toggle="dropdown">
                                     {{ $data->qa_status }}
 
@@ -789,8 +834,8 @@
             })
 
 
-            
- 
+
+
     $(function(){
         $('#rejectReasonModal').on('show.bs.modal', function(event) {
             var button = $(event.relatedTarget);
@@ -801,7 +846,7 @@
         });
     })
 </script>
- 
+
 
 
 
