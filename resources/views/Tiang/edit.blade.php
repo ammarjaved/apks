@@ -52,10 +52,10 @@
             height: 33px !important;
         }
 
-        td.d-flex {
+        /* td.d-flex {
             border-bottom: 0px !important;
-            border-left: 0px !important; 
-        }
+            border-left: 0px !important;
+        } */
 
         textarea {
             border: 1px solid #999999 !important;
@@ -128,7 +128,7 @@
                     if (currentIndex > newIndex) {
                         return true;
                     }
- 
+
                     form.validate().settings.ignore = ":disabled,:hidden";
                     return form.valid();
                 },
@@ -215,23 +215,23 @@
 
         function addReomveImageField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id'); 
+            var id = element.attr('id');
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {
-                if (input_val.hasClass('d-none')) { 
+                if (input_val.hasClass('d-none')) {
                     input_val.removeClass('d-none');
 
                     total_defects += 1;
                 }
             } else {
 
-                if (!input_val.hasClass('d-none')) { 
+                if (!input_val.hasClass('d-none')) {
                     input_val.addClass('d-none');
                     input_val.val('');
-                    total_defects -= 1;  
- 
-                } 
+                    total_defects -= 1;
+
+                }
             }
 
             $('#total_defects').val(total_defects)
@@ -241,7 +241,7 @@
 
         function addReomveImageHighClearanceField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id'); 
+            var id = element.attr('id');
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {

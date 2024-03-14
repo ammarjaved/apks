@@ -1,7 +1,7 @@
 
-                          
-                          
-                          
+
+
+
     <h3>{{ __('messages.info') }} </h3>
 
 
@@ -112,46 +112,10 @@
         <div class="row " id="main_line_connection">
             <div class="col-md-4"><label for="">Number of Services Involves 1 user only</label></div>
             <div class="col-md-4">
-                <input type="number" name="talian_utama" value="{{$data->talian_utama}}" class="form-control" id="main_line_connection_one"  >     
+                <input type="number" name="talian_utama" value="{{$data->talian_utama}}" class="form-control" id="main_line_connection_one"  >
             </div>
         </div>
 
-        {{-- POLE IMAGE 1 --}}
-        {{-- <div class="row">
-            <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1</label></div>
-            <div class="col-md-5 p-2 pr-5">
-                <input type="file" name="pole_image_1" id="pole_image_1" class="form-control">
-            </div>
-
-            <div class="col-md-3">
-                @if ($data->pole_image_1 != '' && file_exists(public_path($data->pole_image_1)))
-                    <a href="{{ URL::asset($data->pole_image_1) }}" data-lightbox="roadtrip">
-                        <img src="{{ URL::asset($data->pole_image_1) }}" alt="" class="adjust-height " style="height:30px; width:30px !important">
-                    </a>
-                @else
-                    <strong>{{ __('messages.no_image_found') }} </strong>
-                @endif
-            </div>
-        </div> --}}
-
-        {{-- POLE IMAGE 2 --}}
-        {{-- <div class="row">
-            <div class="col-md-4"><label for="pole_image-2">{{ __('messages.pole') }} Image
-                    2</label>
-            </div>
-            <div class="col-md-5 p-2 pr-5">
-                <input type="file" name="pole_image_2" id="pole_image_2" class="form-control">
-            </div>
-            <div class="col-md-3">
-                @if ($data->pole_image_2 != '' && file_exists(public_path($data->pole_image_2)))
-                    <a href="{{ URL::asset($data->pole_image_2) }}" data-lightbox="roadtrip">
-                        <img src="{{ URL::asset($data->pole_image_2) }}" alt="" class="adjust-height " style="height:30px; width:30px !important">
-                    </a>
-                @else
-                    <strong>{{ __('messages.no_image_found') }} </strong>
-                @endif
-            </div>
-        </div> --}}
     </fieldset>
     {{-- END Info (1) --}}
 
@@ -160,7 +124,7 @@
     <h3>{{__('messages.images')}}</h3>
 
     <fieldset class="form-input">
-        
+
         {{-- POLE IMAGE 1 --}}
         <div class="row">
             <div class="col-md-4"><label for="pole_image-1">{{ __('messages.pole') }} Image 1 </label></div>
@@ -197,7 +161,7 @@
     </fieldset>
 
     {{-- END IMAGES --}}
-    
+
     <h3> {{ __('messages.Asset_Register') }} </h3>
 
     {{-- START Asset Register (2) --}}
@@ -278,14 +242,14 @@
                     <label for="section_to">{{ __('messages.ABC_Span') }} 3 X 185</label>
                         {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's3_185',  true) !!}
 
-                    {{-- ABC SPAN 3 X 95 --}}    
+                    {{-- ABC SPAN 3 X 95 --}}
                     <label for="s3_95">{{ __('messages.ABC_Span') }}3 X 95</label>
                         {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's3_95',  true) !!}
 
                     {{-- ABC SPAN 3 X 16--}}
                     <label for="s3_16">{{ __('messages.ABC_Span') }}>3 X 16</label>
                         {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's3_16',  true) !!}
-            
+
                     {{-- ABC SPAN  1 X 16--}}
                     <label for="s1_16">{{ __('messages.ABC_Span') }}1 X 16</label>
                         {!! tiangSpanRadio(  $data->abc_span, 'abc_span', 's1_16',  true) !!}
@@ -299,11 +263,11 @@
                     {{-- PVC SPAN 19/064 --}}
                     <label for="s19_064">{{ __('messages.PVC_Span') }}19/064</label>
                         {!! tiangSpanRadio(    $data->pvc_span, 'pvc_span', 's19_064',  true) !!}
-            
+
                     {{-- PVC SPAN 7/083--}}
                     <label for="s7_083"  >{{ __('messages.PVC_Span') }}7/083</label>
                         {!! tiangSpanRadio($data->pvc_span, 'pvc_span', 's7_083',  true) !!}
-            
+
                     {{-- PVC SPAN 7/044--}}
                     <label for="s7_044"  >{{ __('messages.PVC_Span') }}7/044</label>
                         {!! tiangSpanRadio(  $data->pvc_span, 'pvc_span', 's7_044',  true) !!}
@@ -343,7 +307,7 @@
             <table class="table table-bordered w-100">
                 <thead style="background-color: #E4E3E3 !important">
                     <th class="col-4">{{ __('messages.title') }}</th>
-                    <th class="col-4">{{ __('messages.defects') }}</th> 
+                    <th class="col-4">{{ __('messages.defects') }}</th>
                 </thead>
                 {{-- POLE --}}
                 <tr>
@@ -352,7 +316,7 @@
                 </tr>
                 <tr>{!! tiangDefactCheckBox('leaning', $data->tiang_defect, 'tiang_defect', 'leaning',true ) !!}</tr>
                 <tr>{!! tiangDefactCheckBox('dim', $data->tiang_defect, 'tiang_defect', 'no_dim_post_none',true ) !!}</tr>
-                <tr>{!! tiangDefactCheckBox('creepers', $data->tiang_defect, 'tiang_defect',  'creepers',true ) !!}</tr>             
+                <tr>{!! tiangDefactCheckBox('creepers', $data->tiang_defect, 'tiang_defect',  'creepers',true ) !!}</tr>
                 <tr>{!! tiangDefactCheckBox('other', $data->tiang_defect, 'tiang_defect', 'others',true ) !!}</tr>
 
                 {{-- Line (Main / Service) --}}
@@ -369,7 +333,7 @@
                     <th rowspan="5">{{ __('messages.Umbang') }}</th>
                     {!! tiangDefactCheckBox('breaking', $data->umbang_defect, 'umbang_defect', 'Sagging_Breaking',true ) !!}
                 </tr>
-                <tr>{!! tiangDefactCheckBox('creepers', $data->umbang_defect, 'umbang_defect', 'Creepers',true ) !!}</tr>             
+                <tr>{!! tiangDefactCheckBox('creepers', $data->umbang_defect, 'umbang_defect', 'Creepers',true ) !!}</tr>
                 <tr>{!! tiangDefactCheckBox( 'cracked', $data->umbang_defect, 'umbang_defect', 'No_Stay_Insulator_Damaged',true ) !!}</tr>
                 <tr>{!! tiangDefactCheckBox( 'stay_palte', $data->umbang_defect, 'umbang_defect', 'Stay_Plate_Base_Stay_Blocked',true ) !!}</tr>
                 {{-- <tr>{!! tiangDefactCheckBox('current_leakage', $data->umbang_defect, 'umbang_defect', $data->umbang_defect_image, 'current_leakage',true ) !!}</tr> --}}
@@ -453,7 +417,7 @@
             <table class="table table-bordered w-100">
                 <thead style="background-color: #E4E3E3 !important">
                     <th class="col-4">{{ __('messages.title') }}</th>
-                    <th class="col-4">{{ __('messages.defects') }}</th> 
+                    <th class="col-4">{{ __('messages.defects') }}</th>
                 </thead>
                 <tbody>
                     {{-- Site Conditions --}}
@@ -468,7 +432,7 @@
                     <tr>
                         {!! tiangDefactCheckBox('vehicle_entry', $data->tapak_condition, 'tapak_condition',  'No_vehicle_entry_area',true ) !!}
                     </tr>
-                    
+
 
                     {{-- Area --}}
                     <tr>
@@ -599,11 +563,58 @@
                                     </div>
 
                                 </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="five_feet_away">{{ __('messages.five_feet_away') }} </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="five_feet_away" value="{{$data->five_feet_away}}" id="five_feet_away" class="form-control">
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="ffa_no_of_houses">{{ __('messages.ffa_no_of_houses') }} </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="ffa_no_of_houses" value="{{$data->ffa_no_of_houses}}" id="ffa_no_of_houses" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 ">
+                                        <label for="ffa_house_no">{{ __('messages.ffa_house_no') }} </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="ffa_house_no" value="{{$data->ffa_house_no}}" id="ffa_house_no" class="form-control">
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="clean_banner_image">{{ __('messages.clean_banner') }} Image </label></div>
+                                    <div class="col-md-8 row">{!!  viewAndUpdateImage($data->clean_banner_image , 'clean_banner_image' , false )  !!}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="remove_creepers_image">{{ __('messages.remove_creepers') }} Image </label></div>
+                                    <div class="col-md-8 row">{!!  viewAndUpdateImage($data->remove_creepers_image , 'remove_creepers_image' , false )  !!}</div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><label for="current_leakage_image">{{ __('messages.current_leakage') }} Image </label></div>
+                                    <div class="col-md-8 row">{!!  viewAndUpdateImage($data->current_leakage_image , 'current_leakage_image' , false )  !!}</div>
+                                </div>
+
+
                             </fieldset>
                             {{-- END Kebocoran Arus (5) --}}
 
 
-                    
+
 
 
 

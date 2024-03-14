@@ -51,11 +51,11 @@
             height: 33px !important;
         }
 
-        td.d-flex {
+        /* td.d-flex {
             border-bottom: 0px !important;
             border-left: 0px !important;
             border-right: 0px !important;
-        }
+        } */
 
         textarea {
             border: 1px solid #999999 !important;
@@ -86,19 +86,19 @@
                 <div class=" card row bg-white   ">
                     <div class=" ">
                         {{-- <h3 class="text-center p-2">{{ __('messages.qr_savr') }}</h3> --}}
-                                
+
                         {{-- <div class="row p-4">
                             <div class="col-md-4">
                                 <label for="zone">QA Status</label>
                             </div>
                             <div class="col-md-4">
 
-                            
+
 
                                 @if ($data->review_date != '' && $data->pole_image_1 != '')
 
-                                
-                                <button type="button" class="btn  text-left form-control {{$data->qa_status == 'Accept' ? 'btn-success' :($data->qa_status == 'Reject' ? 'btn-danger' :'btn-primary') }} " 
+
+                                <button type="button" class="btn  text-left form-control {{$data->qa_status == 'Accept' ? 'btn-success' :($data->qa_status == 'Reject' ? 'btn-danger' :'btn-primary') }} "
                                     data-toggle="dropdown">
                                     {{ $data->qa_status }}
 
@@ -147,8 +147,8 @@
                             </fieldset> --}}
                             <form id="framework-wizard-form"
                             action="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-map-edit/{{$data->id}}"
-                            enctype="multipart/form-data" style="display: none" method="POST"> 
-    
+                            enctype="multipart/form-data" style="display: none" method="POST">
+
                                 @csrf
                         @include('Tiang.partials.editForm', ['data'=>$data ])
                             </form>
@@ -275,23 +275,23 @@
 
         function addReomveImageField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id'); 
+            var id = element.attr('id');
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {
-                if (input_val.hasClass('d-none')) { 
+                if (input_val.hasClass('d-none')) {
                     input_val.removeClass('d-none');
 
                     total_defects += 1;
                 }
             } else {
 
-                if (!input_val.hasClass('d-none')) { 
+                if (!input_val.hasClass('d-none')) {
                     input_val.addClass('d-none');
                     input_val.val('');
-                    total_defects -= 1;  
- 
-                } 
+                    total_defects -= 1;
+
+                }
             }
 
             $('#total_defects').val(total_defects)
@@ -301,7 +301,7 @@
 
         function addReomveImageHighClearanceField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id'); 
+            var id = element.attr('id');
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {

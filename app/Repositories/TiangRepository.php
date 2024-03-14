@@ -14,7 +14,7 @@ class TiangRepository
     public function storeTiang($request)
     {
 
-        
+
     }
 
 
@@ -38,7 +38,7 @@ class TiangRepository
             $data['bekalan_dua_defect'] = json_decode($data->bekalan_dua_defect, true);
             $data['kaki_lima_defect'] = json_decode($data->kaki_lima_defect, true);
             $data['tapak_condition'] = json_decode($data->tapak_condition, true);
-            $data['kawasan'] = json_decode($data->kawasan, true); 
+            $data['kawasan'] = json_decode($data->kawasan, true);
             $data['ipc_defect'] = json_decode($data->ipc_defect, true);
             $data['tiang_defect_image'] = json_decode($data->tiang_defect_image, true);
             $data['talian_defect_image'] = json_decode($data->talian_defect_image, true);
@@ -54,10 +54,10 @@ class TiangRepository
 
             $talian = $data->talian_utama_connection ;
             $talian = $talian != '' ? explode(',',$talian) : '';
-            
+
             $data['service_line'] = isset($talian[0]) ? $talian[0] : '';
             $data['main_line'] = isset($talian[1]) ? $talian[1] : '';
-          
+
 
         }
 
@@ -65,7 +65,7 @@ class TiangRepository
     }
 
 
-    
+
     public function store($request){
         $data = new Tiang();
         $data->qa_status = 'pending';
@@ -98,6 +98,9 @@ class TiangRepository
         $data->jenis_tiang = $request->jenis_tiang;
         $data->talian_utama = $request->talian_utama;
 
+
+
+
         $talian = '';
         $talian .= $request->has('service_line') ? 's' : '';
         $talian .= $request->has('service_line') && $request->has('main_line') ? ',' : '';
@@ -105,18 +108,24 @@ class TiangRepository
 
         $data->talian_utama_connection = $talian;
 
+
+        $data->five_feet_away = $request->five_feet_away;
+        $data->ffa_no_of_houses = $request->ffa_no_of_houses;
+        $data->ffa_house_no = $request->ffa_house_no;
+
+        // GET TIANG DEFECTS ARRAY FROM app/Constant/TiangCostants
         $defectsKeys = TiangConstants::TIANG_DEFECT;
 
-        
+
 
         $total_defects = 0;
 
         // START DEFECT FOR EACH
-        foreach ($defectsKeys as $key => $defect) 
+        foreach ($defectsKeys as $key => $defect)
         {
             $def = [];
             // CHECK IF REQUEST ARRAY ITEM HAS KEY THEN ITEM KEY = TRUE ELSE FALSE . IF TRUE ADD 1 IN TOTAL DEFECTS EXPECT tapak_condition and kawasan
-            foreach ($defect as $item) 
+            foreach ($defect as $item)
             {
                 $def[$item] = $request->has("$key.$item") ? true : false;
                 if ($def[$item] && $key != 'tapak_condition' && $key!= 'kawasan') {
@@ -135,7 +144,7 @@ class TiangRepository
                 }else{
                     $def['current_leakage'] = false;
                 }
-            
+
                 $def['current_leakage_val'] = $request->{"$key.current_leakage_val"};
 
                 if ($key == 'tiang_defect') {
@@ -161,7 +170,7 @@ class TiangRepository
             }
         }
 
-        $data->total_defects = $total_defects; 
+        $data->total_defects = $total_defects;
         $data->talian_spec = $request->talian_spec;
 
         return $data;

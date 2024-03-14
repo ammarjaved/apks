@@ -51,10 +51,10 @@
             height: 33px !important;
         }
 
-        td.d-flex {
+       /* td.d-flex {
             border-bottom: 0px !important;
-            border-left: 0px !important; 
-        }
+            border-left: 0px !important;
+        }*/
 
         .defects input[type="file"] { margin-bottom: 5px !important; }
         textarea { border: 1px solid #999999 !important; }
@@ -465,7 +465,7 @@
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
                                             <th class="col-4">{{ __('messages.title') }}</th>
-                                            <th class="col-4">{{ __('messages.defects') }}</th> 
+                                            <th class="col-4">{{ __('messages.defects') }}</th>
                                         </thead>
                                         {{-- POLE --}}
                                         <tr>
@@ -494,7 +494,7 @@
                                             </td>
                                         </tr>
                                         {{-- <tr>
-                                            <td class="d-flex"> 
+                                            <td class="d-flex">
                                                 <label for="creepers_after"> {{ __('messages.Creepers') }} After </label>
                                             </td>
                                         </tr> --}}
@@ -567,13 +567,13 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[cracked]" id="umbang_cracked" class="form-check ">
                                                 <label for="umbang_cracked">{{__('messages.No_Stay_Insulator_Damaged') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[stay_palte]" id="stay_palte" class="form-check">
                                                 <label for="stay_palte">{{ __('messages.Stay_Plate_Base_Stay_Blocked') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         {{-- <tr>
                                             <td class="d-flex">
@@ -590,7 +590,7 @@
                                                 <input type="checkbox" name="umbang_defect[other]" id="other_umbang_defect" class="form-check">
                                                 <label for="other_umbang_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="umbang_defect[other_value]" id="other_umbang_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- IPC --}}
@@ -599,14 +599,14 @@
                                             <td>
                                                 <input type="checkbox" name="ipc_defect[burn]" id="ipc_burn"class="form-check">
                                                 <label for="ipc_burn">{{ __('messages.Burn Effect') }} Burn Effect</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="ipc_defect[other]" id="other_ipc_defect" class="form-check">
                                                 <label for="other_ipc_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="ipc_defect[other_value]" id="other_ipc_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Black Box --}}
@@ -616,14 +616,14 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="blackbox_defect[cracked]" id="black_box_cracked" class="form-check">
                                                 <label for="black_box_cracked">{{ __('messages.Kesan_Bakar') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="blackbox_defect[other]" id="other_blackbox_defect" class="form-check">
                                                 <label for="other_blackbox_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="blackbox_defect[other_value]"  id="other_blackbox_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Jumper --}}
@@ -632,20 +632,20 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="jumper[sleeve]" id="jumper_sleeve" class="form-check">
                                                 <label for="jumper_sleeve">{{ __('messages.no_uv_sleeve') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="jumper[burn]" id="jumper_burn" class="form-check">
                                                 <label for="jumper_burn">{{ __('messages.Burn Effect') }} </label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="jumper[other]" id="other_jumper" class="form-check">
                                                 <label for="other_jumper">{{ __('messages.others') }}</label>
                                                 <input type="text" name="jumper[other_value]" id="other_jumper-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Lightning catcher --}}
@@ -655,14 +655,14 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kilat_defect[broken]" id="lightning_broken" class="form-check">
                                                 <label for="lightning_broken">{{ __('messages.broken') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="kilat_defect[other]" id="other_kilat_defect" class="form-check">
                                                 <label for="other_kilat_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="kilat_defect[other_value]" id="other_kilat_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Service --}}
@@ -672,20 +672,20 @@
                                             <td class="d-felx">
                                                 <input type="checkbox" name="servis_defect[roof]" id="service_roof" class="form-check">
                                                 <label for="service_roof">{{ __('messages.the_service_line_is_on_the_roof') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-felx">
                                                 <input type="checkbox" name="servis_defect[won_piece]" id="service_won_piece" class="form-check">
                                                 <label for="service_won_piece">{{ __('messages.won_piece_date') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="servis_defect[other]" id="other_servis_defect" class="form-check">
                                                 <label for="other_servis_defect">{{ __('messages.others') }} </label>
                                                 <input type="text" name="servis_defect[other_value]" id="other_servis_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
                                         {{-- Grounding --}}
                                         <tr>
@@ -693,14 +693,14 @@
                                             <td>
                                                 <input type="checkbox" name="pembumian_defect[netural]" id="grounding_netural" class="form-check">
                                                 <label for="grounding_netural">{{ __('messages.no_connection_to_neutral') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="pembumian_defect[other]" id="other_pembumian_defect" class="form-check">
                                                 <label for="other_pembumian_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="pembumian_defect[other_value]" id="other_pembumian_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Signage - OFF Point / Two Way Supply --}}
@@ -709,7 +709,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="bekalan_dua_defect[damage]" id="signage_damage" class="form-check">
                                                 <label for="signage_damage">{{ __('messages.faded_damaged_missing_signage') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         <tr>
@@ -717,7 +717,7 @@
                                                 <input type="checkbox" name="bekalan_dua_defect[other]" id="other_bekalan_dua_defect" class="form-check">
                                                 <label for="other_bekalan_dua_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="bekalan_dua_defect[other_value]" id="other_bekalan_dua_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Main Street --}}
@@ -727,20 +727,20 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[date_wire]" id="street_date_wire" class="form-check">
                                                 <label for="street_date_wire">{{ __('messages.date_wire') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[burn]" id="street_burn" class="form-check">
                                                 <label for="street_burn">{{ __('messages.junction_box_date_burn_effect') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="kaki_lima_defect[other]" id="other_kaki_lima_defect_image" class="form-check">
                                                 <label for="other_kaki_lima_defect_image">{{ __('messages.others') }}</label>
                                                 <input type="text" name="kaki_lima_defect[other_value]" id="other_kaki_lima_defect_image-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
@@ -756,7 +756,7 @@
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
                                             <th class="col-4">{{ __('messages.title') }}</th>
-                                            <th class="col-4">{{ __('messages.defects') }}</th> 
+                                            <th class="col-4">{{ __('messages.defects') }}</th>
                                         </thead>
                                         <tbody>
 
@@ -768,21 +768,21 @@
                                                     <input type="checkbox" name="tapak_condition[road]" id="site_road" class="form-check">
                                                     <label for="site_road">{{ __('messages.Crossing_the_Road') }}</label>
                                                 </td>
-                                                 
+
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="tapak_condition[side_walk]"  id="side_walk" class="form-check">
                                                     <label for="side_walk">{{ __('messages.Sidewalk') }}</label>
                                                 </td>
-                                                 
+
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="tapak_condition[vehicle_entry]" id="vehicle_entry" class="form-check">
                                                     <label for="vehicle_entry">{{ __('messages.No_vehicle_entry_area') }}</label>
                                                 </td>
-                                                 
+
                                             </tr>
 
                                             {{-- Area --}}
@@ -792,21 +792,21 @@
                                                     <input type="checkbox" name="kawasan[bend]" id="area_bend" class="form-check">
                                                     <label for="area_bend">{{ __('messages.Bend') }}</label>
                                                 </td>
-                                                 
+
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="kawasan[road]" id="area_road" class="form-check">
                                                     <label for="area_road"> {{ __('messages.Road') }}</label>
                                                 </td>
-                                                 
+
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="kawasan[forest]" id="area_forest" class="form-check">
                                                     <label for="area_forest">{{ __('messages.Forest') }} </label>
                                                 </td>
-                                                 
+
                                             </tr>
                                             <tr>
                                                 <td>
@@ -814,7 +814,7 @@
                                                     <label for="area_other">{{ __('messages.others') }}  {{-- (please state) --}} </label>
                                                     <input type="text" name="kawasan[other_value]" id="area_other-input" class="form-control d-none" required placeholder="(please state)">
                                                 </td>
-                                                 
+
                                             </tr>
                                         </tbody>
                                     </table>
@@ -906,6 +906,64 @@
                                             </div>
                                         </div>
                                     </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="five_feet_away">{{ __('messages.five_feet_away') }} </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="five_feet_away" id="five_feet_away" class="form-control">
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="ffa_no_of_houses">{{ __('messages.ffa_no_of_houses') }} </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="ffa_no_of_houses" id="ffa_no_of_houses" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 ">
+                                        <label for="ffa_house_no">{{ __('messages.ffa_house_no') }} </label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="text" name="ffa_house_no" id="ffa_house_no" class="form-control">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="clean_banner_image">{{ __('messages.clean_banner') }} </label>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <input type="file" name="clean_banner_image" id="clean_banner_image" accept="image/*" class="form-control">
+                                    </div>
+                                    <div class="col-md-4" id="clean_banner_image_div"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="remove_creepers_image">{{ __('messages.remove_creepers') }} </label>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <input type="file" name="remove_creepers_image" id="remove_creepers_image" accept="image/*" class="form-control">
+                                    </div>
+                                    <div class="col-md-4" id="remove_creepers_image_div"></div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="current_leakage_image">{{ __('messages.current_leakage') }} </label>
+                                    </div>
+                                    <div class="col-md-4 mb-4">
+                                        <input type="file" name="current_leakage_image" id="current_leakage_image" accept="image/*" class="form-control">
+                                    </div>
+                                    <div class="col-md-4" id="current_leakage_image_div"></div>
                                 </div>
                             </fieldset>
                             {{-- END Kebocoran Arus (5) --}}
@@ -1181,23 +1239,23 @@
 
         function addReomveImageField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id'); 
+            var id = element.attr('id');
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {
-                if (input_val.hasClass('d-none')) { 
+                if (input_val.hasClass('d-none')) {
                     input_val.removeClass('d-none');
 
                     total_defects += 1;
                 }
             } else {
 
-                if (!input_val.hasClass('d-none')) { 
+                if (!input_val.hasClass('d-none')) {
                     input_val.addClass('d-none');
                     input_val.val('');
-                    total_defects -= 1;  
- 
-                } 
+                    total_defects -= 1;
+
+                }
             }
 
             $('#total_defects').val(total_defects)
@@ -1207,7 +1265,7 @@
 
         function addReomveImageHighClearanceField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id'); 
+            var id = element.attr('id');
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {

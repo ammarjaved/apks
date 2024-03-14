@@ -261,7 +261,12 @@ return [
     'yes' => 'Yes',
     'Amp' => '(Amp)',
 
-
+    'clean_banner'=>'Clean Banner',
+    'remove_creepers'=>'Remove Creepers',
+    'current_leakage'=>'Current Leakage',
+    'ffa_house_no'=>'FFA House no',
+    'ffa_no_of_houses'=>'FFA no of Houses',
+    'five_feet_away'=>'Five Feet Away',
 
     /*******************ENd tiang */
 
