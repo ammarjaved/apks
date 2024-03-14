@@ -33,6 +33,7 @@ use App\Http\Controllers\web\Substation\SubstationController;
 use App\Http\Controllers\web\Substation\SubstationLKSController;
 use App\Http\Controllers\web\Tiang\TiangLKSController;
 use App\Http\Controllers\web\FeederPillar\FPController;
+use App\Http\Controllers\web\FeederPillar\OPSFeederPillarController;
 use App\Http\Controllers\web\GenerateNoticeController;
 use App\Http\Controllers\web\LinkBox\LinkBoxMapController;
 use App\Http\Controllers\web\Patrolling\PatrollingController;
@@ -42,6 +43,7 @@ use App\Http\Controllers\web\Tiang\TiangMapController;
 use App\Models\ThirdPartyDiging;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\web\Patrolling\PatrollingExcelController;
+use App\Http\Controllers\web\SAVT\SAVTController;
 use App\Http\Controllers\web\Tiang\TiangDocumentsRedirectController;
 use App\Http\Controllers\web\Tiang\TiangSBUMReportController;
 
@@ -184,9 +186,14 @@ Route::group(
                 Route::get('/search/find-feeder-pillar-cordinated/{q}', [FeederPillarMapController::class, 'seacrhCoordinated'])->name('feeder-pillar-coordinated');
                 Route::get('/feeder-pillar-update-QA-Status', [FPController::class, 'updateQAStatus'])->name('feeder-pillar-update-QA-Status');
                 Route::any('/generate-feeder-pillar-lks', [FeederPillarLKSController::class, 'gene'])->name('generate-feeder-pillar-lks');
+                Route::post('/generate-feeder-pillar-ops', [OPSFeederPillarController::class, 'generateOPS'])->name('generate-feeder-pillar-ops');
                 Route::get('/feeder-pillar-lks',[FeederPillarLKSController::class,'index'])->name('feeder-pillar-lks');
                 Route::get('/generate-feeder-pillar-lks-by-visit-date', [FeederPillarLKSController::class, 'generateByVisitDate'])->name('generate-feeder-pillar-lks-by-visit-date');
 
+
+                // SAVT routes
+
+                Route::resource('/savt',SAVTController::class);
 
                 //generate notice pdf
                 Route::get('/generate-notice/{id}', [GenerateNoticeController::class, 'generateNotice']);

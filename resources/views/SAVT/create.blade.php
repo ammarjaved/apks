@@ -69,12 +69,12 @@
         <div class="container-  ">
             <div class="row  " style="flex-wrap:nowrap">
                 <div class="col-sm-6">
-                    <h3>{{ __('messages.tiang') }}</h3>
+                    <h3>{{ __('messages.savt') }}</h3>
                 </div>
                 <div class="col-sm-6 text-right">
                     <ol class="breadcrumb float-right">
                         <li class="breadcrumb-item">
-                            <a href="{{ route('tiang-talian-vt-and-vr.index', app()->getLocale()) }}">{{ __('messages.index') }}</a>
+                            <a href="{{ route('savt.index', app()->getLocale()) }}">{{ __('messages.index') }}</a>
                         </li>
                         <li class="breadcrumb-item active">{{ __('messages.create') }}</li>
                     </ol>
@@ -86,8 +86,8 @@
     <section class="container ms-auto">
 
         <div class=" card col-md-12 p-3 ">
-            <h3 class="text-center p-2">{{ __('messages.qr_savr') }}</h3>
-                        <form id="framework-wizard-form" action="{{ route('tiang-talian-vt-and-vr.store', app()->getLocale()) }}"
+            <h3 class="text-center p-2">{{ __('messages.savt') }}</h3>
+                        <form id="framework-wizard-form" action="{{ route('savt.store', app()->getLocale()) }}"
                             enctype="multipart/form-data" style="display: none" method="POST"
                             onsubmit="return submitFoam()">
                             @csrf
@@ -103,39 +103,29 @@
                                         <select name="ba_s" id="ba_s" class="form-control" onchange="getWp(this)" required>
                                             @if (Auth::user()->ba == '')
                                                 <option value="" hidden>Select ba</option>
+
                                                 <optgroup label="W1">
-                                                    <option
-                                                        value="KL PUSAT,KUALA LUMPUR PUSAT, 3.14925905877391, 101.754098819705">
-                                                        KL PUSAT</option>
+                                                    <option value="KL PUSAT,KUALA LUMPUR PUSAT, 3.14925905877391, 101.754098819705">KL PUSAT</option>
                                                 </optgroup>
+
                                                 <optgroup label="B1">
-                                                    <option value="PJ,PETALING JAYA, 3.1128074178475, 101.605270457169">
-                                                        PETALING JAYA</option>
-                                                    <option value="RAWANG,RAWANG, 3.47839445121726, 101.622905486475">RAWANG
-                                                    </option>
-                                                    <option
-                                                        value="K.SELANGOR,KUALA SELANGOR, 3.40703209426401, 101.317426926947">
-                                                        KUALA SELANGOR</option>
+                                                    <option value="PJ,PETALING JAYA, 3.1128074178475, 101.605270457169">PETALING JAYA</option>
+                                                    <option value="RAWANG,RAWANG, 3.47839445121726, 101.622905486475">RAWANG</option>
+                                                    <option value="K.SELANGOR,KUALA SELANGOR, 3.40703209426401, 101.317426926947">KUALA SELANGOR</option>
                                                 </optgroup>
+
                                                 <optgroup label="B2">
-                                                    <option value="KLANG,KLANG, 3.08428642705789, 101.436185279023">KLANG
-                                                    </option>
-                                                    <option
-                                                        value="PORT KLANG,PELABUHAN KLANG, 2.98188527916042, 101.324234779569">
-                                                        PELABUHAN KLANG</option>
+                                                    <option value="KLANG,KLANG, 3.08428642705789, 101.436185279023">KLANG</option>
+                                                    <option value="PORT KLANG,PELABUHAN KLANG, 2.98188527916042, 101.324234779569">PELABUHAN KLANG</option>
                                                 </optgroup>
+
                                                 <optgroup label="B4">
-                                                    <option value="CHERAS,CHERAS, 3.14197346621987, 101.849883983416">CHERAS
-                                                    </option>
-                                                    <option
-                                                        value="BANTING/SEPANG,BANTING, 2.82111390453244, 101.505890775541">
-                                                        BANTING</option>
-                                                    <option value="BANGI,BANGI,2.965810949933260,101.81881303103104">BANGI
-                                                    </option>
-                                                    <option
-                                                        value="PUTRAJAYA/CYBERJAYA/PUCHONG,PUTRAJAYA & CYBERJAYA, 2.92875032271019, 101.675338316575">
-                                                        PUTRAJAYA & CYBERJAYA</option>
+                                                    <option value="CHERAS,CHERAS, 3.14197346621987, 101.849883983416">CHERAS</option>
+                                                    <option value="BANTING/SEPANG,BANTING, 2.82111390453244, 101.505890775541">BANTING</option>
+                                                    <option value="BANGI,BANGI,2.965810949933260,101.81881303103104">BANGI</option>
+                                                    <option value="PUTRAJAYA/CYBERJAYA/PUCHONG,PUTRAJAYA & CYBERJAYA, 2.92875032271019, 101.675338316575">PUTRAJAYA & CYBERJAYA</option>
                                                 </optgroup>
+                                                
                                             @else
                                             @endif
                                         </select>
