@@ -296,6 +296,18 @@ return [
 
     /**************End Patroling */
 
+
+
+    /******************** SAVT  */
+
+    'savt'      => 'SAVT',
+    'Pembekal'  => 'Pembekal',
+    'PMU_PPU'   => 'PMU/PPU',
+    'Feeder_no' => 'Feeder no',
+    'Voltan'    => 'Voltan',
+
+    /***************** END SAVT  */
+
     'qr' => 'QR',
     'add_clean_up' => 'Add clean up',
     'image_advertise_poster_removal' => 'Advertisement Removal Image',

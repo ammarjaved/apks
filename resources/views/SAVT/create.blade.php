@@ -53,7 +53,7 @@
 
         td.d-flex {
             border-bottom: 0px !important;
-            border-left: 0px !important; 
+            border-left: 0px !important;
         }
 
         .defects input[type="file"] { margin-bottom: 5px !important; }
@@ -97,6 +97,7 @@
                             {{-- START Info (1) --}}
                             <fieldset class=" form-input">
 
+                                {{-- BA --}}
                                 <div class="row">
                                     <div class="col-md-4"><label for="ba">{{ __('messages.ba') }}</label></div>
                                     <div class="col-md-4">
@@ -125,7 +126,7 @@
                                                     <option value="BANGI,BANGI,2.965810949933260,101.81881303103104">BANGI</option>
                                                     <option value="PUTRAJAYA/CYBERJAYA/PUCHONG,PUTRAJAYA & CYBERJAYA, 2.92875032271019, 101.675338316575">PUTRAJAYA & CYBERJAYA</option>
                                                 </optgroup>
-                                                
+
                                             @else
                                             @endif
                                         </select>
@@ -133,45 +134,58 @@
                                     </div>
                                 </div>
 
-
+                                {{-- Pembekal --}}
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="fp_name"> {{ __('messages.name_of_substation') }} / {{ __('messages.Name_of_Feeder_Pillar') }} </label>
+                                        <label for="Pembekal"> {{ __('messages.Pembekal') }}   </label>
+                                    </div>
+
+                                </div>
+
+                                {{-- PMU/PPU --}}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="supplier_pmu_ppu"> {{ __('messages.PMU_PPU') }}  </label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="fp_name" id="fp_name" class="form-control" required>
+                                        <input type="text" name="supplier_pmu_ppu" id="supplier_pmu_ppu" class="form-control" required>
                                     </div>
                                 </div>
 
+                                {{-- FEEDER NO --}}
                                 <div class="row">
-                                    <div class="col-md-4"><label for="fp_road"> {{ __('messages.Feeder_Name') }} / {{ __('messages.Street_Name') }}</label></div>
+                                    <div class="col-md-4"><label for="supplier_feeder_no"> {{ __('messages.Feeder_no') }}  </label></div>
                                     <div class="col-md-4">
-                                        <input type="text" name="fp_road"  id="fp_road" class="form-control" required>
+                                        <input type="text" name="supplier_feeder_no"  id="supplier_feeder_no" class="form-control" required>
                                     </div>
                                 </div>
 
+                                {{-- SECTION --}}
                                 <div class="row">
                                     <div class="col-md-4"><label for="">{{ __('messages.Section') }} </label></div>
                                 </div>
 
+                                {{-- SECTION FROM --}}
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="section_from">{{ __('messages.from') }} </label>
+                                        <label for="sec_from">{{ __('messages.from') }} </label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="section_from" id="section_from" class="form-control">
+                                        <input type="text" name="sec_from" id="sec_from" class="form-control">
                                     </div>
                                 </div>
 
+                                {{-- SECTION TO --}}
                                 <div class="row">
                                     <div class="col-md-4">
-                                        <label for="section_to">{{ __('messages.to') }}</label>
+                                        <label for="sec_to">{{ __('messages.to') }}</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="section_to" id="section_to" class="form-control">
+                                        <input type="text" name="sec_to" id="sec_to" class="form-control">
                                     </div>
                                 </div>
 
+                                {{-- TIANG NO --}}
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="tiang_no">{{ __('messages.Tiang_No') }}</label>
@@ -181,7 +195,21 @@
                                     </div>
                                 </div>
 
+                                {{-- VOLTAN (KV) --}}
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label for="voltan_kv">{{ __('messages.Voltan') }} (KV)</label>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <select name="voltan_kv" id="voltan_kv" class="form-control">
+                                            <option value="" hidden>select</option>
+                                            <option value="11kv">11kv</option>
+                                            <option value="33kv">33kv</option>
+                                        </select>
+                                    </div>
+                                </div>
 
+                                {{-- VISIT DATE --}}
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="review_date">{{ __('messages.visit_date') }}</label>
@@ -191,56 +219,7 @@
                                     </div>
                                 </div>
 
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for="main_line">{{ __('messages.main_line_service_line') }}</label>
-                                    </div>
-                                    <div class="col-md-5 d-sm-flex">
-                                        <div class="col-md-6">
-                                            <input type="checkbox" name="main_line" id="main_line">
-                                            <label for="main_line">Main Line</label>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <input type="checkbox" name="service_line" id="service_line">
-                                            <label for="service_line">Service Line</label>
-                                        </div>
-
-                                        {{-- <select name="talian_utama_connection" id="main_line" class="form-control">
-                                            <option value="" hidden>select</option>
-                                            <option value="main_line">Main Line</option>
-                                            <option value="service_line">Service Line</option>
-                                        </select> --}}
-                                    </div>
-                                </div>
-
-                                <div class="row  ">
-                                    <div class="col-md-4">
-                                        <label for=""> Number of Services Involves 1 user only </label>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="number" name="talian_utama" class="form-control" id="main_line_connection_one">
-                                    </div>
-                                </div>
-
-
-                                {{-- <div class="row">
-                                    <div class="col-md-4">
-                                        <label for="pole_image-1">{{ __('messages.pole') }} Image 1 </label>
-                                    </div>
-                                    <div class="col-md-5 p-2 pr-5">
-                                        <input type="file" name="pole_image_1" id="pole_image_1" required accept="image/*" class="form-control">
-                                    </div>
-                                </div>
-
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <label for="pole_image-2">{{ __('messages.pole') }} Image 2</label>
-                                    </div>
-                                    <div class="col-md-5 p-2 pr-5">
-                                        <input type="file" name="pole_image_2" id="pole_image_2" required accept="image/*" class="form-control">
-                                    </div>
-                                </div> --}}
-
+                                {{-- COORDINATES --}}
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="cordinates">{{ __('messages.coordinate') }}</label>
@@ -253,10 +232,12 @@
                                 <input type="hidden" name="lat" id="lat" required class="form-control">
                                 <input type="hidden" name="log" id="log" class="form-control">
 
+                                {{-- MAP ERROR DIV --}}
                                 <div class="text-center">
                                     <strong> <span class="text-danger map-error"></span></strong>
                                 </div>
 
+                                {{-- MAP DIV --}}
                                 <div id="map">
 
                                 </div>
@@ -264,6 +245,216 @@
                             </fieldset>
                             {{-- END Info (1) --}}
 
+
+                             {{-- IMAGES --}}
+                             <h3>{{__('messages.Asset_Register')}}</h3>
+                             <fieldset class="form-input">
+                                <div class="row">
+
+                                            {{-- ABC SAIZ (MMP) --}}
+                                    <div class="col-md-6">
+                                        <div class="card p-4">
+                                            <label for="st7"> {{ __('messages.abc_saiz_mmp') }} </label>
+
+                                            <div class="row">
+                                                <div class=" col-md-12 row">
+
+                                                    {{-- ABC SAIZ 3X70 --}}
+                                                    <div class="d-flex col-md-4">
+                                                        <input type="radio" name="abc_size_mmp" value="3x70" id="abc_saiz_mmp_3x70" class="  ">
+                                                        <label for="abc_saiz_mmp_3x70" class="fw-400">3x70</label>
+                                                    </div>
+
+                                                    {{-- ABC SAIZ 3X150 --}}
+
+                                                    <div class="d-flex col-md-4">
+                                                        <input type="radio" name="abc_size_mmp" value="3x150" id="abc_saiz_mmp_3x150" class=" ">
+                                                        <label for="abc_saiz_mmp_3x150" class="fw-400">3x150</label>
+                                                    </div>
+
+                                                    {{-- ABC SAIZ 3X240 --}}
+
+                                                    <div class="d-flex col-md-4">
+                                                        <input type="radio" name="abc_size_mmp" value="3x240" id="abc_saiz_mmp_3x240" class=" ">
+                                                        <label for="abc_saiz_mmp_3x240" class="fw-400">3x240</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                                {{-- ABC PANJNG METER --}}
+                                            <div class="row">
+                                                <div class="col-md-6"><label for="st7"> {{ __('messages.abc_panjang_meter') }} </label></div>
+                                                <div class=" col-md-6 ">
+                                                    <input type="number" name="abc_panjang_meter" id="abc_panjang_meter" class="form-control">
+                                                </div>
+                                            </div>
+
+                                                {{-- ABC TIANG NO --}}
+                                            <div class="row">
+                                                <div class="col-md-6"><label for="st7"> {{ __('messages.abc_tiang_no') }} </label></div>
+                                                <div class=" col-md-6 ">
+                                                    <input type="text" name="abc_tiang_no" id="abc_tiang_no" class="form-control">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+
+                                    <div class="col-md-6">
+                                        <div class="card p-4">
+
+
+                                             {{-- BARE SAIZ MMP --}}
+                                             <div class="row">
+                                                <div class="col-md-6"><label for="st7"> {{ __('messages.bare_size_mmp') }} </label></div>
+                                                <div class=" col-md-6 ">
+                                                    <input type="text" name="bare_size_mmp" id="bare_size_mmp" class="form-control">
+                                                </div>
+                                            </div>
+
+                                                {{-- BARE PANJANG METER --}}
+
+                                            <div class="row">
+                                                <div class="col-md-6"><label for="st7"> {{ __('messages.barbare_panjang_metere_size_mmp') }} </label></div>
+                                                <div class=" col-md-6 ">
+                                                    <input type="text" name="bare_panjang_meter" id="bare_panjang_meter" class="form-control">
+                                                </div>
+                                            </div>
+
+                                                {{-- BARE TIANG NO --}}
+
+                                            <div class="row">
+                                                <div class="col-md-6"><label for="st7"> {{ __('messages.bare_tiang_no') }} </label></div>
+                                                <div class=" col-md-6 ">
+                                                    <input type="text" name="bare_tiang_no" id="bare_tiang_no" class="form-control">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                        {{-- UNDERGROUND --}}
+
+
+                                    <div class="col-md-6">
+                                        <div class="card p-4">
+                                             <label for="st7"> {{ __('messages.underground_cabel_size_mmp') }} </label>
+
+
+                                            <div class=" col-md-12 row">
+
+                                                {{-- UNDERGROUND CABLE 3X70 --}}
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="underground_cabel_size_mmp" value="3x70" id="underground_cabel_size_mmp_3x70" class="  ">
+                                                    <label for="underground_cabel_size_mmp_3x70" class="fw-400">3x70</label>
+                                                </div>
+
+                                                {{-- UNDERGROUND CABLE 3X150 --}}
+
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="underground_cabel_size_mmp" value="3x150" id="underground_cabel_size_mmp_3x150" class=" ">
+                                                    <label for="underground_cabel_size_mmp_3x150" class="fw-400">3x150</label>
+                                                </div>
+
+                                                {{-- UNDERGROUND CABLE 3X240 --}}
+
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="underground_cabel_size_mmp" value="3x240" id="underground_cabel_size_mmp_3x240" class=" ">
+                                                    <label for="underground_cabel_size_mmp_3x240" class="fw-400">3x240</label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-md-6"><label for="st7"> {{ __('messages.underground_cabel_length_meter') }} </label></div>
+                                            <div class=" col-md-6">
+                                                <input type="number" name="underground_cabel_length_meter" id="underground_cabel_length_meter" class="form-control">
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+
+                                        {{-- BIL. EQUIPMENT --}}
+
+                                    <div class="col-md-6">
+                                        <div class="card p-4">
+
+                                                {{-- AUTO CIRCUIT RECLOSER  --}}
+                                            <label for="st7"> {{ __('messages.eqp_no_auto_circuit_recloser') }} </label>
+                                            <div class=" col-md-12 row">
+
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="eqp_no_auto_circuit_recloser" value="Yes" id="eqp_no_auto_circuit_recloser_yes" class="  ">
+                                                    <label for="eqp_no_auto_circuit_recloser_yes" class="fw-400">Yes</label>
+                                                </div>
+
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="eqp_no_auto_circuit_recloser" value="No" id="eqp_no_auto_circuit_recloser_no" class=" ">
+                                                    <label for="eqp_no_auto_circuit_recloser_no" class="fw-400">No</label>
+                                                </div>
+                                            </div>
+
+                                                {{-- LOAD BREAK SWITCH  --}}
+                                            <label for="st7"> {{ __('messages.eqp_no_load_break_switch') }} </label>
+                                            <div class=" col-md-12 row">
+
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="eqp_no_load_break_switch" value="Yes" id="eqp_no_load_break_switch_yes" class="  ">
+                                                    <label for="eqp_no_load_break_switch_yes" class="fw-400">Yes</label>
+                                                </div>
+
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="eqp_no_load_break_switch" value="No" id="eqp_no_load_break_switch_no" class=" ">
+                                                    <label for="eqp_no_load_break_switch_no" class="fw-400">No</label>
+                                                </div>
+                                            </div>
+
+
+                                                    {{-- ISOLATOR SWITCH  --}}
+                                            <label for="st7"> {{ __('messages.eqp_no_isolator_switch') }} </label>
+                                            <div class=" col-md-12 row">
+
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="eqp_no_isolator_switch" value="Yes" id="eqp_no_isolator_switch_yes" class="  ">
+                                                    <label for="eqp_no_isolator_switch_yes" class="fw-400">Yes</label>
+                                                </div>
+
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="eqp_no_isolator_switch" value="No" id="eqp_no_isolator_switch_no" class=" ">
+                                                    <label for="eqp_no_isolator_switch_no" class="fw-400">No</label>
+                                                </div>
+                                            </div>
+
+
+                                                {{-- SET LFI  --}}
+                                            <label for="st7"> {{ __('messages.eqp_no_set_lfi') }} </label>
+                                            <div class=" col-md-12 row">
+
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="eqp_no_set_lfi" value="Yes" id="eqp_no_set_lfi_yes" class="  ">
+                                                    <label for="eqp_no_set_lfi_yes" class="fw-400">Yes</label>
+                                                </div>
+
+                                                <div class="d-flex col-md-4">
+                                                    <input type="radio" name="eqp_no_set_lfi" value="No" id="eqp_no_set_lfi_no" class=" ">
+                                                    <label for="eqp_no_set_lfi_no" class="fw-400">No</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+
+
+
+                             </fieldset>
 
                             {{-- IMAGES --}}
                             <h3>{{__('messages.images')}}</h3>
@@ -325,124 +516,6 @@
                             {{-- END IMAGES --}}
 
 
-                            <h3> {{ __('messages.Asset_Register') }} </h3>
-
-
-                            {{-- START Asset Register (2) --}}
-                            <fieldset class="form-input">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="card p-4">
-                                            <label for="st7"> {{ __('messages.Pole_Size_Bill') }} </label>
-
-                                            <div class="row">
-                                                <div class=" col-md-12 row">
-                                                    <div class="d-flex col-md-4">
-                                                        <input type="radio" name="size_tiang" value="7.5" id="st7" class="  ">
-                                                        <label for="st7" class="fw-400"> 7.5</label>
-                                                    </div>
-
-                                                    <div class="d-flex col-md-4">
-                                                        <input type="radio" name="size_tiang" value="9" id="st9" class=" ">
-                                                        <label for="st9" class="fw-400"> 9</label>
-                                                    </div>
-
-                                                    <div class="d-flex col-md-4">
-                                                        <input type="radio" name="size_tiang" value="10" id="st10" class=" ">
-                                                        <label for="st10" class="fw-400"> 10</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-6">
-                                        <div class="card p-4">
-                                            <label for="">{{ __('messages.Pole_type_No') }} </label>
-                                            <div class="row">
-                                                <div class="col-md-12  row ">
-                                                    <div class="d-flex col-md-4">
-                                                        <input type="radio" name="jenis_tiang" value="spun" id="spun" class=" ">
-                                                        <label for="spun" class="fw-400">{{ __('messages.Spun') }}</label>
-                                                    </div>
-
-                                                    <div class="d-flex col-md-4">
-                                                        <input type="radio" name="jenis_tiang" value="concrete" id="concrete" class=" ">
-                                                        <label for="concrete" class="fw-400">{{ __('messages.Concrete') }}</label>
-
-                                                    </div>
-
-                                                    <div class="d-flex col-md-4">
-                                                        <input type="radio" name="jenis_tiang" value="iron" id="iron" class=" ">
-                                                        <label for="iron" class="fw-400">{{ __('messages.Iron') }}</label>
-                                                    </div>
-
-                                                    <div class="d-flex col-md-4">
-                                                        <input type="radio" name="jenis_tiang" value="wood" id="wood" class=" ">
-                                                        <label for="wood" class="fw-400">{{ __('messages.Wood') }}</label>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-
-                                    {{-- ABC (Span) 3 X 185 --}}
-                                    <div class="col-md-6">
-                                        <div class="card p-4">
-
-                                            <label for="section_to">{{ __('messages.ABC_Span') }} 3 X 185</label>
-                                            {!! tiangSpanRadio('', 'abc_span', 's3_185', true) !!}
-
-                                            <label for="s3_95">{{ __('messages.ABC_Span') }}3 X 95</label>
-                                            {!! tiangSpanRadio('', 'abc_span', 's3_95', true) !!}
-
-                                            <label for="s3_16">{{ __('messages.ABC_Span') }}3 X 16</label>
-                                            {!! tiangSpanRadio('', 'abc_span', 's3_16', true) !!}
-
-                                            <label for="s1_16">{{ __('messages.ABC_Span') }}1 X 16</label>
-                                            {!! tiangSpanRadio('', 'abc_span', 's1_16', true) !!}
-
-                                        </div>
-                                    </div>
-
-
-
-                                    {{-- PVC (Span) 19/064 --}}
-                                    <div class="col-md-6 ">
-                                        <div class="card p-4">
-                                            <label for="s19_064">{{ __('messages.PVC_Span') }} 19/064</label>
-                                            {!! tiangSpanRadio('', 'pvc_span', 's19_064', true) !!}
-
-                                            <label for="s7_083">{{ __('messages.PVC_Span') }} 7/083</label>
-                                            {!! tiangSpanRadio('', 'pvc_span', 's7_083', true) !!}
-
-                                            <label for="s7_044">{{ __('messages.PVC_Span') }} 7/044</label>
-                                            {!! tiangSpanRadio('', 'pvc_span', 's7_044', true) !!}
-
-                                        </div>
-                                    </div>
-
-                                    {{-- BARE (Span) 7/173 --}}
-
-                                    <div class="col-md-6 ">
-                                        <div class="card p-4">
-
-                                            <label for="s7_173">{{ __('messages.BARE_Span') }} 7/173</label>
-                                            {!! tiangSpanRadio('', 'bare_span', 's7_173', true) !!}
-
-                                            <label for="s7_122">{{ __('messages.BARE_Span') }} 7/122</label>
-                                            {!! tiangSpanRadio('', 'bare_span', 's7_122', true) !!}
-
-                                            <label for="s3_132">{{ __('messages.BARE_Span') }} 3/132</label>
-                                            {!! tiangSpanRadio('', 'bare_span', 's3_132', true) !!}
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-
-                            {{-- END Asset Register (2) --}}
 
 
                             {{-- START Kejanggalan (3) --}}
@@ -455,7 +528,7 @@
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
                                             <th class="col-4">{{ __('messages.title') }}</th>
-                                            <th class="col-4">{{ __('messages.defects') }}</th> 
+                                            <th class="col-4">{{ __('messages.defects') }}</th>
                                         </thead>
                                         {{-- POLE --}}
                                         <tr>
@@ -484,7 +557,7 @@
                                             </td>
                                         </tr>
                                         {{-- <tr>
-                                            <td class="d-flex"> 
+                                            <td class="d-flex">
                                                 <label for="creepers_after"> {{ __('messages.Creepers') }} After </label>
                                             </td>
                                         </tr> --}}
@@ -557,13 +630,13 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[cracked]" id="umbang_cracked" class="form-check ">
                                                 <label for="umbang_cracked">{{__('messages.No_Stay_Insulator_Damaged') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="umbang_defect[stay_palte]" id="stay_palte" class="form-check">
                                                 <label for="stay_palte">{{ __('messages.Stay_Plate_Base_Stay_Blocked') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         {{-- <tr>
                                             <td class="d-flex">
@@ -580,7 +653,7 @@
                                                 <input type="checkbox" name="umbang_defect[other]" id="other_umbang_defect" class="form-check">
                                                 <label for="other_umbang_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="umbang_defect[other_value]" id="other_umbang_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- IPC --}}
@@ -589,14 +662,14 @@
                                             <td>
                                                 <input type="checkbox" name="ipc_defect[burn]" id="ipc_burn"class="form-check">
                                                 <label for="ipc_burn">{{ __('messages.Burn Effect') }} Burn Effect</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="ipc_defect[other]" id="other_ipc_defect" class="form-check">
                                                 <label for="other_ipc_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="ipc_defect[other_value]" id="other_ipc_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Black Box --}}
@@ -606,14 +679,14 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="blackbox_defect[cracked]" id="black_box_cracked" class="form-check">
                                                 <label for="black_box_cracked">{{ __('messages.Kesan_Bakar') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="blackbox_defect[other]" id="other_blackbox_defect" class="form-check">
                                                 <label for="other_blackbox_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="blackbox_defect[other_value]"  id="other_blackbox_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Jumper --}}
@@ -622,20 +695,20 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="jumper[sleeve]" id="jumper_sleeve" class="form-check">
                                                 <label for="jumper_sleeve">{{ __('messages.no_uv_sleeve') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="jumper[burn]" id="jumper_burn" class="form-check">
                                                 <label for="jumper_burn">{{ __('messages.Burn Effect') }} </label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="jumper[other]" id="other_jumper" class="form-check">
                                                 <label for="other_jumper">{{ __('messages.others') }}</label>
                                                 <input type="text" name="jumper[other_value]" id="other_jumper-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Lightning catcher --}}
@@ -645,14 +718,14 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kilat_defect[broken]" id="lightning_broken" class="form-check">
                                                 <label for="lightning_broken">{{ __('messages.broken') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="kilat_defect[other]" id="other_kilat_defect" class="form-check">
                                                 <label for="other_kilat_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="kilat_defect[other_value]" id="other_kilat_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Service --}}
@@ -662,20 +735,20 @@
                                             <td class="d-felx">
                                                 <input type="checkbox" name="servis_defect[roof]" id="service_roof" class="form-check">
                                                 <label for="service_roof">{{ __('messages.the_service_line_is_on_the_roof') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-felx">
                                                 <input type="checkbox" name="servis_defect[won_piece]" id="service_won_piece" class="form-check">
                                                 <label for="service_won_piece">{{ __('messages.won_piece_date') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="servis_defect[other]" id="other_servis_defect" class="form-check">
                                                 <label for="other_servis_defect">{{ __('messages.others') }} </label>
                                                 <input type="text" name="servis_defect[other_value]" id="other_servis_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
                                         {{-- Grounding --}}
                                         <tr>
@@ -683,14 +756,14 @@
                                             <td>
                                                 <input type="checkbox" name="pembumian_defect[netural]" id="grounding_netural" class="form-check">
                                                 <label for="grounding_netural">{{ __('messages.no_connection_to_neutral') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="pembumian_defect[other]" id="other_pembumian_defect" class="form-check">
                                                 <label for="other_pembumian_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="pembumian_defect[other_value]" id="other_pembumian_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Signage - OFF Point / Two Way Supply --}}
@@ -699,7 +772,7 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="bekalan_dua_defect[damage]" id="signage_damage" class="form-check">
                                                 <label for="signage_damage">{{ __('messages.faded_damaged_missing_signage') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         <tr>
@@ -707,7 +780,7 @@
                                                 <input type="checkbox" name="bekalan_dua_defect[other]" id="other_bekalan_dua_defect" class="form-check">
                                                 <label for="other_bekalan_dua_defect">{{ __('messages.others') }}</label>
                                                 <input type="text" name="bekalan_dua_defect[other_value]" id="other_bekalan_dua_defect-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
 
                                         {{-- Main Street --}}
@@ -717,20 +790,20 @@
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[date_wire]" id="street_date_wire" class="form-check">
                                                 <label for="street_date_wire">{{ __('messages.date_wire') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td class="d-flex">
                                                 <input type="checkbox" name="kaki_lima_defect[burn]" id="street_burn" class="form-check">
                                                 <label for="street_burn">{{ __('messages.junction_box_date_burn_effect') }}</label>
-                                            </td> 
+                                            </td>
                                         </tr>
                                         <tr>
                                             <td>
                                                 <input type="checkbox" name="kaki_lima_defect[other]" id="other_kaki_lima_defect_image" class="form-check">
                                                 <label for="other_kaki_lima_defect_image">{{ __('messages.others') }}</label>
                                                 <input type="text" name="kaki_lima_defect[other_value]" id="other_kaki_lima_defect_image-input" placeholder="mention other defect" required class="form-control d-none">
-                                            </td> 
+                                            </td>
                                         </tr>
                                     </table>
                                 </div>
@@ -746,7 +819,7 @@
                                     <table class="table table-bordered w-100">
                                         <thead style="background-color: #E4E3E3 !important">
                                             <th class="col-4">{{ __('messages.title') }}</th>
-                                            <th class="col-4">{{ __('messages.defects') }}</th> 
+                                            <th class="col-4">{{ __('messages.defects') }}</th>
                                         </thead>
                                         <tbody>
 
@@ -758,21 +831,21 @@
                                                     <input type="checkbox" name="tapak_condition[road]" id="site_road" class="form-check">
                                                     <label for="site_road">{{ __('messages.Crossing_the_Road') }}</label>
                                                 </td>
-                                                 
+
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="tapak_condition[side_walk]"  id="side_walk" class="form-check">
                                                     <label for="side_walk">{{ __('messages.Sidewalk') }}</label>
                                                 </td>
-                                                 
+
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="tapak_condition[vehicle_entry]" id="vehicle_entry" class="form-check">
                                                     <label for="vehicle_entry">{{ __('messages.No_vehicle_entry_area') }}</label>
                                                 </td>
-                                                 
+
                                             </tr>
 
                                             {{-- Area --}}
@@ -782,21 +855,21 @@
                                                     <input type="checkbox" name="kawasan[bend]" id="area_bend" class="form-check">
                                                     <label for="area_bend">{{ __('messages.Bend') }}</label>
                                                 </td>
-                                                 
+
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="kawasan[road]" id="area_road" class="form-check">
                                                     <label for="area_road"> {{ __('messages.Road') }}</label>
                                                 </td>
-                                                 
+
                                             </tr>
                                             <tr>
                                                 <td>
                                                     <input type="checkbox" name="kawasan[forest]" id="area_forest" class="form-check">
                                                     <label for="area_forest">{{ __('messages.Forest') }} </label>
                                                 </td>
-                                                 
+
                                             </tr>
                                             <tr>
                                                 <td>
@@ -804,7 +877,7 @@
                                                     <label for="area_other">{{ __('messages.others') }}  {{-- (please state) --}} </label>
                                                     <input type="text" name="kawasan[other_value]" id="area_other-input" class="form-control d-none" required placeholder="(please state)">
                                                 </td>
-                                                 
+
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1171,23 +1244,23 @@
 
         function addReomveImageField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id'); 
+            var id = element.attr('id');
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {
-                if (input_val.hasClass('d-none')) { 
+                if (input_val.hasClass('d-none')) {
                     input_val.removeClass('d-none');
 
                     total_defects += 1;
                 }
             } else {
 
-                if (!input_val.hasClass('d-none')) { 
+                if (!input_val.hasClass('d-none')) {
                     input_val.addClass('d-none');
                     input_val.val('');
-                    total_defects -= 1;  
- 
-                } 
+                    total_defects -= 1;
+
+                }
             }
 
             $('#total_defects').val(total_defects)
@@ -1197,7 +1270,7 @@
 
         function addReomveImageHighClearanceField(checkbox) {
             var element = $(checkbox);
-            var id = element.attr('id'); 
+            var id = element.attr('id');
             var input_val = $(`#${id}-input`)
 
             if (checkbox.checked) {
