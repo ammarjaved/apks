@@ -314,7 +314,49 @@
 
 
                     </ul>
+
+
+                    <li class="nav-item ">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-bolt"></i>
+                            <p>
+                                {{__('messages.savt')}}
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{route('savt.create', app()->getLocale())}}" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{__('messages.create')}} savt</p>
+                                </a>
+                            </li>
+    
+                            {{-- <li class="nav-item">
+                                <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-map" class="nav-link ">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{__('messages.map')}}</p>
+                                </a>
+                            </li> --}}
+    
+                            <li class="nav-item">
+                                <a href="{{route('savt.index', app()->getLocale())}}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>{{__('messages.index')}}</p>
+                                </a>
+                            </li>
+                            {{-- <li class="nav-item">
+                                <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-lks" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>documents</p>
+                                </a>
+                            </li> --}}
+                        </ul>
+                    </li>
                 </li>
+
+
+
 
 
                 {{-- <li class="nav-item ">
