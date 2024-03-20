@@ -21,22 +21,7 @@ class TiangConstants
     ];
 
     public const TIANG_IMAGES = ['pole_image_1', 'pole_image_2', 'pole_image_3', 'pole_image_4', 'pole_image_5','current_leakage_image' , 'remove_creepers_image' , 'clean_banner_image'];
-    // $defectsKeys['tiang_defect'] = ['cracked', 'leaning', 'dim', 'creepers', 'other'];
-    // $defectsKeys['talian_defect'] = ['joint', 'need_rentis', 'ground', 'other'];
-    // $defectsKeys['umbang_defect'] = ['breaking', 'creepers', 'cracked', 'stay_palte', 'other'];
 
-    // $defectsKeys['ipc_defect'] = ['burn', 'other'];
-    // $defectsKeys['blackbox_defect'] = ['cracked', 'other'];
-    // $defectsKeys['jumper'] = ['sleeve', 'burn', 'other'];
-
-    // $defectsKeys['kilat_defect'] = ['broken', 'other'];
-    // $defectsKeys['servis_defect'] = ['roof', 'won_piece', 'other'];
-
-    // $defectsKeys['pembumian_defect'] = ['netural', 'other'];
-    // $defectsKeys['bekalan_dua_defect'] = ['damage', 'other'];
-    // $defectsKeys['kaki_lima_defect'] = ['date_wire', 'burn', 'other'];
-    // $defectsKeys['tapak_condition'] = ['road', 'side_walk', 'vehicle_entry'];
-    // $defectsKeys['kawasan'] = ['road', 'bend', 'forest', 'other'];
 
 
 }

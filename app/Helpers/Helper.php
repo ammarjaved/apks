@@ -296,13 +296,13 @@ function tiangSpanRadio($value , $key , $subkey , $status)
 
 
                         if (!$disabled) {
-                         $html.="<div class='col-md-6'>
+                         $html.="<div class='col-md-4'>
                                     <input type='file' accept='image/*' name='$name' id='$name' class='form-control'>
                                 </div>";
                         }
 
                   $html.="
-                    <div class='col-md-6 text-center  py-2'>";
+                    <div class='col-md-4 text-center  py-2'>";
 
                     if ( $image != '' && file_exists(public_path($image))){
                         $html.="<a href='".URL::asset($image) ."' data-lightbox='roadtrip'>
@@ -311,7 +311,9 @@ function tiangSpanRadio($value , $key , $subkey , $status)
                     }else{
                         $html.="<strong>".__('messages.no_image_found') ."</strong>";
                     }
-                    $html.="</div>";
+                    $html.="</div>
+                    <div id='".$name."_div'> </div>
+                    ";
             return $html;
     }
 
@@ -367,3 +369,24 @@ function tiangSpanRadio($value , $key , $subkey , $status)
 
     return $html;
 }
+
+
+
+
+    // SAVT YES NO
+    function savtYesOrNo($name, $disable = null, $value = null ) 
+    {
+        $yes = __('messages.yes');
+        $no = __('messages.no');
+        $html = '<div class="d-flex px-4"> 
+                    <input type="radio" name="'.$name.'" id="'.$name.'_yes" value="Yes" '. ($value == "Yes" ? "checked" : "").' '. (!$disable?:"disabled").'>
+                    <label for="'.$name.'_yes">'.$yes.'</label>
+                </div>
+                <div class="d-flex px-4"> 
+                    <input type="radio" name="'.$name.'" id="'.$name.'_no" value="No" '.($value == "No" ? "checked" : "").' '. (!$disable?:"disabled").'>
+                    <label for="'.$name.'_no">'.$no.'</label>
+                </div>';
+
+        return $html;
+
+    }

@@ -306,6 +306,92 @@ return [
     'Feeder_no' => 'Feeder no',
     'Voltan'    => 'Voltan',
 
+
+    'saiz_mmp'      =>'SIZE (MMP)',
+    'panjang_meter' =>'LENGTH (METERS)',
+    'tiang_no'      =>'POLE BILL',
+
+    'underground_cabel' => 'UNDERGROUND CABLE',
+
+    'eqp_no'                => 'NO. EQUIPMENT',
+    'auto_circuit_recloser' => 'AUTO CIRCUIT RECLOSER',
+    'load_break_switch'     => 'LOAD BREAK SWITCH',
+    'isolator_switch'       => 'ISOLATOR SWITCH',
+    'set_lfi'               => 'SET LFI',
+
+    'rust'          => 'Rust',
+
+    'phase_conductor' => 'Phase Conductor',
+        'sagging'   =>'Sagging',
+        'torn'      =>'Torn',
+        'hotspot'  =>'Hotspot',
+
+        'disconnect' => 'Disconnect',
+
+    'cable_terminate'  => 'Cable Terminate',
+        'crossing' => 'Crossing',
+
+    'lightning_arrester_ocp' =>'Lightning Arrester OCP',
+
+    'lightning_arrester_pac' => 'Lightning Arrester PAC',
+
+    'rentis'    =>'Rentis',
+
+    'switch_link' =>'Switch Link',
+        'need_repair'=>'Need Repair',
+
+        'needs_repaint' => 'Need Repaint',
+    
+    'insulation_status' => 'Insulation Status',
+
+    'earth_bounding'    =>'Earth Bounding',
+        'status'        =>'Status',
+        'ultrasound_status'=>'Ultrasound Status',
+
+    'cable_tray'    => 'Cable Tray',
+        'change'    => 'Change',
+
+    'suspension'    =>'Suspension',
+        'clamp_change'  => 'Clamp Change',
+
+    'triangular'    => 'Triangular',
+        'braker_change' =>'Braker Change',
+
+    'crossarm' =>'Crossarm',
+        'bent' =>'Bent',
+
+    'earth_crossarm' => 'Earth Crossarm',
+        'bent' => 'Bent',
+
+    'conductor_of_the_earth' => 'Conductor of the Earth',
+        'bumi_tangga_connection' => 'Bumi Tangga Connection',
+
+    'wire_to_earth' => 'Wire to Earth',
+        'hanging_disconnected' => 'Hanging/Disconnected',
+
+    'insulation' =>'Insulation',
+        'flashover' => 'Flashover',
+        'full' => 'Full',
+
+    'lightning_catcher_on_line' => 'Lightning Catcher on Line',
+        'ripped_off' => 'Ripped Off',
+
+        'need_change' => 'Need Change',
+
+    'pg_clamps_connectors' => 'PG Clamps Connectors',
+    'climbing_barriers' => 'Climbing Barriers',
+
+    'arcing_horn' => 'Arcing Horn',
+
+    'lfi' => 'LFI',
+        'break_date' => 'Break/Date',
+
+    'savt_clean_banner' =>'SAVT Clean Banner',
+    'savt_remove_creepers' => 'SAVT Remove Creepers',
+    'savt_current_leakage' => 'SAVT Current Leakage',
+    'road_name' => 'Road Name',
+
+
     /***************** END SAVT  */
 
     'qr' => 'QR',
@@ -316,5 +402,7 @@ return [
     'main_line_service_line' => 'Main Line (M) / Servis (S)',
 
     'total_recoreds'=>'Total Recoreds',
+
+    
 ];
 ?>

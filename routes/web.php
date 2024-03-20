@@ -194,6 +194,7 @@ Route::group(
                 // SAVT routes
 
                 Route::resource('/savt',SAVTController::class);
+                Route::get('/savt-update-QA-Status', [SAVTController::class, 'updateQAStatus'])->name('savt-update-QA-Status');
 
                 //generate notice pdf
                 Route::get('/generate-notice/{id}', [GenerateNoticeController::class, 'generateNotice']);
