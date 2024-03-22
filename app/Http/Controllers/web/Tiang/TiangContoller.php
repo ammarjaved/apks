@@ -138,6 +138,7 @@ class TiangContoller extends Controller
             }
 
         } catch (\Throwable $th) {
+            // return $th->getMessage();
             Session::flash('failed', 'Request Failed');
         }
         return redirect()->route('tiang-talian-vt-and-vr.index', app()->getLocale());

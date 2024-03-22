@@ -134,7 +134,7 @@
                             </div>
                         </div> --}}
 
-                        {{-- @if ($data->qa_status == 'Reject')
+                       {{--  @if ($data->qa_status == 'Reject')
                             <div class="row px-4">
                                 <div class="col-md-4">
                                     <label for="zone">Reason</label>
@@ -143,8 +143,8 @@
                                     <textarea name="" id="" cols="10" rows="4" disabled class="form-control">{{$data->reject_remarks}}</textarea>
                                 </div>
                             </div>
-                        @endif
-                            </fieldset> --}}
+                        @endif --}}
+                            {{-- </fieldset>   --}}
                             <form id="framework-wizard-form"
                             action="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-map-edit/{{$data->id}}"
                             enctype="multipart/form-data" style="display: none" method="POST">
