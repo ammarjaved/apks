@@ -380,7 +380,7 @@
             }
 
             substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_substation',
+                layers: 'cite:tiang_substation',
                 format: 'image/png',
                 cql_filter: "ba ILIKE '%" + param + "%'",
                 maxZoom: 21,
