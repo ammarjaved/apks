@@ -48,6 +48,7 @@ class TiangMapController extends Controller
             }
 
         } catch (\Throwable $th) {
+            // return $th->getMessage();
             Session::flash('failed', 'Request Failed');
             
         }

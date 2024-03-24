@@ -170,6 +170,7 @@ class TiangContoller extends Controller
 
     public function updateQAStatus(Request $req)
     {
+        // return $req;
         try {
             $qa_data = Tiang::find($req->id);
             $qa_data->qa_status = $req->status;
@@ -180,9 +181,15 @@ class TiangContoller extends Controller
             $qa_data->qc_by = $user;
             $qa_data->update();
 
-            return redirect()->back();
         } catch (\Throwable $th) {
-            return response()->json(['status' => 'Request failed']);
+            return $th->getMessage();
+            return response()->json(['message' => 'Request failed','status' =>400 ]);
         }
+
+        if ($req->ajax()) {
+            return response()->json(['message'=>'Update Successfully','status' =>200]);
+        }
+        return redirect()->back();
+
     }
 }

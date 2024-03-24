@@ -1,6 +1,8 @@
 @extends('layouts.app', ['page_title' => 'Index'])
 
 @section('css')
+<link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css" />
+ 
     @include('partials.map-css')
     <style>
         #map {
@@ -241,8 +243,8 @@
 
     </div>
 
-    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <div class="modal fade bd-example-modal-lg " id="myLargeModalLabel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Site Data Info</h5>
@@ -250,10 +252,21 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body ">
-                    <table class="table table-bordered">
-                        <tbody id="my_data"></tbody>
-                    </table>
+                <div class="modal-body " style="max-height : 80vh ; overflow-y: scroll" >
+                     <table class="table" id="polygone-tiang-data" >
+                        <thead>
+                            <th>ID</th>
+                            <th>TIANG NO</th>
+                            <th>BA</th>
+                            <th>REVIEW DATE</th>
+                            <th>TOTAL DEFECTS</th>
+                            <th>QA Status</th>
+                            {{-- <th>ACTION</th> --}}
+                        </thead>
+                        <tbody id="polygone-tiang-data-body">
+
+                        </tbody>
+                     </table>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -262,9 +275,42 @@
             </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="rejectReasonModal">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+    
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6 class="modal-title">Reject</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="" id="reject-foam" method="GET">
+                    @csrf
+    
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="reject-id">
+                        <input type="hidden" name="status" id="qa_status" value="Reject">
+                        <label for="reject">Reject Remarks : </label>
+                        <textarea name="reject_remakrs" id="reject_remakrs" cols="20" rows="5" class="form-control" placeholder="enter resaon" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" onclick="QaStatusReject()">update</button>
+                    </div>
+                </form>
+    
+            </div>
+        </div>
+    </div>
+
+    
+
 @endsection
 
 @section('script')
+{{-- <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script> --}}
     @include('partials.map-js')
 
 
@@ -340,6 +386,158 @@
 
 
     <script>
+
+        $(function(){
+            $('#rejectReasonModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+
+                $('#reject-foam').attr('action', `/{{app()->getLocale()}}/tiang-talian-vt-and-vr-update-QA-Status`)
+                $('#reject-id').val(id);
+            });
+        })
+
+               // ADD DRAW TOOLS
+
+               var drawnItems = new L.FeatureGroup();
+                map.addLayer(drawnItems);
+                var drawControl = new L.Control.Draw({
+                    draw: {
+                        circle    : false,
+                        marker    : false,
+                        polygon   : true,
+                        polyline  : false,
+                        rectangle : false,
+                        circlemarker : false,
+                    },
+                    edit: {
+                        featureGroup: drawnItems,
+                        edit: false,  // Disable editing mode
+                        remove: false // Disable deletion mode
+                    }
+                });
+
+                map.addControl(drawControl);
+
+        var newLayer = '';
+                // DRAW TOOL ON CREATED EVENT
+        map.on('draw:created', function(e) 
+        {
+            var type = e.layerType;
+            newLayer = e.layer;
+            // drawnItems.addLayer(newLayer);
+            var data = newLayer.toGeoJSON();
+            var jsonData = JSON.stringify(data.geometry);
+
+
+            $.ajax({
+                    url: `/{{ app()->getLocale() }}/search/tiang-by-polygon?json=${jsonData}`,
+                    dataType: 'JSON',
+                    //data: data,
+                    method: 'GET',
+                    async: false,
+                    success: function callback(response) {
+
+                        if (response.status == 200) {
+                            $("#polygone-tiang-data-body").html('');
+                            var data = response.data;
+
+                            for (let index = 0; index < data.length; index++) {
+                                const element = data[index];
+                                let status = '';
+
+                                if (element.qa_status == 'Accept') {
+                                   status=  `<span class="badge bg-success">Accept</span>`;
+
+                                }else if (element.qa_status == 'Reject') {
+                                    status = `<span class="badge bg-danger">${element.reject_remarks}</span>`;
+                                }else{
+                                    status = `<div class="d-flex text-center" id="status-${element.id}">
+                                                <button class="btn btn-success btn-sm" type="button" onclick="QaStatusAccept(${element.id})">Accept</button>
+                                                    /
+                                                <a type="button" class="btn btn-danger  btn-sm" data-id="${element.id}" data-toggle="modal" data-target="#rejectReasonModal">
+                                                    Reject
+                                                </a>
+                                            </div>`;
+                                }
+
+                                let str = `
+                                            <tr>
+                                                <td>${element.id}</td>
+                                                <td>${element.tiang_no}</td>
+                                                <td>${element.fp_name}</td>    
+                                                <td>${element.review_date}</td>    
+                                                <td>${element.total_defects}</td>    
+                                                <td>${status}</td>    
+                                            </tr>
+                                `;
+                                $('#polygone-tiang-data-body').append(str);
+                            }
+                            $('#myLargeModalLabel').modal('show');
+                        }else{
+                            alert('Request Failed');
+                        }
+                        console.log(response);
+                    }
+                })
+
+        })
+
+
+        function QaStatusAccept(paramId )
+        {
+
+            $.ajax(
+                {
+                    url: `/{{ app()->getLocale() }}/tiang-talian-vt-and-vr-update-QA-Status?status=Accept&&id=${paramId}`,
+                    dataType: 'JSON',
+                    //data: data,
+                    method: 'GET',
+                    async: false,
+                    success: function callback(response) {
+                        console.log(response);
+                        if (response.status == 200) {
+                            $('#status-'+paramId).html('<span class="badge bg-success">Accept</span>');
+                        }else{
+                            alert('Request Failed')
+                        }
+
+                    }
+                }
+                )
+        }
+        
+
+        function QaStatusReject( )
+        {
+            let id = $('#reject-id').val()
+            let remarks = $('#reject_remakrs').val()
+
+            $.ajax(
+                {
+                    url: `/{{ app()->getLocale() }}/tiang-talian-vt-and-vr-update-QA-Status?status=Reject&id=${id}&reject_remakrs?${remarks}`,
+                    dataType: 'JSON',
+                    //data: data,
+                    method: 'GET',
+                    async: false,
+                    success: function callback(response) {
+                        console.log(response);
+                        if (response.status == 200) {
+                            $('#status-'+id).html(`<span class="badge bg-danger">${remarks}</span>`);
+                        }else{
+                            alert('Request Failed')
+                        }
+                        $('#rejectReasonModal').modal('hide');
+
+                           $('#reject-id').val('')
+                          $('#reject_remakrs').val('')
+                    }
+                }
+                )
+        }
+        
+
+
         // for add and remove layers
         function addRemoveBundary(param, paramY, paramX) {
 
@@ -568,15 +766,15 @@
 
             $('#exampleModalLabel').html("Road Info")
             str = ` <tr>
-        <tr><th>Road Name</th><td>${data.road_name}</td> </tr>
-        <tr><th>KM</th><td>${data.km}</td> </tr>
+                <tr><th>Road Name</th><td>${data.road_name}</td> </tr>
+                <tr><th>KM</th><td>${data.km}</td> </tr>
 
-        <tr><th>Totoal Digging</th><td>${data.total_digging}</td> </tr>
-        <tr><th>Total Notice</th><td>${data.total_notice}</td> </tr>
-        <th>Total Supervision</th><td>${data.total_supervision}</td> </tr>
+                <tr><th>Totoal Digging</th><td>${data.total_digging}</td> </tr>
+                <tr><th>Total Notice</th><td>${data.total_notice}</td> </tr>
+                <th>Total Supervision</th><td>${data.total_supervision}</td> </tr>
 
-        <tr><th>Detail</th><td class="text-center"><a href="/{{ app()->getLocale() }}/patrolling-detail/${gid[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
-            </td> </tr>
+                <tr><th>Detail</th><td class="text-center"><a href="/{{ app()->getLocale() }}/patrolling-detail/${gid[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
+                    </td> </tr>
 
         `;
             $("#my_data").html(str);

@@ -46,6 +46,7 @@ use App\Http\Controllers\web\Patrolling\PatrollingExcelController;
 use App\Http\Controllers\web\SAVT\SAVTController;
 use App\Http\Controllers\web\Tiang\TiangDocumentsRedirectController;
 use App\Http\Controllers\web\Tiang\TiangSBUMReportController;
+use App\Http\Controllers\web\Tiang\TiangSearchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -122,6 +123,8 @@ Route::group(
                 Route::get('/generate-tiang-talian-vt-and-vr-lks-by-visit-date', [TiangLKSController::class, 'generateByVisitDate'])->name('generate-tiang-talian-vt-and-vr-lks-by-visit-date');
                 Route::post('/tiang-test',[TiangDocumentsRedirectController::class,'redirectFunction'])->name('tiang-test');
                 Route::post('/tiang-talian-vt-and-vr-SBUM-report',[TiangSBUMReportController::class,'generateSBUMReport'])->name('tiang-talian-vt-and-vr-SBUM-report');
+                Route::get('/search/tiang-by-polygon',[TiangSearchController::class,'getTiangByPolygon'])->name('search-tiang-by-polygon');
+
 
 
 
