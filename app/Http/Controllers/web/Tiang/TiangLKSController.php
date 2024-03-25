@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\web\Tiang;
 
+use App\Constants\TiangConstants;
 use App\Http\Controllers\Controller;
 use App\Models\Tiang;
 use Illuminate\Http\Request;
@@ -135,67 +136,26 @@ class TiangLKSController extends Controller
 
             $fpdf->Ln();
             $fpdf->Ln();
+            $images = TiangConstants::TIANG_IMAGES;
 
-            // $imagePath = public_path('assets/web-images/main-logo.png');
-            // $fpdf->Image($imagePath, 190, 20, 57, 0);
+            $imagePath = public_path('assets/web-images/main-logo.png');
+            $fpdf->Image($imagePath, 190, 20, 57, 0);
             $fpdf->SetFont('Arial', 'B', 9);
 
 
         $sr_no =0;
         foreach ($data as $row) {
 
+            if ($sr_no > 0) {
+                $fpdf->AddPage('L', 'A4');
+            }
             $sr_no++;
             $fpdf->Cell(100, 6, 'SR # : '.$sr_no ,0);
-
-            // add substation image 1 and substation image 2
-            $fpdf->Cell(38, 6, 'Tiang Gambar 1' ,0);
-            $fpdf->Cell(38, 6, 'Tiang Gambar 2' ,0);
-            $fpdf->Cell(38, 6, 'Tiang Gambar 3' ,0);
-            $fpdf->Cell(38, 6, 'Tiang Gambar 4' ,0);
-            $fpdf->Cell(38, 6, 'Tiang Gambar 5' ,0);
-
             $fpdf->Ln();
 
-
-
             $fpdf->Cell(100, 6, 'ID : SAVR-'.$row->id );
-
-            if ($row->pole_image_1 != '' && file_exists(public_path($row->pole_image_1)))
-            {
-
-                $fpdf->Image(public_path($row->pole_image_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
-            }
-            $fpdf->Cell(38,6);
-            // $fpdf->Ln();
-
-
-            if ($row->pole_image_2 != '' && file_exists(public_path($row->pole_image_2)))
-            {
-                $fpdf->Image(public_path($row->pole_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
-            }
-            $fpdf->Cell(38,6);
-
-
-            if ($row->pole_image_3 != '' && file_exists(public_path($row->pole_image_3)))
-            {
-
-                $fpdf->Image(public_path($row->pole_image_3), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
-            }
-            $fpdf->Cell(38,6);
-
-            if ($row->pole_image_4 != '' && file_exists(public_path($row->pole_image_4)))
-            {
-
-                $fpdf->Image(public_path($row->pole_image_4), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
-            }
-            $fpdf->Cell(38,6);
-
-            if ($row->pole_image_5 != '' && file_exists(public_path($row->pole_image_5)))
-            {
-
-                $fpdf->Image(public_path($row->pole_image_5), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
-            }
-      
+            
+            
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Tarikh Lawatan : '.$row->review_date);          //VISIT  DATE
             $fpdf->Ln();
@@ -542,34 +502,83 @@ class TiangLKSController extends Controller
 
 
 
+ 
+
+
+           $fpdf->SetFont('Arial', 'B', 8);
            $fpdf->SetFillColor(169, 169, 169);
 
+           $fpdf->Cell(35, 6, 'Tiang Gambar 1' ,1,0,'C',true);
+           $fpdf->Cell(35, 6, 'Tiang Gambar 2' ,1,0,'C',true);
+           $fpdf->Cell(35, 6, 'Tiang Gambar 3' ,1,0,'C',true);
+           $fpdf->Cell(35, 6, 'Tiang Gambar 4' ,1,0,'C',true);
+           $fpdf->Cell(35, 6, 'Tiang Gambar 5' ,1,0,'C',true);
+           $fpdf->Cell(35, 6, 'Current Leakage Gambar' ,1,0,'C',true);
+           $fpdf->Cell(35, 6, 'Remove Creepers Gambar' ,1,0,'C',true);
+           $fpdf->Cell(35, 6, 'Clean Banner Gambar' ,1,0,'C',true);
 
 
+           $fpdf->Ln();
 
-            $len = 0 ;
-         
-                for ($j = 0 ; $j < 5 ; $j++) // run loop for defects
+
+           foreach($images as $img){
+
+                $fpdf->Cell(1,6);
+
+                if ($row->{$img} != '' && file_exists(public_path($row->{$img})))
                 {
 
-                    $img = 'pole_image_'.$j+1;      
-
-                    if ($img && file_exists(public_path($img))) // check image path is not empty and image exists
-                    {
-                        $fpdf->Image(public_path($imagePath), $fpdf->GetX()+2, $fpdf->GetY()+8, 30, 30); //add image
-                        $fpdf->Cell(35, 7, 'Pole Image ' .$j+1, 1);
-                        $len = $len + 35;
-                    }
-
+                $fpdf->Image(public_path($row->{$img}), $fpdf->GetX(), $fpdf->GetY(), 33, 33);
                 }
+                $fpdf->Cell(28,6);
+
+           }
+          
+
+        //    if ($row->pole_image_1 != '' && file_exists(public_path($row->pole_image_1)))
+        //    {
+
+        //        $fpdf->Image(public_path($row->pole_image_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+        //    }
+        //    $fpdf->Cell(38,6);
+        //    // $fpdf->Ln();
+
+
+        //    if ($row->pole_image_2 != '' && file_exists(public_path($row->pole_image_2)))
+        //    {
+        //        $fpdf->Image(public_path($row->pole_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+        //    }
+        //    $fpdf->Cell(38,6);
+
+
+        //    if ($row->pole_image_3 != '' && file_exists(public_path($row->pole_image_3)))
+        //    {
+
+        //        $fpdf->Image(public_path($row->pole_image_3), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+        //    }
+        //    $fpdf->Cell(38,6);
+
+        //    if ($row->pole_image_4 != '' && file_exists(public_path($row->pole_image_4)))
+        //    {
+
+        //        $fpdf->Image(public_path($row->pole_image_4), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+        //    }
+        //    $fpdf->Cell(38,6);
+
+        //    if ($row->pole_image_5 != '' && file_exists(public_path($row->pole_image_5)))
+        //    {
+
+        //        $fpdf->Image(public_path($row->pole_image_5), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+        //    }
+     
 
           
 
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
+            // $fpdf->Ln();
+            // $fpdf->Ln();
+            // $fpdf->Ln();
+            // $fpdf->Ln();
+            // $fpdf->Ln();
 
 
         }
@@ -577,8 +586,8 @@ class TiangLKSController extends Controller
         $pdfFileName = $req->ba.' - Tiang - '.$req->visit_date.'.pdf';
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-        $folderPath = 'temp/'.$req->folder_name .'/'. $pdfFileName;
-        $pdfFilePath = public_path( $folderPath);
+        $folderPath = $req->folder_name .'/'. $pdfFileName;
+        $pdfFilePath =  $folderPath;
         $fpdf->output('F', $pdfFilePath);
 
         return response()->json(['pdfPath' => $pdfFileName]);
@@ -630,8 +639,11 @@ class TiangLKSController extends Controller
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
             $userID = Auth::user()->id;
-            $folderName = 'temporary-tiang-folder-'.$userID;
-            $folderPath = public_path('temp/'.$folderName);
+            // $folderName = 'temporary-tiang-folder-'.$userID;
+            // $folderPath = public_path('temp/'.$folderName);
+            $folderName = 'D:/temp/temporary-tiang-folder-'.$userID;
+            //$folderPath = public_path('temp/'.$folderName);
+            $folderPath= $folderName;
 
             if (!File::exists($folderPath)) {
                 File::makeDirectory($folderPath, 0777, true, true);

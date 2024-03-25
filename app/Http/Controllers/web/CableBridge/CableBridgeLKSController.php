@@ -54,26 +54,29 @@ class CableBridgeLKSController extends Controller
 
         $sr_no = 0;
         foreach ($data as $row) {
+            if ($sr_no > 0) {
+                $fpdf->AddPage('L', 'A4');
+            }
             $sr_no++;
-            $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
+            $fpdf->Cell(100, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(40, 6, 'CABLE BRIDGE Gambar 1' ,0);
-            $fpdf->Cell(40, 6, 'CABLE BRIDGE Gambar 2' ,0);
+            $fpdf->Cell(80, 6, 'CABLE BRIDGE Gambar 1' ,0);
+            $fpdf->Cell(80, 6, 'CABLE BRIDGE Gambar 2' ,0);
             $fpdf->Ln();
 
-            $fpdf->Cell(165, 6, 'ID : CB-' . $row->id); 
+            $fpdf->Cell(105, 6, 'ID : CB-' . $row->id); 
             if ($row->cable_bridge_image_1 != '' && file_exists(public_path($row->cable_bridge_image_1))) 
             {
-                $fpdf->Image(public_path($row->cable_bridge_image_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image(public_path($row->cable_bridge_image_1), $fpdf->GetX(), $fpdf->GetY(), 70, 70);
             } 
-            $fpdf->Cell(45,6);
+            $fpdf->Cell(80,6);
             // $fpdf->Ln();
 
 
             if ($row->cable_bridge_image_2 != '' && file_exists(public_path($row->cable_bridge_image_2))) 
             {
-                $fpdf->Image(public_path($row->cable_bridge_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image(public_path($row->cable_bridge_image_2), $fpdf->GetX(), $fpdf->GetY(), 70, 70);
             } 
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Tarikh Lawatan : ' . $row->visit_date);                         //VISIT  DATE
@@ -86,6 +89,16 @@ class CableBridgeLKSController extends Controller
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Bil Janggal : ' . $row->total_defects);                         //TOTAL DEFECTS
             $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+        
 
             $fpdf->SetFont('Arial', 'B', 8);
 
@@ -192,8 +205,8 @@ class CableBridgeLKSController extends Controller
         $pdfFileName = $req->ba.' - Cable-Bridge - '.$req->visit_date.'.pdf'; 
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-        $folderPath = 'temp/'.$req->folder_name .'/'. $pdfFileName;
-        $pdfFilePath = public_path( $folderPath);  
+        $folderPath = $req->folder_name .'/'. $pdfFileName;
+        $pdfFilePath = $folderPath;  
         $fpdf->output('F', $pdfFilePath);
  
 
@@ -250,8 +263,10 @@ class CableBridgeLKSController extends Controller
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
             $userID = Auth::user()->id;
-            $folderName = 'temporary-substation-folder-'.$userID;
-            $folderPath = public_path('temp/'.$folderName);
+            $folderName = 'D:/temp/temporary-cable-bridge-folder-'.$userID;
+            $folderPath = $folderName;
+            // $folderName = 'temporary-substation-folder-'.$userID;
+            // $folderPath = public_path('temp/'.$folderName);
 
             if (!File::exists($folderPath)) {
                 File::makeDirectory($folderPath, 0777, true, true);

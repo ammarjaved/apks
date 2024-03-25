@@ -60,27 +60,27 @@ class LinkBoxLKSController extends Controller
         foreach ($data as $row) {  
     
             $sr_no++;
-            $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
+            $fpdf->Cell(100, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(40, 6, 'LINK BOX Gambar 1' ,0);
-            $fpdf->Cell(40, 6, 'LINK BOX Gambar 2' ,0);
+            $fpdf->Cell(80, 6, 'LINK BOX Gambar 1' ,0);
+            $fpdf->Cell(80, 6, 'LINK BOX Gambar 2' ,0);
             $fpdf->Ln();
 
      
-            $fpdf->Cell(160, 6, 'ID : LB-'.$row->id );
+            $fpdf->Cell(105, 6, 'ID : LB-'.$row->id );
 
            
             if ($row->link_box_image_1 != '' && file_exists(public_path($row->link_box_image_1))) 
             {
-                $fpdf->Image(public_path($row->link_box_image_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image(public_path($row->link_box_image_1), $fpdf->GetX(), $fpdf->GetY(), 70, 70);
             } 
-            $fpdf->Cell(45,6);
+            $fpdf->Cell(80,6);
 
 
             if ($row->link_box_image_2 != '' && file_exists(public_path($row->link_box_image_2))) 
             {
-                $fpdf->Image(public_path($row->link_box_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image(public_path($row->link_box_image_2), $fpdf->GetX(), $fpdf->GetY(), 70, 70);
             } 
             $fpdf->Ln();
            
@@ -95,7 +95,15 @@ class LinkBoxLKSController extends Controller
             $fpdf->Cell(60, 6, 'Bil Janggal : ' .$row->total_defects);  //TOTAL DEFECTS
             $fpdf->Ln();
     
-           
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+    
     
             $fpdf->SetFont('Arial', 'B', 8);
             $fpdf->SetFillColor(169, 169, 169);
@@ -260,8 +268,8 @@ class LinkBoxLKSController extends Controller
         $pdfFileName = $req->ba.' - Link-Box - '.$req->visit_date.'.pdf'; 
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-        $folderPath = 'temp/'.$req->folder_name .'/'. $pdfFileName;
-        $pdfFilePath = public_path( $folderPath); 
+        $folderPath = $req->folder_name .'/'. $pdfFileName;
+        $pdfFilePath =$folderPath; 
         $fpdf->output('F', $pdfFilePath);
  
         $response = [
@@ -318,8 +326,10 @@ class LinkBoxLKSController extends Controller
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
             $userID = Auth::user()->id;
-            $folderName = 'temporary-link-boc-folder-'.$userID;
-            $folderPath = public_path('temp/'.$folderName);
+            $folderName = 'D:/temp/temporary-link-box-folder-'.$userID;
+            $folderPath = $folderName;
+            // $folderName = 'temporary-link-boc-folder-'.$userID;
+            // $folderPath = public_path('temp/'.$folderName);
 
             if (!File::exists($folderPath)) {
                 File::makeDirectory($folderPath, 0777, true, true);
