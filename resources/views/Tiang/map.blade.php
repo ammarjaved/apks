@@ -401,7 +401,7 @@
                // ADD DRAW TOOLS
 
                var drawnItems = new L.FeatureGroup();
-                // map.addLayer(drawnItems);
+                map.addLayer(drawnItems);
                 var drawControl = new L.Control.Draw({
                     draw: {
                         circle    : false,
@@ -418,7 +418,7 @@
                     }
                 });
 
-                // map.addControl(drawControl);
+                map.addControl(drawControl);
 
         var newLayer = '';
                 // DRAW TOOL ON CREATED EVENT
