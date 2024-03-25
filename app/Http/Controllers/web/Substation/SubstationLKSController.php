@@ -21,7 +21,7 @@ class SubstationLKSController extends Controller
 
     public function index(){
         $button =[];
-        $button=[ 
+        $button=[
             ['url'=>'generate-substation-lks' , 'name'=>'Generate LKS'],
         ];
         return view('lks.generate-lks',['title'=>'substation' ,'buttons'=>$button]);
@@ -97,36 +97,49 @@ class SubstationLKSController extends Controller
         foreach ($data as $row)
         {
 
-            if ($sr_no % 2 == 0 && $sr_no > 0) {
+            if ($sr_no > 0) {
                 $fpdf->AddPage('L', 'A4');
             }
             $sr_no++;
-            $fpdf->Cell(160, 6, 'SR # : '.$sr_no ,0);
+            $fpdf->Cell(80, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(40, 6, 'Pencawang Gambar 1' ,0);
-            $fpdf->Cell(40, 6, 'Pencawang Gambar 2' ,0);
+            $fpdf->Cell(100, 6, 'Pencawang Gambar 1' ,0);
+            $fpdf->Cell(100, 6, 'Pencawang Gambar 2' ,0);
             $fpdf->Ln();
 
 
 
 
-            $fpdf->Cell(165, 6, 'Nama : '.$row->name,0);
+            $fpdf->Cell(80, 6, 'Nama : '.$row->name,0);
             if ($row->substation_image_1 != '' && file_exists(public_path($row->substation_image_1)))
             {
-                $fpdf->Image(public_path($row->substation_image_1), $fpdf->GetX(), $fpdf->GetY(), 20, 25);
+                $fpdf->Image(public_path($row->substation_image_1), $fpdf->GetX(), $fpdf->GetY(), 80, 85);
             }
-            $fpdf->Cell(40,6);
+            $fpdf->Cell(100,6);
             // $fpdf->Ln();
 
 
             if ($row->substation_image_2 != '' && file_exists(public_path($row->substation_image_2)))
             {
-                $fpdf->Image(public_path($row->substation_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image(public_path($row->substation_image_2), $fpdf->GetX(), $fpdf->GetY(), 80, 85);
             }
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'Tarikh Lawatan : '.$row->visit_date,0,1);          //VISIT  DATE
-            $fpdf->Cell(60, 6, 'Bil Janggal : ' .$row->total_defects,0,1);         // total defects
+            $fpdf->Cell(80, 6, 'Tarikh Lawatan : '.$row->visit_date,0,1);          //VISIT  DATE
+            $fpdf->Cell(80, 6, 'Bil Janggal : ' .$row->total_defects,0,1);         // total defects
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+            $fpdf->Ln();
+
 
 
 
@@ -139,7 +152,7 @@ class SubstationLKSController extends Controller
             $fpdf->Cell(70,7,'Compound PE',1,0,'C',true);     // tree
             $fpdf->Cell(75,7,'Bangunan Rosak',1,0,'C',true); //BUILDING BROKEN
             $fpdf->Cell(30,7,'Iklan Haram ','LTR', 0,'C',true);    // POSTER
-            $fpdf->Cell(50,7,'Pembersihan iklan Haram/Banner','LTR', 0,'C',true); //GRASS
+          //  $fpdf->Cell(50,7,'Pembersihan iklan Haram/Banner','LTR', 0,'C',true); //GRASS
 
 
             $fpdf->Ln();
@@ -158,7 +171,7 @@ class SubstationLKSController extends Controller
 
             $fpdf->Cell(30, 7, '/ Banner', 'RBL', 0,'C',true); //advertisement
 
-            $fpdf->Cell(50, 7, '& Menutup Pintu Pencawang atau','RL', 0,'C',true); //GRASS
+           // $fpdf->Cell(50, 7, '& Menutup Pintu Pencawang atau','RL', 0,'C',true); //GRASS
 
 
             $fpdf->SetFillColor(255, 255, 255);
@@ -179,7 +192,7 @@ class SubstationLKSController extends Controller
 
 
             $fpdf->SetFillColor(169, 169, 169);
-            $fpdf->Cell(50,7,' Pintu Pagar','RBL', 0,'C',true); //GRASS
+            //$fpdf->Cell(50,7,' Pintu Pagar','RBL', 0,'C',true); //GRASS
 
             $fpdf->Ln();
 
@@ -240,18 +253,18 @@ class SubstationLKSController extends Controller
 
 
 
-            if ($row->images_gate_after_lock != '' && file_exists(public_path($row->images_gate_after_lock)))
-            {
-                $fpdf->Image(public_path($row->images_gate_after_lock), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
-            }
-            $fpdf->Cell(25, 25);
+            // if ($row->images_gate_after_lock != '' && file_exists(public_path($row->images_gate_after_lock)))
+            // {
+            //     $fpdf->Image(public_path($row->images_gate_after_lock), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            // }
+            // $fpdf->Cell(25, 25);
 
 
-            if ($row->image_advertisement_after_1 != '' && file_exists(public_path($row->image_advertisement_after_1)))
-            {
-                $fpdf->Image(public_path($row->image_advertisement_after_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
-            }
-            $fpdf->Cell(25, 25);
+            // if ($row->image_advertisement_after_1 != '' && file_exists(public_path($row->image_advertisement_after_1)))
+            // {
+            //     $fpdf->Image(public_path($row->image_advertisement_after_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            // }
+             $fpdf->Cell(25, 25);
 
 
 
@@ -265,8 +278,8 @@ class SubstationLKSController extends Controller
 
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
-        $folderPath = 'temp/'.$req->folder_name .'/'. $pdfFileName;
-        $pdfFilePath = public_path( $folderPath);
+        $pdfFilePath = $req->folder_name .'/'. $pdfFileName;
+        //$pdfFilePath = public_path( $folderPath);
         if (file_exists($pdfFilePath)) {
             File::delete($pdfFilePath);
         }
@@ -335,8 +348,9 @@ class SubstationLKSController extends Controller
             header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
 
             $userID = Auth::user()->id;
-            $folderName = 'temporary-substation-folder-'.$userID;
-            $folderPath = public_path('temp/'.$folderName);
+            $folderName = 'D:/temp/temporary-substation-folder-'.$userID;
+            //$folderPath = public_path('temp/'.$folderName);
+            $folderPath= $folderName;
 
             if (!File::exists($folderPath)) {
                 File::makeDirectory($folderPath, 0777, true, true);
