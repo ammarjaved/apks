@@ -619,8 +619,25 @@
                 buffer: 10
             })
 
+
+
             // map.addLayer(ts_unsurveyed)
             // ts_unsurveyed.bringToFront()
+
+
+            if (feeder_pillar != '') {
+                map.removeLayer(feeder_pillar)
+            }
+
+            feeder_pillar = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:tiang_feeder_pillar',
+                format: 'image/png',
+                cql_filter: "ba ILIKE '%" + param + "%'",
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
 
 
             if (ts_with_defects != '') {
@@ -741,6 +758,7 @@
                 "POI": {
                     'BA': boundary,
                     'Substation': substation,
+                    'Feeder Pillar': feeder_pillar,
                     'Pano': pano_layer,
                     'Unsurveyed' : ts_unsurveyed,
                     'Surveyed with defects' : ts_with_defects,
