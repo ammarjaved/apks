@@ -305,6 +305,58 @@
         </div>
     </div>
 
+
+    <div class="modal fade" id="rejectReasonModalShow">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+    
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6 class="modal-title">Reject Reason</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                
+    
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="reject-id">
+                        <input type="hidden" name="status" id="qa_status" value="Reject">
+                        <label for="reject">Reject Remarks : </label>
+                        <textarea name="reject_remakrs" id="reject_remakrs_show" disabled readonly cols="20" rows="5" class="form-control" placeholder="enter resaon" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        
+                    </div>
+              
+    
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="tiangDetailModal">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+    
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6 class="modal-title">Detail</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                 
+    
+                <div class="modal-body" id="tiangDetailModalBody" style="max-height : 700px ; overflow-y: scroll">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {{-- <button type="button" class="btn btn-danger" onclick="QaStatusReject()">update</button> --}}
+                </div>
+                 
+    
+            </div>
+        </div>
+    </div>
     
 
 @endsection
@@ -389,13 +441,19 @@
     <script>
 
         $(function(){
-            $('#rejectReasonModal').on('show.bs.modal', function(event) {
-                var button = $(event.relatedTarget);
-                var id = button.data('id');
-
-                $('#reject-foam').attr('action', `/{{app()->getLocale()}}/tiang-talian-vt-and-vr-update-QA-Status`)
-                $('#reject-id').val(id);
+            $('#tiangDetailModal').on('hide.bs.modal', function(event) 
+            {
+                getTiangByPolyGone()
+                $('#tiangDetailModalBody').html('');
             });
+
+            $('#rejectReasonModalShow').on('show.bs.modal', function(event) 
+            {
+                var button = $(event.relatedTarget);
+                var remarks = button.data('reject_remarks');
+                $('#reject_remakrs_show').val(remarks);
+            });
+             
         })
 
                // ADD DRAW TOOLS
@@ -421,6 +479,7 @@
                 map.addControl(drawControl);
 
         var newLayer = '';
+        var jsonData = '';
                 // DRAW TOOL ON CREATED EVENT
         map.on('draw:created', function(e) 
         {
@@ -428,10 +487,17 @@
             newLayer = e.layer;
             // drawnItems.addLayer(newLayer);
             var data = newLayer.toGeoJSON();
-            var jsonData = JSON.stringify(data.geometry);
+            jsonData = JSON.stringify(data.geometry);
+
+            getTiangByPolyGone()
+            
+        })
 
 
-            $.ajax({
+        function getTiangByPolyGone()
+        {
+            $.ajax(
+                {
                     url: `/{{ app()->getLocale() }}/search/tiang-by-polygon?json=${jsonData}`,
                     dataType: 'JSON',
                     //data: data,
@@ -451,7 +517,9 @@
                                    status=  `<span class="badge bg-success">Accept</span>`;
 
                                 }else if (element.qa_status == 'Reject') {
-                                    status = `<span class="badge bg-danger">${element.reject_remarks}</span>`;
+                                    status = ` <a type="button" class=" " data-reject_remarks="${element.reject_remarks}" data-toggle="modal" data-target="#rejectReasonModalShow">
+                                                    <span class="badge bg-danger">${element.reject_remarks.substring(0, 8)}...</span>
+                                                </a>`;
                                 }else{
                                     status = `<div class="d-flex text-center" id="status-${element.id}">
                                                 <button class="btn btn-success btn-sm" type="button" onclick="QaStatusAccept(${element.id})">Accept</button>
@@ -470,6 +538,7 @@
                                                 <td>${element.review_date}</td>    
                                                 <td>${element.total_defects}</td>    
                                                 <td>${status}</td>    
+                                                <td><button type="button" class="btn btn-sm btn-secondary" onclick="getTiangDetail(${element.id})">Detail</button></td>
                                             </tr>
                                 `;
                                 $('#polygone-tiang-data-body').append(str);
@@ -482,7 +551,18 @@
                     }
                 })
 
-        })
+        }
+
+
+        function getTiangDetail(paramId){
+            $('#tiangDetailModalBody').html('');
+
+            $('#tiangDetailModalBody').html(
+                `<iframe src="/{{ app()->getLocale() }}/get-tiang-edit/${paramId}" frameborder="0" style="height:500px; width:100%"></iframe>`
+                )
+                $('#tiangDetailModal').modal('show');
+
+        }
 
 
         function QaStatusAccept(paramId )
@@ -524,7 +604,7 @@
                     success: function callback(response) {
                         console.log(response);
                         if (response.status == 200) {
-                            $('#status-'+id).html(`<span class="badge bg-danger">${remarks}</span>`);
+                            getTiangByPolyGone()
                         }else{
                             alert('Request Failed')
                         }
@@ -726,18 +806,18 @@
 
 
             if(work_package){
-        map.removeLayer(work_package);
-        }
+            map.removeLayer(work_package);
+            }
 
-        work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-                layers: 'cite:tbl_workpackage',
-                format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
-                maxZoom: 21,
-                transparent: true
-            }, {
-                buffer: 10
-            })
+            work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:tbl_workpackage',
+                    format: 'image/png',
+                    cql_filter: "ba ILIKE '%" + param + "%'",
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
             // map.addLayer(work_package)
             // work_package.bringToFront()
 
@@ -795,7 +875,7 @@
                 <tr><th>Detail</th><td class="text-center"><a href="/{{ app()->getLocale() }}/patrolling-detail/${gid[1]}" target="_blank" class="btn btn-sm btn-secondary">Detail</a>
                     </td> </tr>
 
-        `;
+            `;
             $("#my_data").html(str);
             $('#myModal').modal('show');
         }

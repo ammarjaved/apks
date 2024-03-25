@@ -14,8 +14,8 @@ class TiangSearchController extends Controller
     {
         
         try {
-            $data = Tiang::whereRaw("ST_Intersects(geom, ST_GeomFromGeoJSON('$request->json'))")->select('id', 'fp_name', 'tiang_no', 'review_date','total_defects' , 'qa_status' )
-            ->whereNotNull('review_date')->get();
+            $data = Tiang::whereRaw("ST_Intersects(geom, ST_GeomFromGeoJSON('$request->json'))")->select('id', 'fp_name', 'tiang_no', 'review_date','total_defects' , 'qa_status' ,'reject_remarks' )
+            ->whereNotNull('review_date')->orderBy('id')->get();
         } catch (\Throwable $th) {
             return response()->json(['data'=>'' ,'status'=> 400]);   
         }
