@@ -37,6 +37,17 @@ class TiangMapController extends Controller
             if ($recored) {
                 $user = Auth::user()->name;
                 $recored->updated_by = $user;
+                // return $request->qa_status;
+                if ($recored->qa_status != $request->qa_status) {
+                    $recored->qa_status = $request->qa_status;
+                    $recored->qc_by = $user;          
+                }
+                if ($request->qa_status == 'Reject') {
+                    $recored->reject_remarks = $request->reject_remakrs;
+                } else{
+                    $recored->reject_remarks = '';
+
+                }
                 $data = $this->tiangRepository->prepareData($recored , $request);
                 $data->update();
                 
@@ -48,7 +59,7 @@ class TiangMapController extends Controller
             }
 
         } catch (\Throwable $th) {
-            // return $th->getMessage();
+            return $th->getMessage();
             Session::flash('failed', 'Request Failed');
             
         }
@@ -72,10 +83,18 @@ class TiangMapController extends Controller
         return response()->json($data, 200);
     }
 
-    public function seacrhCoordinated($lang , $name)
+    public function seacrhCoordinated($lang , $name, $searchBy)
     {
+        // return $searchBy;
         $name = urldecode($name);
-        $data = Tiang::where('tiang_no' ,$name )->orwhere('id' ,$name )->select('tiang_no', \DB::raw('ST_X(geom) as x'),\DB::raw('ST_Y(geom) as y'),)->first();
+        $data = Tiang::query();
+        if ($searchBy == 'tiang_no') {
+          $data =  $data->where('tiang_no' ,$name );
+        }
+        if ($searchBy == 'tiang_id') {
+            $data = $data->where('id' ,$name );
+        }
+        $data =$data->select( \DB::raw('ST_X(geom) as x'),\DB::raw('ST_Y(geom) as y'))->first();
 
         return response()->json($data, 200);
     }

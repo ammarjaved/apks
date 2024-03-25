@@ -357,13 +357,14 @@
 
         $('.typeahead').on('typeahead:select', function(event, suggestion) {
             var name = encodeURIComponent(suggestion);
+            var searchBy= $('input[name="search-by"]:checked').val();
+
 
             if (marker != '') {
                 map.removeLayer(marker)
             }
             $.ajax({
-                url: '/{{ app()->getLocale() }}/search/find-tiang-cordinated/' + encodeURIComponent(
-                    name),
+                url: '/{{ app()->getLocale() }}/search/find-tiang-cordinated/' + encodeURIComponent(name)+'/'+searchBy,
                 dataType: 'JSON',
                 //data: data,
                 method: 'GET',
@@ -400,7 +401,7 @@
                // ADD DRAW TOOLS
 
                var drawnItems = new L.FeatureGroup();
-                map.addLayer(drawnItems);
+                // map.addLayer(drawnItems);
                 var drawControl = new L.Control.Draw({
                     draw: {
                         circle    : false,
@@ -417,7 +418,7 @@
                     }
                 });
 
-                map.addControl(drawControl);
+                // map.addControl(drawControl);
 
         var newLayer = '';
                 // DRAW TOOL ON CREATED EVENT
