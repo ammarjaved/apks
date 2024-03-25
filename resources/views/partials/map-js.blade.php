@@ -40,6 +40,7 @@ var fp_without_defects ='';
 var fp_with_defects ='';
 var fp_reject ='';
 var fp_pending = '';
+var feeder_pillar = '';
 
 var ts_without_defects = '';
 var ts_unsurveyed ='';
