@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Svg\Tag\Rect;
-use ZipArchive; 
+use ZipArchive;
 
 class RemoveLKSController extends Controller
 {
@@ -14,26 +14,28 @@ class RemoveLKSController extends Controller
 
 
 
-    public function createZipAndDownload(Request $req) 
+    public function createZipAndDownload(Request $req)
     {
-        try 
-        {  
-            if (!empty($req->fileName)) 
+        try
+        {
+            if (!empty($req->fileName))
             {
-                
-                $paths = explode(',',$req->fileName);
-                
-                $zip = new ZipArchive;
-                $zipFileName = $req->ba.' - '. $req->name .' - ' .$req->from_date.'-'.$req->to_date.'.zip';
 
-                if ($zip->open(public_path($zipFileName), ZipArchive::CREATE) === TRUE) 
+                $paths = explode(',',$req->fileName);
+
+                $zip = new ZipArchive;
+                $zipFileName = 'D:/temp/'.$req->ba.' - '. $req->name .' - ' .$req->from_date.'-'.$req->to_date.'.zip';
+                //return $req->folder_name.'/ '.$zipFileName;
+
+                if ($zip->open($zipFileName, ZipArchive::CREATE) === TRUE)
                 {
-            
-                    $destination = public_path('temp/'.$req->folder_name);
-                    foreach ($paths as $file) 
+
+
+                    $destination =$req->folder_name;
+                    foreach ($paths as $file)
                     {
                         $filePath = $destination.'/'.$file;
-                        if (file_exists($filePath)) 
+                        if (file_exists($filePath))
                         {
                             $zip->addFile($filePath, basename($filePath));
                         }
@@ -43,25 +45,26 @@ class RemoveLKSController extends Controller
 
 
                         File::deleteDirectory($destination);
-                    
 
-                    return response()->download(public_path($zipFileName))->deleteFileAfterSend(true);
-                } 
+
+                    return response()->download($zipFileName)->deleteFileAfterSend(true);
+                }
             }
-            else 
+            else
             {
                 return "Failed to create the zip file.";
             }
         } catch (\Throwable $th) {
+            return $th->getMessage();
             return "try again...";
         }
     }
 
-    public function removeFiles(Request $req)  
+    public function removeFiles(Request $req)
     {
-        if ($req->has('fileName') && $req->fileName != '') 
+        if ($req->has('fileName') && $req->fileName != '')
         {
-            if (file_exists(public_path('/temp/'.$req->fileName))) 
+            if (file_exists(public_path('/temp/'.$req->fileName)))
             {
                 File::delete(public_path('/temp/'.$req->fileName));
                 return 'success';

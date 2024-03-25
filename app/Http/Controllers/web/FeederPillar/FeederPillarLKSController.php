@@ -22,7 +22,7 @@ class FeederPillarLKSController extends Controller
     public function index()
     {
         $button =[];
-        $button=[ 
+        $button=[
             ['url'=>'generate-feeder-pillar-lks' , 'name'=>'Generate LKS'],
             ['url'=>'generate-feeder-pillar-ops' , 'name'=>'Generate OPS'],
         ];
@@ -243,8 +243,8 @@ class FeederPillarLKSController extends Controller
         header('Content-Type: application/pdf');
         header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
 
-        $folderPath = 'temp/'.$req->folder_name .'/'. $pdfFileName;
-        $pdfFilePath = public_path( $folderPath);
+        $folderPath = $req->folder_name .'/'. $pdfFileName;
+        $pdfFilePath = $folderPath;
         if (file_exists($pdfFilePath)) {
             File::delete($pdfFilePath);
         }
@@ -308,8 +308,8 @@ class FeederPillarLKSController extends Controller
             header('Content-Type: application/pdf');
             header('Content-Disposition: attachment; filename="' . $pdfFileName . '"');
             $userID = Auth::user()->id;
-            $folderName = 'temporary-feeder-pillar-folder-'.$userID;
-            $folderPath = public_path('temp/'.$folderName);
+            $folderName = 'D:/temp/temporary-feeder-pillar-folder-'.$userID;
+            $folderPath = $folderName;
 
             if (!File::exists($folderPath)) {
                 File::makeDirectory($folderPath, 0777, true, true);
