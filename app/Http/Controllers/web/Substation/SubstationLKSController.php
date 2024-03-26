@@ -54,7 +54,7 @@ class SubstationLKSController extends Controller
         // $result = $this->filter($result , 'visit_date',$req)->where('qa_status','Accept');
         $data = $result->select('id','ba','updated_at', 'name', DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'Ya' ELSE 'Tidak' END as unlocked"), DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN (gate_status->>'other_value')::text ELSE '' END as gate_other_value") ,DB::raw("CASE WHEN (building_status->>'other')::text='true' THEN (building_status->>'other_value')::text ELSE '' END as building_status_other_value") , DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'Ya' ELSE 'Tidak' END as demaged"), DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as other_gate"), DB::raw("CASE WHEN (building_status->>'broken_roof')::text='true' THEN 'Ya' ELSE 'Tidak' END as broken_roof"), DB::raw("CASE WHEN (building_status->>'broken_gutter')::text='true' THEN 'Ya' ELSE 'Tidak' END as broken_gutter"), DB::raw("CASE WHEN (building_status->>'broken_base')::text='true' THEN 'Ya' ELSE 'Tidak' END as broken_base"), DB::raw("CASE WHEN (building_status->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as building_other"), 'grass_status',
         'tree_branches_status', 'advertise_poster_status', 'total_defects', 'visit_date', 'substation_image_1', 'substation_image_2', 'qa_status' ,'reject_remarks','image_building','image_building_2','image_advertisement_before_1','image_advertisement_before_2',
-        'images_gate_after_lock' , 'images_gate_after_lock_2','image_advertisement_after_1','image_gate','image_gate_2','other_image','image_grass' , 'image_grass_2','image_tree_branches','image_tree_branches_2')->get();
+        'images_gate_after_lock' , 'images_gate_after_lock_2','image_advertisement_after_1','image_gate','image_gate_2','other_image','image_grass' , 'image_grass_2','image_tree_branches','image_tree_branches_2'  , DB::raw('ST_X(geom) as X'), DB::raw('ST_Y(geom) as Y'))->get();
 
         // return view ('substation.lks-pdf-template',['datas'=>$data , 'ba'=>$req->ba, 'visit_date'=>$req->from_date]);
 
@@ -126,6 +126,7 @@ class SubstationLKSController extends Controller
             }
             $fpdf->Ln();
             $fpdf->Cell(50, 6, 'Tarikh Lawatan : '.$row->visit_date,0,1);          //VISIT  DATE
+            $fpdf->Cell(60, 6, 'Koordinat : '.$row->x . ' , ' . $row->y ,0,1);
             $fpdf->Cell(50, 6, 'Bil Janggal : ' .$row->total_defects,0,1);         // total defects
             $fpdf->Ln();
             $fpdf->Ln();

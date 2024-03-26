@@ -117,8 +117,8 @@ class TiangLKSController extends Controller
             DB::raw("CASE WHEN (kawasan::json->>'road')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_road"),
             DB::raw("CASE WHEN (kawasan::json->>'forest')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_forest"),
             DB::raw("CASE WHEN (kawasan::json->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as kawasan_other"),
-            DB::raw("kawasan::json
-            ->>'other_value' as kawasan_other_value"),
+            DB::raw("kawasan::json->>'other_value' as kawasan_other_value"),
+            DB::raw('ST_X(geom) as X'), DB::raw('ST_Y(geom) as Y')
 
            )->get();
 
@@ -164,7 +164,7 @@ class TiangLKSController extends Controller
             $fpdf->Cell(60, 6, 'TO - FROM : '.$row->section_from .' - ' .  $row->section_to);
             $fpdf->Ln();
            // $fpdf->Cell(60, 6, 'Koordinat : '.$row->X .' , '. $row->Y);         //COORDINATE
-            $fpdf->Cell(60, 6, 'Koordinat : '.$row->coords);
+            $fpdf->Cell(60, 6, 'Koordinat : '.$row->x . ' , ' . $row->y);
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Bil Janggal : ' .$row->total_defects);          //TOTAL DEFECTS
             $fpdf->Ln();

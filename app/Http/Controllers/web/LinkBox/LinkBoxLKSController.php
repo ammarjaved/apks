@@ -34,7 +34,7 @@ class LinkBoxLKSController extends Controller
                 
         $data = $result->select('id','ba', 'bushes_status','type','link_box_image_1', 'link_box_image_2',
         'vandalism_status', 'cover_status','leaning_status','rust_status','advertise_poster_status','start_date','end_date','visit_date','coordinate','image_cover','image_cover_2','total_defects',
-        'image_vandalism','image_vandalism_2','image_leaning','image_leaning_2','image_rust','image_rust_2','images_bushes','images_bushes_2','images_advertise_poster','images_advertise_poster_2')->get();
+        'image_vandalism','image_vandalism_2','image_leaning','image_leaning_2','image_rust','image_rust_2','images_bushes','images_bushes_2','images_advertise_poster','images_advertise_poster_2' , DB::raw('ST_X(geom) as X'), DB::raw('ST_Y(geom) as Y'))->get();
 
         $fpdf->AddPage('L', 'A4');
         $fpdf->SetFont('Arial', 'B', 22);
@@ -66,8 +66,8 @@ class LinkBoxLKSController extends Controller
             $fpdf->Cell(140, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(50, 6, 'LINK BOX Gambar 1' ,0);
-            $fpdf->Cell(50, 6, 'LINK BOX Gambar 2' ,0);
+            $fpdf->Cell(40, 6, 'LINK BOX Gambar 1' ,0);
+            $fpdf->Cell(40, 6, 'LINK BOX Gambar 2' ,0);
             $fpdf->Ln();
 
      
@@ -76,14 +76,14 @@ class LinkBoxLKSController extends Controller
            
             if ($row->link_box_image_1 != '' && file_exists(public_path($row->link_box_image_1))) 
             {
-                $fpdf->Image(public_path($row->link_box_image_1), $fpdf->GetX(), $fpdf->GetY(), 40, 40);
+                $fpdf->Image(public_path($row->link_box_image_1), $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             } 
-            $fpdf->Cell(50,6);
+            $fpdf->Cell(40,6);
 
 
             if ($row->link_box_image_2 != '' && file_exists(public_path($row->link_box_image_2))) 
             {
-                $fpdf->Image(public_path($row->link_box_image_2), $fpdf->GetX(), $fpdf->GetY(), 40, 40);
+                $fpdf->Image(public_path($row->link_box_image_2), $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             } 
             $fpdf->Ln();
            
@@ -93,16 +93,12 @@ class LinkBoxLKSController extends Controller
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'TO - FROM : '.$row->end_date .' - ' .  $row->start_date);
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'Koordinat : '.$row->coordinate);        //COORDINATE
+            $fpdf->Cell(60, 6, 'Koordinat : '.$row->x . ' , ' . $row->y);        //COORDINATE
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Bil Janggal : ' .$row->total_defects);  //TOTAL DEFECTS
             $fpdf->Ln();
     
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
+           
       
     
     
