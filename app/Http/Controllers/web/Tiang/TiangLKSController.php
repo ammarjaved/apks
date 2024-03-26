@@ -530,7 +530,7 @@ class TiangLKSController extends Controller
 
                 $fpdf->Image(public_path($row->{$img}), $fpdf->GetX(), $fpdf->GetY(), 33, 33);
                 }
-                $fpdf->Cell(28,6);
+                $fpdf->Cell(33,6);
 
            }
           

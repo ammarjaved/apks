@@ -256,8 +256,10 @@
                      <table class="table" id="polygone-tiang-data" >
                         <thead>
                             <th>ID</th>
-                            <th>TIANG NO</th>
                             <th>BA</th>
+                            <th>TIANG NO</th>
+                            <th>FP NAME</th>
+                            <th>ROAD NAME</th>
                             <th>REVIEW DATE</th>
                             <th>TOTAL DEFECTS</th>
                             <th>QA Status</th>
@@ -533,8 +535,10 @@
                                 let str = `
                                             <tr>
                                                 <td>${element.id}</td>
+                                                <td>${element.ba}</td>    
                                                 <td>${element.tiang_no}</td>
                                                 <td>${element.fp_name}</td>    
+                                                <td>${element.fp_road}</td>    
                                                 <td>${element.review_date}</td>    
                                                 <td>${element.total_defects}</td>    
                                                 <td>${status}</td>    
