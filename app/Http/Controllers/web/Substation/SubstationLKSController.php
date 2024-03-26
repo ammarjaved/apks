@@ -97,15 +97,15 @@ class SubstationLKSController extends Controller
         foreach ($data as $row)
         {
 
-            if ($sr_no > 0) {
+            if ($sr_no % 2 == 1 && $sr_no > 0) {
                 $fpdf->AddPage('L', 'A4');
             }
             $sr_no++;
             $fpdf->Cell(80, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(100, 6, 'Pencawang Gambar 1' ,0);
-            $fpdf->Cell(100, 6, 'Pencawang Gambar 2' ,0);
+            $fpdf->Cell(90, 6, 'Pencawang Gambar 1' ,0);
+            $fpdf->Cell(120, 6, 'Pencawang Gambar 2' ,0);
             $fpdf->Ln();
 
 
@@ -114,7 +114,7 @@ class SubstationLKSController extends Controller
             $fpdf->Cell(80, 6, 'Nama : '.$row->name,0);
             if ($row->substation_image_1 != '' && file_exists(public_path($row->substation_image_1)))
             {
-                $fpdf->Image(public_path($row->substation_image_1), $fpdf->GetX(), $fpdf->GetY(), 80, 85);
+                $fpdf->Image(public_path($row->substation_image_1), $fpdf->GetX(), $fpdf->GetY(), 40, 45);
             }
             $fpdf->Cell(100,6);
             // $fpdf->Ln();
@@ -122,23 +122,16 @@ class SubstationLKSController extends Controller
 
             if ($row->substation_image_2 != '' && file_exists(public_path($row->substation_image_2)))
             {
-                $fpdf->Image(public_path($row->substation_image_2), $fpdf->GetX(), $fpdf->GetY(), 80, 85);
+                $fpdf->Image(public_path($row->substation_image_2), $fpdf->GetX(), $fpdf->GetY(), 40, 45);
             }
             $fpdf->Ln();
-            $fpdf->Cell(80, 6, 'Tarikh Lawatan : '.$row->visit_date,0,1);          //VISIT  DATE
-            $fpdf->Cell(80, 6, 'Bil Janggal : ' .$row->total_defects,0,1);         // total defects
+            $fpdf->Cell(50, 6, 'Tarikh Lawatan : '.$row->visit_date,0,1);          //VISIT  DATE
+            $fpdf->Cell(50, 6, 'Bil Janggal : ' .$row->total_defects,0,1);         // total defects
             $fpdf->Ln();
             $fpdf->Ln();
             $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
+
+
 
 
 
@@ -157,8 +150,8 @@ class SubstationLKSController extends Controller
 
             $fpdf->Ln();
 
-            $fpdf->Cell(18, 7, 'Tidak Kunci', 1,0,'L',true);   //unlocked
-            $fpdf->Cell(15, 7, 'Rosak', 1,0,'L',true);    //damaged
+            $fpdf->Cell(22, 7, 'Tidak Berkunci', 1,0,'L',true);   //unlocked
+            $fpdf->Cell(11, 7, 'Rosak', 1,0,'L',true);    //damaged
             $fpdf->Cell(27, 7, 'Lain', 1,0,'L',true);      //other
 
             $fpdf->Cell(40, 7, 'Bersemak/Rumput Panjang', 1,0,'L',true);    //branches in p.e
@@ -176,8 +169,8 @@ class SubstationLKSController extends Controller
 
             $fpdf->SetFillColor(255, 255, 255);
             $fpdf->Ln();
-            $fpdf->Cell(18, 7, $row->unlocked, 1);
-            $fpdf->Cell(15, 7, $row->demaged, 1);
+            $fpdf->Cell(22, 7, $row->unlocked, 1);
+            $fpdf->Cell(11, 7, $row->demaged, 1);
             $fpdf->Cell(27, 7, $row->other_gate == 'Ya' ? $row->gate_other_value : '', 1);
 
             $fpdf->Cell(40, 7, $row->grass_status =='Yes' ?'Ya' : 'Tidak', 1);

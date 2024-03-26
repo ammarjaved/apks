@@ -36,7 +36,7 @@ class FeederPillarLKSController extends Controller
 
         $result = FeederPillar::where('ba',$req->ba)->where('visit_date', $req->visit_date)->where('qa_status','Accept');
 
-        $data = $result->select('id','guard_status','image_advertisement_after_1','paint_status', 'ba','feeder_pillar_image_1','feeder_pillar_image_2', DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'Ya' ELSE 'Tidak' END as unlocked"), DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'Ya' ELSE 'Tidak' END as demaged"), DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as other_gate"),DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN (gate_status->>'other_value')::text ELSE '' END as gate_other_value") , 'vandalism_status', 'leaning_staus', 'rust_status', 'advertise_poster_status', 'visit_date', 'size', 'coordinate', 'image_gate', 'image_gate_2', 'total_defects', 'image_vandalism', 'image_vandalism_2', 'image_leaning', 'image_leaning_2', 'image_rust', 'image_rust_2', 'images_advertise_poster', 'images_advertise_poster_2')->get();
+        $data = $result->select('id','guard_status','image_advertisement_after_1','paint_status','image_name_plate', 'ba','feeder_pillar_image_1','feeder_pillar_image_2', DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'Ya' ELSE 'Tidak' END as unlocked"), DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'Ya' ELSE 'Tidak' END as demaged"), DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'Ya' ELSE 'Tidak' END as other_gate"),DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN (gate_status->>'other_value')::text ELSE '' END as gate_other_value") , 'vandalism_status', 'leaning_staus', 'rust_status', 'advertise_poster_status', 'visit_date', 'size', 'coordinate', 'image_gate', 'image_gate_2', 'total_defects', 'image_vandalism', 'image_vandalism_2', 'image_leaning', 'image_leaning_2', 'image_rust', 'image_rust_2', 'images_advertise_poster', 'images_advertise_poster_2')->get();
 
 
         // $pdf = PDF::loadView('feeder-pillar.lks-feeder-pillar-template',['datas'=>$data,'ba'=>$req->ba , 'visit_date'=>$req->visit_date]);
@@ -82,12 +82,12 @@ class FeederPillarLKSController extends Controller
 
             }
             $sr_no++;
-            $fpdf->Cell(115, 6, 'SR # : '.$sr_no ,0);
+            $fpdf->Cell(120, 6, 'SR # : '.$sr_no ,0);
 
             // add feeder pilar images  Header
-            $fpdf->Cell(45, 6, 'FEEDER PILLAR Gambar 1' ,0);
-            $fpdf->Cell(40, 6, 'FEEDER PILLAR Gambar 2' ,0);
-            $fpdf->Cell(40, 6, 'FP Plate' ,0);
+            $fpdf->Cell(60, 6, 'FEEDER PILLAR Gambar 1' ,0);
+            $fpdf->Cell(60, 6, 'FEEDER PILLAR Gambar 2' ,0);
+            $fpdf->Cell(60, 6, 'FP Plate' ,0);
 
             $fpdf->Ln();
 
@@ -97,7 +97,7 @@ class FeederPillarLKSController extends Controller
             if ($row->feeder_pillar_image_1 != '' && file_exists(public_path($row->feeder_pillar_image_1)))
             {
 
-                $fpdf->Image(public_path($row->feeder_pillar_image_1), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image(public_path($row->feeder_pillar_image_1), $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             }
             $fpdf->Cell(45,6);
             // $fpdf->Ln();
@@ -105,12 +105,14 @@ class FeederPillarLKSController extends Controller
 
             if ($row->feeder_pillar_image_2 != '' && file_exists(public_path($row->feeder_pillar_image_2)))
             {
-                $fpdf->Image(public_path($row->feeder_pillar_image_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image(public_path($row->feeder_pillar_image_2), $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             }
+
+            $fpdf->Cell(45,6);
 
             if ($row->image_name_plate != '' && file_exists(public_path($row->image_name_plate)))
             {
-                $fpdf->Image(public_path($row->image_name_plate), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image(public_path($row->image_name_plate), $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             }
 
             $fpdf->Ln();
@@ -120,8 +122,12 @@ class FeederPillarLKSController extends Controller
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Koordinat : ' . $row->coordinate);          //COORDINATE
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'Bil Janggal : ' . $row->total_defects);     //TOTAL DEFECTS
+            $fpdf->Cell(60, 8, 'Bil Janggal : ' . $row->total_defects);     //TOTAL DEFECTS
             $fpdf->Ln();
+
+
+
+
 
             $fpdf->SetFont('Arial', 'B', 8);
 
@@ -130,7 +136,7 @@ class FeederPillarLKSController extends Controller
             $fpdf->Cell(70, 7, 'Pintu Pagar', 1, 0, 'C', true);  //GATE
             $fpdf->Cell(130, 7, 'Status Lain', 1, 0, 'C', true);  // OTHERS STATUS
             $fpdf->Cell(30,7,'Iklan Haram ','LTR', 0,'C',true);    // POSTER
-            $fpdf->Cell(50,7,'Pembersihan iklan Haram/Banner','LTR', 0,'C',true); //GRASS
+        //    $fpdf->Cell(50,7,'Pembersihan iklan Haram/Banner','LTR', 0,'C',true); //GRASS
 
             $fpdf->Ln();
 
@@ -146,7 +152,7 @@ class FeederPillarLKSController extends Controller
 
 
             $fpdf->Cell(30, 7, '/ Banner', 'RBL', 0,'C',true); //advertisement
-            $fpdf->Cell(50, 7, '& Menutup Pintu Pencawang atau','RL', 0,'C',true); //GRASS
+          //  $fpdf->Cell(50, 7, '& Menutup Pintu Pencawang atau','RL', 0,'C',true); //GRASS
 
 
 
@@ -166,7 +172,7 @@ class FeederPillarLKSController extends Controller
 
 
             $fpdf->SetFillColor(169, 169, 169);
-            $fpdf->Cell(50,7,' Pintu Pagar','RBL', 0,'C',true); //GRASS
+            //$fpdf->Cell(50,7,' Pintu Pagar','RBL', 0,'C',true); //GRASS
 
             $fpdf->Ln();
 
@@ -218,19 +224,19 @@ class FeederPillarLKSController extends Controller
              //   $fpdf->Cell(25, 30, '');
 
 
-                if ($row->image_gate_2 != '' && file_exists(public_path($row->image_gate_2)))
-                {
-                    $fpdf->Image(public_path($row->image_gate_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
-                }
-                $fpdf->Cell(25, 25);
+            //     if ($row->image_gate_2 != '' && file_exists(public_path($row->image_gate_2)))
+            //     {
+            //         $fpdf->Image(public_path($row->image_gate_2), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+            //     }
+            //     $fpdf->Cell(25, 25);
 
 
 
-            if ($row->image_advertisement_after_1 != '' && file_exists(public_path($row->image_advertisement_after_1))) {
-                $fpdf->Image(public_path($row->image_advertisement_after_1), $fpdf->GetX()+3, $fpdf->GetY(), 20, 20);
+            // if ($row->image_advertisement_after_1 != '' && file_exists(public_path($row->image_advertisement_after_1))) {
+            //     $fpdf->Image(public_path($row->image_advertisement_after_1), $fpdf->GetX()+3, $fpdf->GetY(), 20, 20);
 
-            }
-                $fpdf->Cell(25, 25, '');
+            // }
+            //     $fpdf->Cell(25, 25, '');
 
 
             $fpdf->Ln();
