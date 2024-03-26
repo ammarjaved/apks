@@ -54,29 +54,29 @@ class CableBridgeLKSController extends Controller
 
         $sr_no = 0;
         foreach ($data as $row) {
-            if ($sr_no > 0) {
+            if ($sr_no > 0 && $sr_no % 0 == 0) {
                 $fpdf->AddPage('L', 'A4');
             }
             $sr_no++;
-            $fpdf->Cell(100, 6, 'SR # : '.$sr_no ,0);
+            $fpdf->Cell(150, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(80, 6, 'CABLE BRIDGE Gambar 1' ,0);
-            $fpdf->Cell(80, 6, 'CABLE BRIDGE Gambar 2' ,0);
+            $fpdf->Cell(50, 6, 'CABLE BRIDGE Gambar 1' ,0);
+            $fpdf->Cell(50, 6, 'CABLE BRIDGE Gambar 2' ,0);
             $fpdf->Ln();
 
-            $fpdf->Cell(105, 6, 'ID : CB-' . $row->id); 
+            $fpdf->Cell(155, 6, 'ID : CB-' . $row->id); 
             if ($row->cable_bridge_image_1 != '' && file_exists(public_path($row->cable_bridge_image_1))) 
             {
-                $fpdf->Image(public_path($row->cable_bridge_image_1), $fpdf->GetX(), $fpdf->GetY(), 70, 70);
+                $fpdf->Image(public_path($row->cable_bridge_image_1), $fpdf->GetX(), $fpdf->GetY(), 40, 40);
             } 
-            $fpdf->Cell(80,6);
+            $fpdf->Cell(50,6);
             // $fpdf->Ln();
 
 
             if ($row->cable_bridge_image_2 != '' && file_exists(public_path($row->cable_bridge_image_2))) 
             {
-                $fpdf->Image(public_path($row->cable_bridge_image_2), $fpdf->GetX(), $fpdf->GetY(), 70, 70);
+                $fpdf->Image(public_path($row->cable_bridge_image_2), $fpdf->GetX(), $fpdf->GetY(), 40, 40);
             } 
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Tarikh Lawatan : ' . $row->visit_date);                         //VISIT  DATE
@@ -95,9 +95,7 @@ class CableBridgeLKSController extends Controller
             $fpdf->Ln();
             $fpdf->Ln();
             $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
+   
         
 
             $fpdf->SetFont('Arial', 'B', 8);
