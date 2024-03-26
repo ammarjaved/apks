@@ -126,7 +126,7 @@ class SubstationLKSController extends Controller
             }
             $fpdf->Ln();
             $fpdf->Cell(50, 6, 'Tarikh Lawatan : '.$row->visit_date,0,1);          //VISIT  DATE
-            $fpdf->Cell(60, 6, 'Koordinat : '.$row->x . ' , ' . $row->y ,0,1);
+            $fpdf->Cell(60, 6, 'Koordinat : '.$row->y . ' , ' . $row->x ,0,1);
             $fpdf->Cell(50, 6, 'Bil Janggal : ' .$row->total_defects,0,1);         // total defects
             $fpdf->Ln();
             $fpdf->Ln();
