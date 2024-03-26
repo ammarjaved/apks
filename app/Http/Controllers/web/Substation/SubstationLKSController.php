@@ -145,7 +145,7 @@ class SubstationLKSController extends Controller
             $fpdf->Cell(60,7,'Pintu Pagar',1,0,'C',true); // gate
             $fpdf->Cell(70,7,'Compound PE',1,0,'C',true);     // tree
             $fpdf->Cell(75,7,'Bangunan Rosak',1,0,'C',true); //BUILDING BROKEN
-            $fpdf->Cell(30,7,'Iklan Haram ','LTR', 0,'C',true);    // POSTER
+            $fpdf->Cell(60,7,'Iklan Haram ','LTR', 0,'C',true);    // POSTER
           //  $fpdf->Cell(50,7,'Pembersihan iklan Haram/Banner','LTR', 0,'C',true); //GRASS
 
 
@@ -163,7 +163,7 @@ class SubstationLKSController extends Controller
             $fpdf->Cell(15, 7, 'Base', 1,0,'L',true);   //base
             $fpdf->Cell(30, 7, 'Lain', 1,0,'L',true);  //other
 
-            $fpdf->Cell(30, 7, '/ Banner', 'RBL', 0,'C',true); //advertisement
+            $fpdf->Cell(60, 7, '/ Banner', 'RBL', 0,'C',true); //advertisement
 
            // $fpdf->Cell(50, 7, '& Menutup Pintu Pencawang atau','RL', 0,'C',true); //GRASS
 
@@ -182,7 +182,7 @@ class SubstationLKSController extends Controller
             $fpdf->Cell(15, 7, $row->broken_base, 1);
             $fpdf->Cell(30, 7, $row->building_other == 'Ya' ? $row->building_status_other_value : '' , 1);
 
-            $fpdf->Cell(30, 7, $row->advertise_poster_status=='Yes' ?'Ya' : 'Tidak', 1);
+            $fpdf->Cell(60, 7, $row->advertise_poster_status=='Yes' ?'Ya' : 'Tidak', 1);
 
 
             $fpdf->SetFillColor(169, 169, 169);

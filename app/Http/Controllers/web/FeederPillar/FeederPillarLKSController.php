@@ -99,7 +99,7 @@ class FeederPillarLKSController extends Controller
 
                 $fpdf->Image(public_path($row->feeder_pillar_image_1), $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             }
-            $fpdf->Cell(45,6);
+            $fpdf->Cell(50,6);
             // $fpdf->Ln();
 
 
@@ -135,7 +135,7 @@ class FeederPillarLKSController extends Controller
 
             $fpdf->Cell(70, 7, 'Pintu Pagar', 1, 0, 'C', true);  //GATE
             $fpdf->Cell(130, 7, 'Status Lain', 1, 0, 'C', true);  // OTHERS STATUS
-            $fpdf->Cell(30,7,'Iklan Haram ','LTR', 0,'C',true);    // POSTER
+            $fpdf->Cell(60,7,'Iklan Haram ','LTR', 0,'C',true);    // POSTER
         //    $fpdf->Cell(50,7,'Pembersihan iklan Haram/Banner','LTR', 0,'C',true); //GRASS
 
             $fpdf->Ln();
@@ -147,11 +147,11 @@ class FeederPillarLKSController extends Controller
             $fpdf->Cell(30, 7, 'Vandalism', 1, 0, 'L', true); //Vandalism
             $fpdf->Cell(25, 7, 'Condong', 1, 0, 'L', true);   //Leaning
             $fpdf->Cell(25, 7, 'Karat', 1, 0, 'L', true);  //Rusty
-            $fpdf->Cell(25, 7, 'FP Gaurd', 1, 0, 'L', true);  //Rusty
+            $fpdf->Cell(25, 7, 'FP Guard', 1, 0, 'L', true);  //Rusty
             $fpdf->Cell(25, 7, 'Cat Pudar', 1, 0, 'L', true);  //Rusty
 
 
-            $fpdf->Cell(30, 7, '/ Banner', 'RBL', 0,'C',true); //advertisement
+            $fpdf->Cell(60, 7, '/ Banner', 'RBL', 0,'C',true); //advertisement
           //  $fpdf->Cell(50, 7, '& Menutup Pintu Pencawang atau','RL', 0,'C',true); //GRASS
 
 
@@ -168,7 +168,7 @@ class FeederPillarLKSController extends Controller
             $fpdf->Cell(25, 7, $row->guard_status=='Yes' ?'Ya' : 'Tidak', 1);
             $fpdf->Cell(25, 7, $row->paint_status=='Yes' ?'Ya' : 'Tidak', 1);
 
-            $fpdf->Cell(30, 7, $row->advertise_poster_status=='Yes' ?'Ya' : 'Tidak', 1);
+            $fpdf->Cell(60, 7, $row->advertise_poster_status=='Yes' ?'Ya' : 'Tidak', 1);
 
 
             $fpdf->SetFillColor(169, 169, 169);

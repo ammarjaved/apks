@@ -23,7 +23,7 @@ class TiangLKSController extends Controller
     public function index()
     {
         $button =[];
-        $button=[ 
+        $button=[
             ['url'=>'generate-tiang-talian-vt-and-vr-lks' , 'name'=>'Generate LKS'],
             ['url'=>'tiang-talian-vt-and-vr-SBUM-report' , 'name'=>'SBUM Report'],
         ];
@@ -154,8 +154,8 @@ class TiangLKSController extends Controller
             $fpdf->Ln();
 
             $fpdf->Cell(100, 6, 'ID : SAVR-'.$row->id );
-            
-            
+
+
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Tarikh Lawatan : '.$row->review_date);          //VISIT  DATE
             $fpdf->Ln();
@@ -180,9 +180,9 @@ class TiangLKSController extends Controller
 
             $fpdf->Cell(40, 6, 'Talian Utama (M) / Servis (S)' ,1,0,'C',true );         //Main Line (M) / Servis (S)
             $fpdf->Cell(45, 6, 'Bilangan Perkhidmatan Terlibat' ,1,0,'C',true );        //Number of Services Involves
-            $fpdf->Cell(30, 6, 'Jarak Kelegaan (meter)' ,1,0,'C',true );                //Clearance Distance
+            $fpdf->Cell(40, 6, 'Jarak Kelegaan (meter)' ,1,0,'C',true );                //Clearance Distance
             $fpdf->Cell(65, 6, 'Spesifikasi Kelegaan Talian' ,1,0,'C',true );           //Line clearance specifications
-            $fpdf->Cell(90, 6, 'Pemeriksaan Kebocoran Arus pada Tiang' ,1,0,'C',true ); //Inspection of current leakage on the pole
+            $fpdf->Cell(80, 6, 'Pemeriksaan Kebocoran Arus pada Tiang' ,1,0,'C',true ); //Inspection of current leakage on the pole
 
             // table 0 header # 1/2 bare span table header # 1 end
             $fpdf->Ln();
@@ -192,9 +192,9 @@ class TiangLKSController extends Controller
 
             $fpdf->Cell(40, 6, $row->talian_utama_connection ,1,0,'C',true );
             $fpdf->Cell(45, 6, $row->talian_utama ,1,0,'C',true );
-            $fpdf->Cell(30, 6, $row->jarak_kelegaan ,1,0,'C',true );
+            $fpdf->Cell(40, 6, $row->jarak_kelegaan ,1,0,'C',true );
             $fpdf->Cell(65, 6, $row->talian_spec ,1,0,'C',true );
-            $fpdf->Cell(90, 6, $row->arus_pada_tiang ,1,0,'C',true );
+            $fpdf->Cell(80, 6, $row->arus_pada_tiang ,1,0,'C',true );
 
 
             //table # 0 body values end
@@ -222,8 +222,8 @@ class TiangLKSController extends Controller
 
            //header # 1/2 bare span table header # 1 start
 
-           $fpdf->Cell(20, 6, 'SIZE TIANG' ,1,0,'L',true );  // size tiang header
-           $fpdf->Cell(20, 6, 'JENIS TIANG' ,1,0,'L',true ); // jenis tiang header
+           $fpdf->Cell(20, 6, 'Size Tiang' ,1,0,'L',true );  // size tiang header
+           $fpdf->Cell(20, 6, 'Jenis Tiang' ,1,0,'L',true ); // jenis tiang header
 
            $fpdf->Cell(23, 6, '3 X 185' ,1,0,'L',true ); // abc span header start
            $fpdf->Cell(23, 6, '3 X 95' ,1,0,'L',true );
@@ -290,11 +290,11 @@ class TiangLKSController extends Controller
                                                                                 //POLE
            $fpdf->Cell(15, 6, "Reput" ,1,0,'C',true);                               //Cracked
            $fpdf->Cell(15, 6, "Condong" ,1,0,'C',true);                             //Leaning
-           $fpdf->Cell(20, 6, "No Tiang Pudar" ,1,0,'C',true);                      //No. Dim Post
+           $fpdf->Cell(30, 6, "No Tiang Pudar" ,1,0,'C',true);                      //No. Dim Post
            $fpdf->Cell(15, 6, "Creepers" ,1,0,'C',true);                            //Creepers
-           $fpdf->Cell(35, 6, "Lain-lain" ,1,0,'C',true);                           //Others
+           $fpdf->Cell(25, 6, "Lain-lain" ,1,0,'C',true);                           //Others
                                                                                 // Line (Main / Service)
-           $fpdf->Cell(15, 6, "sendi" ,1,0,'C',true);                               //Joint
+           $fpdf->Cell(15, 6, "IPC" ,1,0,'C',true);                               //Joint
            $fpdf->Cell(20, 6, "Perlu Rentis" ,1,0,'C',true);                        //Need Rentis
            $fpdf->Cell(45, 6, "Tidak Patuh Ground Clearance" ,1,0,'C',true);        //Not Comply With Ground Clearance
            $fpdf->Cell(40, 6, "Lain-lain" ,1,0,'C',true);                           //Others
@@ -313,9 +313,9 @@ class TiangLKSController extends Controller
 
            $fpdf->Cell(15, 6, $row->tiang_defect_cracked,1,0,'C',true);         // Pole Values
            $fpdf->Cell(15, 6, $row->tiang_defect_leaning ,1,0,'C',true);
-           $fpdf->Cell(20, 6, $row->tiang_defect_dim ,1,0,'C',true);
+           $fpdf->Cell(30, 6, $row->tiang_defect_dim ,1,0,'C',true);
            $fpdf->Cell(15, 6, $row->tiang_defect_creepers ,1,0,'C',true);
-           $fpdf->Cell(35, 6, $row->tiang_defect_other_value ,1,0,'C',true);
+           $fpdf->Cell(25, 6, $row->tiang_defect_other_value ,1,0,'C',true);
 
            $fpdf->Cell(15, 6, $row->talian_defect_joint ,1,0,'C',true);                           // Line (Main / Service) Values
            $fpdf->Cell(20, 6, $row->talian_defect_need_rentis ,1,0,'C',true);
@@ -345,7 +345,7 @@ class TiangLKSController extends Controller
            // tbale # 3 header 2/2
                                                                                         // Umbagan
            $fpdf->Cell(40, 6, "Tiada Stay Insulator/Rosak" ,1,0,'C',true);                  //No Stay Insulator/Damaged
-           $fpdf->Cell(45, 6, "Stay Plate/Pangkal Stay Terbongkah" ,1,0,'C',true);          //Stay Plate / Base Stay Blocked
+           $fpdf->Cell(45, 6, "Stay Plate Terbongkah" ,1,0,'C',true);          //Stay Plate / Base Stay Blocked
            $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                   //Others
                                                                                         //IPC
            $fpdf->Cell(25, 6, "Kesan Bakar" ,1,0,'C',true);                                 //Burn Effect
@@ -401,7 +401,7 @@ class TiangLKSController extends Controller
            $fpdf->Cell(20, 6, "Rosak" ,1,0,'C',true);                                           //Broken
            $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                       //Others
                                                                                             //Service
-           $fpdf->Cell(45, 6, "Talian servis berada di atas bumbung" ,1,0,'C',true);            //The Service Line Is On The Roof
+           $fpdf->Cell(45, 6, "Talian servis atas bumbung" ,1,0,'C',true);            //The Service Line Is On The Roof
            $fpdf->Cell(30, 6, "Won piece Tanggal" ,1,0,'C',true);                               //Won Piece Date
            $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                       //Others
                                                                                             //Grounding
@@ -452,13 +452,13 @@ class TiangLKSController extends Controller
            $fpdf->Ln();
            // table # 5 header 1/2
                                                                                         // Main Street
-           $fpdf->Cell(30, 6, "Wayar Tanggal" ,1,0,'C',true);                               // Date Wire
-           $fpdf->Cell(45, 6, "unction Box Tanggal / Kesan Bakar" ,1,0,'C',true);           //Junction Box Date / Burn Effect
-           $fpdf->Cell(20, 6, "Lain-lain" ,1,0,'C',true);                                   //Others
+           $fpdf->Cell(28, 6, "Wayar Tanggal" ,1,0,'C',true);                               // Date Wire
+           $fpdf->Cell(49, 6, "Junction Box Tanggal / Kesan Bakar" ,1,0,'C',true);           //Junction Box Date / Burn Effect
+           $fpdf->Cell(18, 6, "Lain-lain" ,1,0,'C',true);                                   //Others
                                                                                         //Site Conditions
            $fpdf->Cell(35, 6, "Melintasi Jalanraya" ,1,0,'C',true);                         //Crossing the Road
            $fpdf->Cell(20, 6, "Bahu Jalan" ,1,0,'C',true);                                  //Sidewalk
-           $fpdf->Cell(40, 6, "tidak dimasuki kenderaan" ,1,0,'C',true);                    //No vehicle entry area
+           $fpdf->Cell(40, 6, "Tidak Dimasuki Kenderaan" ,1,0,'C',true);                    //No vehicle entry area
                                                                                         // Area
            $fpdf->Cell(20, 6, "Bendang" ,1,0,'C',true);                                     //Bend
            $fpdf->Cell(20, 6, "Jalanraya" ,1,0,'C',true);                                   //Road
@@ -475,9 +475,9 @@ class TiangLKSController extends Controller
            // table # 5 body start
            $fpdf->SetFillColor(255, 255, 255);
 
-           $fpdf->Cell(30, 6, $row->kaki_lima_defect_date_wire ,1,0,'C',true);                           // Main Street Values
-           $fpdf->Cell(45, 6, $row->kaki_lima_defect_burn ,1,0,'C',true);
-           $fpdf->Cell(20, 6, $row->kaki_lima_defect_other_value ,1,0,'C',true);
+           $fpdf->Cell(28, 6, $row->kaki_lima_defect_date_wire ,1,0,'C',true);                           // Main Street Values
+           $fpdf->Cell(49, 6, $row->kaki_lima_defect_burn ,1,0,'C',true);
+           $fpdf->Cell(18, 6, $row->kaki_lima_defect_other_value ,1,0,'C',true);
 
            $fpdf->Cell(35, 6, $row->tapak_condition_road ,1,0,'C',true);       //Site Conditions values
            $fpdf->Cell(20, 6, $row->tapak_condition_side_walk ,1,0,'C',true);
@@ -502,7 +502,7 @@ class TiangLKSController extends Controller
 
 
 
- 
+
 
 
            $fpdf->SetFont('Arial', 'B', 8);
@@ -513,9 +513,9 @@ class TiangLKSController extends Controller
            $fpdf->Cell(35, 6, 'Tiang Gambar 3' ,1,0,'C',true);
            $fpdf->Cell(35, 6, 'Tiang Gambar 4' ,1,0,'C',true);
            $fpdf->Cell(35, 6, 'Tiang Gambar 5' ,1,0,'C',true);
-           $fpdf->Cell(35, 6, 'Current Leakage Gambar' ,1,0,'C',true);
-           $fpdf->Cell(35, 6, 'Remove Creepers Gambar' ,1,0,'C',true);
-           $fpdf->Cell(35, 6, 'Clean Banner Gambar' ,1,0,'C',true);
+           $fpdf->Cell(35, 6, 'Gambar Kebocoran Arus' ,1,0,'C',true);
+           $fpdf->Cell(35, 6, 'Gambar Pembersihan Creepers' ,1,0,'C',true);
+           $fpdf->Cell(35, 6, 'Gambar Pembersihan Banners' ,1,0,'C',true);
 
 
            $fpdf->Ln();
@@ -533,7 +533,7 @@ class TiangLKSController extends Controller
                 $fpdf->Cell(33,6);
 
            }
-          
+
 
         //    if ($row->pole_image_1 != '' && file_exists(public_path($row->pole_image_1)))
         //    {
@@ -570,9 +570,9 @@ class TiangLKSController extends Controller
 
         //        $fpdf->Image(public_path($row->pole_image_5), $fpdf->GetX(), $fpdf->GetY(), 20, 20);
         //    }
-     
 
-          
+
+
 
             // $fpdf->Ln();
             // $fpdf->Ln();
