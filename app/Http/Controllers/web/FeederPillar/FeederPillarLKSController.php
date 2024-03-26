@@ -85,9 +85,9 @@ class FeederPillarLKSController extends Controller
             $fpdf->Cell(120, 6, 'SR # : '.$sr_no ,0);
 
             // add feeder pilar images  Header
-            $fpdf->Cell(60, 6, 'FEEDER PILLAR Gambar 1' ,0);
-            $fpdf->Cell(60, 6, 'FEEDER PILLAR Gambar 2' ,0);
-            $fpdf->Cell(60, 6, 'FP Plate' ,0);
+            $fpdf->Cell(40, 6, 'FEEDER PILLAR Gambar 1' ,0);
+            $fpdf->Cell(40, 6, 'FEEDER PILLAR Gambar 2' ,0);
+            $fpdf->Cell(40, 6, 'FP Plate' ,0);
 
             $fpdf->Ln();
 
@@ -99,7 +99,7 @@ class FeederPillarLKSController extends Controller
 
                 $fpdf->Image(public_path($row->feeder_pillar_image_1), $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             }
-            $fpdf->Cell(50,6);
+            $fpdf->Cell(40,6);
             // $fpdf->Ln();
 
 
@@ -108,7 +108,7 @@ class FeederPillarLKSController extends Controller
                 $fpdf->Image(public_path($row->feeder_pillar_image_2), $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             }
 
-            $fpdf->Cell(45,6);
+            $fpdf->Cell(40,6);
 
             if ($row->image_name_plate != '' && file_exists(public_path($row->image_name_plate)))
             {
