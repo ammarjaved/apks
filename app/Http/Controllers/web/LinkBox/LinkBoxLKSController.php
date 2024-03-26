@@ -59,28 +59,31 @@ class LinkBoxLKSController extends Controller
 
         foreach ($data as $row) {  
     
+            if ($sr_no > 0) {
+                $fpdf->AddPage('L', 'A4');
+            }
             $sr_no++;
-            $fpdf->Cell(100, 6, 'SR # : '.$sr_no ,0);
+            $fpdf->Cell(140, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(80, 6, 'LINK BOX Gambar 1' ,0);
-            $fpdf->Cell(80, 6, 'LINK BOX Gambar 2' ,0);
+            $fpdf->Cell(40, 6, 'LINK BOX Gambar 1' ,0);
+            $fpdf->Cell(40, 6, 'LINK BOX Gambar 2' ,0);
             $fpdf->Ln();
 
      
-            $fpdf->Cell(105, 6, 'ID : LB-'.$row->id );
+            $fpdf->Cell(145, 6, 'ID : LB-'.$row->id );
 
            
             if ($row->link_box_image_1 != '' && file_exists(public_path($row->link_box_image_1))) 
             {
-                $fpdf->Image(public_path($row->link_box_image_1), $fpdf->GetX(), $fpdf->GetY(), 70, 70);
+                $fpdf->Image(public_path($row->link_box_image_1), $fpdf->GetX(), $fpdf->GetY(), 40, 40);
             } 
-            $fpdf->Cell(80,6);
+            $fpdf->Cell(40,6);
 
 
             if ($row->link_box_image_2 != '' && file_exists(public_path($row->link_box_image_2))) 
             {
-                $fpdf->Image(public_path($row->link_box_image_2), $fpdf->GetX(), $fpdf->GetY(), 70, 70);
+                $fpdf->Image(public_path($row->link_box_image_2), $fpdf->GetX(), $fpdf->GetY(), 40, 40);
             } 
             $fpdf->Ln();
            
