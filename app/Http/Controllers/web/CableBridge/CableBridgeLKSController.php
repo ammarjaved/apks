@@ -54,7 +54,7 @@ class CableBridgeLKSController extends Controller
 
         $sr_no = 0;
         foreach ($data as $row) {
-            if ($sr_no > 0 && $sr_no % 0 == 0) {
+            if ($sr_no > 0 && $sr_no % 2 == 0) {
                 $fpdf->AddPage('L', 'A4');
             }
             $sr_no++;
