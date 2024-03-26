@@ -103,9 +103,7 @@ class LinkBoxLKSController extends Controller
             $fpdf->Ln();
             $fpdf->Ln();
             $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
+      
     
     
             $fpdf->SetFont('Arial', 'B', 8);
