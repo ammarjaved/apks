@@ -85,9 +85,9 @@ class FeederPillarLKSController extends Controller
             $fpdf->Cell(120, 6, 'SR # : '.$sr_no ,0);
 
             // add feeder pilar images  Header
-            $fpdf->Cell(60, 6, 'FEEDER PILLAR Gambar 1' ,0);
+            $fpdf->Cell(45, 6, 'FEEDER PILLAR Gambar 1' ,0);
             $fpdf->Cell(60, 6, 'FEEDER PILLAR Gambar 2' ,0);
-            $fpdf->Cell(60, 6, 'FP Plate' ,0);
+            $fpdf->Cell(40, 6, 'FP Plate' ,0);
 
             $fpdf->Ln();
 
