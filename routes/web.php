@@ -34,6 +34,7 @@ use App\Http\Controllers\web\Substation\SubstationLKSController;
 use App\Http\Controllers\web\Tiang\TiangLKSController;
 use App\Http\Controllers\web\FeederPillar\FPController;
 use App\Http\Controllers\web\FeederPillar\OPSFeederPillarController;
+use App\Http\Controllers\web\FeederPillar\FPpdfFromHtmlController;
 use App\Http\Controllers\web\GenerateNoticeController;
 use App\Http\Controllers\web\LinkBox\LinkBoxMapController;
 use App\Http\Controllers\web\Patrolling\PatrollingController;
@@ -237,6 +238,9 @@ Route::group(
                 Route::get('/get-all-counts', [Dashboard::class, 'getAllCounts'])->name('get-all-counts');
 
                 Route::get('/testing-map', [PatrollingLKSController::class, 'genet'])->name('tetsing-map');
+
+                Route::get('/gen-pdf', [FPpdfFromHtmlController::class, 'generatePDF'])->name('gen-pdf');
+
 
 
 
