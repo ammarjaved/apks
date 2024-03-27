@@ -505,7 +505,7 @@ class TiangLKSController extends Controller
 
 
 
-           $fpdf->SetFont('Arial', 'B', 8);
+           $fpdf->SetFont('Arial', 'B', 6);
            $fpdf->SetFillColor(169, 169, 169);
 
            $fpdf->Cell(35, 6, 'Tiang Gambar 1' ,1,0,'C',true);

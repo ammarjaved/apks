@@ -101,22 +101,22 @@ class SubstationLKSController extends Controller
                 $fpdf->AddPage('L', 'A4');
             }
             $sr_no++;
-            $fpdf->Cell(80, 6, 'SR # : '.$sr_no ,0);
+            $fpdf->Cell(100, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(90, 6, 'Pencawang Gambar 1' ,0);
-            $fpdf->Cell(120, 6, 'Pencawang Gambar 2' ,0);
+            $fpdf->Cell(120, 6, 'Pencawang Gambar 1' ,0);
+            $fpdf->Cell(100, 6, 'Pencawang Gambar 2' ,0);
             $fpdf->Ln();
 
 
 
 
-            $fpdf->Cell(80, 6, 'Nama : '.$row->name,0);
+            $fpdf->Cell(100, 6, 'Nama : '.$row->name,0);
             if ($row->substation_image_1 != '' && file_exists(public_path($row->substation_image_1)))
             {
                 $fpdf->Image(public_path($row->substation_image_1), $fpdf->GetX(), $fpdf->GetY(), 40, 45);
             }
-            $fpdf->Cell(100,6);
+            $fpdf->Cell(120,6);
             // $fpdf->Ln();
 
 

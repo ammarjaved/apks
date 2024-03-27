@@ -2,7 +2,7 @@
 
 @section('css')
 <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css" />
- 
+
     @include('partials.map-css')
     <style>
         #map {
@@ -121,7 +121,7 @@
                     <label for="ts_without_defects">Surveyed without defects</label>
                 </div>
 
-                
+
                 <div class=" mx-4">
                     <input type="radio" name="select_layer" id="ts_layer_pending" value="ts_pending"
                         onchange="selectLayer(this.value)" class="pending">
@@ -245,7 +245,7 @@
 
     <div class="modal fade bd-example-modal-lg " id="myLargeModalLabel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
-            <div class="modal-content">
+            <div class="modal-content" style="width:1100px;">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Site Data Info</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -282,7 +282,7 @@
     <div class="modal fade" id="rejectReasonModal">
         <div class="modal-dialog">
             <div class="modal-content ">
-    
+
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h6 class="modal-title">Reject</h6>
@@ -290,7 +290,7 @@
                 </div>
                 <form action="" id="reject-foam" method="GET">
                     @csrf
-    
+
                     <div class="modal-body">
                         <input type="hidden" name="id" id="reject-id">
                         <input type="hidden" name="status" id="qa_status" value="Reject">
@@ -302,7 +302,7 @@
                         <button type="button" class="btn btn-danger" onclick="QaStatusReject()">update</button>
                     </div>
                 </form>
-    
+
             </div>
         </div>
     </div>
@@ -311,14 +311,14 @@
     <div class="modal fade" id="rejectReasonModalShow">
         <div class="modal-dialog">
             <div class="modal-content ">
-    
+
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h6 class="modal-title">Reject Reason</h6>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                
-    
+
+
                     <div class="modal-body">
                         <input type="hidden" name="id" id="reject-id">
                         <input type="hidden" name="status" id="qa_status" value="Reject">
@@ -327,10 +327,10 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        
+
                     </div>
-              
-    
+
+
             </div>
         </div>
     </div>
@@ -339,14 +339,14 @@
     <div class="modal fade" id="tiangDetailModal">
         <div class="modal-dialog">
             <div class="modal-content ">
-    
+
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h6 class="modal-title">Detail</h6>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                 
-    
+
+
                 <div class="modal-body" id="tiangDetailModalBody" style="max-height : 700px ; overflow-y: scroll">
 
                 </div>
@@ -354,12 +354,12 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                     {{-- <button type="button" class="btn btn-danger" onclick="QaStatusReject()">update</button> --}}
                 </div>
-                 
-    
+
+
             </div>
         </div>
     </div>
-    
+
 
 @endsection
 
@@ -443,19 +443,19 @@
     <script>
 
         $(function(){
-            $('#tiangDetailModal').on('hide.bs.modal', function(event) 
+            $('#tiangDetailModal').on('hide.bs.modal', function(event)
             {
                 getTiangByPolyGone()
                 $('#tiangDetailModalBody').html('');
             });
 
-            $('#rejectReasonModalShow').on('show.bs.modal', function(event) 
+            $('#rejectReasonModalShow').on('show.bs.modal', function(event)
             {
                 var button = $(event.relatedTarget);
                 var remarks = button.data('reject_remarks');
                 $('#reject_remakrs_show').val(remarks);
             });
-             
+
         })
 
                // ADD DRAW TOOLS
@@ -483,7 +483,7 @@
         var newLayer = '';
         var jsonData = '';
                 // DRAW TOOL ON CREATED EVENT
-        map.on('draw:created', function(e) 
+        map.on('draw:created', function(e)
         {
             var type = e.layerType;
             newLayer = e.layer;
@@ -492,7 +492,7 @@
             jsonData = JSON.stringify(data.geometry);
 
             getTiangByPolyGone()
-            
+
         })
 
 
@@ -535,13 +535,13 @@
                                 let str = `
                                             <tr>
                                                 <td>${element.id}</td>
-                                                <td>${element.ba}</td>    
+                                                <td>${element.ba}</td>
                                                 <td>${element.tiang_no}</td>
-                                                <td>${element.fp_name}</td>    
-                                                <td>${element.fp_road}</td>    
-                                                <td>${element.review_date}</td>    
-                                                <td>${element.total_defects}</td>    
-                                                <td>${status}</td>    
+                                                <td>${element.fp_name}</td>
+                                                <td>${element.fp_road}</td>
+                                                <td>${element.review_date}</td>
+                                                <td>${element.total_defects}</td>
+                                                <td>${status}</td>
                                                 <td><button type="button" class="btn btn-sm btn-secondary" onclick="getTiangDetail(${element.id})">Detail</button></td>
                                             </tr>
                                 `;
@@ -591,7 +591,7 @@
                 }
                 )
         }
-        
+
 
         function QaStatusReject( )
         {
@@ -620,7 +620,7 @@
                 }
                 )
         }
-        
+
 
 
         // for add and remove layers
@@ -674,7 +674,7 @@
 
             // map.addLayer(substation)
             // substation.bringToFront()
-            
+
             road = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_roads',
                 format: 'image/png',
