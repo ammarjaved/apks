@@ -52,11 +52,11 @@
                             </a>
                         </li>
 
-                        
+
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/patrolling-lks" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>documents</p>
+                                <p>Documents</p>
                             </a>
                         </li>
 
@@ -152,7 +152,7 @@
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/substation-lks" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>documents</p>
+                                <p>Documents</p>
                             </a>
                         </li>
 
@@ -190,7 +190,7 @@
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/feeder-pillar-lks" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>documents</p>
+                                <p>Documents</p>
                             </a>
                         </li>
                     </ul>
@@ -229,7 +229,7 @@
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-lks" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>documents</p>
+                                <p>Documents</p>
                             </a>
                         </li>
                     </ul>
@@ -268,7 +268,7 @@
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/link-box-lks" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>documents</p>
+                                <p>Documents</p>
                             </a>
                         </li>
                     </ul>
@@ -308,7 +308,7 @@
                         <li class="nav-item">
                             <a href="/{{app()->getLocale()}}/cable-bridge-lks" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
-                                <p>documents</p>
+                                <p>Documents</p>
                             </a>
                         </li>
 
@@ -331,14 +331,14 @@
                                     <p>{{__('messages.create')}} savt</p>
                                 </a>
                             </li>
-    
+
                             {{-- <li class="nav-item">
                                 <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-map" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{__('messages.map')}}</p>
                                 </a>
                             </li> --}}
-    
+
                             <li class="nav-item">
                                 <a href="{{route('savt.index', app()->getLocale())}}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
@@ -348,7 +348,7 @@
                             {{-- <li class="nav-item">
                                 <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-lks" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
-                                    <p>documents</p>
+                                    <p>Documents</p>
                                 </a>
                             </li> --}}
                         </ul>
