@@ -51,6 +51,7 @@ use App\Http\Controllers\web\Substation\SubstationTOCController;
 use App\Http\Controllers\web\Tiang\TiangDocumentsRedirectController;
 use App\Http\Controllers\web\Tiang\TiangSBUMReportController;
 use App\Http\Controllers\web\Tiang\TiangSearchController;
+use App\Http\Controllers\web\Tiang\TiangPembersihanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -128,6 +129,7 @@ Route::group(
                 Route::post('/tiang-test',[TiangDocumentsRedirectController::class,'redirectFunction'])->name('tiang-test');
                 Route::post('/tiang-talian-vt-and-vr-SBUM-report',[TiangSBUMReportController::class,'generateSBUMReport'])->name('tiang-talian-vt-and-vr-SBUM-report');
                 Route::get('/search/tiang-by-polygon',[TiangSearchController::class,'getTiangByPolygon'])->name('search-tiang-by-polygon');
+                Route::post('generate-tiang-talian-vt-and-vr-pembersihan',[TiangPembersihanController::class ,'generateTiangExcel'])->name("generate-tiang-talian-vt-and-vr-pembersihan");
 
 
 

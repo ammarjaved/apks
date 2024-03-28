@@ -25,7 +25,9 @@ class TiangLKSController extends Controller
         $button =[];
         $button=[
             ['url'=>'generate-tiang-talian-vt-and-vr-lks' , 'name'=>'Generate LKS'],
-            ['url'=>'tiang-talian-vt-and-vr-SBUM-report' , 'name'=>'SBUM Report'],
+            ['url'=>'generate-tiang-talian-vt-and-vr-pembersihan' , 'name'=>'Generate Pembersihan'],
+
+            // ['url'=>'tiang-talian-vt-and-vr-SBUM-report' , 'name'=>'SBUM Report'],
         ];
         return view('lks.generate-lks',['title'=>'tiang' , 'url'=>'tiang-talian-vt-and-vr-lks','buttons'=>$button]);
     }
