@@ -23,6 +23,10 @@ class SubstationLKSController extends Controller
         $button =[];
         $button=[
             ['url'=>'generate-substation-lks' , 'name'=>'Generate LKS'],
+            ['url'=>'generate-substation-pembersihan' , 'name'=>'Generate Pembersihan'],
+            ['url'=>'generate-substation-toc-claim' , 'name'=>'TOC Claim'],
+
+
         ];
         return view('lks.generate-lks',['title'=>'substation' ,'buttons'=>$button]);
     }

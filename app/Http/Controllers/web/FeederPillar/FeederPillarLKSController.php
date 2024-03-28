@@ -24,7 +24,8 @@ class FeederPillarLKSController extends Controller
         $button =[];
         $button=[
             ['url'=>'generate-feeder-pillar-lks' , 'name'=>'Generate LKS'],
-            ['url'=>'generate-feeder-pillar-ops' , 'name'=>'Generate OPS'],
+            // ['url'=>'generate-feeder-pillar-ops' , 'name'=>'Generate OPS'],
+            ['url'=>'generate-feeder-pillar-pembersihan' , 'name'=>'Generate Pembersihan'],
         ];
         return view('lks.generate-lks',['title'=>'feeder_pillar' ,'buttons'=>$button]);
 

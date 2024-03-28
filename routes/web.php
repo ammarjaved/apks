@@ -20,6 +20,7 @@ use App\Http\Controllers\web\Substation\SubstationExcelController;
 use App\Http\Controllers\web\excel\ThirdPartyExcelController;
 use App\Http\Controllers\web\Tiang\TiangExcelController;
 use App\Http\Controllers\web\FeederPillar\FeederPillarMapController;
+use App\Http\Controllers\web\FeederPillar\FeederPillarPembersihanController;
 use App\Http\Controllers\web\LinkBox\LinkBoxController;
 use App\Http\Controllers\web\map\GeneratePDFController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,8 @@ use App\Models\ThirdPartyDiging;
 use Illuminate\Support\Facades\App;
 use App\Http\Controllers\web\Patrolling\PatrollingExcelController;
 use App\Http\Controllers\web\SAVT\SAVTController;
+use App\Http\Controllers\web\Substation\SubstationPembersihanController;
+use App\Http\Controllers\web\Substation\SubstationTOCController;
 use App\Http\Controllers\web\Tiang\TiangDocumentsRedirectController;
 use App\Http\Controllers\web\Tiang\TiangSBUMReportController;
 use App\Http\Controllers\web\Tiang\TiangSearchController;
@@ -175,6 +178,8 @@ Route::group(
                 Route::get('/get-substation-lks',[SubstationLKSController::class,'getDataForLKS'])->name('get-substation-lks');
                 Route::any('/generate-substation-lks', [SubstationLKSController::class, 'gene'])->name('generate-substation-lks');
                 Route::get('/generate-substation-lks-by-visit-date', [SubstationLKSController::class, 'generateByVisitDate'])->name('generate-substation-lks-by-visit-date');
+                Route::post('/generate-substation-pembersihan', [SubstationPembersihanController::class, 'pembersihan'])->name('generate-substation-pembersihan');
+                Route::post('/generate-substation-toc-claim', [SubstationTOCController::class, 'generateTOC'])->name('generate-substation-toc-claim');
 
 
 
@@ -192,6 +197,7 @@ Route::group(
                 Route::post('/generate-feeder-pillar-ops', [OPSFeederPillarController::class, 'generateOPS'])->name('generate-feeder-pillar-ops');
                 Route::get('/feeder-pillar-lks',[FeederPillarLKSController::class,'index'])->name('feeder-pillar-lks');
                 Route::get('/generate-feeder-pillar-lks-by-visit-date', [FeederPillarLKSController::class, 'generateByVisitDate'])->name('generate-feeder-pillar-lks-by-visit-date');
+                Route::post('/generate-feeder-pillar-pembersihan', [FeederPillarPembersihanController::class, 'pembersihan'])->name('generate-feeder-pillar-pembersihan');
 
 
                 // SAVT routes
