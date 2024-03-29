@@ -170,6 +170,7 @@ class TiangContoller extends Controller
 
     public function updateQAStatus(Request $req)
     {
+
         // return $req;
         try {
             $qa_data = Tiang::find($req->id);
@@ -179,6 +180,8 @@ class TiangContoller extends Controller
             }
             $user = Auth::user()->name;            
             $qa_data->qc_by = $user;
+            $qa_data->qc_at = now();
+
             $qa_data->update();
 
         } catch (\Throwable $th) {
