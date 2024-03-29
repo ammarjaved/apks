@@ -155,7 +155,7 @@ class SubstationPembersihanController extends Controller
                     $g++;
                     // Add image to cell
                     $k = $g +15;
-                    $gateWorkSheet->mergeCells('B'.$g.':M'.$k);
+                    $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
                     $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
                     
                     $imagePath = public_path($advertise->image_advertisement_before_1);
