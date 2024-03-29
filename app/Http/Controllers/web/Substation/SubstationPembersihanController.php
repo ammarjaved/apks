@@ -81,7 +81,7 @@ class SubstationPembersihanController extends Controller
            
 
                 
-                $gateWorkSheet = $spreadsheet->getSheet(1);
+                $gateWorkSheet = $spreadsheet->getSheet(2);
                 $g = 4;
                 $sr = 1;
                 foreach ($gateUnlocked as $gate) 
@@ -141,7 +141,7 @@ class SubstationPembersihanController extends Controller
                 $advertisePoster = $advertisePoster->where('advertise_poster_status', 'Yes')
                         ->select('image_advertisement_before_1','id','visit_date' , DB::raw('ST_X(geom) as x' ) , DB::raw('ST_Y(geom) as y'), 'image_advertisement_after_1')->orderBy('visit_date')->get();
                 
-                $advertiseSheet = $spreadsheet->getSheet(2);
+                $advertiseSheet = $spreadsheet->getSheet(1);
                 $g = 4;
                 $sr = 1;
                 foreach ($advertiseSheet as $advertise) 
