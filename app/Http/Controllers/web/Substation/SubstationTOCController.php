@@ -28,7 +28,7 @@ class SubstationTOCController extends Controller
         {    
             $data = Substation::query();
             $data = $this->filter($data , 'visit_date' , $req)->where('qa_status', 'Accept');
-            $totalCounts = $data->where('total_defects' , '!=' , 0)->select('visit_date' , 'name')->orderBy('visit_date')->get();
+            $totalCounts = $data->select('visit_date' , 'name')->orderBy('visit_date')->get();
 
             if ($totalCounts) 
             {
