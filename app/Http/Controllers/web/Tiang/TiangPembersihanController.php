@@ -116,7 +116,7 @@ class TiangPembersihanController extends Controller
                     $g++;
                     // Add image to cell
                     $k = $g +15;
-                    $gateWorkSheet->mergeCells('B'.$g.':M'.$k);
+                    $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
                     $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
 
                     $imagePath = public_path($gate->pole_image_1); // Provide the path to your image file
@@ -177,7 +177,7 @@ class TiangPembersihanController extends Controller
                     $g++;
                     // Add image to cell
                     $k = $g +15;
-                    $gateWorkSheet->mergeCells('B'.$g.':M'.$k);
+                    $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
                     $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
 
                     $imagePath = public_path($advertise->pole_image_2);

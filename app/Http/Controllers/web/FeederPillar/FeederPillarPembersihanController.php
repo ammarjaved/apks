@@ -96,7 +96,7 @@ class FeederPillarPembersihanController extends Controller
                     $g++;
                     // Add image to cell
                     $k = $g +15;
-                    $gateWorkSheet->mergeCells('B'.$g.':M'.$k);
+                    $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
                     $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
                     
                     $imagePath = public_path($gate->image_gate); // Provide the path to your image file
@@ -156,7 +156,7 @@ class FeederPillarPembersihanController extends Controller
                     $g++;
                     // Add image to cell
                     $k = $g +15;
-                    $gateWorkSheet->mergeCells('B'.$g.':M'.$k);
+                    $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
                     $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
                     
                     $imagePath = public_path($advertise->images_advertise_poster);
