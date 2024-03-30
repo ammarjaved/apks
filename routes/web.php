@@ -130,6 +130,9 @@ Route::group(
                 Route::post('/tiang-talian-vt-and-vr-SBUM-report',[TiangSBUMReportController::class,'generateSBUMReport'])->name('tiang-talian-vt-and-vr-SBUM-report');
                 Route::get('/search/tiang-by-polygon',[TiangSearchController::class,'getTiangByPolygon'])->name('search-tiang-by-polygon');
                 Route::post('generate-tiang-talian-vt-and-vr-pembersihan',[TiangPembersihanController::class ,'generateTiangExcel'])->name("generate-tiang-talian-vt-and-vr-pembersihan");
+                Route::get('remove-tiang-talian-vt-and-vr/{id}',[TiangContoller::class ,'destroyTiang'])->name("remove-tiang-talian-vt-and-vr");
+                Route::get('/search/find-substation-in-tiang-cordinated/{q}/{searchBy}',[TiangSearchController::class ,'seacrhSubstationCoordinated'])->name("find-substation-in-tiang-cordinated");
+                Route::get('/search/find-substation-in-tiang/{type}/{q}',[TiangSearchController::class ,'seacrhSubstation'])->name("find-substation-in-tiang");
 
 
 

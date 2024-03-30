@@ -178,7 +178,7 @@ border-color: #BF2BFF;
     }
 
 
-    input.typeahead.tt-hint {
+    input.typeahead.tt-hint , input.typeahead-substation.tt-hint {
         border: 0px !important;
         background: transparent !important;
         padding: 20px 14px;

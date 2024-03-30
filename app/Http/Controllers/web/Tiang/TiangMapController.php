@@ -24,9 +24,19 @@ class TiangMapController extends Controller
     {
         // return $id;
         $data = $this->tiangRepository->getRecoreds($id);
+        $fromPoleImage1 = '';
+        $fromPoleImage2 = '';
+
+        if ($data && $data->section_from != '') {
+           $from= Tiang::where('section_from' , $data->section_from)->first();
+            if ($from) {
+                $fromPoleImage1 = $from->pole_image_1;
+                $fromPoleImage2 = $from->pole_image_2;
+            }
+        }
         // return $data->jenis_tiang;
 
-        return $data ? view('Tiang.edit-form', ['data' => $data]) : abort(404);
+        return $data ? view('Tiang.edit-form', ['data' => $data , 'fromPoleImage1' => $fromPoleImage1 , 'fromPoleImage2'=>$fromPoleImage2]) : abort(404);
     }
 
 

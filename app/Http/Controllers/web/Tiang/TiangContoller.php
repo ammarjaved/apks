@@ -152,18 +152,33 @@ class TiangContoller extends Controller
      */
     public function destroy($language, $id)
     {
-        //
         try {
             Tiang::find($id)->delete();
 
-            return redirect()
-                ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
-                ->with('success', 'Record Removed');
-        } catch (\Throwable $th) {
-            // return $th->getMessage();
-            return redirect()
-                ->route('tiang-talian-vt-and-vr.index', app()->getLocale())
-                ->with('failed', 'Request Failed');
+            Session::flash('failed', 'Request Failed');
+        } 
+        catch (\Throwable $th) 
+        { 
+        // return $th->getMessage();
+            Session::flash('failed', 'Request Failed');
+        }
+
+        return redirect()->route('tiang-talian-vt-and-vr.index', app()->getLocale());
+    }
+
+
+    public function destroyTiang($language, $id)
+    {
+        try {
+            Tiang::find($id)->delete();
+
+           return response()->json(['success'=>true],200);
+        } 
+        catch (\Throwable $th) 
+        { 
+        // return $th->getMessage();
+            return response()->json(['success'=>false],400);
+
         }
     }
 

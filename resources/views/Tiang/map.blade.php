@@ -8,7 +8,10 @@
         #map {
             height: 700px;
         }
-
+        #lightbox .lb-outerContainer{display: block}
+        #myLargeModalLabel>.modal-dialog {
+    max-width: 1100px !important;
+    margin: 0.75rem 9rem !important ;}
 
         /* .main-sidebar{width: 220px }
                 body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header  {margin-left: 220px }
@@ -143,20 +146,34 @@
                 </div>
 
 
-            <div class="mx-4">
-                <div id="the-basics">
-                    <div class="d-flex">
-                        <div class="col-6">
-                            <input type="radio" name="search-by" value="tiang_no" id="search-by-tiang-no" checked onclick="$('#search-input').attr('placeholder','Search by Tiang No')"> <label for="search-by-tiang-no">Tiang No</label>
+                <div class="mx-4">
+                    <div id="the-basics">
+                        <div class="d-flex">
+                            <div class="col-6">
+                                <input type="radio" name="search-by" value="tiang_no" id="search-by-tiang-no" checked onclick="$('#search-input').attr('placeholder','Search by Tiang No')"> <label for="search-by-tiang-no">Tiang No</label>
+                            </div>
+                            <div class="col-6">
+                                <input type="radio" name="search-by" value="tiang_id" id="search-by-tiang-id" onclick="document.getElementById('search-input').placeholder = 'Search by Tiang ID'"> <label for="search-by-tiang-id">Tiang Id</label>
+                            </div>
                         </div>
-                        <div class="col-6">
-                            <input type="radio" name="search-by" value="tiang_id" id="search-by-tiang-id" onclick="document.getElementById('search-input').placeholder = 'Search by Tiang ID'"> <label for="search-by-tiang-id">Tiang Id</label>
-                        </div>
+                        <input class="typeahead" type="text" placeholder="search by tiang no" id="search-input" class="form-control">
                     </div>
-                    <input class="typeahead" type="text" placeholder="search by tiang no" id="search-input" class="form-control">
                 </div>
             </div>
- </div>
+
+            <div class="col-md-4">
+                <div id="the-basics-substation">
+                    <div class="d-flex">
+                        <div class="col-6">
+                            <input type="radio" name="substation-search-by" value="substation_name" id="search-by-substation-name" checked onclick="$('#substation-search-input').attr('placeholder','Search by Substation Name ').val('')"> <label for="search-by-substation-name">Substation Name</label>
+                        </div>
+                        <div class="col-6">
+                            <input type="radio" name="substation-search-by" value="substation_id" id="search-by-substation-id" onclick="$('#substation-search-input').attr('placeholder','Search by Substation ID ').val('')"> <label for="search-by-substation-id">Substation ID</label>
+                        </div>
+                    </div>
+                    <input class="typeahead-substation" type="text" placeholder="search by Substation Name" id="substation-search-input" class="form-control">
+                </div>
+            </div>
 
         </div>
 
@@ -252,8 +269,8 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body " style="max-height : 80vh ; overflow-y: scroll" >
-                     <table class="table" id="polygone-tiang-data" >
+                <div class="modal-body " style="max-height : 80vh ; overflow: scroll" >
+                     <table class="table table-hover" id="polygone-tiang-data" >
                         <thead>
                             <th>ID</th>
                             <th>BA</th>
@@ -261,9 +278,14 @@
                             <th>FP NAME</th>
                             <th>ROAD NAME</th>
                             <th>REVIEW DATE</th>
+                            <th>SIZE TIANG</th>
+                            <th>JENIS TIANG</th>
                             <th>TOTAL DEFECTS</th>
                             <th>QA Status</th>
-                            {{-- <th>ACTION</th> --}}
+                            <th>IMAGE 1</th>
+                            <th>IMAGE 2</th>
+
+                            <th>ACTION</th>
                         </thead>
                         <tbody id="polygone-tiang-data-body">
 
@@ -361,9 +383,37 @@
     </div>
 
 
+    <div class="modal fade" id="removeConfirm">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+    
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Remove Recored</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="" id="remove-foam" method="POST">
+                    @method('DELETE')
+                    @csrf
+    
+                    <div class="modal-body">
+                        Are You Sure ?
+                        <input type="hidden" name="id" id="remove-modal-id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" onclick="removeRecord()">Remove</button>
+                    </div>
+                </form>
+    
+            </div>
+        </div>
+    </div>
+
 @endsection
 
 @section('script')
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 {{-- <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script> --}}
     @include('partials.map-js')
 
@@ -371,6 +421,7 @@
 
     <script>
 
+        // SEARCH BY TIANG NO OR NAME
         var substringMatcher = function(strs) {
 
             return function findMatches(q, cb) {
@@ -434,8 +485,79 @@
                     map.addLayer(marker);
                 }
             })
+        });
+
+
+
+        // SEARCH BY TIANG NO OR NAME
+        var substationSubstringMatcher = function(strs) {
+
+        return function findMatches(q, cb) {
+
+            var matches;
+            var searchBy= $('input[name="substation-search-by"]:checked').val();
+
+            matches = [];
+            $.ajax({
+                url: '/{{ app()->getLocale() }}/search/find-substation-in-tiang/'+searchBy+'/' + q,
+                dataType: 'JSON',
+                //data: data,
+                method: 'GET',
+                async: false,
+                success: function callback(data) {
+                    $.each(data, function(i, str) {
+
+                        matches.push(str.name);
+
+                    });
+                }
+            })
+
+            cb(matches);
+        };
+        }; 
+
+
+
+        $('#the-basics-substation .typeahead-substation').typeahead({
+            hint: true,
+            highlight: true,
+            minLength: 1
+            }, {
+            name: 'states',
+            source: substationSubstringMatcher()
+        });
+
+        $('.typeahead-substation').on('typeahead:select', function(event, suggestion) {
+        var name = encodeURIComponent(suggestion);
+        var searchBy= $('input[name="substation-search-by"]:checked').val();
+
+
+        if (marker != '') {
+            map.removeLayer(marker)
+        }
+        $.ajax({
+            url: '/{{ app()->getLocale() }}/search/find-substation-in-tiang-cordinated/' + encodeURIComponent(name)+'/'+searchBy,
+            dataType: 'JSON',
+            //data: data,
+            method: 'GET',
+            async: false,
+            success: function callback(data) {
+                console.log(data);
+                map.flyTo([parseFloat(data.y), parseFloat(data.x)], 16, {
+                    duration: 1.5, // Animation duration in seconds
+                    easeLinearity: 0.25,
+                });
+
+                marker = new L.Marker([data.y, data.x]);
+                map.addLayer(marker);
+            }
+        })
 
         });
+
+
+
     </script>
 
 
@@ -454,6 +576,13 @@
                 var button = $(event.relatedTarget);
                 var remarks = button.data('reject_remarks');
                 $('#reject_remakrs_show').val(remarks);
+            });
+
+            $('#removeConfirm').on('show.bs.modal', function(event)
+            {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                $('#remove-modal-id').val(id);
             });
 
         })
@@ -540,9 +669,26 @@
                                                 <td>${element.fp_name}</td>
                                                 <td>${element.fp_road}</td>
                                                 <td>${element.review_date}</td>
+                                                <td>${element.size_tiang}</td>
+                                                <td>${element.jenis_tiang}</td>
                                                 <td>${element.total_defects}</td>
                                                 <td>${status}</td>
-                                                <td><button type="button" class="btn btn-sm btn-secondary" onclick="getTiangDetail(${element.id})">Detail</button></td>
+                                                <td>
+                                                    <a class="text-right" id="imp"  href="http://121.121.232.54:8090/${element.pole_image_1}" data-lightbox="roadtrip">
+                                                        <img src="http://121.121.232.54:8090/${element.pole_image_1}" style="height:50px;"/>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a class="text-right" id="imp"  href="http://121.121.232.54:8090/${element.pole_image_2}" data-lightbox="roadtrip">
+                                                        <img src="http://121.121.232.54:8090/${element.pole_image_2}" style="height:50px;"/>
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <div class='d-flex'>
+                                                        <button type="button" class="btn  mr-2" onclick="getTiangDetail(${element.id})"><i class="fas fa-eye text-primary"></i></button>
+                                                        <button type="button" class="btn  "  data-id="${element.id}" data-toggle="modal" data-target="#removeConfirm"><i class="fas fa-trash text-danger"></i></button>
+                                                    </div>
+                                                </td>
                                             </tr>
                                 `;
                                 $('#polygone-tiang-data-body').append(str);
@@ -620,6 +766,19 @@
                 }
                 )
         }
+
+
+        function removeRecord() {
+            var id = document.getElementById('remove-modal-id').value;
+            axios.get('/{{app()->getLocale()}}/remove-tiang-talian-vt-and-vr/' + id)
+            .then(function (response) {
+                getTiangByPolyGone()
+            })
+            .catch(function (error) {
+                alert('Request Failed')
+            });
+            $('#removeConfirm').modal('hide');
+    }
 
 
 

@@ -67,6 +67,29 @@
             </div>
         </div>
 
+
+
+        {{-- FROM TIANG IMAGES --}}
+
+    
+        @isset($fromPoleImage1)
+            <div class="row">
+                <div class="col-4">
+                    <a class="text-right"  href="http://121.121.232.54:8090/{{$fromPoleImage1}}" data-lightbox="roadtrip">
+                        <img src="http://121.121.232.54:8090/{{$fromPoleImage1}}" style="height:50px;"/>
+                    </a> 
+                </div>
+                <div class="col-4">
+                    <a class="text-right"  href="http://121.121.232.54:8090/{{$fromPoleImage2}}" data-lightbox="roadtrip">
+                        <img src="http://121.121.232.54:8090/{{$fromPoleImage2}}" style="height:50px;"/>
+                    </a> 
+                </div>
+            </div>
+        @endisset
+
+        
+
+
         {{-- SECTION TO --}}
         <div class="row">
             <div class="col-md-4"><label for="section_to">{{ __('messages.to') }}</label></div>
