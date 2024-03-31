@@ -280,6 +280,7 @@
                             <th>REVIEW DATE</th>
                             <th>SIZE TIANG</th>
                             <th>JENIS TIANG</th>
+                            <th style="min-width: 200px !important;">CABLE TYPE</th>
                             <th>TOTAL DEFECTS</th>
                             <th>QA Status</th>
                             <th>IMAGE 1</th>
@@ -671,6 +672,11 @@
                                                 <td>${element.review_date}</td>
                                                 <td>${element.size_tiang}</td>
                                                 <td>${element.jenis_tiang}</td>
+                                                <td>
+                                                    ${element.abc_span}
+                                                    ${element.pvc_span != '' ? ','+element.pvc_span :''}
+                                                    ${element.bare_span != '' ? ','+element.bare_span :''}
+                                                </td>
                                                 <td>${element.total_defects}</td>
                                                 <td>${status}</td>
                                                 <td>

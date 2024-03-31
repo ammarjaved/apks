@@ -15,10 +15,40 @@ class TiangSearchController extends Controller
     public function getTiangByPolygon(Request $request)
     {
         
-        try {
-            $data = Tiang::whereRaw("ST_Intersects(geom, ST_GeomFromGeoJSON('$request->json'))")->select('id', 'fp_name', 'tiang_no', 'review_date','total_defects' , 'qa_status' ,'reject_remarks', 'fp_road' , 'ba' ,'pole_image_1','pole_image_2' , 'jenis_tiang' ,'size_tiang')
-            ->whereNotNull('review_date')->orderBy('id')->get();
+        $spanColumns = [ 
+                'abc_span'=>['label'=>'ABC SPAN','keys' =>['s3_185','s3_95','s1_16']],
+                'pvc_span'=>['label'=>'ABC SPAN','keys' =>['s19_064','s7_083','s7_044']],
+                'bare_span'=>['label'=>'ABC SPAN','keys' =>['s7_173','s7_122','s3_132']]
+            ];
+
+        try 
+        {
+            $data = Tiang::whereRaw("ST_Intersects(geom, ST_GeomFromGeoJSON('$request->json'))")
+                            ->select('id', 'fp_name', 'tiang_no', 'review_date','total_defects' , 'qa_status' ,'reject_remarks', 'fp_road' , 'ba' ,'pole_image_1','pole_image_2' , 'jenis_tiang' ,'size_tiang','abc_span','pvc_span','bare_span')
+                            // ->selectRaw("CONCAT(
+                            //         CASE WHEN abc_span->>'s3_185' IS NOT NULL THEN abc_span->>'s3_185'
+                            // )")
+                            ->whereNotNull('review_date')
+                            ->orderBy('id')
+                            ->get();
+
+                            foreach ($data as $rec) {
+                                foreach ($spanColumns as $key => $value) {
+                                    $spanValue = json_decode($rec->{$key});
+                                    $span = '';
+                        
+                                    foreach ($value['keys'] as $spanKey) {
+                                        if (isset($spanValue->{$spanKey})) {
+                                            $span .= $value['label'] . ' ' . $spanKey . ' : ' . $spanValue->{$spanKey} . ' , ';
+                                        }
+                                    }
+                        
+                                    $rec->{$key} = rtrim($span, ' ,');
+                                }
+                            }
+                       
         } catch (\Throwable $th) {
+            return $th->getMessage();
             return response()->json(['data'=>'' ,'status'=> 400]);   
         }
        
