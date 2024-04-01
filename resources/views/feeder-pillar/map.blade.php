@@ -491,7 +491,9 @@
                     'Surveyed Without defects': fp_surveyed,
                     'Work Package': work_package,
                     'Pending':fp_pending,
-                    'Reject':fp_reject
+                    'Reject':fp_reject,
+                    '5_x_5_grid':g5_x_5_grid,
+
 
                 }
             };

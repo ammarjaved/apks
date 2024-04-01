@@ -533,7 +533,7 @@
                         'With defects': lb_with_defects,
                         'Without defects': lb_without_defects,
                         'Unsurveyed': lb_unsurveyed,
-
+                        '5_x_5_grid':g5_x_5_grid,
                         'Work Package': work_package,
                         'Pending': lb_pending,
                         'Reject': lb_reject

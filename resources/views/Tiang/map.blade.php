@@ -285,6 +285,8 @@
                             <th>QA Status</th>
                             <th>IMAGE 1</th>
                             <th>IMAGE 2</th>
+                            <th>FROM 1</th>
+                            <th>IMAGE 2</th>
 
                             <th>ACTION</th>
                         </thead>
@@ -680,13 +682,23 @@
                                                 <td>${element.total_defects}</td>
                                                 <td>${status}</td>
                                                 <td>
-                                                    <a class="text-right" id="imp"  href="http://121.121.232.53:8090/${element.pole_image_1}" data-lightbox="roadtrip">
-                                                        <img src="http://121.121.232.53:8090/${element.pole_image_1}" style="height:50px;"/>
+                                                    <a href="http://121.121.232.53:8090/${element.pole_image_1}" target="_blank" />
+                                                        <img src="http://121.121.232.53:8090/${element.pole_image_1}" style="height:50px;" >
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a class="text-right" id="imp"  href="http://121.121.232.53:8090/${element.pole_image_2}" data-lightbox="roadtrip">
-                                                        <img src="http://121.121.232.53:8090/${element.pole_image_2}" style="height:50px;"/>
+                                                    <a href="http://121.121.232.53:8090/${element.pole_image_2}" target="_blank" />
+                                                        <img src="http://121.121.232.53:8090/${element.pole_image_2}" style="height:50px;"  />
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="http://121.121.232.53:8090/${element.from_pole_image_1}" target="_blank" />
+                                                        <img src="http://121.121.232.53:8090/${element.from_pole_image_1}" style="height:50px;" />
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="http://121.121.232.53:8090/${element.from_pole_image_2}" target="_blank" />
+                                                        <img src="http://121.121.232.53:8090/${element.from_pole_image_2}" style="height:50px;"  />
                                                     </a>
                                                 </td>
                                                 <td>
@@ -990,6 +1002,14 @@
             // map.addLayer(work_package)
             // work_package.bringToFront()
 
+            // g5_x_5_grid = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+            //         layers: 'cite:grid_5x5',
+            //         format: 'image/png',
+            //         maxZoom: 21,
+            //         transparent: true
+            //     }, {
+            //         buffer: 10
+            //     })
 
             addGroupOverLays()
 
@@ -1006,6 +1026,7 @@
             groupedOverlays = {
                 "POI": {
                     'BA': boundary,
+                    '5_x_5_grid':g5_x_5_grid,
                     'Substation': substation,
                     'Feeder Pillar': feeder_pillar,
                     'Pano': pano_layer,

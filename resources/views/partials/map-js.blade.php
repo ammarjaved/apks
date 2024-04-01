@@ -78,6 +78,19 @@ var sub_reject = '';
 
 
 
+var g5_x_5_grid = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:grid_5x5',
+                    format: 'image/png',
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                });
+
+
+
+
+
    
 
     var popup = L.popup();

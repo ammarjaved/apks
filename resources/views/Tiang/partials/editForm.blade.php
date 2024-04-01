@@ -75,13 +75,13 @@
         @isset($fromPoleImage1)
             <div class="row">
                 <div class="col-4">
-                    <a class="text-right"  href="http://121.121.232.54:8090/{{$fromPoleImage1}}" data-lightbox="roadtrip">
-                        <img src="http://121.121.232.54:8090/{{$fromPoleImage1}}" style="height:50px;"/>
+                    <a class="text-right"  href="{{URL::asset($fromPoleImage1)}}" data-lightbox="roadtrip">
+                        <img src="{{URL::asset($fromPoleImage1)}}" style="height:50px;"/>
                     </a> 
                 </div>
                 <div class="col-4">
-                    <a class="text-right"  href="http://121.121.232.54:8090/{{$fromPoleImage2}}" data-lightbox="roadtrip">
-                        <img src="http://121.121.232.54:8090/{{$fromPoleImage2}}" style="height:50px;"/>
+                    <a class="text-right"  href="{{URL::asset($fromPoleImage2)}}" data-lightbox="roadtrip">
+                        <img src="{{URL::asset($fromPoleImage2)}}" style="height:50px;"/>
                     </a> 
                 </div>
             </div>

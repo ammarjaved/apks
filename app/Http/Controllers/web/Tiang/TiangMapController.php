@@ -28,7 +28,7 @@ class TiangMapController extends Controller
         $fromPoleImage2 = '';
 
         if ($data && $data->section_from != '') {
-           $from= Tiang::where('section_from' , $data->section_from)->first();
+           $from= Tiang::where('tiang_no' , $data->section_from)->first();
             if ($from) {
                 $fromPoleImage1 = $from->pole_image_1;
                 $fromPoleImage2 = $from->pole_image_2;

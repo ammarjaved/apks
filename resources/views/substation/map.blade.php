@@ -527,7 +527,7 @@
                     'With defects': substation_with_defects,
                     'Without defects': substation_without_defects,
                     'Unsurveyed': unservey,
-
+                    '5_x_5_grid':g5_x_5_grid,
                     'Work Package': work_package,
                     'Pending': sub_pending,
                     'Reject': sub_reject

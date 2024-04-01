@@ -24,7 +24,7 @@ class TiangSearchController extends Controller
         try 
         {
             $data = Tiang::whereRaw("ST_Intersects(geom, ST_GeomFromGeoJSON('$request->json'))")
-                            ->select('id', 'fp_name', 'tiang_no', 'review_date','total_defects' , 'qa_status' ,'reject_remarks', 'fp_road' , 'ba' ,'pole_image_1','pole_image_2' , 'jenis_tiang' ,'size_tiang','abc_span','pvc_span','bare_span')
+                            ->select('id', 'fp_name', 'tiang_no', 'review_date','total_defects' ,'section_from', 'qa_status' ,'reject_remarks', 'fp_road' , 'ba' ,'pole_image_1','pole_image_2' , 'jenis_tiang' ,'size_tiang','abc_span','pvc_span','bare_span')
                             // ->selectRaw("CONCAT(
                             //         CASE WHEN abc_span->>'s3_185' IS NOT NULL THEN abc_span->>'s3_185'
                             // )")
@@ -33,6 +33,11 @@ class TiangSearchController extends Controller
                             ->get();
 
                             foreach ($data as $rec) {
+                                $from_img = Tiang::where('tiang_no' , $rec->section_from)->select('pole_image_1','pole_image_2')->first();
+                                if ($from_img) {
+                                    $rec['from_pole_image_1'] = $from_img->pole_image_1;
+                                    $rec['from_pole_image_2'] = $from_img->pole_image_2;
+                                }
                                 foreach ($spanColumns as $key => $value) {
                                     $spanValue = json_decode($rec->{$key});
                                     $span = '';

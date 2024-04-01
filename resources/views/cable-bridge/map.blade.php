@@ -507,7 +507,7 @@
                         'With defects': cb_with_defects,
                         'Without defects': cb_without_defects,
                         'Unsurveyed': cb_unsurveyed,
-
+                        '5_x_5_grid':g5_x_5_grid,
                         'Work Package': work_package,
                         'Pending': cb_pending,
                         'Reject': cb_reject
