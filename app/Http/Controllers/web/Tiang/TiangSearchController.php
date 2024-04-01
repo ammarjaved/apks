@@ -43,7 +43,7 @@ class TiangSearchController extends Controller
                                     $span = '';
                         
                                     foreach ($value['keys'] as $spanKey) {
-                                        if (isset($spanValue->{$spanKey})) {
+                                        if (isset($spanValue->{$spanKey}) && $spanValue->{$spanKey} != '' ) {
                                             $span .= $value['label'] . ' ' . $spanKey . ' : ' . $spanValue->{$spanKey} . ' , ';
                                         }
                                     }

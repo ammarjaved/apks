@@ -285,8 +285,8 @@
                             <th>QA Status</th>
                             <th>IMAGE 1</th>
                             <th>IMAGE 2</th>
-                            <th>FROM 1</th>
-                            <th>IMAGE 2</th>
+                            <th>FROM IMAGE 1</th>
+                            <th>FROM IMAGE 2</th>
 
                             <th>ACTION</th>
                         </thead>
@@ -1002,14 +1002,18 @@
             // map.addLayer(work_package)
             // work_package.bringToFront()
 
-            // g5_x_5_grid = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
-            //         layers: 'cite:grid_5x5',
-            //         format: 'image/png',
-            //         maxZoom: 21,
-            //         transparent: true
-            //     }, {
-            //         buffer: 10
-            //     })
+            if(g5_x_5_grid){
+                map.removeLayer(g5_x_5_grid);
+            }
+            g5_x_5_grid = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                    layers: 'cite:grid_5x5',
+                    format: 'image/png',
+                    cql_filter: "ba ILIKE '%" + param + "%'",
+                    maxZoom: 21,
+                    transparent: true
+                }, {
+                    buffer: 10
+                })
 
             addGroupOverLays()
 
