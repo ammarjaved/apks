@@ -680,13 +680,13 @@
                                                 <td>${element.total_defects}</td>
                                                 <td>${status}</td>
                                                 <td>
-                                                    <a class="text-right" id="imp"  href="http://121.121.232.54:8090/${element.pole_image_1}" data-lightbox="roadtrip">
-                                                        <img src="http://121.121.232.54:8090/${element.pole_image_1}" style="height:50px;"/>
+                                                    <a class="text-right" id="imp"  href="http://121.121.232.53:8090/${element.pole_image_1}" data-lightbox="roadtrip">
+                                                        <img src="http://121.121.232.53:8090/${element.pole_image_1}" style="height:50px;"/>
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a class="text-right" id="imp"  href="http://121.121.232.54:8090/${element.pole_image_2}" data-lightbox="roadtrip">
-                                                        <img src="http://121.121.232.54:8090/${element.pole_image_2}" style="height:50px;"/>
+                                                    <a class="text-right" id="imp"  href="http://121.121.232.53:8090/${element.pole_image_2}" data-lightbox="roadtrip">
+                                                        <img src="http://121.121.232.53:8090/${element.pole_image_2}" style="height:50px;"/>
                                                     </a>
                                                 </td>
                                                 <td>
