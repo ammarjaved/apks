@@ -588,6 +588,14 @@
                 $('#remove-modal-id').val(id);
             });
 
+            $('#rejectReasonModal').on('show.bs.modal', function(event)
+            {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                $('#reject-id').val(id);
+            });
+
+
         })
 
                // ADD DRAW TOOLS
@@ -804,7 +812,19 @@
         function addRemoveBundary(param, paramY, paramX) {
 
 
-            var q_cql = "ba ILIKE '%" + param + "%' "
+            var q_cql = '';
+            var boundaryFilter = '';
+            var baFilter = '';
+
+            if (param == '') {
+                baFilter = "ba ILIKE '%" + param + "%' "
+                boundaryFilter = "station ILIKE '%" + param + "%' ";
+            }else{
+                baFilter = "ba ='" + param + "' ";
+                boundaryFilter = "station ='" + param + "' ";
+
+            }
+            q_cql = baFilter;
             if (from_date != '') {
                 q_cql = q_cql + "AND review_date >=" + from_date;
             }
@@ -820,7 +840,7 @@
             boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:ba',
                 format: 'image/png',
-                cql_filter: "station ILIKE '%" + param + "%'",
+                cql_filter: boundaryFilter,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -842,7 +862,7 @@
             substation = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tiang_substation',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
+                cql_filter: baFilter,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -855,7 +875,7 @@
             road = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_roads',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
+                cql_filter: baFilter,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -873,7 +893,7 @@
             ts_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:ts_unsurveyed',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
+                cql_filter: baFilter,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -893,7 +913,7 @@
             feeder_pillar = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tiang_feeder_pillar',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
+                cql_filter: baFilter,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -976,7 +996,7 @@
             pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:pano_apks',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
+                cql_filter: baFilter,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -993,7 +1013,7 @@
             work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                     layers: 'cite:tbl_workpackage',
                     format: 'image/png',
-                    cql_filter: "ba ILIKE '%" + param + "%'",
+                    cql_filter: baFilter,
                     maxZoom: 21,
                     transparent: true
                 }, {
@@ -1008,7 +1028,7 @@
             g5_x_5_grid = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                     layers: 'cite:grid_5x5',
                     format: 'image/png',
-                    cql_filter: "ba ILIKE '%" + param + "%'",
+                    cql_filter: baFilter,
                     maxZoom: 21,
                     transparent: true
                 }, {

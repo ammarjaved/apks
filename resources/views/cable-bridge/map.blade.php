@@ -306,6 +306,27 @@
 
 
 
+            var q_cql = '';             
+            var boundaryFilter = '';
+            var baFilter = '';
+
+            if (param == '') {
+                baFilter = "ba ILIKE '%" + param + "%' "
+                boundaryFilter = "station ILIKE '%" + param + "%' ";
+            }else{
+                baFilter = "ba ='" + param + "' ";
+                boundaryFilter = "station ='" + param + "' ";
+
+            }
+            q_cql = baFilter;
+
+            if (from_date != '') {
+                q_cql = q_cql + "AND visit_date >=" + from_date;
+            }
+            if (to_date != '') {
+                q_cql = q_cql + "AND visit_date <=" + to_date;
+            }
+
 
             if (work_package) {
                 map.removeLayer(work_package);
@@ -314,7 +335,7 @@
             work_package = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:tbl_workpackage',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
+                cql_filter: baFilter,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -334,7 +355,7 @@
             boundary = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:ba',
                 format: 'image/png',
-                cql_filter: "station ILIKE '%" + param + "%'",
+                cql_filter: boundaryFilter,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -350,7 +371,7 @@
             pano_layer = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                 layers: 'cite:pano_apks',
                 format: 'image/png',
-                cql_filter: "ba ILIKE '%" + param + "%'",
+                cql_filter: baFilter,
                 maxZoom: 21,
                 transparent: true
             }, {
@@ -367,21 +388,14 @@
                 easeLinearity: 0.25,
             });
 
-            updateLayers(param);
+            updateLayers(q_cql , baFilter);
 
         }
 
 
-        function updateLayers(param) {
+        function updateLayers(q_cql , baFilter) {
 
-            var q_cql = "ba ILIKE '%" + param + "%' "
-            if (from_date != '') {
-                q_cql = q_cql + "AND visit_date >=" + from_date;
-            }
-            if (to_date != '') {
-                q_cql = q_cql + "AND visit_date <=" + to_date;
-            }
-
+   
 
             if (cb_without_defects != '') {
                 map.removeLayer(cb_without_defects)
@@ -473,7 +487,7 @@
                 cb_unsurveyed = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                     layers: 'cite:cb_unsurveyed',
                     format: 'image/png',
-                    cql_filter: "ba ILIKE '%" + param + "%'",
+                    cql_filter: baFilter,
                     maxZoom: 21,
                     transparent: true
                 }, {
@@ -490,7 +504,7 @@
                 g5_x_5_grid = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
                         layers: 'cite:grid_5x5',
                         format: 'image/png',
-                        cql_filter: "ba ILIKE '%" + param + "%'",
+                        cql_filter: baFilter,
                         maxZoom: 21,
                         transparent: true
                     }, {

@@ -80,7 +80,7 @@ class FPController extends Controller
             $data = new FeederPillar();      
             $data->coordinate = $request->coordinate;
             $user = Auth::user()->name;
-
+            $data->team = $request->team;
             $data->created_by = $user;
             $data->qa_status = 'pending';
             $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");

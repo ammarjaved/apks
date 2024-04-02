@@ -91,6 +91,8 @@ class CableBridgeController extends Controller
             $user = Auth::user()->name;
 
             $data->created_by = $user;
+            $data->team = $request->team;
+
             $data->qa_status = 'pending';
             $data->geom = DB::raw("ST_GeomFromText('POINT(" . $request->log . ' ' . $request->lat . ")',4326)");
             $cableBridge->store($data,$request);
