@@ -559,72 +559,81 @@
 
         });
 
-
-
     </script>
-
 
 
     <script>
 
         $(function(){
-            $('#tiangDetailModal').on('hide.bs.modal', function(event)
-            {
+            // Event handler for hiding Tiang modal
+            $('#tiangDetailModal').on('hide.bs.modal', function(event) {
                 getTiangByPolyGone()
                 $('#tiangDetailModalBody').html('');
             });
 
-            $('#rejectReasonModalShow').on('show.bs.modal', function(event)
-            {
+
+            // Event handler for showing reject reason modal
+            $('#rejectReasonModalShow').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var remarks = button.data('reject_remarks');
                 $('#reject_remakrs_show').val(remarks);
             });
 
-            $('#removeConfirm').on('show.bs.modal', function(event)
-            {
+
+            // Event handler for showing remove confirm modal
+            $('#removeConfirm').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 $('#remove-modal-id').val(id);
             });
 
-            $('#rejectReasonModal').on('show.bs.modal', function(event)
-            {
+
+            // Event handler for showing reject reason modal
+            $('#rejectReasonModal').on('show.bs.modal', function(event) {
                 var button = $(event.relatedTarget);
                 var id = button.data('id');
                 $('#reject-id').val(id);
             });
 
 
-        })
+            // Listen for message from iframe
+            window.addEventListener('message', function(event) {
+                if (event.data === 'closeModal') {
+                    $('#tiangDetailModal').modal('hide');
+                    getTiangByPolyGone()
+                }
+            });
+        });
 
-               // ADD DRAW TOOLS
+       
 
-               var drawnItems = new L.FeatureGroup();
-                map.addLayer(drawnItems);
-                var drawControl = new L.Control.Draw({
-                    draw: {
-                        circle    : false,
-                        marker    : false,
-                        polygon   : true,
-                        polyline  : false,
-                        rectangle : false,
-                        circlemarker : false,
-                    },
-                    edit: {
-                        featureGroup: drawnItems,
-                        edit: false,  // Disable editing mode
-                        remove: false // Disable deletion mode
-                    }
-                });
+        // ADD DRAW TOOLS
 
-                map.addControl(drawControl);
+        var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+        var drawControl = new L.Control.Draw({
+            draw: {
+                circle    : false,
+                marker    : false,
+                polygon   : true,
+                polyline  : false,
+                rectangle : false,
+                circlemarker : false,
+            },
+            edit: {
+                featureGroup: drawnItems,
+                edit: false,  // Disable editing mode
+                remove: false // Disable deletion mode
+            }
+        });
+
+        map.addControl(drawControl);
 
         var newLayer = '';
         var jsonData = '';
-                // DRAW TOOL ON CREATED EVENT
-        map.on('draw:created', function(e)
-        {
+
+        // DRAW TOOL ON CREATED EVENT
+        map.on('draw:created', function(e){
             var type = e.layerType;
             newLayer = e.layer;
             // drawnItems.addLayer(newLayer);
@@ -804,7 +813,7 @@
                 alert('Request Failed')
             });
             $('#removeConfirm').modal('hide');
-    }
+        }
 
 
 

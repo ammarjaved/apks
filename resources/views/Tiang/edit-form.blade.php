@@ -153,19 +153,19 @@
 
                             
                                 <fieldset class="form-input">
-                            <div class="row  ">
-                                <div class="col-md-4">
-                                    <label for="zone">QA Status</label>
-                                </div>
-                                <div class="col-md-4">
-    
-                                    <select name="qa_status" id="qa_status" class="form-control" onchange="onChangeQa(this.value)">
-                                        <option value="{{$data->qa_status}}" hidden>{{$data->qa_status}}</option>
-                                        <option value="Accept">Accept</option>
-                                        <option value="Reject">Reject</option>
-                                    </select>
-                                </div>
-                                </div>
+                                    <div class="row  ">
+                                        <div class="col-md-4">
+                                            <label for="zone">QA Status</label>
+                                        </div>
+                                        <div class="col-md-4">
+            
+                                            <select name="qa_status" id="qa_status" class="form-control" onchange="onChangeQa(this.value)">
+                                                <option value="{{$data->qa_status}}" hidden>{{$data->qa_status}}</option>
+                                                <option value="Accept">Accept</option>
+                                                <option value="Reject">Reject</option>
+                                            </select>
+                                        </div>
+                                    </div>
                      
                                 
                                     <div class=" row {{$data->qa_status != 'Reject' ? 'd-none' : ''}} " id="reject-reason" >
@@ -181,6 +181,7 @@
                             
 
                             <div class="text-center py-4" >
+                                <button type="button" class="btn btn-danger btn-sm" onclick="removeRecord({{$data->id}})">Remove</button>
                                 <button class="btn btn-sm btn-success" type="submit" onclick="$('#framework-wizard-form').submit()">UPDATE</button>
                             </div>
 
@@ -204,182 +205,119 @@
 
 
     <script>
-        // var form = $("#framework-wizard-form").show();
-        // form
-        //     .steps({
-        //         headerTag: "h3",
-        //         bodyTag: "fieldset",
-        //         transitionEffect: "slideLeft",
-
-        //         onStepChanging: function(event, currentIndex, newIndex) {
-        //             // Allways allow previous action even if the current form is not valid!
-        //             if (currentIndex > newIndex) {
-        //                 return true;
-        //             }
-
-        //             form.validate().settings.ignore = ":disabled,:hidden";
-        //             return form.valid();
-        //         },
-
-
-
-        //         onFinished: function(event, currentIndex) {
-        //             form.submit();
-        //         },
-        //         // autoHeight: true,
-        //     })
-
-        function onChangeQa(status){
-            if (status == 'Accept') {
-                $('#reject-reason').hasClass('d-none')?'':$('#reject-reason').addClass('d-none')
-            }else if(status == 'Reject'){
-                $('#reject-reason').hasClass('d-none')?$('#reject-reason').removeClass('d-none') : ''
+        // Function to handle changes in QA status
+        function onChangeQa(status) {
+            if (status === 'Accept') {
+                $('#reject-reason').addClass('d-none');
+            } else if (status === 'Reject') {
+                $('#reject-reason').removeClass('d-none');
             }
         }
-
-
+    
+        // Function to get geolocation
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(showPosition);
             } else {
-                x.innerHTML = "Geolocation is not supported by this browser.";
+                console.log("Geolocation is not supported by this browser.");
             }
         }
-
+    
+        // Function to show geolocation
         function showPosition(position) {
-
-            $('#lat').val(position.coords.latitude)
-            $('#log').val(position.coords.longitude)
-
+            $('#lat').val(position.coords.latitude);
+            $('#log').val(position.coords.longitude);
         }
-
+    
+        // Function to remove a record
+        function removeRecord(paramId) {
+            var confrim = confirm('Are you sure?')
+            if (confrim) {
+                $.ajax({
+                    url: `/{{ app()->getLocale() }}/remove-tiang-talian-vt-and-vr/${paramId}`,
+                    dataType: 'JSON',
+                    method: 'GET',
+                    success: function(response) {
+                        // Send message to parent window to close modal after successful removal
+                        window.parent.postMessage('closeModal', '*');
+                    }
+                });
+            }
+        }
+    
         $(document).ready(function() {
-
+            // Event handler for checkboxes in defects section
             $('.defects input[type="checkbox"]').on('click', function() {
-                addReomveImageField(this)
-
-            })
-
+                addRemoveImageField(this);
+            });
+    
+            // Event handler for checkboxes in high clearance section
             $('.high-clearance input[type="checkbox"]').on('click', function() {
-                addReomveImageHighClearanceField(this)
-
-            })
-
-            $('input[name="tiang_defect_current_leakage"]').on('change', function() {
-                if (this.value == 'Yes') {
-                    if ($('#arus_pada_tiang_amp_div').hasClass('d-none')) {
-                        $('#arus_pada_tiang_amp_div').removeClass('d-none');
-                    }
-                } else {
-                    if (!$('#arus_pada_tiang_amp_div').hasClass('d-none')) {
-                        $('#arus_pada_tiang_amp_div').addClass('d-none');
-                    }
-                }
-            })
-
-            $('input[name="umbang_defect_current_leakage"]').on('change', function() {
-                if (this.value == 'Yes') {
-                    if ($('#arus_pada_umbgan_amp_div').hasClass('d-none')) {
-                        $('#arus_pada_umbgan_amp_div').removeClass('d-none');
-                    }
-                } else {
-                    if (!$('#arus_pada_umbgan_amp_div').hasClass('d-none')) {
-                        $('#arus_pada_umbgan_amp_div').addClass('d-none');
-                    }
-                }
-            })
-
-            $('.select-radio-value').on('change',function(){
+                addRemoveImageHighClearanceField(this);
+            });
+    
+            // Event handler for radio buttons with 'other' option
+            $('.select-radio-value').on('change', function() {
                 var val = this.value;
                 var id = `${this.name}_input`;
-                var input = $(`#${id}`)
+                var input = $(`#${id}`);
                 if (val === 'other') {
-                    input.val('');
-                    input.removeClass('d-none');
-                }else{
-                    input.val(val);
-                    if (!input.hasClass('d-none')) {
-                        input.addClass('d-none')
-                    }
+                    input.val('').removeClass('d-none');
+                } else {
+                    input.val(val).addClass('d-none');
                 }
             });
-
-          
-        
-            
-        
- 
         });
-
-       
+    
         var total_defects = parseInt({{ $data->total_defects }});
-
-        function addReomveImageField(checkbox) {
+    
+        // Function to add or remove image field based on checkbox state
+        function addRemoveImageField(checkbox) {
             var element = $(checkbox);
             var id = element.attr('id');
-            var input_val = $(`#${id}-input`)
-
+            var input_val = $(`#${id}-input`);
+    
             if (checkbox.checked) {
-                if (input_val.hasClass('d-none')) {
-                    input_val.removeClass('d-none');
-
-                    total_defects += 1;
-                }
+                input_val.removeClass('d-none');
+                total_defects += 1;
             } else {
-
-                if (!input_val.hasClass('d-none')) {
-                    input_val.addClass('d-none');
-                    input_val.val('');
-                    total_defects -= 1;
-
-                }
+                input_val.addClass('d-none').val('');
+                total_defects -= 1;
             }
-
-            $('#total_defects').val(total_defects)
-
+    
+            $('#total_defects').val(total_defects);
         }
-
-
-        function addReomveImageHighClearanceField(checkbox) {
+    
+        // Function to add or remove image field in high clearance section based on checkbox state
+        function addRemoveImageHighClearanceField(checkbox) {
             var element = $(checkbox);
             var id = element.attr('id');
-            var input_val = $(`#${id}-input`)
-
+            var input_val = $(`#${id}-input`);
+    
             if (checkbox.checked) {
-                if (input_val.hasClass('d-none')) {
-                    input_val.removeClass('d-none');
-                }
+                input_val.removeClass('d-none');
             } else {
-
-                if (!input_val.hasClass('d-none')) {
-
-                    input_val.addClass('d-none');
-                    input_val.val('');
-
-                    var span = input.parent().find('label');
-                    if (span.length > 0) {
-                        span.html('')
-                    }
-
-                    var span_val = $(`#${id}-input-error`);
-                    if (span_val.length > 0) {
-                        span_val.html('')
-                    }
+                input_val.addClass('d-none').val('');
+                var span = input_val.parent().find('label');
+                if (span.length > 0) {
+                    span.html('');
                 }
-
+                var span_val = $(`#${id}-input-error`);
+                if (span_val.length > 0) {
+                    span_val.html('');
+                }
             }
         }
-
-        function getMainLine(val){
-            if (val == 'service_line') {
-                $('#main_line_connection').removeClass('d-none')
-            }else{
-                if (!$('#main_line_connection').hasClass('d-none')) {
-                $('#main_line_connection').addClass('d-none')
-                $('#main_line_connection_one , #main_line_connection_many').prop('checked', false);
-
-                }
+    
+        // Function to show main line connection options
+        function getMainLine(val) {
+            if (val === 'service_line') {
+                $('#main_line_connection').removeClass('d-none');
+            } else {
+                $('#main_line_connection').addClass('d-none');
+                $('#main_line_connection_one, #main_line_connection_many').prop('checked', false);
             }
         }
     </script>
+    
 @endsection
