@@ -372,7 +372,7 @@
                 </div>
 
 
-                <div class="modal-body" id="tiangDetailModalBody" style="max-height : 700px ; overflow-y: scroll">
+                <div class="modal-body" id="tiangDetailModalBody" style="max-height : 90vh ; overflow-y: scroll">
 
                 </div>
                 <div class="modal-footer">
