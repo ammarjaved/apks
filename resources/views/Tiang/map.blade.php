@@ -8,7 +8,7 @@
         #map {
             height: 700px;
         }
-        #lightbox .lb-outerContainer{display: block}
+        #lightbox .lb-outerContainer{display: none}
         #myLargeModalLabel>.modal-dialog {
     max-width: 1100px !important;
     margin: 0.75rem 9rem !important ;}
@@ -180,47 +180,6 @@
         <!--  START MAP CARD DIV -->
         <div class="row m-2">
 
-
-            <!-- START MAP SIDEBAR DIV -->
-            {{-- <div class="col-2 p-0">
-            <div class="card p-0 m-0"
-                style="border: 1px solid rgb(177, 175, 175) !important; border-radius: 0px !important">
-                <div class="card-header"><strong> NAVIGATION</strong></div>
-                <div class="card-body">
-                    <!-- MAP SIDEBAR LAYERS SELECTOR -->
-                    <div class="side-bar" style="height: 569px !important; overflow-y: scroll;">
-
-
-
-                        <details class="mb-3" open>
-                            <summary><strong> Tiang + Talian VT & VR</strong> </summary>
-                            <table class="table table-bordered">
-                                <tr>
-                                    <td>Pendaftaran aset, pemeriksaan visual</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan iklan haram/banner</td>
-                                </tr>
-                                <tr>
-                                    <td>Pembersihan creepers</td>
-                                </tr>
-                                <tr>
-                                    <td>Pemeriksaan kebocoran arus pada tiang</td>
-                                </tr>
-                                <tr>
-                                    <td>Report</td>
-                                </tr>
-                            </table>
-
-                        </details>
-
-
-                        <!-- END MAP SIDEBAR DETAILS -->
-                    </div>
-                </div>
-            </div>
-        </div> --}}
-            <!-- END MAP SIDEBAR DIV -->
 
             <!-- START MAP  DIV -->
             <div class="col-md-8 p-0 ">
