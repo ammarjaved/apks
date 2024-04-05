@@ -16,7 +16,7 @@ class TiangSearchController extends Controller
     {
         
         $spanColumns = [ 
-                'abc_span'=>['label'=>'ABC SPAN','keys' =>['s3_185','s3_95','s1_16']],
+                'abc_span'=>['label'=>'ABC SPAN','keys' =>['s3_185','s3_95','s3_16' ,'s1_16']],
                 'pvc_span'=>['label'=>'ABC SPAN','keys' =>['s19_064','s7_083','s7_044']],
                 'bare_span'=>['label'=>'ABC SPAN','keys' =>['s7_173','s7_122','s3_132']]
             ];
