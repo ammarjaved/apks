@@ -77,16 +77,16 @@ class TiangMapController extends Controller
         
     }
 
-    public function seacrh($lang , $type, $q)
+    public function seacrh(Request $req)
     {
 
         $ba = \Illuminate\Support\Facades\Auth::user()->ba;
 
         $data = Tiang::where('ba', 'LIKE', '%' . $ba . '%');
-        if ($type == 'tiang_no') {
-           $data->where('tiang_no' , 'LIKE' , '%' . $q . '%')->select('tiang_no');
+        if ($req->type == 'tiang_no') {
+           $data->where('tiang_no' , 'LIKE' , '%' . $req->q . '%')->select('tiang_no');
         }else{
-            $data->where('id' , 'LIKE' ,  $q . '%')->select(DB::raw('id as tiang_no'));
+            $data->where('id' , 'LIKE' ,  $req->q . '%')->select(DB::raw('id as tiang_no'));
         }
         $data = $data->limit(10)->get();
 

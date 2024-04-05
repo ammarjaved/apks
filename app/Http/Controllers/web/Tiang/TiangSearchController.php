@@ -24,7 +24,7 @@ class TiangSearchController extends Controller
         try 
         {
             $data = Tiang::whereRaw("ST_Intersects(geom, ST_GeomFromGeoJSON('$request->json'))")
-                            ->select('id', 'fp_name', 'tiang_no', 'review_date','total_defects' ,'section_from', 'qa_status' ,'reject_remarks', 'fp_road' , 'ba' ,'pole_image_1','pole_image_2' , 'jenis_tiang' ,'size_tiang','abc_span','pvc_span','bare_span')
+                            ->select('id', 'fp_name', 'tiang_no', 'review_date','total_defects' ,'section_from', 'qa_status' ,'reject_remarks', 'fp_road' , 'ba' ,'pole_image_1','pole_image_2' , 'jenis_tiang' ,'size_tiang','abc_span','pvc_span','bare_span','created_by')
                             ->whereNotNull('pole_image_1')
                             ->whereNotNull('qa_status')
                             ->whereNotNull('review_date')

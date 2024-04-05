@@ -118,7 +118,7 @@ Route::group(
                 Route::resource('tiang-talian-vt-and-vr', TiangContoller::class);
                 Route::post('generate-tiang-talian-vt-and-vr-excel', [TiangExcelController::class, 'generateTiangExcel'])->name('generate-tiang-talian-vt-and-vr-excel');
                 Route::view('/tiang-talian-vt-and-vr-map', 'Tiang.map')->name('tiang-talian-vt-and-vr-map');
-                Route::get('/search/find-tiang/{type}/{q}', [TiangMapController::class, 'seacrh'])->name('tiang-search');
+                Route::get('/search/find-tiang', [TiangMapController::class, 'seacrh'])->name('tiang-search');
                 Route::get('/search/find-tiang-cordinated/{q}/{searchBy}', [TiangMapController::class, 'seacrhCoordinated'])->name('tiang-coordinated');
                 Route::get('/get-tiang-edit/{id}', [TiangMapController::class, 'editMap'])->name('get-tiang-edit');
                 Route::post('/tiang-talian-vt-and-vr-map-edit/{id}', [TiangMapController::class, 'editMapStore'])->name('tiang-talian-vt-and-vr-map-edit');

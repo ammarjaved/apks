@@ -242,6 +242,7 @@
                             <th style="min-width: 200px !important;">CABLE TYPE</th>
                             <th>TOTAL DEFECTS</th>
                             <th>QA Status</th>
+                            <th>CREATED BY</th>
                             <th>IMAGE 1</th>
                             <th>IMAGE 2</th>
                             <th>FROM IMAGE 1</th>
@@ -392,8 +393,29 @@
                 var searchBy= $('input[name="search-by"]:checked').val();
 
                 matches = [];
+                // var postData = {
+                //     searchBy: searchBy,
+                //     q: q
+                // };
+                // axios.post('/{{app()->getLocale()}}/search/find-tiang', postData)
+                // .then(function (response) {
+                //     var data  = response.data;
+                //     console.log(data);
+                //     $.each(data, function(i, str) {
+
+                //         matches.push(str.tiang_no);
+
+                //         });
+                //     // getTiangByPolyGone();
+                // })
+                // .catch(function (error) {
+                //     console.error('Request Failed:', error);
+                //     alert('Request Failed');
+                // });
+
+
                 $.ajax({
-                    url: '/{{ app()->getLocale() }}/search/find-tiang/'+searchBy+'/' + q,
+                    url: `/{{ app()->getLocale() }}/search/find-tiang?type=${searchBy}&q=${q}`,
                     dataType: 'JSON',
                     //data: data,
                     method: 'GET',
@@ -657,6 +679,7 @@
                                                 </td>
                                                 <td>${element.total_defects}</td>
                                                 <td>${status}</td>
+                                                <td>${element.created_by}</td>
                                                 <td>
                                                     <a href="http://121.121.232.53:8090/${element.pole_image_1}" target="_blank" />
                                                         <img src="http://121.121.232.53:8090/${element.pole_image_1}" style="height:50px;" >

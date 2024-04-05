@@ -150,20 +150,21 @@
 
                                 @csrf
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="id">ID </label></div>
-                                    <div class="col-md-4">
-                                        <input type="text"   value="{{ $data->id }}" disabled class="form-control disabled">
+                                <fieldset class="form-input">
+                                    <div class="row ">
+                                        <div class="col-md-4"><label for="id">ID </label></div>
+                                        <div class="col-md-4">
+                                            <input type="text"   value="{{ $data->id }}" disabled class="form-control disabled">
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col-md-4"><label for="id">Created By </label></div>
-                                    <div class="col-md-4">
-                                        <input type="text"   value="{{ $data->created_by }}" disabled class="form-control disabled">
+                                    <div class="row ">
+                                        <div class="col-md-4"><label for="id">Created By </label></div>
+                                        <div class="col-md-4">
+                                            <input type="text"   value="{{ $data->created_by }}" disabled class="form-control disabled">
+                                        </div>
                                     </div>
-                                </div>
-
+                                </fieldset>
                                 @include('Tiang.partials.editForm', ['data'=>$data ])
 
                             
