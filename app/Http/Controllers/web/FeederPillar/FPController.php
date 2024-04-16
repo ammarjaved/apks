@@ -176,6 +176,19 @@ class FPController extends Controller
 
 
 
+    public function destroyFeederPillar($language, $id)
+    {
+        try {
+            FeederPillar::find($id)->delete();
+            return response()->json(['success'=>true],200);
+        } 
+        catch (\Throwable $th) 
+        { 
+            return response()->json(['success'=>false],400);
+        }
+    }
+
+
     public function updateQAStatus(Request $req)
     {
         try 
@@ -193,11 +206,15 @@ class FPController extends Controller
 
             $qa_data->update();
 
-            return redirect()->back();
         } 
         catch (\Throwable $th) 
         {
             return response()->json(['status' => 'Request failed']);
         }
+
+        if ($req->ajax()) {
+            return response()->json(['message'=>'Update Successfully','status' =>200]);
+        }
+        return redirect()->back();
     }
 }

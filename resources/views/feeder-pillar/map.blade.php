@@ -7,6 +7,10 @@
         #map {
             height: 700px;
         }
+        #myLargeModalLabel>.modal-dialog {
+            max-width: 1100px !important;
+            margin: 0.75rem 9rem !important;
+        }
     </style>
 @endsection
 @section('content')
@@ -223,6 +227,156 @@
             </div>
         </div>
     </div>
+
+
+    
+    <div class="modal fade bd-example-modal-lg " id="myLargeModalLabel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content" style="width:1100px;">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Site Data Info</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body p-3" style="max-height : 80vh ; overflow: scroll" >
+                     <table class="table table-hover" id="polygone-tiang-data" >
+                        <thead>
+                            <th>ID</th>
+                            <th>BA</th>
+                            <th>SIZE</th>
+                            <th>VISIT DATE</th>
+                            <th>TOTAL DEFECTS</th>
+                            <th>QA Status</th>
+                            <th>CREATED BY</th>
+                            <th>IMAGE 1</th>
+                            <th>IMAGE 2</th>
+                            <th>ACTION</th>
+                        </thead>
+                        <tbody id="polygone-data-body">
+
+                        </tbody>
+                     </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="rejectReasonModal">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6 class="modal-title">Reject</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="" id="reject-foam" method="GET">
+                    @csrf
+
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="reject-id">
+                        <input type="hidden" name="status" id="qa_status" value="Reject">
+                        <label for="reject">Reject Remarks : </label>
+                        <textarea name="reject_remakrs" id="reject_remakrs" cols="20" rows="5" class="form-control" placeholder="enter resaon" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" onclick="QaStatusReject()">update</button>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="rejectReasonModalShow">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6 class="modal-title">Reject Reason</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="reject-id">
+                        <input type="hidden" name="status" id="qa_status" value="Reject">
+                        <label for="reject">Reject Remarks : </label>
+                        <textarea name="reject_remakrs" id="reject_remakrs_show" disabled readonly cols="20" rows="5" class="form-control" placeholder="enter resaon" required></textarea>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+                    </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="DetailModal">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6 class="modal-title">Detail</h6>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+
+                <div class="modal-body" id="DetailModalBody" style="max-height : 90vh ; overflow-y: scroll">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    {{-- <button type="button" class="btn btn-danger" onclick="QaStatusReject()">update</button> --}}
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="removeConfirm">
+        <div class="modal-dialog">
+            <div class="modal-content ">
+    
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title">Remove Recored</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <form action="" id="remove-foam" method="POST">
+                    @method('DELETE')
+                    @csrf
+    
+                    <div class="modal-body">
+                        Are You Sure ?
+                        <input type="hidden" name="id" id="remove-modal-id">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-danger" onclick="removeRecord()">Remove</button>
+                    </div>
+                </form>
+    
+            </div>
+        </div>
+    </div>
+
+
 @endsection
 
 @section('script')
@@ -291,6 +445,246 @@
             })
 
         });
+    </script>
+
+
+    <script>
+          $(function(){
+            // Event handler for hiding Tiang modal
+            $('#tiangDetailModal').on('hide.bs.modal', function(event) {
+                getRecoredByPolyGone()
+                $('#tiangDetailModalBody').html('');
+            });
+
+
+            // Event handler for showing reject reason modal
+            $('#rejectReasonModalShow').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var remarks = button.data('reject_remarks');
+                $('#reject_remakrs_show').val(remarks);
+            });
+
+
+            // Event handler for showing remove confirm modal
+            $('#removeConfirm').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                $('#remove-modal-id').val(id);
+            });
+
+
+            // Event handler for showing reject reason modal
+            $('#rejectReasonModal').on('show.bs.modal', function(event) {
+                var button = $(event.relatedTarget);
+                var id = button.data('id');
+                $('#reject-id').val(id);
+            });
+
+
+            // Listen for message from iframe
+            window.addEventListener('message', function(event) {
+                if (event.data === 'closeModal') {
+                    $('#DetailModal').modal('hide');
+                    getRecoredByPolyGone()
+                }
+            });
+        });
+
+        // ADD DRAW TOOLS
+
+        var drawnItems = new L.FeatureGroup();
+        map.addLayer(drawnItems);
+        var drawControl = new L.Control.Draw({
+            draw: {
+                circle    : false,
+                marker    : false,
+                polygon   : true,
+                polyline  : false,
+                rectangle : false,
+                circlemarker : false,
+            },
+            edit: {
+                featureGroup: drawnItems,
+                edit: false,  // Disable editing mode
+                remove: false // Disable deletion mode
+            }
+        });
+
+        map.addControl(drawControl);
+
+        var newLayer = '';
+        var jsonData = '';
+
+        // DRAW TOOL ON CREATED EVENT
+        map.on('draw:created', function(e){
+            var type = e.layerType;
+            newLayer = e.layer;
+            // drawnItems.addLayer(newLayer);
+            var data = newLayer.toGeoJSON();
+            jsonData = JSON.stringify(data.geometry);
+
+            getRecoredByPolyGone()
+
+        })
+
+
+
+        function getRecoredByPolyGone()
+        {
+            $.ajax(
+                {
+                    url: `/{{ app()->getLocale() }}/search/feeder-pillar-by-polygon?json=${jsonData}`,
+                    dataType: 'JSON',
+                    //data: data,
+                    method: 'GET',
+                    async: false,
+                    success: function callback(response) {
+
+                        console.log(response);
+                        if (response.status == 200) {
+                            $("#polygone-data-body").html('');
+                            var data = response.data;
+
+                            for (let index = 0; index < data.length; index++) {
+                                const element = data[index];
+                                let status = '';
+
+                                if (element.qa_status == 'Accept') {
+                                   status=  `<span class="badge bg-success">Accept</span>`;
+
+                                }else if (element.qa_status == 'Reject') {
+                                    status = ` <a type="button" class=" " data-reject_remarks="${element.reject_remarks}" data-toggle="modal" data-target="#rejectReasonModalShow">
+                                                    <span class="badge bg-danger">${element.reject_remarks.length > 9 ? element.reject_remarks.substring(0, 8) + '...' : element.reject_remarks}</span>
+
+                                                </a>`;
+                                }else{
+                                    status = `<div class="d-flex text-center" id="status-${element.id}">
+                                                <button class="btn btn-success btn-sm" type="button" onclick="QaStatusAccept(${element.id})">Accept</button>
+                                                    /
+                                                <a type="button" class="btn btn-danger  btn-sm" data-id="${element.id}" data-toggle="modal" data-target="#rejectReasonModal">
+                                                    Reject
+                                                </a>
+                                            </div>`;
+                                }
+
+                                let str = `
+                                            <tr>
+                                                <td>${element.id}</td>
+                                                <td>${element.ba}</td>
+                                                <td>${element.size}</td>
+                                                <td>${element.visit_date}</td>
+                                                <td>${element.total_defects}</td>
+                                                <td>${status}</td>
+                                                <td>${element.created_by}</td>
+                                                <td>
+                                                    <a href="http://121.121.232.53:8090/${element.feeder_pillar_image_1}" target="_blank" />
+                                                        <img src="http://121.121.232.53:8090/${element.feeder_pillar_image_1}" style="height:50px;" >
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <a href="http://121.121.232.53:8090/${element.feeder_pillar_image_2}" target="_blank" />
+                                                        <img src="http://121.121.232.53:8090/${element.feeder_pillar_image_2}" style="height:50px;"  />
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    <div class='d-flex'>
+                                                        <button type="button" class="btn  mr-2" onclick="getFormDetail(${element.id})"><i class="fas fa-eye text-primary"></i></button>
+                                                        <button type="button" class="btn  "  data-id="${element.id}" data-toggle="modal" data-target="#removeConfirm"><i class="fas fa-trash text-danger"></i></button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                `;
+                                $('#polygone-data-body').append(str);
+                            }
+                            $('#myLargeModalLabel').modal('show');
+                        }else{
+                            alert('Request Failed');
+                        }
+                        // console.log(response);
+                    }
+                })
+
+        }
+
+
+        function getFormDetail(paramId){
+            $('#DetailModalBody').html('');
+
+            $('#DetailModalBody').html(
+                `<iframe src="/{{ app()->getLocale() }}/get-feeder-pillar-edit/${paramId}" frameborder="0" style="height:500px; width:100%"></iframe>`
+                )
+                $('#DetailModal').modal('show');
+
+        }
+
+
+        function QaStatusAccept(paramId )
+        {
+
+            $.ajax(
+                {
+                    url: `/{{ app()->getLocale() }}/feeder-pillar-update-QA-Status?status=Accept&&id=${paramId}`,
+                    dataType: 'JSON',
+                    //data: data,
+                    method: 'GET',
+                    async: false,
+                    success: function callback(response) {
+                        console.log(response);
+                        if (response.status == 200) {
+                            $('#status-'+paramId).html('<span class="badge bg-success">Accept</span>');
+                        }else{
+                            alert('Request Failed')
+                        }
+
+                    }
+                }
+                )
+        }
+
+
+        function QaStatusReject( )
+        {
+            let id = $('#reject-id').val()
+            let remarks = $('#reject_remakrs').val()
+
+            $.ajax(
+                {
+                    url: `/{{ app()->getLocale() }}/feeder-pillar-update-QA-Status?status=Reject&id=${id}&reject_remakrs=${remarks}`,
+                    dataType: 'JSON',
+                    //data: data,
+                    method: 'GET',
+                    async: false,
+                    success: function callback(response) {
+                        console.log(response);
+                        if (response.status == 200) {
+                            getRecoredByPolyGone()
+                        }else{
+                            alert('Request Failed')
+                        }
+                        $('#rejectReasonModal').modal('hide');
+
+                        $('#reject-id').val('')
+                        $('#reject_remakrs').val('')
+                    }
+                }
+                )
+        }
+
+
+        function removeRecord() {
+            var id = document.getElementById('remove-modal-id').value;
+            axios.get('/{{app()->getLocale()}}/remove-feeder-pillar/' + id)
+            .then(function (response) {
+                getRecoredByPolyGone()
+            })
+            .catch(function (error) {
+                alert('Request Failed')
+            });
+            $('#removeConfirm').modal('hide');
+        }
+
+
+
     </script>
 
 

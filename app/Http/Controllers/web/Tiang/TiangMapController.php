@@ -50,7 +50,9 @@ class TiangMapController extends Controller
                 // return $request->qa_status;
                 if ($recored->qa_status != $request->qa_status) {
                     $recored->qa_status = $request->qa_status;
-                    $recored->qc_by = $user;          
+                    $recored->qc_by = $user;    
+                    $recored->qc_at = now();
+                         
                 }
                 if ($request->qa_status == 'Reject') {
                     $recored->reject_remarks = $request->reject_remakrs;

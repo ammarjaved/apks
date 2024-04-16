@@ -12,10 +12,12 @@
             min-width: 16px !important;
             margin-right: 12px;
         }
+
         input[type='radio'] {
             border-radius: 50% !important;
         }
-        .fw-400{
+
+        .fw-400 {
             font-weight: 400 !important;
         }
 
@@ -52,10 +54,10 @@
         }
 
         /* td.d-flex {
-            border-bottom: 0px !important;
-            border-left: 0px !important;
-            border-right: 0px !important;
-        } */
+                border-bottom: 0px !important;
+                border-left: 0px !important;
+                border-right: 0px !important;
+            } */
 
         textarea {
             border: 1px solid #999999 !important;
@@ -134,7 +136,7 @@
                             </div>
                         </div> --}}
 
-                       {{--  @if ($data->qa_status == 'Reject')
+                        {{--  @if ($data->qa_status == 'Reject')
                             <div class="row px-4">
                                 <div class="col-md-4">
                                     <label for="zone">Reason</label>
@@ -144,65 +146,71 @@
                                 </div>
                             </div>
                         @endif --}}
-                            {{-- </fieldset>   --}}
-                            <form id="framework-wizard-form" action="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-map-edit/{{$data->id}}"
-                            enctype="multipart/form-data"  method="POST">
+                        {{-- </fieldset>   --}}
+                        <form id="framework-wizard-form"
+                            action="/{{ app()->getLocale() }}/tiang-talian-vt-and-vr-map-edit/{{ $data->id }}"
+                            enctype="multipart/form-data" method="POST">
 
-                                @csrf
+                            @csrf
 
-                                <fieldset class="form-input">
-                                    <div class="row ">
-                                        <div class="col-md-4"><label for="id">ID </label></div>
-                                        <div class="col-md-4">
-                                            <input type="text"   value="{{ $data->id }}" disabled class="form-control disabled">
-                                        </div>
+                            <fieldset class="form-input">
+                                <div class="row ">
+                                    <div class="col-md-4"><label for="id">ID </label></div>
+                                    <div class="col-md-4">
+                                        <input type="text" value="{{ $data->id }}" disabled
+                                            class="form-control disabled">
                                     </div>
+                                </div>
 
-                                    <div class="row ">
-                                        <div class="col-md-4"><label for="id">Created By </label></div>
-                                        <div class="col-md-4">
-                                            <input type="text"   value="{{ $data->created_by }}" disabled class="form-control disabled">
-                                        </div>
+                                <div class="row ">
+                                    <div class="col-md-4"><label for="id">Created By </label></div>
+                                    <div class="col-md-4">
+                                        <input type="text" value="{{ $data->created_by }}" disabled
+                                            class="form-control disabled">
                                     </div>
-                                </fieldset>
-                                @include('Tiang.partials.editForm', ['data'=>$data ])
+                                </div>
+                            </fieldset>
+                            @include('Tiang.partials.editForm', ['data' => $data])
 
-                            
-                                <fieldset class="form-input">
-                                    <div class="row  ">
-                                        <div class="col-md-4">
-                                            <label for="zone">QA Status</label>
-                                        </div>
-                                        <div class="col-md-4">
-            
-                                            <select name="qa_status" id="qa_status" class="form-control" onchange="onChangeQa(this.value)">
-                                                <option value="{{$data->qa_status}}" hidden>{{$data->qa_status}}</option>
-                                                <option value="Accept">Accept</option>
-                                                <option value="Reject">Reject</option>
-                                            </select>
-                                        </div>
+
+                            <fieldset class="form-input">
+                                <div class="row  ">
+                                    <div class="col-md-4">
+                                        <label for="zone">QA Status</label>
                                     </div>
-                     
-                                
-                                    <div class=" row {{$data->qa_status != 'Reject' ? 'd-none' : ''}} " id="reject-reason" >
-                                        
+                                    <div class="col-md-4">
+
+                                        <select name="qa_status" id="qa_status" class="form-control"
+                                            onchange="onChangeQa(this.value)">
+                                            <option value="{{ $data->qa_status }}" hidden>{{ $data->qa_status }}</option>
+                                            <option value="Accept">Accept</option>
+                                            <option value="Reject">Reject</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                                <div class=" row {{ $data->qa_status != 'Reject' ? 'd-none' : '' }} " id="reject-reason">
+
                                     <div class="col-md-4">
                                         <label for="zone">Reason</label>
                                     </div>
                                     <div class="col-md-4">
-                                        <textarea name="reject_remakrs" id="reject_remakrs" cols="10" rows="4"  class="form-control">{{$data->reject_remarks}}</textarea>
+                                        <textarea name="reject_remakrs" id="reject_remakrs" cols="10" rows="4" class="form-control">{{ $data->reject_remarks }}</textarea>
                                     </div>
-                                    </div>
-                                 
-                            
+                                </div>
 
-                            <div class="text-center py-4" >
-                                <button type="button" class="btn btn-danger btn-sm" onclick="removeRecord({{$data->id}})">Remove</button>
-                                <button class="btn btn-sm btn-success" type="submit" onclick="$('#framework-wizard-form').submit()">UPDATE</button>
-                            </div>
 
-                        </fieldset>
-                            </form>
+
+                                <div class="text-center py-4">
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                        onclick="removeRecord({{ $data->id }})">Remove</button>
+                                    <button class="btn btn-sm btn-success" type="submit"
+                                        onclick="$('#framework-wizard-form').submit()">UPDATE</button>
+                                </div>
+
+                            </fieldset>
+                        </form>
 
 
                     </div>
@@ -212,7 +220,6 @@
         </div>
     </div>
     <x-reject-modal />
-
 @endsection
 
 @section('script')
@@ -229,7 +236,7 @@
                 $('#reject-reason').removeClass('d-none');
             }
         }
-    
+
         // Function to get geolocation
         function getLocation() {
             if (navigator.geolocation) {
@@ -238,13 +245,13 @@
                 console.log("Geolocation is not supported by this browser.");
             }
         }
-    
+
         // Function to show geolocation
         function showPosition(position) {
             $('#lat').val(position.coords.latitude);
             $('#log').val(position.coords.longitude);
         }
-    
+
         // Function to remove a record
         function removeRecord(paramId) {
             var confrim = confirm('Are you sure?')
@@ -260,18 +267,18 @@
                 });
             }
         }
-    
+
         $(document).ready(function() {
             // Event handler for checkboxes in defects section
             $('.defects input[type="checkbox"]').on('click', function() {
                 addRemoveImageField(this);
             });
-    
+
             // Event handler for checkboxes in high clearance section
             $('.high-clearance input[type="checkbox"]').on('click', function() {
                 addRemoveImageHighClearanceField(this);
             });
-    
+
             // Event handler for radio buttons with 'other' option
             $('.select-radio-value').on('change', function() {
                 var val = this.value;
@@ -284,15 +291,15 @@
                 }
             });
         });
-    
+
         var total_defects = parseInt({{ $data->total_defects }});
-    
+
         // Function to add or remove image field based on checkbox state
         function addRemoveImageField(checkbox) {
             var element = $(checkbox);
             var id = element.attr('id');
             var input_val = $(`#${id}-input`);
-    
+
             if (checkbox.checked) {
                 input_val.removeClass('d-none');
                 total_defects += 1;
@@ -300,16 +307,16 @@
                 input_val.addClass('d-none').val('');
                 total_defects -= 1;
             }
-    
+
             $('#total_defects').val(total_defects);
         }
-    
+
         // Function to add or remove image field in high clearance section based on checkbox state
         function addRemoveImageHighClearanceField(checkbox) {
             var element = $(checkbox);
             var id = element.attr('id');
             var input_val = $(`#${id}-input`);
-    
+
             if (checkbox.checked) {
                 input_val.removeClass('d-none');
             } else {
@@ -324,7 +331,7 @@
                 }
             }
         }
-    
+
         // Function to show main line connection options
         function getMainLine(val) {
             if (val === 'service_line') {
@@ -335,5 +342,4 @@
             }
         }
     </script>
-    
 @endsection

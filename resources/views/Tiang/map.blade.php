@@ -13,9 +13,7 @@
     max-width: 1100px !important;
     margin: 0.75rem 9rem !important ;}
 
-        /* .main-sidebar{width: 220px }
-                body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-header  {margin-left: 220px }
-                .content-wrapper{margin-left: 220px !important} */
+
     </style>
 @endsection
 
@@ -763,7 +761,7 @@
 
             $.ajax(
                 {
-                    url: `/{{ app()->getLocale() }}/tiang-talian-vt-and-vr-update-QA-Status?status=Reject&id=${id}&reject_remakrs?${remarks}`,
+                    url: `/{{ app()->getLocale() }}/tiang-talian-vt-and-vr-update-QA-Status?status=Reject&id=${id}&reject_remakrs=${remarks}`,
                     dataType: 'JSON',
                     //data: data,
                     method: 'GET',

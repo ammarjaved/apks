@@ -21,6 +21,7 @@ use App\Http\Controllers\web\excel\ThirdPartyExcelController;
 use App\Http\Controllers\web\Tiang\TiangExcelController;
 use App\Http\Controllers\web\FeederPillar\FeederPillarMapController;
 use App\Http\Controllers\web\FeederPillar\FeederPillarPembersihanController;
+use App\Http\Controllers\web\FeederPillar\FeederPillarSearchController;
 use App\Http\Controllers\web\LinkBox\LinkBoxController;
 use App\Http\Controllers\web\map\GeneratePDFController;
 use Illuminate\Support\Facades\Route;
@@ -47,6 +48,7 @@ use Illuminate\Support\Facades\App;
 use App\Http\Controllers\web\Patrolling\PatrollingExcelController;
 use App\Http\Controllers\web\SAVT\SAVTController;
 use App\Http\Controllers\web\Substation\SubstationPembersihanController;
+use App\Http\Controllers\web\Substation\SubstationSearchController;
 use App\Http\Controllers\web\Substation\SubstationTOCController;
 use App\Http\Controllers\web\Tiang\TiangDocumentsRedirectController;
 use App\Http\Controllers\web\Tiang\TiangSBUMReportController;
@@ -186,6 +188,8 @@ Route::group(
                 Route::get('/generate-substation-lks-by-visit-date', [SubstationLKSController::class, 'generateByVisitDate'])->name('generate-substation-lks-by-visit-date');
                 Route::post('/generate-substation-pembersihan', [SubstationPembersihanController::class, 'pembersihan'])->name('generate-substation-pembersihan');
                 Route::post('/generate-substation-toc-claim', [SubstationTOCController::class, 'generateTOC'])->name('generate-substation-toc-claim');
+                Route::get('/search/substation-by-polygon',[SubstationSearchController::class,'getSubstationByPolygon'])->name('search-substation-by-polygon');
+                Route::get('remove-substation/{id}',[SubstationController::class ,'destroySubstation'])->name("remove-substation");
 
 
 
@@ -204,6 +208,8 @@ Route::group(
                 Route::get('/feeder-pillar-lks',[FeederPillarLKSController::class,'index'])->name('feeder-pillar-lks');
                 Route::get('/generate-feeder-pillar-lks-by-visit-date', [FeederPillarLKSController::class, 'generateByVisitDate'])->name('generate-feeder-pillar-lks-by-visit-date');
                 Route::post('/generate-feeder-pillar-pembersihan', [FeederPillarPembersihanController::class, 'pembersihan'])->name('generate-feeder-pillar-pembersihan');
+                Route::get('/search/feeder-pillar-by-polygon',[FeederPillarSearchController::class,'getFeederPillarByPolygon'])->name('search-feeder-pillar-by-polygon');
+                Route::get('remove-feeder-pillar/{id}',[FPController::class ,'destroyFeederPillar'])->name("remove-feeder-pillar");
 
 
                 // SAVT routes

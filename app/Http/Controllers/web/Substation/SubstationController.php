@@ -187,8 +187,22 @@ class SubstationController extends Controller
         return redirect()->route('substation.index', app()->getLocale());
     }
 
+
+    public function destroySubstation($language, $id)
+    {
+        try {
+            Substation::find($id)->delete();
+            return response()->json(['success'=>true],200);
+        } 
+        catch (\Throwable $th) 
+        { 
+            return response()->json(['success'=>false],400);
+        }
+    }
+
     public function updateQAStatus(Request $req)
     {
+        // return $req;
         try {
             // return $req;
             $qa_data = Substation::find($req->id);
@@ -203,10 +217,15 @@ class SubstationController extends Controller
 
             $qa_data->update();
 
-            return redirect()->back();
+            // return redirect()->back();
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return response()->json(['status' => 'Request failed']);
         }
+
+        if ($req->ajax()) {
+            return response()->json(['message'=>'Update Successfully','status' =>200]);
+        }
+        return redirect()->back();
     }
 }

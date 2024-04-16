@@ -17,6 +17,7 @@ class SubstationMapController extends Controller
     public function editMap($lang, $id, SubstationRepository $substationRepository)
     {
         $data = $substationRepository->getSubstation($id);
+        // return $id;
 
         if ($data) {
             return $data ? view('substation.edit-form', ['data' => $data, 'disabled' => false]) : abort(404);
@@ -33,7 +34,17 @@ class SubstationMapController extends Controller
 
             $user = Auth::user()->name;
             $data->updated_by = $user;
+            if ($data->qa_status != $request->qa_status) {
+                $data->qa_status = $request->qa_status;
+                $data->qc_by = $user;   
+                $data->qc_at = now();
+            }
+            if ($request->qa_status == 'Reject') {
+                $data->reject_remarks = $request->reject_remakrs;
+            } else{
+                $data->reject_remarks = '';
 
+            }
             $res = $substationRepository->store($data, $request);
 
             $res->update();

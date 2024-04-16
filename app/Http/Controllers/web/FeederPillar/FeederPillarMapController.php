@@ -21,7 +21,7 @@ class FeederPillarMapController extends Controller
             $data->gate_status = json_decode($data->gate_status);
         
 
-        return view('feeder-pillar.edit-form', ['data' => $data, 'disabled' => true]) ;
+        return view('feeder-pillar.edit-form', ['data' => $data, 'disabled' => false]) ;
         }
         abort(404);
     }
@@ -35,12 +35,24 @@ class FeederPillarMapController extends Controller
             $user = Auth::user()->name;
 
             $data->updated_by = $user;
+
+            if ($data->qa_status != $request->qa_status) {
+                $data->qa_status = $request->qa_status;
+                $data->qc_by = $user;   
+                $data->qc_at = now();
+            }
+            if ($request->qa_status == 'Reject') {
+                $data->reject_remarks = $request->reject_remakrs;
+            } else {
+                $data->reject_remarks = '';
+            }
+
             $feederPillar->store($data, $request);
             $data->update();
 
             return view('components.map-messages', ['id' => $id, 'success' => true, 'url' => 'feeder-pillar'])->with('success', 'Form Update');
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return view('components.map-messages', ['id' => $id, 'success' => false, 'url' => 'feeder-pillar'])->with('failed', 'Form Update Failed');
         }
     }

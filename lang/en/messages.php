@@ -402,6 +402,7 @@ return [
     'main_line_service_line' => 'Main Line (M) / Servis (S)',
 
     'total_recoreds'=>'Total Recoreds',
+    'remove'=>'Remove'
 
     
 ];
