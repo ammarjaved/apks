@@ -42,7 +42,7 @@ class CableBridgeController extends Controller
                     return 'CB-' . $row->id;
                 })
                 // ->addColumn('qa_status_action', function ($row) {
-                    
+
                 //     if ($row->visit_date != '' && $row->cable_bridge_image_1 != '') {
                 //         return "SDfsdfsd";
                 //         if ($row->qa_status === 'Accept' || $row->qa_status === 'Reject') {
@@ -84,7 +84,7 @@ class CableBridgeController extends Controller
      */
     public function store(Request $request , CableBridgeRepo $cableBridge)
     {
-        try 
+        try
         {
             $data = new CableBridge();
             $data->coords = $request->coordinate;
@@ -98,8 +98,8 @@ class CableBridgeController extends Controller
             $cableBridge->store($data,$request);
             $data->save();
             Session::flash('success', 'Request Success');
-        } 
-        catch (\Throwable $th) 
+        }
+        catch (\Throwable $th)
         {
             Session::flash('failed', 'Request Failed');
         }
@@ -141,7 +141,7 @@ class CableBridgeController extends Controller
      */
     public function update(Request $request, $language, $id , CableBridgeRepo $cableBridge)
     {
-        try 
+        try
         {
             $data = CableBridge::find($id);
             $user = Auth::user()->name;
@@ -150,8 +150,8 @@ class CableBridgeController extends Controller
             $cableBridge->store($data,$request);
             $data->update();
             Session::flash('success', 'Request Success');
-        } 
-        catch (\Throwable $th) 
+        }
+        catch (\Throwable $th)
         {
             Session::flash('failed', 'Request Failed');
         }
@@ -167,17 +167,30 @@ class CableBridgeController extends Controller
      */
     public function destroy($language, $id)
     {
-        try 
+        try
         {
             CableBridge::find($id)->delete();
             Session::flash('success', 'Request Success');
-        } 
-        catch (\Throwable $th) 
+        }
+        catch (\Throwable $th)
         {
             Session::flash('failed', 'Request Failed');
         }
         return redirect()->route('feeder-pillar.index', app()->getLocale());
     }
+
+
+    public function destroyCableBridge($language, $id)
+    {
+        try {
+            CableBridge::find($id)->delete();  
+        }
+        catch (\Throwable $th)
+        {
+            return response()->json(['success'=>false],400);
+        }
+    }
+
 
     public function updateQAStatus(Request $req)
     {
@@ -193,9 +206,13 @@ class CableBridgeController extends Controller
 
             $qa_data->update();
 
-            return redirect()->back();
+            // return redirect()->back();
         } catch (\Throwable $th) {
             return response()->json(['status' => 'Request failed']);
         }
+        if ($req->ajax()) {
+            return response()->json(['message'=>'Update Successfully','status' =>200]);
+        }
+        return redirect()->back();
     }
 }

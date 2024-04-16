@@ -7,6 +7,8 @@ use App\Models\CableBridge;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use App\Repositories\CableBridgeRepo;
+
 
 class CableBridgeMapController extends Controller
 {
@@ -20,54 +22,74 @@ class CableBridgeMapController extends Controller
 
     }
 
-    public function update(Request $request, $language, $id)
+    public function update(Request $request, $language, $id , CableBridgeRepo $cableBridge)
     {
         //
 
 
 
         try {
-            $currentDate = Carbon::now()->toDateString();
-            $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
 
             $data = CableBridge::find($id);
-            $data->zone = $request->zone;
-            $data->ba = $request->ba;
             $user = Auth::user()->name;
 
             $data->updated_by = $user;
-            // $data->team = $request->team;
-            $data->visit_date = $request->visit_date;
-            $data->patrol_time = $combinedDateTime;
-            $data->feeder_involved = $request->feeder_involved;
-            if ($data->qa_status == '') {
-                $data->qa_status = 'pending';
+            if ($data->qa_status != $request->qa_status) {
+                $data->qa_status = $request->qa_status;
+                $data->qc_by = $user;
+                $data->qc_at = now();
             }
-            $data->start_date = $request->start_date;
-            $data->end_date = $request->end_date;
+            if ($request->qa_status == 'Reject') {
+                $data->reject_remarks = $request->reject_remakrs;
+            } else{
+                $data->reject_remarks = '';
 
-            $data->voltage = $request->voltage;
-            // $data->coordinate = $request->coordinate;
-            $data->pipe_staus = $request->pipe_staus;
-            $data->collapsed_status = $request->collapsed_status;
-            $data->vandalism_status = $request->vandalism_status;
-
-            $data->rust_status = $request->rust_status;
-            $data->bushes_status = $request->bushes_status;
-            $destinationPath = 'assets/images/cable-bridge/';
-
-            foreach ($request->all() as $key => $file) {
-                // Check if the input is a file and it is valid
-                if ($request->hasFile($key) && $request->file($key)->isValid()) {
-                    $uploadedFile = $request->file($key);
-                    $img_ext = $uploadedFile->getClientOriginalExtension();
-                    $filename = $key . '-' . strtotime(now()) .rand(10,100) . '.' . $img_ext;
-                    $uploadedFile->move($destinationPath, $filename);
-                    $data->{$key} = $destinationPath . $filename;
-                }
             }
+            $cableBridge->store($data,$request);
+            $data->update();
 
-            $data->save();
+
+            // $currentDate = Carbon::now()->toDateString();
+            // $combinedDateTime = $currentDate . ' ' . $request->patrol_time;
+
+            // $data = CableBridge::find($id);
+            // $data->zone = $request->zone;
+            // $data->ba = $request->ba;
+            // $user = Auth::user()->name;
+
+            // $data->updated_by = $user;
+            // // $data->team = $request->team;
+            // $data->visit_date = $request->visit_date;
+            // $data->patrol_time = $combinedDateTime;
+            // $data->feeder_involved = $request->feeder_involved;
+            // if ($data->qa_status == '') {
+            //     $data->qa_status = 'pending';
+            // }
+            // $data->start_date = $request->start_date;
+            // $data->end_date = $request->end_date;
+
+            // $data->voltage = $request->voltage;
+            // // $data->coordinate = $request->coordinate;
+            // $data->pipe_staus = $request->pipe_staus;
+            // $data->collapsed_status = $request->collapsed_status;
+            // $data->vandalism_status = $request->vandalism_status;
+
+            // $data->rust_status = $request->rust_status;
+            // $data->bushes_status = $request->bushes_status;
+            // $destinationPath = 'assets/images/cable-bridge/';
+
+            // foreach ($request->all() as $key => $file) {
+            //     // Check if the input is a file and it is valid
+            //     if ($request->hasFile($key) && $request->file($key)->isValid()) {
+            //         $uploadedFile = $request->file($key);
+            //         $img_ext = $uploadedFile->getClientOriginalExtension();
+            //         $filename = $key . '-' . strtotime(now()) .rand(10,100) . '.' . $img_ext;
+            //         $uploadedFile->move($destinationPath, $filename);
+            //         $data->{$key} = $destinationPath . $filename;
+            //     }
+            // }
+
+            // $data->save();
 
 
 

@@ -37,6 +37,18 @@ class LinkBoxMapController extends Controller
             $data->feeder_involved = $request->feeder_involved;
             $user = Auth::user()->name;
 
+            if ($data->qa_status != $request->qa_status) {
+                $data->qa_status = $request->qa_status;
+                $data->qc_by = $user;
+                $data->qc_at = now();
+            }
+            if ($request->qa_status == 'Reject') {
+                $data->reject_remarks = $request->reject_remakrs;
+            } else{
+                $data->reject_remarks = '';
+
+            }
+
             $data->updated_by = $user;
             if ($data->qa_status == '') {
                 $data->qa_status = 'pending';
@@ -49,8 +61,8 @@ class LinkBoxMapController extends Controller
                 $data->{$value} = $request->{$value};
                $request->has($value)&& $request->{$value} == 'Yes' ? $total_defects++ : '';
             }
-           $data->total_defects = $total_defects;
-           $data->leaning_angle = $request->leaning_angle;
+            $data->total_defects = $total_defects;
+            $data->leaning_angle = $request->leaning_angle;
             $destinationPath = 'assets/images/link-box/';
 
             foreach ($request->all() as $key => $file) {

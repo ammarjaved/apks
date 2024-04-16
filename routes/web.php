@@ -13,6 +13,7 @@ use App\Http\Controllers\web\CableBridge\CableBridgeController;
 use App\Http\Controllers\web\CableBridge\CableBridgeMapController;
 use App\Http\Controllers\web\Dashboard;
 use App\Http\Controllers\web\CableBridge\CableBridgeExcelController;
+use App\Http\Controllers\web\CableBridge\CableBridgeSearchController;
 use App\Http\Controllers\web\excel\DigingExcelController;
 use App\Http\Controllers\web\FeederPillar\FeederPillarExcelController;
 use App\Http\Controllers\web\LinkBox\LinkBoxExcelController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\web\FeederPillar\FeederPillarMapController;
 use App\Http\Controllers\web\FeederPillar\FeederPillarPembersihanController;
 use App\Http\Controllers\web\FeederPillar\FeederPillarSearchController;
 use App\Http\Controllers\web\LinkBox\LinkBoxController;
+use App\Http\Controllers\web\LinkBox\LinkBoxSearchController;
 use App\Http\Controllers\web\map\GeneratePDFController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\web\map\MapController;
@@ -151,6 +153,8 @@ Route::group(
                 Route::any('/generate-link-box-lks', [LinkBoxLKSController::class, 'gene'])->name('generate-link-box-lks');
                 Route::get('/link-box-lks',[LinkBoxLKSController::class,'index'])->name('link-box-lks');
                 Route::get('/generate-link-box-lks-by-visit-date', [LinkBoxLKSController::class, 'generateByVisitDate'])->name('generate-link-box-lks-by-visit-date');
+                Route::get('/search/link-box-by-polygon',[LinkBoxSearchController::class,'getLinkBoxByPolygon'])->name('search-link-box-by-polygon');
+                Route::get('remove-link-box/{id}',[LinkBoxController::class ,'destroyLinkBox'])->name("remove-link-box");
 
 
                 //// Cable Bridge
@@ -166,6 +170,9 @@ Route::group(
                 Route::any('/generate-cable-bridge-lks', [CableBridgeLKSController::class, 'gene'])->name('generate-cable-bridge-lks');
                 Route::get('/cable-bridge-lks',[CableBridgeLKSController::class,'index'])->name('cable-bridge-lks');
                 Route::get('/generate-cable-bridge-lks-by-visit-date', [CableBridgeLKSController::class, 'generateByVisitDate'])->name('generate-cable-bridge-lks-by-visit-date');
+                Route::get('/search/cable-bridge-by-polygon',[CableBridgeSearchController::class,'getCableBridgeByPolygon'])->name('search-cable-bridge-by-polygon');
+                Route::get('remove-cable-bridge/{id}',[CableBridgeController::class ,'destroyCableBridge'])->name("remove-cable-bridge");
+
 
                 ////third party digging routes
                 Route::resource('third-party-digging', ThirdPartyDiggingController::class);

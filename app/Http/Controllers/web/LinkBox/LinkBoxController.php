@@ -34,7 +34,7 @@ class LinkBoxController extends Controller
 
             return datatables()
                 ->of($result->get())->addColumn('link_box_id', function ($row) {
-                    
+
                     return "LB-" .$row->id;
                 })
                 ->make(true);
@@ -237,6 +237,19 @@ class LinkBoxController extends Controller
         }
     }
 
+    public function destroyLinkBox($language, $id)
+    {
+        try {
+            LinkBox::find($id)->delete();
+            return response()->json(['success'=>true],200);
+        }
+        catch (\Throwable $th)
+        {
+            return response()->json(['success'=>false],400);
+        }
+    }
+
+
     public function updateQAStatus(Request $req)
     {
         try {
@@ -246,15 +259,19 @@ class LinkBoxController extends Controller
                 $qa_data->reject_remarks = $req->reject_remakrs;
             }
             $user = Auth::user()->name;
-            
+
             $qa_data->qc_by = $user;
             $qa_data->qc_at = now();
 
             $qa_data->update();
 
-            return redirect()->back();
+            // return redirect()->back();
         } catch (\Throwable $th) {
             return response()->json(['status' => 'Request failed']);
         }
+        if ($req->ajax()) {
+            return response()->json(['message'=>'Update Successfully','status' =>200]);
+        }
+        return redirect()->back();
     }
 }
