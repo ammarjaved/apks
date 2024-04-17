@@ -451,9 +451,9 @@
     <script>
           $(function(){
             // Event handler for hiding Tiang modal
-            $('#tiangDetailModal').on('hide.bs.modal', function(event) {
+            $('#DetailModal').on('hide.bs.modal', function(event) {
                 getRecoredByPolyGone()
-                $('#tiangDetailModalBody').html('');
+                $('#DetailModalBody').html('');
             });
 
 
