@@ -69,7 +69,7 @@
 
 
             <div class="row">
-                @include('components.qr-filter', ['url' => 'generate-tiang-talian-vt-and-vr-excel'])
+                @include('components.qr-filter', ['url' => 'generate-savt-excel'])
 
                 <div class="col-12">
                     <div class="card">
@@ -81,11 +81,11 @@
                                 <a href="{{ route('savt.create', app()->getLocale()) }}">
                                     <button class="btn text-white btn-success  btn-sm mr-4">Add SAVT</button>
                                 </a>
-                                {{-- <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
+                                 {{-- <button class="btn text-white  btn-sm mr-4" type="button" data-toggle="collapse"
                                     style="background-color: #708090" data-target="#collapseQr" aria-expanded="false"
                                     aria-controls="collapseQr">
-                                    QR SAVT
-                                </button> --}}
+                                    QR SAVT --}}
+                                {{-- </button> --}}
 
                             </div>
                         </div>

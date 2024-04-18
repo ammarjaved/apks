@@ -350,7 +350,7 @@
                                         <div class="card p-4">
                                             <label for="st7"> ABC {{ __('messages.saiz_mmp') }} </label>
 
-                                        
+
                                                 <div class=" col-md-12 row   ">
 
                                                     {{-- ABC SAIZ 3X70 --}}
@@ -377,10 +377,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                           
 
-                                                 
-                                               
+
+
+
 
 
                                                 {{-- ABC PANJNG METER --}}
@@ -594,9 +594,9 @@
                                                <label for="tiang_leaning"> {{ __('messages.leaning') }}</label>
                                            </td>
                                            <td  class="d-flex">{!!  savtYesOrNo('tiang_leaning') !!}</td>
-                                           
+
                                        </tr>
-                                       
+
 
                                        {{-- CONDUCTOR PHASE --}}
 
@@ -654,7 +654,7 @@
                                        </tr>
 
 
-                                    
+
 
                                        {{-- CABLE TERMINATE --}}
                                        <tr>
@@ -709,7 +709,7 @@
                                            <th rowspan="3">{{ __('messages.lightning_arrester_pac') }}</th>
                                            <td  >
                                                {{-- <input type="checkbox" name="lightning_arrester_pac_broken" id="lightning_arrester_pac_broken" class="form-check"> --}}
-                                               <label for="lightning_arrester_pac_broken">{{ __('messages.broken') }}</label>    
+                                               <label for="lightning_arrester_pac_broken">{{ __('messages.broken') }}</label>
                                            </td>
                                            <td  class="d-flex">{!!  savtYesOrNo('lightning_arrester_pac_broken') !!}</td>
 
@@ -754,7 +754,7 @@
                                            <td  class="d-flex">{!!  savtYesOrNo('switch_link_need_repair') !!}</td>
 
                                        </tr>
-                                   
+
                                        {{-- POLE NEED REPAINT --}}
                                        <tr>
                                            <th >{{ __('messages.tiang') }}</th>
@@ -777,7 +777,7 @@
 
                                        </tr>
 
-                                        
+
 
                                        {{-- EARTH BOUNDING --}}
 
@@ -788,7 +788,7 @@
                                                <label for="earth_bounding_status">{{ __('messages.status') }}</label>
                                            </td>
                                            <td  class="d-flex">{!!  savtYesOrNo('earth_bounding_status') !!}</td>
-                                           
+
                                        </tr>
                                        <tr>
                                            <td  >
@@ -819,7 +819,7 @@
                                            </td>
                                            <td  class="d-flex">{!!  savtYesOrNo('cabel_tray_change') !!}</td>
                                        </tr>
-                                      
+
 
 
 
@@ -834,7 +834,7 @@
                                            </td>
                                            <td  class="d-flex">{!!  savtYesOrNo('suspension_clamp_change') !!}</td>
                                        </tr>
-                                       
+
 
 
 
@@ -873,7 +873,7 @@
                                            <td  class="d-flex">{!!  savtYesOrNo('crossarm_bent') !!}</td>
 
                                        </tr>
-                                       
+
 
 
 
@@ -896,7 +896,7 @@
                                            <td  class="d-flex">{!!  savtYesOrNo('earth_crossarm_bent') !!}</td>
 
                                        </tr>
-                                        
+
 
 
 
@@ -942,7 +942,7 @@
                                            <td  class="d-flex">{!!  savtYesOrNo('wte_hanging_disconnected') !!}</td>
 
                                        </tr>
- 
+
 
 
 
@@ -1006,7 +1006,7 @@
                                            <td  class="d-flex">{!!  savtYesOrNo('lcol_hotspot') !!}</td>
 
                                        </tr>
-                                       
+
 
 
 
@@ -1029,7 +1029,7 @@
                                            <td  class="d-flex">{!!  savtYesOrNo('jumper_hotspot') !!}</td>
 
                                        </tr>
-       
+
 
 
 
@@ -1052,7 +1052,7 @@
                                             <td  class="d-flex">{!!  savtYesOrNo('pg_cc_hotspot') !!}</td>
 
                                         </tr>
-                     
+
 
 
 
@@ -1068,7 +1068,7 @@
                                         <td  class="d-flex">{!!  savtYesOrNo('climbing_barrier_need_change') !!}</td>
 
                                     </tr>
-                                    
+
 
 
 
@@ -1096,16 +1096,16 @@
                                             <label for="lfi_break_date">{{ __('messages.break_date') }}</label>
                                         </td>
 
-                                        <td  class="d-flex">{!!  savtYesOrNo('lfi_break_date') !!}</td>
+                                        <td  class="d-flex">{!!  savtYesOrNo('lfi_break') !!}</td>
 
                                     </tr>
-                                  
+
                                    </table>
                                </div>
                                <input type="hidden" name="total_defects" id="total_defects">
                            </fieldset>
 
- 
+
 
 
                             <h3>{{ __('messages.Kebocoran_Arus') }}</h3>
@@ -1123,7 +1123,7 @@
                                         <textarea name="remarks" id="remarks" cols="30" rows="6" class="form-control"></textarea>
                                     </div>
                                 </div>
-                                 
+
                                     {{-- FIVE FEET AWAY --}}
                                 <div class="row">
                                     <div class="col-md-4">
@@ -1191,7 +1191,7 @@
 
 
 
-        function getWp(param) 
+        function getWp(param)
         {
             var splitVal = param.value.split(',');
             addRemoveBundary(splitVal[1], splitVal[2], splitVal[3])
@@ -1329,7 +1329,7 @@
         ];
 
         const userBa = "{{ Auth::user()->ba }}";
-        $(document).ready(function() 
+        $(document).ready(function()
         {
 
             if (userBa !== '') {
@@ -1343,7 +1343,7 @@
         });
 
         // DISPALY UPLOADED IMAGE
-        function showUploadedImage(param) 
+        function showUploadedImage(param)
         {
             const file = param.files[0];
             const id = $(`#${param.id}_div`);
@@ -1374,9 +1374,9 @@
 
         $('#total_defects').val(total_defects)
 
-        
 
-        function getBaPoints(param) 
+
+        function getBaPoints(param)
         {
             var baSelect = $('#ba_s')
             baSelect.empty();
@@ -1393,16 +1393,16 @@
 
         function getVoltan(param){
             if (param == '11kv') {
-                
+
                     $('.voltan_11').css('display','block')
-          
+
             }else{
                 $('.voltan_11').css('display','none')
 
             }
         }
 
-        
+
 
 
     </script>

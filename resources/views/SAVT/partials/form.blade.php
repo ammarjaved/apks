@@ -181,7 +181,7 @@
                                     <div class="col-md-4"><label for="savt_remove_creepers_image">{{ __('messages.savt_remove_creepers') }} Image </label></div>
                                     <div class="col-md-8 row">{!!  viewAndUpdateImage($data->savt_remove_creepers_image , 'savt_remove_creepers_image' , $disabled )  !!}</div>
                                 </div>
-                                
+
 
                                 {{-- SAVT CLEAN BANNER IMAGE --}}
                                 <div class="row">
@@ -212,7 +212,7 @@
                                     <div class="col-md-6">
                                         <div class="card p-4">
                                             <label for="st7"> ABC {{ __('messages.saiz_mmp') }} </label>
-                                        
+
                                                 <div class=" col-md-12 row   ">
 
                                                     {{-- ABC SAIZ 3X70 --}}
@@ -239,10 +239,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                           
 
-                                                 
-                                               
+
+
+
                                                 {{-- ABC PANJNG METER --}}
                                             <div class="row">
                                                 <div class="col-md-6"><label for="st7">ABC {{ __('messages.panjang_meter') }} </label></div>
@@ -452,7 +452,7 @@
                                            <td><label for="tiang_leaning"> {{ __('messages.leaning') }}</label></td>
                                            <td  class="d-flex">{!!  savtYesOrNo('tiang_leaning', $disabled ,$data->tiang_leaning) !!}</td>
                                         </tr>
-                                       
+
 
                                        {{-- CONDUCTOR PHASE --}}
 
@@ -494,7 +494,7 @@
                                        </tr>
 
 
-                                    
+
 
                                        {{-- CABLE TERMINATE --}}
                                        <tr>
@@ -556,7 +556,7 @@
                                            <td><label for="switch_link_need_repair">{{ __('messages.need_repair') }}</label></td>
                                            <td class="d-flex">{!!  savtYesOrNo('switch_link_need_repair', $disabled ,$data->switch_link_need_repair) !!}</td>
                                        </tr>
-                                   
+
                                        {{-- POLE NEED REPAINT --}}
                                        <tr>
                                            <th>{{ __('messages.tiang') }}</th>
@@ -595,7 +595,7 @@
                                            <td><label for="cabel_tray_change">{{ __('messages.change') }}</label></td>
                                            <td  class="d-flex">{!!  savtYesOrNo('cabel_tray_change', $disabled ,$data->cabel_tray_change) !!}</td>
                                        </tr>
-                                      
+
                                        {{-- SUSPENSION --}}
 
                                        <tr>
@@ -603,7 +603,7 @@
                                            <td><label for="suspension_clamp_change">{{ __('messages.clamp_change') }}</label></td>
                                            <td  class="d-flex">{!!  savtYesOrNo('suspension_clamp_change', $disabled ,$data->suspension_clamp_change) !!}</td>
                                        </tr>
-                                       
+
                                        {{-- TRIANGULAR --}}
 
                                        <tr>
@@ -624,7 +624,7 @@
                                            <td><label for="crossarm_bent">{{ __('messages.bent') }}</label></td>
                                            <td class="d-flex">{!!  savtYesOrNo('crossarm_bent', $disabled ,$data->crossarm_bent) !!}</td>
                                        </tr>
-                                       
+
                                        {{-- EARTH CROSSARM --}}
 
                                        <tr>
@@ -663,7 +663,7 @@
                                            <td><label for="wte_hanging_disconnected">{{ __('messages.hanging_disconnected') }}</label></td>
                                            <td class="d-flex">{!!  savtYesOrNo('wte_hanging_disconnected', $disabled ,$data->wte_hanging_disconnected) !!}</td>
                                        </tr>
- 
+
                                        {{-- INSULATION --}}
 
                                        <tr>
@@ -715,7 +715,7 @@
                                            <td><label for="jumper_hotspot">{{ __('messages.hotspot') }}</label></td>
                                            <td class="d-flex">{!!  savtYesOrNo('jumper_hotspot', $disabled ,$data->jumper_hotspot) !!}</td>
                                        </tr>
-       
+
                                        {{-- PG CLAMPS / CONNECTORS --}}
 
                                        <tr>
@@ -728,7 +728,7 @@
                                             <td><label for="pg_cc_hotspot">{{ __('messages.hotspot') }}</label></td>
                                             <td class="d-flex">{!!  savtYesOrNo('pg_cc_hotspot', $disabled ,$data->pg_cc_hotspot) !!}</td>
                                         </tr>
-                     
+
                                         {{-- Climbing Barriers --}}
 
                                         <tr>
@@ -737,7 +737,7 @@
                                             </td>
                                             <td class="d-flex">{!!  savtYesOrNo('climbing_barrier_need_change', $disabled ,$data->climbing_barrier_need_change) !!}</td>
                                         </tr>
-                                    
+
                                         {{-- Arcing Horn --}}
 
                                         <tr>
@@ -750,10 +750,10 @@
 
                                         <tr>
                                             <th>{{ __('messages.lfi') }}</th>
-                                            <td><label for="lfi_break_date">{{ __('messages.break_date') }}</label></td>
-                                            <td class="d-flex">{!!  savtYesOrNo('lfi_break_date', $disabled ,$data->lfi_break_date) !!}</td>
+                                            <td><label for="lfi_break">{{ __('messages.break_date') }}</label></td>
+                                            <td class="d-flex">{!!  savtYesOrNo('lfi_break', $disabled ,$data->lfi_break) !!}</td>
                                         </tr>
-                                  
+
                                    </table>
                                </div>
                                <input type="hidden" name="total_defects" id="total_defects">
@@ -762,7 +762,7 @@
 
                            {{------------------------------- END Kejanggalan (3) ------------------------------------}}
 
- 
+
 
 
 
@@ -784,7 +784,7 @@
                                         <textarea name="remarks" id="remarks" cols="30" rows="6" class="form-control" {{!$disabled ?: "disabled"}}>{{$data->remarks}}</textarea>
                                     </div>
                                 </div>
-                                 
+
                                     {{-- FIVE FEET AWAY --}}
                                 <div class="row">
                                     <div class="col-md-4"><label for="five_feet_away">{{ __('messages.five_feet_away') }} </label></div>
@@ -811,8 +811,8 @@
 
 
                                 @if ($disabled)
-                                    
-                                
+
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <label for="zone">QA Status</label>
@@ -874,4 +874,3 @@
 
 
                             {{--------------------------------- END Kebocoran Arus (5) ------------------------------}}
-                 

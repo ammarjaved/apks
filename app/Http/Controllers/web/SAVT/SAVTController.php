@@ -9,11 +9,13 @@ use App\Traits\Filter;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Traits\RemoveImages;
 
 
 class SAVTController extends Controller
 {
     use Filter;
+    use RemoveImages;
 
     private $savtRepository;
 
@@ -40,7 +42,7 @@ class SAVTController extends Controller
 
             return datatables()
                 ->of($result->get())->addColumn('savt_id', function ($row) {
-                    
+
                     return "SAVT-" .$row->id;
                 })
                 ->make(true);
@@ -71,18 +73,18 @@ class SAVTController extends Controller
     {
         //
         try {
-            
+
             $create = $this->savtRepository->store($request);
             $data = $this->savtRepository->prepareData($create , $request);
             $data->save();
-            return $request;
-            
+            // return $request;
+
             Session::flash('success', 'Request Success');
         } catch (\Throwable $th) {
-            return $th->getMessage();   
+            return $th->getMessage();
             Session::flash('failed', 'Request Failed');
         }
-        return redirect()->route('tiang-talian-vt-and-vr.index', app()->getLocale());
+        return redirect()->route('savt.index', app()->getLocale());
 
     }
 
@@ -96,7 +98,7 @@ class SAVTController extends Controller
     {
         //
         $data = SAVT::find($id);
-        if ($data) 
+        if ($data)
         {
             return view("SAVT.show",['data'=>$data, 'disabled' => true]);
         }
@@ -114,7 +116,7 @@ class SAVTController extends Controller
         //
         // return $id;
         $data = SAVT::find($id);
-        if ($data) 
+        if ($data)
         {
             return view("SAVT.edit",['data'=>$data, 'disabled' => false]);
         }
@@ -157,14 +159,21 @@ class SAVTController extends Controller
      */
     public function destroy($lang , $id)
     {
-        
-         try {
-            SAVT::find($id)->delete();  
+        try {
+            $rec = SAVT::find($id);
+            if ($rec) {
+
+                $imagesArray = \App\Constants\SAVTConstants::SAVT_IMAGES;
+                $this->removeImages($imagesArray , $rec);
+
+                $rec->delete();
+
+            }
 
             Session::flash('success', 'Request Success');
 
         } catch (\Throwable $th) {
-            // return $th->getMessage();
+            return $th->getMessage();
             Session::flash('failed', 'Request Failed');
 
         }
@@ -182,7 +191,7 @@ class SAVTController extends Controller
             if ($req->status == 'Reject') {
                 $qa_data->reject_remarks = $req->reject_remakrs;
             }
-            $user = Auth::user()->name;            
+            $user = Auth::user()->name;
             $qa_data->qc_by = $user;
             $qa_data->update();
 
