@@ -201,8 +201,8 @@ class FPController extends Controller
             }
             $user = Auth::user()->name;
             
-            // $qa_data->qc_by = $user;
-            // $qa_data->qc_at = now();
+            $qa_data->qc_by = $user;
+            $qa_data->qc_at = now();
 
             $qa_data->update();
 
