@@ -26,7 +26,7 @@
 
 
 
-    
+
 /// layers
 
 var substation = '';
@@ -84,7 +84,7 @@ var g5_x_5_grid = '';
 
 
 
-   
+
 
     var popup = L.popup();
 
@@ -258,7 +258,7 @@ var g5_x_5_grid = '';
                     'info_format': 'application/json',
                     'propertyName': 'NAME,AREA_CODE,DESCRIPTIO'
                 }
-            ); 
+            );
             var secondUrl = encodeURIComponent(url)
             $.ajax({
                 url: '/{{ app()->getLocale() }}/proxy/' + encodeURIComponent(secondUrl),
@@ -526,6 +526,9 @@ var g5_x_5_grid = '';
   }
 
     var ba = "{{ Auth::user()->ba }}";
+    if(ba==='PUTRAJAYA &amp; CYBERJAYA'){
+        ba='PUTRAJAYA & CYBERJAYA';
+    }
     var f_ba = '';
 
 
@@ -546,7 +549,7 @@ var g5_x_5_grid = '';
 
     // if ba is not empty
     function callLayers(param) {
-     
+
             var userBa = '';
         for (const data of b1Options) {
             if (data[1] == param) {
@@ -561,7 +564,7 @@ var g5_x_5_grid = '';
         zoom = 11;
         addRemoveBundary(userBa[1], userBa[2], userBa[3])
         }
-        
+
     }
 
 
