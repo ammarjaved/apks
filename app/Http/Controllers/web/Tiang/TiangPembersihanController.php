@@ -134,7 +134,7 @@ class TiangPembersihanController extends Controller
                     if ($gate->remove_creepers_image !='' && file_exists($imagePath1))
                     {
                         $image1 = new Drawing();
-                        $image->setPath($imagePath1);
+                        $image1->setPath($imagePath1);
                         $image1->setCoordinates('I' . $g); // Cell coordinate where you want to insert the image
                         $image1->setWidth(300); // Set the width of the image (adjust as needed)
                         $image1->setHeight(300); // Set the height of the image (adjust as needed)
@@ -195,7 +195,7 @@ class TiangPembersihanController extends Controller
                     if ($advertise->clean_banner_image !='' && file_exists($imagePath1))
                     {
                         $image1 = new Drawing();
-                        $image->setPath($imagePath1);
+                        $image1->setPath($imagePath1);
                         $image1->setCoordinates('I' . $g); // Cell coordinate where you want to insert the image
                         $image1->setWidth(300); // Set the width of the image (adjust as needed)
                         $image1->setHeight(300); // Set the height of the image (adjust as needed)
