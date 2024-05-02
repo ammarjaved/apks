@@ -135,9 +135,6 @@ class FeederPillarPembersihanController extends Controller
                 }
                 
 
-
-
-
                 // GET POSTER DATA AND IMMAGES 
                 $advertisePoster = $advertisePoster->where('advertise_poster_status', 'Yes')
                         ->select('images_advertise_poster','id','visit_date' , DB::raw('ST_X(geom) as x' ) , DB::raw('ST_Y(geom) as y'), 'image_advertisement_after_1')->orderBy('visit_date')->get();
