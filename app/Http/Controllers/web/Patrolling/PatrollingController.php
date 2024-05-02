@@ -50,14 +50,10 @@ class PatrollingController extends Controller
             $road->total_supervision = $request->total_supervision;
             $road->update();
 
-            return redirect()
-                ->route('get-all-work-packages', app()->getLocale())
-                ->with('success', 'Request Success');
+            return redirect()->route('get-all-work-packages', app()->getLocale())->with('success', 'Request Success');
         } catch (\Throwable $th) {
             return $th->getMessage();
-            return redirect()
-                ->route('get-all-work-packages', app()->getLocale())
-                ->with('failed', 'Request Failed');
+            return redirect()->route('get-all-work-packages', app()->getLocale())->with('failed', 'Request Failed');
         }
     }
 
@@ -73,18 +69,14 @@ class PatrollingController extends Controller
 
     public function getRoads($language, $id)
     {
-        $roads = Road::where('id_workpackage', $id)
-            ->select('id', 'road_name')
-            ->get();
+        $roads = Road::where('id_workpackage', $id)->select('id', 'road_name')->get();
 
         return $roads;
     }
 
     public function getRoadsByID($language, $id)
     {
-        $road = Road::where('id', $id)
-            ->select('id', 'road_name', 'ba', 'km', 'date_patrol', 'time_patrol', 'name_project', 'actual_km', 'fidar', 'total_digging', 'total_notice', 'total_supervision')
-            ->first();
+        $road = Road::where('id', $id)->select('id', 'road_name', 'ba', 'km', 'date_patrol', 'time_patrol', 'name_project', 'actual_km', 'fidar', 'total_digging', 'total_notice', 'total_supervision')->first();
         $road->time_petrol = date('H:i:s', strtotime($road->time_petrol));
         return $road;
     }
@@ -101,27 +93,16 @@ class PatrollingController extends Controller
 
     public function paginate(Request $request, $language)
     {
-        
-
- 
         if ($request->ajax()) {
-
-           
             $result = Patroling::query();
 
-        $request =  $this->filterWithOutAccpet($result , 'vist_date' , $request);
+            $request = $this->filterWithOutAccpet($result, 'vist_date', $request);
 
-    $result->whereNotNull('km')->where('km','!=','0')
-  
-    ->select(
-        '*',
-        DB::raw("st_x(geom_start) as start_x"),
-        DB::raw("st_y(geom_start) as start_y"),
-        DB::raw("st_x(geom_end) as end_x"),
-        DB::raw("st_y(geom_end) as end_y")
-    )
-    ->orderByDesc('date');
-
+            $result
+                // ->whereNotNull('km')
+                // ->where('km', '!=', '0')
+                ->select('*', DB::raw('st_x(geom_start) as start_x'), DB::raw('st_y(geom_start) as start_y'), DB::raw('st_x(geom_end) as end_x'), DB::raw('st_y(geom_end) as end_y'))
+                ->orderByDesc('date');
 
             return Datatables::of($result->get()->makeHidden(['geom']))->make(true);
         }
@@ -129,12 +110,9 @@ class PatrollingController extends Controller
         return view('patrolling.index');
     }
 
-
     public function getGeoJson($landg, $id)
     {
-
-
-            $query =DB::select("SELECT json_build_object(
+        $query = DB::select("SELECT json_build_object(
                 'type', 'FeatureCollection',
                 'crs', json_build_object(
                     'type', 'name',
@@ -156,11 +134,8 @@ class PatrollingController extends Controller
             ) AS tbl1;
              ");
 
-             return response()->json($query, 200);
-
+        return response()->json($query, 200);
     }
-
-
 
     public function updateQAStatus(Request $req)
     {
