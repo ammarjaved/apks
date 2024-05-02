@@ -19,6 +19,7 @@ class SubstationPembersihanController extends Controller
 
     public function pembersihan(Request $req)
     {
+        // return "SDfsd";
 
         try 
         {
