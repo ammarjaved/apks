@@ -21,9 +21,10 @@ class SubstationPembersihanController extends Controller
     {
         // return "SDfsd";
 
-        try 
+
+        try
         {
-            $data = Substation::query();            
+            $data = Substation::query();
             $data = $this->filter($data , 'visit_date' , $req)->where('qa_status', 'Accept');
 
             $gateUnlocked       = clone $data;
@@ -38,11 +39,12 @@ class SubstationPembersihanController extends Controller
                 ->get();
 
 
-            if ($totalCounts) 
+            if ($totalCounts)
             {
 
                 $excelFile = public_path('assets/excel-template/PE_PEMBERSIHAN.xlsx');
                 $spreadsheet = IOFactory::load($excelFile);
+
                 $worksheet = $spreadsheet->getSheet(0);
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
 
@@ -51,7 +53,7 @@ class SubstationPembersihanController extends Controller
                 $color = '';
                 $gateCount = 0;
                 $advertiseCount = 0;
-                foreach ($totalCounts as $count) 
+                foreach ($totalCounts as $count)
                 {
                     if ($i %2 == 0) {
                         $color = 'a8a8a8';
@@ -65,27 +67,27 @@ class SubstationPembersihanController extends Controller
                     $worksheet->getStyle('A' . $i . ':C' . $i)->getFill()->setFillType(Fill::FILL_SOLID)->getStartColor()->setRGB($color    );
                     $i++;
 
-                    $gateCount += $count->gate_unlocked; 
-                    $advertiseCount += $count->advertise_banner; 
+                    $gateCount += $count->gate_unlocked;
+                    $advertiseCount += $count->advertise_banner;
                 }
-                
+
                 $worksheet->setCellValue('A' . $i, 'JUMLAH');
                 $worksheet->setCellValue('B' . $i, $gateCount);
                 $worksheet->setCellValue('C' . $i, $advertiseCount);
                 $worksheet->getStyle('A4' . ':C' . $i)->getAlignment()->setHorizontal(Alignment::HORIZONTAL_CENTER);
 
 
-                // GET GATE DATA AND IMMAGES 
+                // GET GATE DATA AND IMMAGES
                 $gateUnlocked = $gateUnlocked->whereRaw("(gate_status->>'unlocked')::text = 'true'")
-                        ->select('image_gate','id','visit_date' , DB::raw('ST_X(geom) as x' ), 'images_gate_after_lock' , DB::raw('ST_Y(geom) as y'))->orderBy('visit_date')->get();
+                        ->select('image_gate' , 'image_gate_2','id','visit_date' , DB::raw('ST_X(geom) as x' ), 'images_gate_after_lock' , 'images_gate_after_lock_2' , DB::raw('ST_Y(geom) as y'))->orderBy('visit_date')->get();
 
-           
 
-                
+
+
                 $gateWorkSheet = $spreadsheet->getSheet(2);
                 $g = 4;
                 $sr = 1;
-                foreach ($gateUnlocked as $gate) 
+                foreach ($gateUnlocked as $gate)
                 {
                     $gateWorkSheet->mergeCells('B'.$g.':H'.$g);
                     $gateWorkSheet->setCellValue('B'.$g, 'SEBELUM');
@@ -98,9 +100,9 @@ class SubstationPembersihanController extends Controller
                     $k = $g +15;
                     $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
                     $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
-                    
+
                     $imagePath = public_path($gate->image_gate); // Provide the path to your image file
-                    if ($gate->image_gate !='' && file_exists($imagePath)) 
+                    if ($gate->image_gate !='' && file_exists($imagePath))
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
@@ -110,11 +112,22 @@ class SubstationPembersihanController extends Controller
                         $image->setWorksheet($gateWorkSheet);
                     }
 
-                    $imagePath1 = public_path($gate->images_gate_after_lock); // Provide the path to your image file
-                    if ($gate->images_gate_after_lock !='' && file_exists($imagePath1)) 
+                    $imagePath1 = '' ;// Provide the path to your image file
+                    if ($gate->images_gate_after_lock !='' && file_exists( public_path($gate->images_gate_after_lock)))
                     {
+                        $imagePath1 =  public_path($gate->images_gate_after_lock);
+                    }
+                    elseif($gate->images_gate_after_lock_2 !='' && file_exists( public_path($gate->images_gate_after_lock_2)))
+                    {
+                        $imagePath1 =  public_path($gate->images_gate_after_lock_2);
+                    }
+                    elseif($gate->image_gate_2 !='' && file_exists( public_path($gate->image_gate_2))){
+                        $imagePath1 =  public_path($gate->image_gate_2);
+                    }
+                    if ($imagePath1 != '') {
+
                         $image1 = new Drawing();
-                        $image->setPath($imagePath1);
+                        $image1->setPath($imagePath1);
                         $image1->setCoordinates('I' . $g); // Cell coordinate where you want to insert the image
                         $image1->setWidth(300); // Set the width of the image (adjust as needed)
                         $image1->setHeight(300); // Set the height of the image (adjust as needed)
@@ -130,22 +143,22 @@ class SubstationPembersihanController extends Controller
                     // $spreadsheet->getActiveSheet()->getStyle('B' . $g)->getAlignment()->setWrapText(true);
 
                     $g += 5;
-                    $sr++;  
-                    
+                    $sr++;
+
                 }
-                
 
 
 
 
-                // GET POSTER DATA AND IMMAGES 
+
+                // GET POSTER DATA AND IMMAGES
                 $advertisePoster = $advertisePoster->where('advertise_poster_status', 'Yes')
                         ->select('image_advertisement_before_1','id','visit_date' , DB::raw('ST_X(geom) as x' ) , DB::raw('ST_Y(geom) as y'), 'image_advertisement_after_1')->orderBy('visit_date')->get();
-                
+
                 $advertiseSheet = $spreadsheet->getSheet(1);
                 $g = 4;
                 $sr = 1;
-                foreach ($advertiseSheet as $advertise) 
+                foreach ($advertiseSheet as $advertise)
                 {
                     $gateWorkSheet->mergeCells('B'.$g.':H'.$g);
                     $gateWorkSheet->setCellValue('B'.$g, 'SEBELUM');
@@ -158,9 +171,9 @@ class SubstationPembersihanController extends Controller
                     $k = $g +15;
                     $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
                     $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
-                    
+
                     $imagePath = public_path($advertise->image_advertisement_before_1);
-                    if ($advertise->image_advertisement_before_1 != '' && file_exists($imagePath)) 
+                    if ($advertise->image_advertisement_before_1 != '' && file_exists($imagePath))
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
@@ -171,10 +184,10 @@ class SubstationPembersihanController extends Controller
                     }
 
                     $imagePath1 = public_path($advertise->image_advertisement_after_1);
-                    if ($advertise->image_advertisement_after_1 !='' && file_exists($imagePath1)) 
+                    if ($advertise->image_advertisement_after_1 !='' && file_exists($imagePath1))
                     {
-                        $image1 = new Drawing();                   
-                        $image->setPath($imagePath1);
+                        $image1 = new Drawing();
+                        $image1->setPath($imagePath1);
                         $image1->setCoordinates('I' . $g); // Cell coordinate where you want to insert the image
                         $image1->setWidth(300); // Set the width of the image (adjust as needed)
                         $image1->setHeight(300); // Set the height of the image (adjust as needed)
@@ -191,24 +204,27 @@ class SubstationPembersihanController extends Controller
                     // $spreadsheet->getActiveSheet()->getStyle('B' . $g)->getAlignment()->setWrapText(true);
 
                     $g += 5;
-                    $sr++;  
-                    
+                    $sr++;
+
                 }
-                
 
                 $filename = "PENCAWANG_PEMBERSIHAN {$req->ba} {$req->from_date} - {$req->to_date} ".rand(2,10000).'.xlsx';
+            // return public_path('assets/updated-excels/') . $filename;
                 $writer->save(public_path('assets/updated-excels/') . $filename);
+                // return $req;
+
                 return response()->download(public_path('assets/updated-excels/') . $filename)->deleteFileAfterSend(true);
-            } 
-            else 
+            }
+            else
             {
                 return redirect()->back()->with('failed', 'No records found ');
             }
 
         }
-        catch (\Throwable $th)
-        {
-            return redirect()->back()->with('failed', 'Request Failed '. $th->getMessage());
+        catch (\Exception $e) {
+            // Log or handle the error
+        return     "Error saving file: " . $e->getMessage();
+            // Return an error response or perform necessary actions
         }
         return  $data;
     }
