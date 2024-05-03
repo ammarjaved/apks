@@ -166,19 +166,19 @@ class TiangPembersihanController extends Controller
                 $advertiseSheet->setTitle('PEMBERSIHAN IKLAN HARAM');
                 $g = 4;
                 $sr = 1;
-                foreach ($advertiseSheet as $advertise)
+                foreach ($advertisePoster as $advertise)
                 {
-                    $advertisePoster->mergeCells('B'.$g.':H'.$g);
-                    $advertisePoster->setCellValue('B'.$g, 'SEBELUM');
+                    $advertiseSheet->mergeCells('B'.$g.':H'.$g);
+                    $advertiseSheet->setCellValue('B'.$g, 'SEBELUM');
 
-                    $advertisePoster->mergeCells('I'.$g.':O'.$g);
-                    $advertisePoster->setCellValue('I'.$g , 'SELEPAS');
+                    $advertiseSheet->mergeCells('I'.$g.':O'.$g);
+                    $advertiseSheet->setCellValue('I'.$g , 'SELEPAS');
 
                     $g++;
                     // Add image to cell
                     $k = $g +15;
-                    $advertisePoster->mergeCells('B'.$g.':H'.$k);
-                    $advertisePoster->mergeCells('I'.$g.':O'.$k);
+                    $advertiseSheet->mergeCells('B'.$g.':H'.$k);
+                    $advertiseSheet->mergeCells('I'.$g.':O'.$k);
 
                     $imagePath = public_path($advertise->pole_image_2);
                     if ($advertise->pole_image_2 != '' && file_exists($imagePath))
@@ -188,7 +188,7 @@ class TiangPembersihanController extends Controller
                         $image->setCoordinates('B' . $g); // Cell coordinate where you want to insert the image
                         $image->setWidth(300); // Set the width of the image (adjust as needed)
                         $image->setHeight(300); // Set the height of the image (adjust as needed)
-                        $image->setWorksheet($advertisePoster);
+                        $image->setWorksheet($advertiseSheet);
                     }
 
                     $imagePath1 = public_path($advertise->clean_banner_image);
@@ -199,15 +199,15 @@ class TiangPembersihanController extends Controller
                         $image1->setCoordinates('I' . $g); // Cell coordinate where you want to insert the image
                         $image1->setWidth(300); // Set the width of the image (adjust as needed)
                         $image1->setHeight(300); // Set the height of the image (adjust as needed)
-                        $image1->setWorksheet($advertisePoster);
+                        $image1->setWorksheet($advertiseSheet);
                     }
 
                     $g += 16;
                     // return $g;
-                    $advertisePoster->mergeCells('B'.$g.':O'.$g+3);
+                    $advertiseSheet->mergeCells('B'.$g.':O'.$g+3);
 
                     $cellValue = "SR : {$sr}\n ID : FP-{$advertise->id}\n COORDINATE : {$advertise->y} , {$advertise->x}\n TARIKH RONDAAN : {$advertise->review_date}";
-                    $advertisePoster->getCell('B' . $g)->setValue($cellValue);
+                    $advertiseSheet->getCell('B' . $g)->setValue($cellValue);
                     // $gateWorkSheet->getCell('B' . $g)->setValue("sdasd\ndsadasd\n");
                     // $spreadsheet->getActiveSheet()->getStyle('B' . $g)->getAlignment()->setWrapText(true);
 
