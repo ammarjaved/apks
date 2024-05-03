@@ -160,17 +160,17 @@ class SubstationPembersihanController extends Controller
                 $sr = 1;
                 foreach ($advertiseSheet as $advertise)
                 {
-                    $gateWorkSheet->mergeCells('B'.$g.':H'.$g);
-                    $gateWorkSheet->setCellValue('B'.$g, 'SEBELUM');
+                    $advertisePoster->mergeCells('B'.$g.':H'.$g);
+                    $advertisePoster->setCellValue('B'.$g, 'SEBELUM');
 
-                    $gateWorkSheet->mergeCells('I'.$g.':O'.$g);
-                    $gateWorkSheet->setCellValue('I'.$g , 'SELEPAS');
+                    $advertisePoster->mergeCells('I'.$g.':O'.$g);
+                    $advertisePoster->setCellValue('I'.$g , 'SELEPAS');
 
                     $g++;
                     // Add image to cell
                     $k = $g +15;
-                    $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
-                    $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
+                    $advertisePoster->mergeCells('B'.$g.':H'.$k);
+                    $advertisePoster->mergeCells('I'.$g.':O'.$k);
 
                     $imagePath = public_path($advertise->image_advertisement_before_1);
                     if ($advertise->image_advertisement_before_1 != '' && file_exists($imagePath))
@@ -180,7 +180,7 @@ class SubstationPembersihanController extends Controller
                         $image->setCoordinates('B' . $g); // Cell coordinate where you want to insert the image
                         $image->setWidth(300); // Set the width of the image (adjust as needed)
                         $image->setHeight(300); // Set the height of the image (adjust as needed)
-                        $image->setWorksheet($gateWorkSheet);
+                        $image->setWorksheet($advertisePoster);
                     }
 
                     $imagePath1 = public_path($advertise->image_advertisement_after_1);
@@ -191,15 +191,15 @@ class SubstationPembersihanController extends Controller
                         $image1->setCoordinates('I' . $g); // Cell coordinate where you want to insert the image
                         $image1->setWidth(300); // Set the width of the image (adjust as needed)
                         $image1->setHeight(300); // Set the height of the image (adjust as needed)
-                        $image1->setWorksheet($gateWorkSheet);
+                        $image1->setWorksheet($advertisePoster);
                     }
 
                     $g += 16;
                     // return $g;
-                    $gateWorkSheet->mergeCells('B'.$g.':O'.$g+3);
+                    $advertisePoster->mergeCells('B'.$g.':O'.$g+3);
 
                     $cellValue = "SR : {$sr}\n ID : FP-{$advertise->id}\n COORDINATE : {$advertise->y} , {$advertise->x}\n TARIKH RONDAAN : {$advertise->visit_date}";
-                    $gateWorkSheet->getCell('B' . $g)->setValue($cellValue);
+                    $advertisePoster->getCell('B' . $g)->setValue($cellValue);
                     // $gateWorkSheet->getCell('B' . $g)->setValue("sdasd\ndsadasd\n");
                     // $spreadsheet->getActiveSheet()->getStyle('B' . $g)->getAlignment()->setWrapText(true);
 
