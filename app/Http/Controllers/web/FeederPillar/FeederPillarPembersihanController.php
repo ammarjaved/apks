@@ -147,10 +147,11 @@ class FeederPillarPembersihanController extends Controller
                                             ->orderBy('visit_date')
                                             ->get();
 
+
                 $advertiseSheet = $spreadsheet->getSheet(2);
                 $g = 4;
                 $sr = 1;
-                foreach ($advertiseSheet as $advertise)
+                foreach ($advertisePoster as $advertise)
                 {
                     $advertiseSheet->mergeCells('B'.$g.':H'.$g);
                     $advertiseSheet->setCellValue('B'.$g, 'SEBELUM');
