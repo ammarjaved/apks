@@ -16,10 +16,10 @@ class FeederPillarMapController extends Controller
     public function editMap($lang, $id)
     {
         $data = FeederPillar::find($id);
-         
+
         if ($data) {
             $data->gate_status = json_decode($data->gate_status);
-        
+
 
         return view('feeder-pillar.edit-form', ['data' => $data, 'disabled' => false]) ;
         }
@@ -38,7 +38,7 @@ class FeederPillarMapController extends Controller
 
             if ($data->qa_status != $request->qa_status) {
                 $data->qa_status = $request->qa_status;
-                $data->qc_by = $user;   
+                $data->qc_by = $user;
                 $data->qc_at = now();
             }
             if ($request->qa_status == 'Reject') {
