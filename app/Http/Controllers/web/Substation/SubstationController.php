@@ -153,7 +153,7 @@ class SubstationController extends Controller
             }
         
             $user = Auth::user()->name;
-            $data->updated_by = $user;
+            // $data->updated_by = $user;
            
             $res = $this->substationRepository->store($data, $request);
             $res->update();

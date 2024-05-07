@@ -46,7 +46,7 @@ class TiangMapController extends Controller
             $recored = Tiang::find($id);
             if ($recored) {
                 $user = Auth::user()->name;
-                $recored->updated_by = $user;
+                // $recored->updated_by = $user;
                 // return $request->qa_status;
                 if ($recored->qa_status != $request->qa_status) {
                     $recored->qa_status = $request->qa_status;

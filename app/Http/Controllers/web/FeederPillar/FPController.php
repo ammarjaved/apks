@@ -142,7 +142,7 @@ class FPController extends Controller
         {
             $data = FeederPillar::find($id);
             $user = Auth::user()->name;
-            $data->updated_by = $user;
+            // $data->updated_by = $user;
             $feederPillar->store($data,$request);
             $data->update();
             Session::flash('success', 'Request Success');

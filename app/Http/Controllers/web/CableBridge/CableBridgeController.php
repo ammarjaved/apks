@@ -146,7 +146,7 @@ class CableBridgeController extends Controller
             $data = CableBridge::find($id);
             $user = Auth::user()->name;
 
-            $data->updated_by = $user;
+            // $data->updated_by = $user;
             $cableBridge->store($data,$request);
             $data->update();
             Session::flash('success', 'Request Success');

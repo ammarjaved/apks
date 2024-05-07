@@ -128,7 +128,7 @@ class TiangContoller extends Controller
             $recored = Tiang::find($id);
             if ($recored) {
                 $user = Auth::user()->name;
-                $recored->updated_by = $user;
+                // $recored->updated_by = $user;
                 $data = $this->tiangRepository->prepareData($recored , $request);
                 $data->update();
 

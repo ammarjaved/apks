@@ -136,7 +136,7 @@ class SAVTController extends Controller
             $recored = SAVT::find($id);
             if ($recored) {
                 $user = Auth::user()->name;
-                $recored->updated_by = $user;
+                // $recored->updated_by = $user;
                 $data = $this->savtRepository->prepareData($recored , $request);
                 $data->update();
 

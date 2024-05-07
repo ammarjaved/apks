@@ -49,7 +49,7 @@ class LinkBoxMapController extends Controller
 
             }
 
-            $data->updated_by = $user;
+            // $data->updated_by = $user;
             if ($data->qa_status == '') {
                 $data->qa_status = 'pending';
             }

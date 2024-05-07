@@ -174,7 +174,7 @@ class LinkBoxController extends Controller
             $data->feeder_involved = $request->feeder_involved;
             $user = Auth::user()->name;
 
-            $data->updated_by = $user;
+            // $data->updated_by = $user;
             if ($data->qa_status == '') {
                 $data->qa_status = 'pending';
             }

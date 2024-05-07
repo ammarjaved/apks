@@ -33,7 +33,7 @@ class SubstationMapController extends Controller
             }
 
             $user = Auth::user()->name;
-            $data->updated_by = $user;
+            // $data->updated_by = $user;
             if ($data->qa_status != $request->qa_status) {
                 $data->qa_status = $request->qa_status;
                 $data->qc_by = $user;   
