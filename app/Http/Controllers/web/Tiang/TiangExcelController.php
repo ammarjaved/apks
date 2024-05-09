@@ -33,7 +33,7 @@ class TiangExcelController extends Controller
             $defectsImg = ['pole_image_1', 'pole_image_2', 'pole_image_3', 'pole_image_4', 'pole_image_5'];
 
 
-            $res = $result->whereNotNull('review_date')->get()
+            $res = $result->whereNotNull('review_date')->orderBy('fp_name')->get()
                             ->makeHidden(['geom' , 'tiang_defect_image' , 'talian_defect_image' ,
                             'umbang_defect_image' , 'ipc_defect_image' ,'jumper_image','kilat_defect_image',
                             'servis_defect_image' ,'pembumian_defect_image','blackbox_defect_image','bekalan_dua_defect_image',
