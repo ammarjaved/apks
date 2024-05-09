@@ -53,11 +53,20 @@ class TiangRepository
             $data['kaki_lima_defect_image'] = json_decode($data->kaki_lima_defect_image, true);
 
             $talian = $data->talian_utama_connection ;
-            $talian = $talian != '' ? explode(',',$talian) : '';
-
-            $data['service_line'] = isset($talian[0]) ? $talian[0] : '';
-            $data['main_line'] = isset($talian[1]) ? $talian[1] : '';
-
+            // $talian = $talian != '' ? explode(',',$talian) : '';
+            if ($data->talian_utama_connection != '') {
+                # code...
+            
+                if (str_contains($data->talian_utama_connection , ',')) {
+                    $talian = explode(',',$talian);
+                    $data['service_line'] = isset($talian[0]) ? $talian[0] : '';
+                    $data['main_line'] = isset($talian[1])  ? $talian[1] : '';
+                }else{
+                    $data['service_line'] = $data->talian_utama_connection == 's' ? 's' : '';
+                    $data['main_line'] = $data->talian_utama_connection  == 'm' ? 'm' : '';
+                }
+            }   
+           
 
         }
 

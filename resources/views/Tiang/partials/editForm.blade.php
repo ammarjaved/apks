@@ -121,11 +121,11 @@
             </div>
             <div class="col-md-5 d-flex">
                 <div class="col-md-6">
-                    <input type="checkbox" name="main_line" id="main_line" {{$data->service_line != '' ? 'checked' : ''}}>
+                    <input type="checkbox" name="main_line" id="main_line" {{$data->main_line != '' ? 'checked' : ''}} >
                     <label for="main_line">Main Line</label>
                 </div>
                 <div class="col-md-6">
-                    <input type="checkbox" name="service_line" id="service_line"  {{$data->main_line != '' ? 'checked' : ''}}>
+                    <input type="checkbox" name="service_line" id="service_line"  {{$data->service_line != '' ? 'checked' : ''}}>
                     <label for="service_line">Service Line</label>
                 </div>
             </div>
