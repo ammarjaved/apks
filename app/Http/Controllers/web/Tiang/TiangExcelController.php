@@ -175,7 +175,7 @@ class TiangExcelController extends Controller
                     // echo "test <br>";
                     $other_defects = '';
 
-                    $secondWorksheet->setCellValue('B' . $i, $i - 8);
+                    $secondWorksheet->setCellValue('A' . $i, $i - 8);
                     $secondWorksheet->setCellValue('F' . $i, $secondRec->fp_name);
                     $secondWorksheet->setCellValue('G' . $i, $secondRec->fp_road);
                     $secondWorksheet->setCellValue('H' . $i, $secondRec->section_from);
