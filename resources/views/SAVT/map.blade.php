@@ -146,20 +146,20 @@
 
                 <div class="mx-4">
                     <div id="the-basics">
-                        <div class="d-flex">
+                        {{-- <div class="d-flex">
                             <div class="col-6">
                                 <input type="radio" name="search-by" value="tiang_no" id="search-by-tiang-no" checked onclick="$('#search-input').attr('placeholder','Search by Tiang No')"> <label for="search-by-tiang-no">Tiang No</label>
                             </div>
                             <div class="col-6">
                                 <input type="radio" name="search-by" value="tiang_id" id="search-by-tiang-id" onclick="document.getElementById('search-input').placeholder = 'Search by Tiang ID'"> <label for="search-by-tiang-id">Tiang Id</label>
                             </div>
-                        </div>
-                        <input class="typeahead" type="text" placeholder="search by tiang no" id="search-input" class="form-control">
+                        </div> --}}
+                        <input class="typeahead" type="text" placeholder="search by ID" id="search-input" class="form-control">
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
+            {{-- <div class="col-md-4">
                 <div id="the-basics-substation">
                     <div class="d-flex">
                         <div class="col-6">
@@ -171,7 +171,7 @@
                     </div>
                     <input class="typeahead-substation" type="text" placeholder="search by Substation Name" id="substation-search-input" class="form-control">
                 </div>
-            </div>
+            </div> --}}
 
         </div>
 
@@ -231,20 +231,16 @@
                         <thead>
                             <th>ID</th>
                             <th>BA</th>
-                            <th>TIANG NO</th>
-                            <th>FP NAME</th>
+                            <th>PMU/PPU</th>
+                            <th>FEEDER NO</th>
                             <th>ROAD NAME</th>
-                            <th>REVIEW DATE</th>
-                            <th>SIZE TIANG</th>
-                            <th>JENIS TIANG</th>
-                            <th style="min-width: 200px !important;">CABLE TYPE</th>
+                            <th>VSIIST DATE</th>
+                            <th>VOLTAN KV</th>
                             <th>TOTAL DEFECTS</th>
                             <th>QA Status</th>
                             <th>CREATED BY</th>
                             <th>IMAGE 1</th>
                             <th>IMAGE 2</th>
-                            <th>FROM IMAGE 1</th>
-                            <th>FROM IMAGE 2</th>
 
                             <th>ACTION</th>
                         </thead>
@@ -347,7 +343,7 @@
     <div class="modal fade" id="removeConfirm">
         <div class="modal-dialog">
             <div class="modal-content ">
-    
+
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">Remove Recored</h4>
@@ -356,7 +352,7 @@
                 <form action="" id="remove-foam" method="POST">
                     @method('DELETE')
                     @csrf
-    
+
                     <div class="modal-body">
                         Are You Sure ?
                         <input type="hidden" name="id" id="remove-modal-id">
@@ -366,7 +362,7 @@
                         <button type="button" class="btn btn-danger" onclick="removeRecord()">Remove</button>
                     </div>
                 </form>
-    
+
             </div>
         </div>
     </div>
@@ -388,7 +384,7 @@
             return function findMatches(q, cb) {
 
                 var matches;
-                var searchBy= $('input[name="search-by"]:checked').val();
+                // var searchBy= $('input[name="search-by"]:checked').val();
 
                 matches = [];
                 // var postData = {
@@ -404,7 +400,7 @@
                 //         matches.push(str.tiang_no);
 
                 //         });
-                //     // getTiangByPolyGone();
+                //     // getDataByPolyGone();
                 // })
                 // .catch(function (error) {
                 //     console.error('Request Failed:', error);
@@ -413,7 +409,7 @@
 
 
                 $.ajax({
-                    url: `/{{ app()->getLocale() }}/search/find-tiang?type=${searchBy}&q=${q}`,
+                    url: `/{{ app()->getLocale() }}/search/find-savt?q=${q}`,
                     dataType: 'JSON',
                     //data: data,
                     method: 'GET',
@@ -421,7 +417,7 @@
                     success: function callback(data) {
                         $.each(data, function(i, str) {
 
-                            matches.push(str.tiang_no);
+                            matches.push(str.id);
 
                         });
                     }
@@ -444,14 +440,14 @@
 
         $('.typeahead').on('typeahead:select', function(event, suggestion) {
             var name = encodeURIComponent(suggestion);
-            var searchBy= $('input[name="search-by"]:checked').val();
+            // var searchBy= $('input[name="search-by"]:checked').val();
 
 
             if (marker != '') {
                 map.removeLayer(marker)
             }
             $.ajax({
-                url: '/{{ app()->getLocale() }}/search/find-tiang-cordinated/' + encodeURIComponent(name)+'/'+searchBy,
+                url: '/{{ app()->getLocale() }}/search/find-savt-cordinated/' + encodeURIComponent(name),
                 dataType: 'JSON',
                 //data: data,
                 method: 'GET',
@@ -497,7 +493,7 @@
 
             cb(matches);
         };
-        }; 
+        };
 
 
 
@@ -546,7 +542,7 @@
         $(function(){
             // Event handler for hiding Tiang modal
             $('#tiangDetailModal').on('hide.bs.modal', function(event) {
-                getTiangByPolyGone()
+                getDataByPolyGone()
                 $('#tiangDetailModalBody').html('');
             });
 
@@ -578,13 +574,17 @@
             // Listen for message from iframe
             window.addEventListener('message', function(event) {
                 if (event.data === 'closeModal') {
+                    $('#set-iframe').html('');
                     $('#tiangDetailModal').modal('hide');
-                    getTiangByPolyGone()
+                    if (jsonData !== '') {
+                        getDataByPolyGone()
+
+                    }
                 }
             });
         });
 
-       
+
 
         // ADD DRAW TOOLS
 
@@ -619,12 +619,12 @@
             var data = newLayer.toGeoJSON();
             jsonData = JSON.stringify(data.geometry);
 
-            getTiangByPolyGone()
+            getDataByPolyGone()
 
         })
 
 
-        function getTiangByPolyGone()
+        function getDataByPolyGone()
         {
             $.ajax(
                 {
@@ -664,38 +664,22 @@
                                             <tr>
                                                 <td>${element.id}</td>
                                                 <td>${element.ba}</td>
-                                                <td>${element.tiang_no}</td>
-                                                <td>${element.fp_name}</td>
-                                                <td>${element.fp_road}</td>
-                                                <td>${element.review_date}</td>
-                                                <td>${element.size_tiang}</td>
-                                                <td>${element.jenis_tiang}</td>
-                                                <td>
-                                                    ${element.abc_span}
-                                                    ${element.pvc_span != '' ? ','+element.pvc_span :''}
-                                                    ${element.bare_span != '' ? ','+element.bare_span :''}
-                                                </td>
+                                                <td>${element.supplier_pmu_ppu}</td>
+                                                <td>${element.supplier_feeder_no}</td>
+                                                <td>${element.road_name}</td>
+                                                <td>${element.visit_date}</td>
+                                                <td>${element.voltan_kv}</td>
                                                 <td>${element.total_defects}</td>
                                                 <td>${status}</td>
                                                 <td>${element.created_by}</td>
                                                 <td>
-                                                    <a href="http://121.121.232.53:8090/${element.pole_image_1}" target="_blank" />
-                                                        <img src="http://121.121.232.53:8090/${element.pole_image_1}" style="height:50px;" >
+                                                    <a href="http://121.121.232.53:8090/${element.savt_image_1}" target="_blank" />
+                                                        <img src="http://121.121.232.53:8090/${element.savt_image_1}" style="height:50px;" >
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="http://121.121.232.53:8090/${element.pole_image_2}" target="_blank" />
-                                                        <img src="http://121.121.232.53:8090/${element.pole_image_2}" style="height:50px;"  />
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a href="http://121.121.232.53:8090/${element.from_pole_image_1}" target="_blank" />
-                                                        <img src="http://121.121.232.53:8090/${element.from_pole_image_1}" style="height:50px;" />
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <a href="http://121.121.232.53:8090/${element.from_pole_image_2}" target="_blank" />
-                                                        <img src="http://121.121.232.53:8090/${element.from_pole_image_2}" style="height:50px;"  />
+                                                    <a href="http://121.121.232.53:8090/${element.savt_image_2}" target="_blank" />
+                                                        <img src="http://121.121.232.53:8090/${element.savt_image_2}" style="height:50px;"  />
                                                     </a>
                                                 </td>
                                                 <td>
@@ -735,7 +719,7 @@
 
             $.ajax(
                 {
-                    url: `/{{ app()->getLocale() }}/tiang-talian-vt-and-vr-update-QA-Status?status=Accept&&id=${paramId}`,
+                    url: `/{{ app()->getLocale() }}/savt-update-QA-Status?status=Accept&&id=${paramId}`,
                     dataType: 'JSON',
                     //data: data,
                     method: 'GET',
@@ -761,7 +745,7 @@
 
             $.ajax(
                 {
-                    url: `/{{ app()->getLocale() }}/tiang-talian-vt-and-vr-update-QA-Status?status=Reject&id=${id}&reject_remakrs=${remarks}`,
+                    url: `/{{ app()->getLocale() }}/savt-update-QA-Status?status=Reject&id=${id}&reject_remakrs=${remarks}`,
                     dataType: 'JSON',
                     //data: data,
                     method: 'GET',
@@ -769,7 +753,7 @@
                     success: function callback(response) {
                         console.log(response);
                         if (response.status == 200) {
-                            getTiangByPolyGone()
+                            getDataByPolyGone()
                         }else{
                             alert('Request Failed')
                         }
@@ -785,9 +769,9 @@
 
         function removeRecord() {
             var id = document.getElementById('remove-modal-id').value;
-            axios.get('/{{app()->getLocale()}}/remove-tiang-talian-vt-and-vr/' + id)
+            axios.get('/{{app()->getLocale()}}/remove-savt/' + id)
             .then(function (response) {
-                getTiangByPolyGone()
+                getDataByPolyGone()
             })
             .catch(function (error) {
                 alert('Request Failed')
