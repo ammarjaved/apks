@@ -332,12 +332,12 @@
                                 </a>
                             </li>
 
-                            {{-- <li class="nav-item">
-                                <a href="/{{app()->getLocale()}}/tiang-talian-vt-and-vr-map" class="nav-link ">
+                            <li class="nav-item">
+                                <a href="/{{app()->getLocale()}}/savt-map" class="nav-link ">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>{{__('messages.map')}}</p>
                                 </a>
-                            </li> --}}
+                            </li>
 
                             <li class="nav-item">
                                 <a href="{{route('savt.index', app()->getLocale())}}" class="nav-link">

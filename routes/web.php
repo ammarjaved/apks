@@ -50,6 +50,7 @@ use Illuminate\Support\Facades\App;
 use App\Http\Controllers\web\Patrolling\PatrollingExcelController;
 use App\Http\Controllers\web\SAVT\SAVTController;
 use App\Http\Controllers\web\SAVT\SAVTExcelController;
+use App\Http\Controllers\web\SAVT\SAVTMapController;
 use App\Http\Controllers\web\Substation\SubstationPembersihanController;
 use App\Http\Controllers\web\Substation\SubstationSearchController;
 use App\Http\Controllers\web\Substation\SubstationTOCController;
@@ -225,6 +226,9 @@ Route::group(
                 Route::resource('/savt',SAVTController::class);
                 Route::get('/savt-update-QA-Status', [SAVTController::class, 'updateQAStatus'])->name('savt-update-QA-Status');
                 Route::post('generate-savt-excel', [SAVTExcelController::class, 'generateSAVTExcel'])->name('generate-savt-excel');
+                Route::view('/savt-map', 'SAVT.map')->name('savt-map');
+                Route::get('/get-savt-edit/{id}', [SAVTMapController::class, 'editMap'])->name('get-savt-edit');
+                
 
                 //generate notice pdf
                 Route::get('/generate-notice/{id}', [GenerateNoticeController::class, 'generateNotice']);
