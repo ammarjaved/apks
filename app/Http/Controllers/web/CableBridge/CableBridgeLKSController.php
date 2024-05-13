@@ -85,7 +85,7 @@ class CableBridgeLKSController extends Controller
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'TO - FROM : ' . $row->end_date . ' - ' . $row->start_date);
             $fpdf->Ln();
-            $fpdf->Cell(60, 6, 'Koordinat : '.$row->x . ' , ' . $row->Y);                              //COORDINATE
+            $fpdf->Cell(60, 6, 'Koordinat : '.$row->y . ' , ' . $row->x);                              //COORDINATE
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Bil Janggal : ' . $row->total_defects);                         //TOTAL DEFECTS
             $fpdf->Ln();

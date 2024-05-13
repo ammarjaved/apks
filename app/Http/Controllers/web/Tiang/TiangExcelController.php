@@ -418,7 +418,7 @@ class TiangExcelController extends Controller
                     ->with('failed', 'No records found ');
             }
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return redirect()
                 ->back()
                 ->with('failed', 'Request Failed');

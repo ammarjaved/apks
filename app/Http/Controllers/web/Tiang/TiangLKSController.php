@@ -165,8 +165,8 @@ class TiangLKSController extends Controller
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'TO - FROM : '.$row->section_from .' - ' .  $row->section_to);
             $fpdf->Ln();
-           $fpdf->Cell(60, 6, 'Koordinat : '.$row->X .' , '. $row->Y);         //COORDINATE
-            // $fpdf->Cell(60, 6, 'Koordinat : '.$row->y . ' , ' . $row->x);
+        //    $fpdf->Cell(60, 6, 'Koordinat : '.$row->x .' , '. $row->y);         //COORDINATE
+            $fpdf->Cell(60, 6, 'Koordinat : '.$row->y . ' , ' . $row->x);
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Bil Janggal : ' .$row->total_defects);          //TOTAL DEFECTS
             $fpdf->Ln();
