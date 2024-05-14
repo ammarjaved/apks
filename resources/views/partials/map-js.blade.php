@@ -60,6 +60,12 @@ var lb_with_defects ='';
 var lb_pending = '';
 var lb_reject = '';
 
+var savt_without_defects = '';
+var savt_unsurveyed ='';
+var savt_with_defects ='';
+var savt_pending = '';
+var savt_reject = '';
+
 var road = '';
 var unservey = '';
 var pano_layer = '';
@@ -221,6 +227,28 @@ var g5_x_5_grid = '';
             }
             else if (param == 'lb_reject') {
                 sel_lyr = lb_reject;
+
+            }
+
+            
+            else if (param == 'savt_unsurveyed') {
+                sel_lyr = savt_unsurveyed;
+
+            }
+            else if (param == 'savt_with_defects') {
+                sel_lyr = savt_with_defects;
+
+            }
+            else if (param == 'savt_without_defects') {
+                sel_lyr = savt_without_defects;
+
+            }
+            else if (param == 'savt_pending') {
+                sel_lyr = savt_pending;
+
+            }
+            else if (param == 'savt_reject') {
+                sel_lyr = savt_reject;
 
             }
             else if (param == 'road') {

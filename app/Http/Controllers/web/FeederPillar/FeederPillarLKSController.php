@@ -283,7 +283,10 @@ class FeederPillarLKSController extends Controller
             $fpdf->AddPage('L', 'A4');
             $fpdf->SetFont('Arial', 'B', 22);
                 //add Heading
-            $fpdf->Cell(180, 25, $req->ba .' LKS ( '. ($req->from_date?? ' All ') . ' - ' . ($req->to_date?? ' All ').' )');
+            $fpdf->Cell(180, 15, strtoupper($req->ba) .' FEEDER PILLAR',0,1);
+            $fpdf->Cell(180, 25, 'PO NO :');
+    
+            // $fpdf->Cell(180, 25, $req->ba .' LKS ( '. ($req->from_date?? ' All ') . ' - ' . ($req->to_date?? ' All ').' )');
             $fpdf->Ln();
             $fpdf->SetFont('Arial', 'B', 16);
                 // visit date table start

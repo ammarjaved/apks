@@ -173,7 +173,7 @@ class SAVTController extends Controller
             Session::flash('success', 'Request Success');
 
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             Session::flash('failed', 'Request Failed');
 
         }
@@ -182,6 +182,25 @@ class SAVTController extends Controller
     }
 
 
+    public function destroySAVT ($language, $id)
+    {
+        try {
+            $rec = SAVT::find($id);
+            if ($rec) {
+
+                $imagesArray = \App\Constants\SAVTConstants::SAVT_IMAGES;
+                $this->removeImages($imagesArray , $rec);
+
+                $rec->delete();
+
+            }
+            return response()->json(['success'=>true],200);
+        }
+        catch (\Throwable $th)
+        {
+            return response()->json(['success'=>false],400);
+        }
+    }
 
     public function updateQAStatus(Request $req)
     {
@@ -195,10 +214,15 @@ class SAVTController extends Controller
             $qa_data->qc_by = $user;
             $qa_data->update();
 
-            return redirect()->back();
         } catch (\Throwable $th) {
+            // return $th->getMessage();
             return response()->json(['status' => 'Request failed']);
         }
+
+        if ($req->ajax()) {
+            return response()->json(['message'=>'Update Successfully','status' =>200]);
+        }
+        return redirect()->back();
     }
 
 }

@@ -21,7 +21,7 @@ class CableBridgeExcelController extends Controller
         {
             $result = CableBridge::query();
             $result = $this->filter($result , 'visit_date',$req);
-            $result = $result->whereNotNull('visit_date')->get();
+            $result = $result->whereNotNull('visit_date')->select('*', DB::raw("st_x(geom) as x") ,DB::raw("st_y(geom) as y"))->get();
  
             if ($result) 
             {
@@ -43,7 +43,7 @@ class CableBridgeExcelController extends Controller
                     $worksheet->setCellValue('I' . $i, $rec->start_date);
                     $worksheet->setCellValue('J' . $i, $rec->end_date);
                     $worksheet->setCellValue('K' . $i, $rec->voltage);
-                    $worksheet->setCellValue('L' . $i, $rec->coordinate);
+                    $worksheet->setCellValue('L' . $i, $rec->y. ' ,'.$rec->x);
                     $worksheet->setCellValue('M' . $i, $rec->danger_sign);
                     $worksheet->setCellValue('N' . $i, $rec->anti_crossing_device);
                     $worksheet->setCellValue('O' . $i, $rec->vandalism_status);
@@ -72,7 +72,7 @@ class CableBridgeExcelController extends Controller
         } 
         catch (\Throwable $th) 
         {
-            // return $th->getMessage();
+            return $th->getMessage();
             return redirect()->back()->with('failed', 'Request Failed');
         }
     }

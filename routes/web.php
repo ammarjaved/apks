@@ -50,6 +50,8 @@ use Illuminate\Support\Facades\App;
 use App\Http\Controllers\web\Patrolling\PatrollingExcelController;
 use App\Http\Controllers\web\SAVT\SAVTController;
 use App\Http\Controllers\web\SAVT\SAVTExcelController;
+use App\Http\Controllers\web\SAVT\SAVTMapController;
+use App\Http\Controllers\web\SAVT\SAVTSearchController;
 use App\Http\Controllers\web\Substation\SubstationPembersihanController;
 use App\Http\Controllers\web\Substation\SubstationSearchController;
 use App\Http\Controllers\web\Substation\SubstationTOCController;
@@ -225,6 +227,15 @@ Route::group(
                 Route::resource('/savt',SAVTController::class);
                 Route::get('/savt-update-QA-Status', [SAVTController::class, 'updateQAStatus'])->name('savt-update-QA-Status');
                 Route::post('generate-savt-excel', [SAVTExcelController::class, 'generateSAVTExcel'])->name('generate-savt-excel');
+                Route::view('/savt-map', 'SAVT.map')->name('savt-map');
+                Route::get('/get-savt-edit/{id}', [SAVTMapController::class, 'editMap'])->name('get-savt-edit');
+                Route::post('/update-savt-map-edit/{id}', [SAVTMapController::class, 'update'])->name('update-savt-map-edit');
+                Route::get('/remove-savt/{id}',[SAVTController::class ,'destroySAVT'])->name("remove-savt");
+                Route::get('/search/savt-by-polygon',[SAVTSearchController::class,'getSAVTByPolygon'])->name('search-savt-by-polygon');
+                Route::get('/search/find-savt', [SAVTMapController::class, 'seacrh'])->name('savt-search');
+                Route::get('/search/find-savt-cordinated/{q}', [SAVTMapController::class, 'seacrhCoordinated'])->name('savt-coordinated');
+
+
 
                 //generate notice pdf
                 Route::get('/generate-notice/{id}', [GenerateNoticeController::class, 'generateNotice']);

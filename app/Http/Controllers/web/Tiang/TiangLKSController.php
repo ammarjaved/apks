@@ -165,7 +165,7 @@ class TiangLKSController extends Controller
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'TO - FROM : '.$row->section_from .' - ' .  $row->section_to);
             $fpdf->Ln();
-           // $fpdf->Cell(60, 6, 'Koordinat : '.$row->X .' , '. $row->Y);         //COORDINATE
+        //    $fpdf->Cell(60, 6, 'Koordinat : '.$row->x .' , '. $row->y);         //COORDINATE
             $fpdf->Cell(60, 6, 'Koordinat : '.$row->y . ' , ' . $row->x);
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Bil Janggal : ' .$row->total_defects);          //TOTAL DEFECTS
@@ -609,7 +609,9 @@ class TiangLKSController extends Controller
             $fpdf->AddPage('L', 'A4');
             $fpdf->SetFont('Arial', 'B', 22);
                 //add Heading
-            $fpdf->Cell(180, 25, $req->ba .' LKS ( '. ($req->from_date?? ' All ') . ' - ' . ($req->to_date?? ' All ').' )');
+                $fpdf->Cell(180, 15, strtoupper($req->ba) .' LKS LV',0,1);
+                $fpdf->Cell(180, 25, 'PO NO :');
+            // $fpdf->Cell(180, 25, $req->ba .' LKS ( '. ($req->from_date?? ' All ') . ' - ' . ($req->to_date?? ' All ').' )');
             $fpdf->Ln();
             $fpdf->SetFont('Arial', 'B', 16);
                 // visit date table start

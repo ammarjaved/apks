@@ -200,7 +200,7 @@ class TiangContoller extends Controller
             $qa_data->update();
 
         } catch (\Throwable $th) {
-            return $th->getMessage();
+            // return $th->getMessage();
             return response()->json(['message' => 'Request failed','status' =>400 ]);
         }
 
