@@ -57,6 +57,8 @@ function statsTable(Request $request){
                 AND visit_date <=  ' $to_date') as link_box,
                 (select count(*) from tbl_cable_bridge   where ba='$ba' and cable_bridge_image_1 is not null and visit_date is not null  and visit_date >= '$from_date'
                 AND visit_date <=  ' $to_date') as cable_bridge,
+                (select count(*) from tbl_savt   where ba='$ba' and savt_image_1 is not null and visit_date is not null  and visit_date >= '$from_date'
+                AND visit_date <=  ' $to_date') as savt,
                 (select round(sum(km),2) from patroling  where ba='$ba' and vist_date is not null  and vist_date >= '$from_date'
                 AND vist_date <=  ' $to_date') as km) as stats";
             $res = DB::select($query);
@@ -90,12 +92,15 @@ function statsTable(Request $request){
       $data['link_box']         = $this->getGraphCount('tbl_link_box' , 'visit_date' , 'total_defects', $ba , $request );
       $data['cable_bridge']     = $this->getGraphCount('tbl_cable_bridge' , 'visit_date' , 'total_defects', $ba , $request );
       $data['tiang']            = $this->getGraphCount('tbl_savr' , 'review_date' , 'total_defects', $ba , $request);
+      $data['savt']             = $this->getGraphCount('tbl_savt' , 'visit_date' , 'total_defects', $ba , $request);
 
-   $data['suryed_substation']       = $this->totalGraphCount('tbl_substation' , $ba ,'visit_date' , $request);
+
+      $data['suryed_substation']       = $this->totalGraphCount('tbl_substation' , $ba ,'visit_date' , $request);
       $data['suryed_feeder_pillar']    = $this->totalGraphCount('tbl_feeder_pillar' , $ba ,'visit_date' , $request );
       $data['suryed_link_box']         = $this->totalGraphCount('tbl_link_box', $ba ,'visit_date' , $request );
       $data['suryed_cable_bridge']     = $this->totalGraphCount('tbl_cable_bridge' , $ba ,'visit_date' , $request);
       $data['suryed_tiang']            = $this->totalGraphCount('tbl_savr' , $ba ,'review_date' , $request);
+      $data['suryed_savt']             = $this->totalGraphCount('tbl_savt' , $ba ,'visit_date' , $request);
 
 
       return response()->json($data);
@@ -162,7 +167,7 @@ function statsTable(Request $request){
 
             if ($ba != '') {
                 $query = "select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,
-        substation,substation_defects,fp_defects as feeder_pillar_defect,lb as link_box_defect,cb as cable_bridge_defect,savr as tiang_defect from
+        substation,substation_defects,fp_defects as feeder_pillar_defect,lb as link_box_defect,cb as cable_bridge_defect,savr as tiang_defect , savt , savt_defect from
         (select
         sum(case
             when notice='yes' Then 1 else 0
@@ -172,6 +177,8 @@ function statsTable(Request $request){
         (select count(*) from tbl_link_box where ba='$ba') as link_box,
         (select count(*) from tbl_cable_bridge where ba='$ba' ) as cable_bridge,
         (select count(*) from tbl_substation where ba='$ba' and substation_image_1 is not null and substation_image_2 is not null) as substation,
+        (select count(*) from tbl_savt where ba='$ba' and savt_image_1 is not null and savt_image_2 is not null) as savt,
+
         sum(case
             when supervision='yes' Then 1 else 0
         end) as sup
@@ -192,11 +199,13 @@ function statsTable(Request $request){
          jumper_other+kilat_broken+kilat_other+servis_roof+servis_won_piece+
          servis_other+pembumian_netural+pembumian_other+bekalan_dua_damage+
          bekalan_dua_other+kaki_lima_date_wire+kaki_lima_burn+kaki_lima_other)
-         FROM public.savr_counts where ba='$ba') as savr
+         FROM public.savr_counts where ba='$ba') as savr,
+         (select sum(total_defects) from tbl_savt  where ba='$ba') as savt_defect
+
             ";
             } else {
                 $query = "select dig as total_notice,sup as total_supervision,km as total_km  , feeder_pillar , tiang , link_box , cable_bridge ,
-             substation,substation_defects,fp_defects,lb as linkbox,cb as cablebridge, savr  from
+             substation,substation_defects,fp_defects,lb as linkbox,cb as cablebridge, savr , savt, savt_defect from
             (select
             sum(case
                 when notice='yes' Then 1 else 0
@@ -206,6 +215,7 @@ function statsTable(Request $request){
             (select count(*) from tbl_link_box ) as link_box,
             (select count(*) from tbl_cable_bridge  ) as cable_bridge,
             (select count(*) from tbl_substation where total_defects is not null and substation_image_1 is not null and substation_image_2 is not null) as substation,
+            (select count(*) from tbl_savt where total_defects is not null and savt_image_1 is not null and savt_image_2 is not null) as savt,
             sum(case
                 when supervision='yes' Then 1 else 0
             end) as sup
@@ -225,7 +235,8 @@ function statsTable(Request $request){
             jumper_other+kilat_broken+kilat_other+servis_roof+servis_won_piece+
             servis_other+pembumian_netural+pembumian_other+bekalan_dua_damage+
             bekalan_dua_other+kaki_lima_date_wire+kaki_lima_burn+kaki_lima_other)
-            FROM public.savr_counts ) as savr
+            FROM public.savr_counts ) as savr,
+            (select sum(total_defects) from tbl_savt) as savt_defect
 
             ";
             }
