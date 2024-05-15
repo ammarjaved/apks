@@ -330,6 +330,52 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="col-md-12">
+                <div class="card card-danger">
+                    <div class="card-header"> SAVT</div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card p-3">
+
+                                    <h3 class="text-center"> {{ __('messages.total_savt_visited') }}</h3>
+                                    <p class="text-center mb-0 pb-0"><span
+                                            id="savt"></span></p>
+
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card p-3">
+
+                                    <h3 class="text-center"> {{ __('messages.total_savt_defects') }} </h3>
+                                    <p class="text-center mb-0 pb-0"><span
+                                            id="savt_defect"></span></p>
+
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card p-3">
+                                    <div id="suryed_savt-container"
+                                        style="width:100%; height: 400px; margin: 0 auto"></div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card p-3">
+                                    <div id="savt-container" style="width:100%; height: 400px; margin: 0 auto">
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -515,6 +561,10 @@
                         makeArray(data['tiang'], 'tiang-container', 'Defcets')
                     }
 
+                    if (data && data['savt'] != '') {
+                        makeArray(data['savt'], 'savt-container', 'Defcets')
+                    }
+
                     // if (data && data['suryed_patrolling'] != '') {
                     //     makeTotalArray(data['suryed_patrolling'] , 'suryed_patrolling-container'  )
                     // }
@@ -537,6 +587,9 @@
 
                     if (data && data['suryed_tiang'] != '') {
                         makeArray(data['suryed_tiang'], 'suryed_tiang-container', 'Visited')
+                    }
+                    if (data && data['suryed_savt'] != '') {
+                        makeArray(data['suryed_savt'], 'suryed_savt-container', 'Visited')
                     }
                 }
             });
@@ -674,14 +727,20 @@
                         feeder_pillar: 0,
                         tiang: 0,
                         link_box: 0,
-                        cable_bridge: 0
+                        cable_bridge: 0,
+                        savt: 0
                     };
 
                     for (var i = 0; i < data.length; i++) {
-                        str += '<tr><td>' + data[i].ba + '</td><td>' + data[i].patroling + '</td><td>' +
-                            data[i].substation + '</td><td>' + data[i].feeder_pillar + '</td><td>' + data[i]
-                            .tiang + '</td><td>' +
-                            data[i].link_box + '</td><td>' + data[i].cable_bridge + '</td></tr>';
+                        str += `<tr>
+                                    <td>${data[i].ba}</td>
+                                    <td>${data[i].patroling}</td>
+                                    <td>${data[i].substation}</td>
+                                    <td>${data[i].feeder_pillar}</td>
+                                    <td>${data[i].tiang}</td>
+                                    <td>${data[i].link_box}</td>
+                                    <td>${data[i].cable_bridge}</td>
+                                </tr>`;
 
                         totals.patroling += parseFloat(data[i].patroling) || 0;
                         totals.substation += parseInt(data[i].substation) || 0;
@@ -689,6 +748,8 @@
                         totals.tiang += parseInt(data[i].tiang) || 0;
                         totals.link_box += parseInt(data[i].link_box) || 0;
                         totals.cable_bridge += parse(data[i].cable_bridge) || 0;
+                        totals.savt += parse(data[i].savt) || 0;
+
                     }
 
                     $('#stats_table').html(str);

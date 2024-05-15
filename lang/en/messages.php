@@ -21,6 +21,9 @@ return [
     'cable_bridge' => 'Cable Bridge',
     'total_cable_bridge_visited' => 'Total Cable Bridge Visited',
     'total_cable_bridge_defects' => 'Total Cable Bridge Defects',
+    'total_savt_visited' => 'Total SAVT Visited',
+    'total_savt_defects' => 'Total SAVT Defects',
+
 
     //*************************end dashboard */
 
