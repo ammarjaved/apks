@@ -42,6 +42,7 @@ class AdminDashboard extends Controller
                 'tiang' => 'tbl_savr',
                 'link_box' => 'tbl_link_box',
                 'cable_bridge' => 'tbl_cable_bridge',
+                'savt' => 'tbl_savt',
             ];
         //    if ($request->ajax()) {
                 $data = [];
