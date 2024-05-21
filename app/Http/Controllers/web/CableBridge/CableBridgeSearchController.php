@@ -19,7 +19,7 @@ class CableBridgeSearchController extends Controller
             $data = CableBridge::whereRaw("ST_Intersects(geom, ST_GeomFromGeoJSON('$request->json'))")
                             ->select('id', 'ba', 'end_date', 'start_date','voltage' ,'cable_bridge_image_1', 'cable_bridge_image_2' ,'reject_remarks', 'qa_status','created_by','total_defects', 'visit_date')
                             ->whereNotNull('cable_bridge_image_1')
-                            ->whereNotNull('qa_status')
+                            ->where('qa_status', 'pending')
                             ->whereNotNull('visit_date')
                             ->orderBy('id')
                             ->get();

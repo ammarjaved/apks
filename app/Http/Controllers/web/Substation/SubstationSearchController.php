@@ -19,7 +19,7 @@ class SubstationSearchController extends Controller
             $data = Substation::whereRaw("ST_Intersects(geom, ST_GeomFromGeoJSON('$request->json'))")
                             ->select('id', 'fl', 'name', 'type','voltage' ,'substation_image_1', 'substation_image_2' ,'reject_remarks', 'qa_status','created_by','total_defects', 'visit_date')
                             ->whereNotNull('substation_image_1')
-                            ->whereNotNull('qa_status')
+                            ->where('qa_status', 'pending')
                             ->whereNotNull('visit_date')
                             ->orderBy('id')
                             ->get();

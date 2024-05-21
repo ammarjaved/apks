@@ -172,6 +172,7 @@ class TiangExcelController extends Controller
                 $secondWorksheet->setCellValue('C1', $ba);
                 $secondWorksheet->setCellValue('B3', 'Tarikh Pemeriksaan : ' .date('Y-m-d'));
 
+                 
                 //return $res;
                 foreach ($res as $secondRec) {
                     // echo "test <br>";
@@ -655,7 +656,7 @@ class TiangExcelController extends Controller
                     // $secondWorksheet->setCellValue('BA' . $i, $other_defects);
 
                     $secondWorksheet->setCellValue('AF' . $i, $secondRec->total_defects);
-                    $secondWorksheet->setCellValue('AI' . $i, $secondRec->remarks);
+                    $secondWorksheet->setCellValue('AI' . $i, $other_defects);
                     $secondWorksheet->setCellValue('AJ' . $i, $secondRec->coords);
 
 
