@@ -89,8 +89,13 @@ class SAVTRepo
                 $img_ext = $uploadedFile->getClientOriginalExtension();
                 $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
 
+                $filePath = $imageStoreUrlPath   . $filename;
+
                 // Move the file to the first location
-                $uploadedFile->move($imageStoreUrlPath, $filename);
+                $fileContents = file_get_contents($uploadedFile->getRealPath());
+                file_put_contents($filePath, $fileContents);
+                // Move the file to the first location
+                // $uploadedFile->move($imageStoreUrlPath, $filename);
                 $data->{$key} = $destinationPath . $filename;
 
                 // Copy the file to the second location

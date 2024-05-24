@@ -104,8 +104,13 @@ class LinkBoxController extends Controller
                     $img_ext = $uploadedFile->getClientOriginalExtension();
                     $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
 
+                    $filePath = $imageStoreUrlPath   . $filename;
+
                     // Move the file to the first location
-                    $uploadedFile->move($imageStoreUrlPath, $filename);
+                    $fileContents = file_get_contents($uploadedFile->getRealPath());
+                    file_put_contents($filePath, $fileContents);
+                    // Move the file to the first location
+                    // $uploadedFile->move($imageStoreUrlPath, $filename);
                     $data->{$key} = $destinationPath . $filename;
 
                     // Copy the file to the second location
@@ -207,7 +212,13 @@ class LinkBoxController extends Controller
                     $uploadedFile = $request->file($key);
                     $img_ext = $uploadedFile->getClientOriginalExtension();
                     $filename = $key . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
-                    $uploadedFile->move($imageStoreUrlPath, $filename);
+
+                    $filePath = $imageStoreUrlPath   . $filename;
+
+                    // Move the file to the first location
+                    $fileContents = file_get_contents($uploadedFile->getRealPath());
+                    file_put_contents($filePath, $fileContents);
+                    // $uploadedFile->move($imageStoreUrlPath, $filename);
                     $data->{$key} = $destinationPath . $filename;
                 }
             }

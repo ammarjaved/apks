@@ -64,6 +64,8 @@ class LinkBoxMapController extends Controller
             $data->total_defects = $total_defects;
             $data->leaning_angle = $request->leaning_angle;
             $destinationPath = 'assets/images/link-box/';
+            $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
+
 
             foreach ($request->all() as $key => $file) {
                 // Check if the input is a file and it is valid
@@ -71,7 +73,12 @@ class LinkBoxMapController extends Controller
                     $uploadedFile = $request->file($key);
                     $img_ext = $uploadedFile->getClientOriginalExtension();
                     $filename = $key . '-' . strtotime(now()).rand(10,100)  . '.' . $img_ext;
-                    $uploadedFile->move($destinationPath, $filename);
+                    $filePath = $imageStoreUrlPath   . $filename;
+
+                    // Move the file to the first location
+                    $fileContents = file_get_contents($uploadedFile->getRealPath());
+                    file_put_contents($filePath, $fileContents);
+                    // $uploadedFile->move($destinationPath, $filename);
                     $data->{$key} = $destinationPath . $filename;
                 }
             }

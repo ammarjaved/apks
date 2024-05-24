@@ -25,7 +25,7 @@ class uploadImagesContoller extends Controller
         if ($data) {
             $destinationPath = 'assets/images/';
             $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
-        //    $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/';
+
 
             foreach ($request->allFiles() as $key => $file) {
                 // Check if the input is a file and it is valid
@@ -33,15 +33,15 @@ class uploadImagesContoller extends Controller
                     $uploadedFile = $request->file($key);
                     $img_ext = $uploadedFile->getClientOriginalExtension();
                     $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
+                    $filePath = $imageStoreUrlPath   . $filename;
 
                     // Move the file to the first location
-                    $uploadedFile->move($imageStoreUrlPath, $filename);
+                    $fileContents = file_get_contents($uploadedFile->getRealPath());
+                    file_put_contents($filePath, $fileContents);
+                    // $uploadedFile->move($imageStoreUrlPath, $filename);
                     $data->{$key} = $destinationPath . $filename;
 
-                    // Copy the file to the second location
-                    // $sourcePath = $imageStoreUrlPath . $filename;
-                    // $destinationPath2 = $externalPath . $filename;
-                    //  copy($sourcePath, $destinationPath2);
+
                 }
 
             }
@@ -115,8 +115,14 @@ class uploadImagesContoller extends Controller
                             $img_ext = $uploadedFile->getClientOriginalExtension();
                             $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
 
+                            $filePath = $imageStoreUrlPath   . $filename;
+
                             // Move the file to the first location
-                            $uploadedFile->move($imageStoreUrlPath, $filename);
+                            $fileContents = file_get_contents($uploadedFile->getRealPath());
+                            file_put_contents($filePath, $fileContents);
+
+                            // Move the file to the first location
+                            // $uploadedFile->move($imageStoreUrlPath, $filename);
                             $arr[$key] = $destinationPath.$filename;
 
                             // Copy the file to the second location
@@ -156,8 +162,14 @@ class uploadImagesContoller extends Controller
                             $img_ext = $uploadedFile->getClientOriginalExtension();
                             $filename = $mainkey . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
 
+
+                            $filePath = $imageStoreUrlPath   . $filename;
+
                             // Move the file to the first location
-                            $uploadedFile->move($imageStoreUrlPath, $filename);
+                            $fileContents = file_get_contents($uploadedFile->getRealPath());
+                            file_put_contents($filePath, $fileContents);
+                            // Move the file to the first location
+                            // $uploadedFile->move($imageStoreUrlPath, $filename);
                             $data[$mainkey] = $destinationPath.$filename ;
 
                             // Copy the file to the second location
