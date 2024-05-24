@@ -55,7 +55,7 @@ class SAVTRepo
 
 
         // $data->fill($request->only($data->getFillable()));
-      
+
 
 
         $defects = SAVTConstants::SAVT_DEFECT;
@@ -64,7 +64,7 @@ class SAVTRepo
             if($request->has($defect) && $request->{$defect} == 'Yes'){
                 $total_defects ++ ;
             }
-            $data->{$defect} = $request->has($defect) ?$request->{$defect} : '' ; 
+            $data->{$defect} = $request->has($defect) ?$request->{$defect} : '' ;
         }
 
         $data->total_defects = $total_defects;
@@ -73,21 +73,33 @@ class SAVTRepo
 
         $defectsImg = SAVTConstants::SAVT_IMAGES;
         $destinationPath = 'assets/images/savt/';
+        $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
+        $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/savt/';
+
 
         if (!File::exists($destinationPath)) {
             File::makeDirectory($destinationPath, 0777, true, true);
         }
 
-        foreach ($defectsImg as $file) {
-            if (is_a($request->{$file}, 'Illuminate\Http\UploadedFile') && $request->{$file}->isValid()) {
-                $uploadedFile = $request->{$file};
-                $img_ext = $request->{$file}->getClientOriginalExtension();
-                $filename = $file . '-' . strtotime(now()) .rand(10,100) . '.' . $img_ext;
-                $uploadedFile->move($destinationPath, $filename);
-                $data->{$file} = $destinationPath . $filename;
-            }
-        }
 
+        foreach ($request->allFiles() as $key => $file) {
+            // Check if the input is a file and it is valid
+            if ($request->hasFile($key) && $request->file($key)->isValid()) {
+                $uploadedFile = $request->file($key);
+                $img_ext = $uploadedFile->getClientOriginalExtension();
+                $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
+
+                // Move the file to the first location
+                $uploadedFile->move($imageStoreUrlPath, $filename);
+                $data->{$key} = $destinationPath . $filename;
+
+                // Copy the file to the second location
+                $sourcePath = $imageStoreUrlPath . $filename;
+                $destinationPath2 = $externalPath . $filename;
+                 copy($sourcePath, $destinationPath2);
+            }
+
+        }
         return $data;
 
 

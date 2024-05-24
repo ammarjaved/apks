@@ -66,7 +66,7 @@
             </div>
         </div>
     </section>
- 
+
     <div class=" ">
 
         <div class="container">
@@ -349,7 +349,7 @@
                                 </div>
                             </div>
 
-                            
+
                             <div class="row">
                                 <div class="col-md-4"><label
                                         for="image_tree_branches">{{ __('messages.image_tree_branches') }}</label></div>
@@ -361,7 +361,7 @@
 
                                 </div>
                             </div>
-                           
+
 
 
 

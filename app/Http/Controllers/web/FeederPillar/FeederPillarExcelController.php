@@ -21,15 +21,15 @@ class FeederPillarExcelController extends Controller
             $result = FeederPillar::query();
             $result = $this->filter($result , 'visit_date',$req);
             $result = $result->whereNotNull('visit_date')->select('*', DB::raw('ST_X(geom) as x'), DB::raw('ST_Y(geom) as y'))->get();
- 
-            if ($result) 
+
+            if ($result)
             {
                 $excelFile = public_path('assets/excel-template/feeder-pillar.xlsx');
                 $spreadsheet = IOFactory::load($excelFile);
                 $worksheet = $spreadsheet->getActiveSheet();
 
                 $i = 3;
-                foreach ($result as $rec) 
+                foreach ($result as $rec)
                 {
                     $worksheet->setCellValue('A' . $i, $rec->id);
                     $worksheet->setCellValue('B' . $i, $rec->zone);
@@ -60,23 +60,23 @@ class FeederPillarExcelController extends Controller
                     $worksheet->setCellValue('T' . $i, $rec->advertise_poster_status);
                     $worksheet->setCellValue('U' . $i, $rec->repair_date != ''?date('Y-m-d', strtotime($rec->repair_date)) : '');
 
-                    $worksheet->setCellValue('V' . $i, 'http://121.121.232.53:8090/'.$rec->feeder_pillar_image_1
-                    .' , http://121.121.232.53:8090/'.$rec->feeder_pillar_image_2
-                    .' , http://121.121.232.53:8090/'.$rec->image_name_plate
-                    .' , http://121.121.232.53:8090/'.$rec->image_gate
-                    .' , http://121.121.232.53:8090/'.$rec->image_gate_2
-                    .' , http://121.121.232.53:8090/'.$rec->image_vandalism
-                    .' , http://121.121.232.53:8090/'.$rec->image_vandalism_2
-                    .' , http://121.121.232.53:8090/'.$rec->image_leaning
-                    .' , http://121.121.232.53:8090/'.$rec->image_leaning_2
-                    .' , http://121.121.232.53:8090/'.$rec->image_rust
-                    .' , http://121.121.232.53:8090/'.$rec->image_rust_2
-                    .' , http://121.121.232.53:8090/'.$rec->images_advertise_poster
-                    .' , http://121.121.232.53:8090/'.$rec->images_advertise_poster_2
-                    .' , http://121.121.232.53:8090/'.$rec->image_advertisement_after_1
-                    .' , http://121.121.232.53:8090/'.$rec->image_advertisement_after_2
-                    .' , http://121.121.232.53:8090/'.$rec->other_image);
-                    
+                    $worksheet->setCellValue('V' . $i, config('globals.APP_IMAGES_URL').$rec->feeder_pillar_image_1
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->feeder_pillar_image_2
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->image_name_plate
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->image_gate
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->image_gate_2
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->image_vandalism
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->image_vandalism_2
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->image_leaning
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->image_leaning_2
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->image_rust
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->image_rust_2
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->images_advertise_poster
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->images_advertise_poster_2
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->image_advertisement_after_1
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->image_advertisement_after_2
+                    .' , ' .config('globals.APP_IMAGES_URL').$rec->other_image);
+
                     $i++;
                 }
                 $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');

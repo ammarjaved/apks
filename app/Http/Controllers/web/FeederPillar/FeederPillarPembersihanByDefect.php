@@ -102,8 +102,8 @@ class FeederPillarPembersihanByDefect extends Controller
                 $advertiseSheet->mergeCells('B' . $g . ':H' . $k);
                 $advertiseSheet->mergeCells('I' . $g . ':O' . $k);
 
-                $imagePath = public_path($advertise->image_1);
-                if ($advertise->image_1 != '' && file_exists($imagePath)) {
+                $imagePath = config('globals.APP_IMAGES_URL').$advertise->image_1;
+                if ($advertise->image_1 != '' ) {
                     $image = new Drawing();
                     $image->setPath($imagePath);
                     $image->setCoordinates('B' . $g); // Cell coordinate where you want to insert the image
@@ -112,8 +112,8 @@ class FeederPillarPembersihanByDefect extends Controller
                     $image->setWorksheet($advertiseSheet);
                 }
 
-                $imagePath1 = public_path($advertise->image_2);
-                if ($advertise->image_2 != '' && file_exists($imagePath1)) {
+                $imagePath1 = config('globals.APP_IMAGES_URL').$advertise->image_2;
+                if ($advertise->image_2 != '' ) {
                     $image1 = new Drawing();
                     $image1->setPath($imagePath1);
                     $image1->setCoordinates('I' . $g); // Cell coordinate where you want to insert the image

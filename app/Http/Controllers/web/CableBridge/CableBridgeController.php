@@ -100,7 +100,7 @@ class CableBridgeController extends Controller
             Session::flash('success', 'Request Success');
         }
         catch (\Throwable $th)
-        {
+        {   return $th->getMessage();
             Session::flash('failed', 'Request Failed');
         }
         return redirect()->route('cable-bridge.index', app()->getLocale());
@@ -183,7 +183,7 @@ class CableBridgeController extends Controller
     public function destroyCableBridge($language, $id)
     {
         try {
-            CableBridge::find($id)->delete();  
+            CableBridge::find($id)->delete();
         }
         catch (\Throwable $th)
         {

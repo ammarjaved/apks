@@ -347,7 +347,7 @@
     <div class="modal fade" id="removeConfirm">
         <div class="modal-dialog">
             <div class="modal-content ">
-    
+
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">Remove Recored</h4>
@@ -356,7 +356,7 @@
                 <form action="" id="remove-foam" method="POST">
                     @method('DELETE')
                     @csrf
-    
+
                     <div class="modal-body">
                         Are You Sure ?
                         <input type="hidden" name="id" id="remove-modal-id">
@@ -366,7 +366,7 @@
                         <button type="button" class="btn btn-danger" onclick="removeRecord()">Remove</button>
                     </div>
                 </form>
-    
+
             </div>
         </div>
     </div>
@@ -497,7 +497,7 @@
 
             cb(matches);
         };
-        }; 
+        };
 
 
 
@@ -584,7 +584,7 @@
             });
         });
 
-       
+
 
         // ADD DRAW TOOLS
 
@@ -679,23 +679,23 @@
                                                 <td>${status}</td>
                                                 <td>${element.created_by}</td>
                                                 <td>
-                                                    <a href="http://121.121.232.53:8090/${element.pole_image_1}" target="_blank" />
-                                                        <img src="http://121.121.232.53:8090/${element.pole_image_1}" style="height:50px;" >
+                                                    <a href="{{config('globals.APP_IMAGES_URL')}}${element.pole_image_1}" target="_blank" />
+                                                        <img src="{{config('globals.APP_IMAGES_URL')}}${element.pole_image_1}" style="height:50px;" >
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="http://121.121.232.53:8090/${element.pole_image_2}" target="_blank" />
-                                                        <img src="http://121.121.232.53:8090/${element.pole_image_2}" style="height:50px;"  />
+                                                    <a href="{{config('globals.APP_IMAGES_URL')}}${element.pole_image_2}" target="_blank" />
+                                                        <img src="{{config('globals.APP_IMAGES_URL')}}${element.pole_image_2}" style="height:50px;"  />
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="http://121.121.232.53:8090/${element.from_pole_image_1}" target="_blank" />
-                                                        <img src="http://121.121.232.53:8090/${element.from_pole_image_1}" style="height:50px;" />
+                                                    <a href="{{config('globals.APP_IMAGES_URL')}}${element.from_pole_image_1}" target="_blank" />
+                                                        <img src="{{config('globals.APP_IMAGES_URL')}}${element.from_pole_image_1}" style="height:50px;" />
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="http://121.121.232.53:8090/${element.from_pole_image_2}" target="_blank" />
-                                                        <img src="http://121.121.232.53:8090/${element.from_pole_image_2}" style="height:50px;"  />
+                                                    <a href="{{config('globals.APP_IMAGES_URL')}}${element.from_pole_image_2}" target="_blank" />
+                                                        <img src="{{config('globals.APP_IMAGES_URL')}}${element.from_pole_image_2}" style="height:50px;"  />
                                                     </a>
                                                 </td>
                                                 <td>

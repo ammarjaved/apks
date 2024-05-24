@@ -109,7 +109,7 @@ function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
     $lab_name = __('messages.' . $lab_name);
     $html = '';
 
-    
+
 
     $id = $arr_name . '_' . $key;
     $name = $arr_name . '[' . $key . ']';
@@ -133,7 +133,7 @@ function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
         $html .=
         "<td class='$class'><label class='text-capitalize' for='$id'> $lab_name After</label>";
     }
-   
+
 
     if ($key == 'other') {
         $key2 = $key . '_value';
@@ -150,9 +150,9 @@ function getImage2($key, $arr, $arr_name, $img_arr, $lab_name)
             </td>
             <td>";
 
-    if ($key_exist   && $img_arr != '') { 
+    if ($key_exist   && $img_arr != '') {
         if (array_key_exists($image1, $img_arr) && file_exists(public_path($img_arr[$image1])) && $img_arr[$image1] != '') {
-             
+
             $html .=
                 "<a href='" . URL::asset($img_arr[$image1]) . "' data-lightbox='roadtrip'>
                     <img src='" . URL::asset($img_arr[$image1]) . "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
@@ -210,7 +210,7 @@ function getImageShow($key, $arr, $arr_name, $img_arr, $lab_name)
     if ($key_exist && $img_arr != '') {
         $image1 = $key == 'creepers_after' ? 'creepers_after1' : $key;
         if (array_key_exists($image1, $img_arr) && file_exists(public_path($img_arr[$image1])) && $img_arr[$image1] != '') {
-             
+
             $html .=
                 "<a href='" . URL::asset($img_arr[$image1]) . "' data-lightbox='roadtrip'>
                     <img src='" . URL::asset($img_arr[$image1]) . "' class='adjust-height mb-1' style='height:30px; width:30px !important'>
@@ -290,30 +290,33 @@ function tiangSpanRadio($value , $key , $subkey , $status)
 
 //  for show and update images start
 
-    function viewAndUpdateImage($image , $name , $disabled ){
+    function viewAndUpdateImage($image , $name , $disabled )
+    {
 
             $html = '';
+                // IF DISABLE IS FALSE THEN SHOW IMAGE UPLOAD INPUT FIELD
+            if (!$disabled)
+            {
+                $html.="<div class='col-md-4'>
+                            <input type='file' accept='image/*' name='$name' id='$name' class='form-control'>
+                        </div>";
+            }
 
+            $html.="<div class='col-md-4 text-center  py-2'>";      //START DIV
 
-                        if (!$disabled) {
-                         $html.="<div class='col-md-4'>
-                                    <input type='file' accept='image/*' name='$name' id='$name' class='form-control'>
-                                </div>";
+                        if ( $image != ''  )    // IF IMAGE IS NOT EMPTY THEN SHOW IMAGE
+                        {
+                            $html.="<a href='".config('globals.APP_IMAGES_URL').$image ."' data-lightbox='roadtrip'>
+                                        <img src='".config('globals.APP_IMAGES_URL').$image ."' alt='' style='height:70px' height='70' class='adjust-height ml-5'>
+                                    </a>";
                         }
+                        else                    //ELSE SHOW IMAGE NOT FOUND
+                        {
+                            $html.="<strong>".__('messages.no_image_found') ."</strong>";
+                        }
+            $html.="</div>
+                    <div id='".$name."_div'> </div>";   //FOR SHOW TEMP IMAGE
 
-                  $html.="
-                    <div class='col-md-4 text-center  py-2'>";
-
-                    if ( $image != '' && file_exists(public_path($image))){
-                        $html.="<a href='".URL::asset($image) ."' data-lightbox='roadtrip'>
-                        <img src='".URL::asset($image) ."' alt='' style='height:70px'
-                            height='70' class='adjust-height ml-5'></a>";
-                    }else{
-                        $html.="<strong>".__('messages.no_image_found') ."</strong>";
-                    }
-                    $html.="</div>
-                    <div id='".$name."_div'> </div>
-                    ";
             return $html;
     }
 
@@ -341,7 +344,7 @@ function tiangSpanRadio($value , $key , $subkey , $status)
             return  $array[$key];
          }
          return "";
-    
+
     }
 
 
@@ -351,8 +354,8 @@ function tiangSpanRadio($value , $key , $subkey , $status)
     $html = '';
 
     $id = $arr_name . '_' . $key;
-    $name = $arr_name . '[' . $key . ']'; 
- 
+    $name = $arr_name . '[' . $key . ']';
+
     $key_exist = !empty($arr) && array_key_exists($key, $arr) && $arr[$key] == true;
         $html .= "<td class='d-flex'>
                         <input type='checkbox' name='$name' id='$id' " . ($key_exist? 'checked' : '') . " class='form-check' ".($disabled ? '' : 'disabled').">
@@ -374,15 +377,15 @@ function tiangSpanRadio($value , $key , $subkey , $status)
 
 
     // SAVT YES NO
-    function savtYesOrNo($name, $disable = null, $value = null ) 
+    function savtYesOrNo($name, $disable = null, $value = null )
     {
         $yes = __('messages.yes');
         $no = __('messages.no');
-        $html = '<div class="d-flex px-4"> 
+        $html = '<div class="d-flex px-4">
                     <input type="radio" name="'.$name.'" id="'.$name.'_yes" value="Yes" '. ($value == "Yes" ? "checked" : "").' '. (!$disable?:"disabled").'>
                     <label for="'.$name.'_yes">'.$yes.'</label>
                 </div>
-                <div class="d-flex px-4"> 
+                <div class="d-flex px-4">
                     <input type="radio" name="'.$name.'" id="'.$name.'_no" value="No" '.($value == "No" ? "checked" : "").' '. (!$disable?:"disabled").'>
                     <label for="'.$name.'_no">'.$no.'</label>
                 </div>';

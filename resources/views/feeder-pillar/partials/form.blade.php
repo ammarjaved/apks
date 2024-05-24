@@ -201,9 +201,9 @@
         @endif
 
         <div class="col-md-4 text-center mb-3">
-            @if (file_exists(public_path($data->image_name_plate)) && $data->image_name_plate != '')
-                <a href="{{ URL::asset($data->image_name_plate) }}" data-lightbox="roadtrip">
-                    <img src="{{ URL::asset($data->image_name_plate) }}" alt="" height="70" class="adjust-height ml-5  ">
+            @if ($data->image_name_plate != '')
+                <a href="{{ config('globals.APP_IMAGES_URL').$data->image_name_plate }}" data-lightbox="roadtrip">
+                    <img src="{{ config('globals.APP_IMAGES_URL').$data->image_name_plate }}" alt="" height="70" class="adjust-height ml-5  ">
                 </a>
             @else
                 <strong>{{__('messages.no_image_found')}}</strong>
@@ -276,9 +276,9 @@
         @endif
 
         <div class="col-md-4 text-center mb-3">
-            @if (file_exists(public_path($data->other_image)) && $data->other_image != '')
-                <a href="{{ URL::asset($data->other_image) }}" data-lightbox="roadtrip">
-                    <img src="{{ URL::asset($data->other_image) }}" alt="" height="70" class="adjust-height ml-5  ">
+            @if ( $data->other_image != '')
+                <a href="{{ config('globals.APP_IMAGES_URL').$data->other_image }}" data-lightbox="roadtrip">
+                    <img src="{{ config('globals.APP_IMAGES_URL').$data->other_image }}" alt="" height="70" class="adjust-height ml-5  ">
                 </a>
             @else
                 <strong>{{__('messages.no_image_found')}}</strong>

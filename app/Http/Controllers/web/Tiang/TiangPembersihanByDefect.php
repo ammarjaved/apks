@@ -19,14 +19,14 @@ class TiangPembersihanByDefect extends Controller
     use Filter;
 
     public function pembersihan(Request $req) {
-        
+
 
         try {
             if (empty($req->defect)) {
                 return redirect()->back()->with('failed', 'Request Failed Select Defect');
             }
         $defect = TiangConstants::TIANG_DEFECTS_DB_NAME[$req->defect];
-        $images = array_slice(TiangConstants::TIANG_IMAGES , 0 , 5 , true);     
+        $images = array_slice(TiangConstants::TIANG_IMAGES , 0 , 5 , true);
 
         // return $defect;
         $query = $this->filter(Tiang::query() , 'review_date' , $req)
@@ -59,7 +59,7 @@ class TiangPembersihanByDefect extends Controller
 
         $color = '';
         $defectsCounts = 0;
-        
+
         foreach ($totalCounts as $count)
         {
             if ($i %2 == 0) {
@@ -88,7 +88,7 @@ class TiangPembersihanByDefect extends Controller
                 $g = 4;
                 $sr = 1;
 
-                $imageDestiantionPath = public_path().'/';
+                $imageDestiantionPath = config('globals.APP_IMAGES_URL');
                 foreach ($advertisePoster as $advertise)
                 {
                     $advertiseSheet->mergeCells('B'.$g.':H'.$g);
@@ -115,9 +115,11 @@ class TiangPembersihanByDefect extends Controller
                     $advertiseSheet->mergeCells('P'.$g.':V'.$k);
                     $advertiseSheet->mergeCells('W'.$g.':AC'.$k);
                     $advertiseSheet->mergeCells('AD'.$g.':AJ'.$k);
-                  
+
                     $imagePath = $imageDestiantionPath.$advertise->pole_image_1;
-                    if ($advertise->pole_image_1 != '' && file_exists($imagePath))
+                    if ($advertise->pole_image_1 != ''
+                    //  && file_exists($imagePath)
+                    )
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
@@ -128,7 +130,8 @@ class TiangPembersihanByDefect extends Controller
                     }
 
                     $imagePath1 = $imageDestiantionPath.$advertise->pole_image_2;
-                    if ($advertise->pole_image_2 !='' && file_exists($imagePath1))
+                    if ($advertise->pole_image_2 !='' //&& file_exists($imagePath1)
+                    )
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath1);
@@ -139,7 +142,8 @@ class TiangPembersihanByDefect extends Controller
                     }
 
                     $imagePath2 = $imageDestiantionPath.$advertise->pole_image_3;
-                    if ($advertise->pole_image_3 !='' && file_exists($imagePath2))
+                    if ($advertise->pole_image_3 !='' //&& file_exists($imagePath2)
+                    )
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath2);
@@ -150,7 +154,8 @@ class TiangPembersihanByDefect extends Controller
                     }
 
                     $imagePath3 = $imageDestiantionPath.$advertise->pole_image_4;
-                    if ($advertise->pole_image_4 !='' && file_exists($imagePath3))
+                    if ($advertise->pole_image_4 !='' //&& file_exists($imagePath3)
+                    )
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath3);
@@ -161,7 +166,8 @@ class TiangPembersihanByDefect extends Controller
                     }
 
                     $imagePath4 = $imageDestiantionPath.$advertise->pole_image_5;
-                    if ($advertise->pole_image_5 !='' && file_exists($imagePath4))
+                    if ($advertise->pole_image_5 !='' //&& file_exists($imagePath4)
+                    )
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath4);

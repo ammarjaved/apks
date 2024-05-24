@@ -22,7 +22,7 @@ class SubstationPembersihanByDefect extends Controller
     use Filter;
 
     public function pembersihan(Request $req) {
-        
+
         try {
             if (empty($req->defect)) {
                 return redirect()->back()->with('failed', 'Request Failed Select Defect');
@@ -61,7 +61,7 @@ class SubstationPembersihanByDefect extends Controller
 
         $color = '';
         $defectsCounts = 0;
-        
+
         foreach ($totalCounts as $count)
         {
             if ($i %2 == 0) {
@@ -103,8 +103,9 @@ class SubstationPembersihanByDefect extends Controller
                     $advertiseSheet->mergeCells('B'.$g.':H'.$k);
                     $advertiseSheet->mergeCells('I'.$g.':O'.$k);
 
-                    $imagePath = public_path($advertise->image_1);
-                    if ($advertise->image_1 != '' && file_exists($imagePath))
+                    $imagePath = config('globals.APP_IMAGES_URL').$advertise->image_1;
+                    if ($advertise->image_1 != '' //&& file_exists($imagePath)
+                    )
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
@@ -114,8 +115,9 @@ class SubstationPembersihanByDefect extends Controller
                         $image->setWorksheet($advertiseSheet);
                     }
 
-                    $imagePath1 = public_path($advertise->image_2);
-                    if ($advertise->image_2 !='' && file_exists($imagePath1))
+                    $imagePath1 = config('globals.APP_IMAGES_URL').$advertise->image_2;
+                    if ($advertise->image_2 !='' //&& file_exists($imagePath1)
+                    )
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath1);

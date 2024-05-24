@@ -71,23 +71,23 @@ class SubstationExcelController extends Controller
                     $worksheet->setCellValue('U' . $i, $rec->advertise_poster_status);
                     $worksheet->setCellValue('V' . $i, $rec->total_defects);
                     $worksheet->setCellValue('W' . $i, $rec->repair_date != ''?date('Y-m-d', strtotime($rec->repair_date)) : '');
-                    $worksheet->setCellValue('X' . $i, 'http://121.121.232.53:8090/'.$rec->substation_image_1
-                    .' http://121.121.232.53:8090/'.$rec->substation_image_2
-                    .' http://121.121.232.53:8090/'.$rec->image_gate
-                    .' http://121.121.232.53:8090/'.$rec->image_gate_2
-                    .' http://121.121.232.53:8090/'.$rec->images_gate_after_lock
-                    .' http://121.121.232.53:8090/'.$rec->images_gate_after_lock_2
-                    .' http://121.121.232.53:8090/'.$rec->image_grass
-                    .' http://121.121.232.53:8090/'.$rec->image_grass_2
-                    .' http://121.121.232.53:8090/'.$rec->image_tree_branches
-                    .' http://121.121.232.53:8090/'.$rec->image_tree_branches_2
-                    .' http://121.121.232.53:8090/'.$rec->image_building
-                    .' http://121.121.232.53:8090/'.$rec->image_building_2
-                    .' http://121.121.232.53:8090/'.$rec->image_advertisement_before_1
-                    .' http://121.121.232.53:8090/'.$rec->image_advertisement_before_2
-                    .' http://121.121.232.53:8090/'.$rec->image_advertisement_after_1
-                    .' http://121.121.232.53:8090/'.$rec->image_advertisement_after_2
-                    .' http://121.121.232.53:8090/'.$rec->other_image);
+                    $worksheet->setCellValue('X' . $i, config('globals.APP_IMAGES_URL').$rec->substation_image_1
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->substation_image_2
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_gate
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_gate_2
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->images_gate_after_lock
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->images_gate_after_lock_2
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_grass
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_grass_2
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_tree_branches
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_tree_branches_2
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_building
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_building_2
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_advertisement_before_1
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_advertisement_before_2
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_advertisement_after_1
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->image_advertisement_after_2
+                    .' , '.config('globals.APP_IMAGES_URL').$rec->other_image);
 
                     $i++;
                 }
