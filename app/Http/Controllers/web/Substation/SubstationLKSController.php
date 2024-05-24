@@ -107,14 +107,14 @@ class SubstationLKSController extends Controller
         foreach ($data as $row)
         {
 
-            if ( $sr_no > 0) {
+            if ($sr_no % 2 == 1 && $sr_no > 0) {
                 $fpdf->AddPage('L', 'A4');
             }
             $sr_no++;
-            $fpdf->Cell(80, 6, 'SR # : '.$sr_no ,0);
+            $fpdf->Cell(100, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(100, 6, 'Pencawang Gambar 1' ,0);
+            $fpdf->Cell(120, 6, 'Pencawang Gambar 1' ,0);
             $fpdf->Cell(100, 6, 'Pencawang Gambar 2' ,0);
             $fpdf->Ln();
 
@@ -126,9 +126,9 @@ class SubstationLKSController extends Controller
             // && file_exists(public_path($row->substation_image_1))
             )
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->substation_image_1, $fpdf->GetX(), $fpdf->GetY(), 75, 75);
+                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->substation_image_1, $fpdf->GetX(), $fpdf->GetY(), 40, 45);
             }
-            $fpdf->Cell(100,6);
+            $fpdf->Cell(120,6);
             // $fpdf->Ln();
 
 
@@ -136,18 +136,12 @@ class SubstationLKSController extends Controller
             // && file_exists(public_path($row->substation_image_2))
             )
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->substation_image_2, $fpdf->GetX(), $fpdf->GetY(), 75, 75);
+                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->substation_image_2, $fpdf->GetX(), $fpdf->GetY(), 40, 45);
             }
             $fpdf->Ln();
             $fpdf->Cell(50, 6, 'Tarikh Lawatan : '.$row->visit_date,0,1);          //VISIT  DATE
             $fpdf->Cell(60, 6, 'Koordinat : '.$row->y . ' , ' . $row->x ,0,1);
             $fpdf->Cell(50, 6, 'Bil Janggal : ' .$row->total_defects,0,1);         // total defects
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
             $fpdf->Ln();
             $fpdf->Ln();
             $fpdf->Ln();

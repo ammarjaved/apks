@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Http\Controllers\web\FeederPillar;
 
 use App\Constants\FeederPillarConstants;
@@ -86,44 +85,44 @@ class FeederPillarLKSController extends Controller
         $sr_no= 0;
 
         foreach ($data as $row) {
-            if ( $sr_no > 0) {
+            if ($sr_no % 2 == 1 && $sr_no > 0) {
                 $fpdf->AddPage('L', 'A4');
 
             }
             $sr_no++;
-            $fpdf->Cell(70, 6, 'SR # : '.$sr_no ,0);
+            $fpdf->Cell(120, 6, 'SR # : '.$sr_no ,0);
 
             // add feeder pilar images  Header
-            $fpdf->Cell(70, 6, 'FEEDER PILLAR Gambar 1' ,0 ,0,'C');
-            $fpdf->Cell(70, 6, 'FEEDER PILLAR Gambar 2' ,0,0,'C');
-            $fpdf->Cell(70, 6, 'FP Plate' ,0,0,'C');
+            $fpdf->Cell(45, 6, 'FEEDER PILLAR Gambar 1' ,0);
+            $fpdf->Cell(60, 6, 'FEEDER PILLAR Gambar 2' ,0);
+            $fpdf->Cell(40, 6, 'FP Plate' ,0);
 
             $fpdf->Ln();
 
-            $fpdf->Cell(71, 6, 'ID : FP-' . $row->id);
+            $fpdf->Cell(125, 6, 'ID : FP-' . $row->id);
 
             // add feeder pillar images
             if ($row->feeder_pillar_image_1 != '')
             {
 
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->feeder_pillar_image_1, $fpdf->GetX(), $fpdf->GetY(), 68, 68);
+                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->feeder_pillar_image_1, $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             }
-            $fpdf->Cell(70,6);
+            $fpdf->Cell(45,6);
             // $fpdf->Ln();
 
 
             if ($row->feeder_pillar_image_2 != '' )
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->feeder_pillar_image_2, $fpdf->GetX(), $fpdf->GetY(), 68, 68);
+                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->feeder_pillar_image_2, $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             }
 
-            $fpdf->Cell(70,6);
+            $fpdf->Cell(50,6);
 
             if ($row->image_name_plate != ''
             // && file_exists(public_path($row->image_name_plate))
             )
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_name_plate, $fpdf->GetX(), $fpdf->GetY(), 68, 68);
+                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_name_plate, $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             }
 
             $fpdf->Ln();
@@ -134,11 +133,6 @@ class FeederPillarLKSController extends Controller
             $fpdf->Cell(60, 6, 'Koordinat : '.$row->y . ' , ' . $row->x);          //COORDINATE
             $fpdf->Ln();
             $fpdf->Cell(60, 8, 'Bil Janggal : ' . $row->total_defects);     //TOTAL DEFECTS
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
             $fpdf->Ln();
 
 
