@@ -44,7 +44,7 @@ class CableBridgeRepo
 
             $destinationPath = 'assets/images/cable-bridge/';
             $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
-            $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/cable-bridge/';
+      //      $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/cable-bridge/';
 
 
             foreach ($request->allFiles() as $key => $file) {
@@ -59,9 +59,9 @@ class CableBridgeRepo
                     $data->{$key} = $destinationPath . $filename;
 
                     // Copy the file to the second location
-                    $sourcePath = $imageStoreUrlPath . $filename;
-                    $destinationPath2 = $externalPath . $filename;
-                     copy($sourcePath, $destinationPath2);
+           //         $sourcePath = $imageStoreUrlPath . $filename;
+                  //  $destinationPath2 = $externalPath . $filename;
+                   //  copy($sourcePath, $destinationPath2);
                 }
 
             }

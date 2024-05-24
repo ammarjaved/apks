@@ -74,7 +74,7 @@ class SAVTRepo
         $defectsImg = SAVTConstants::SAVT_IMAGES;
         $destinationPath = 'assets/images/savt/';
         $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
-        $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/savt/';
+     //   $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/savt/';
 
 
         if (!File::exists($destinationPath)) {
@@ -94,9 +94,9 @@ class SAVTRepo
                 $data->{$key} = $destinationPath . $filename;
 
                 // Copy the file to the second location
-                $sourcePath = $imageStoreUrlPath . $filename;
-                $destinationPath2 = $externalPath . $filename;
-                 copy($sourcePath, $destinationPath2);
+            //    $sourcePath = $imageStoreUrlPath . $filename;
+         //       $destinationPath2 = $externalPath . $filename;
+            //     copy($sourcePath, $destinationPath2);
             }
 
         }

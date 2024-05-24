@@ -169,7 +169,7 @@ class TiangRepository
         $defectsImg = TiangConstants::TIANG_IMAGES;
         $destinationPath = 'assets/images/tiang/';
         $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
-        $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/tiang/';
+      //  $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/tiang/';
 
             foreach ($request->allFiles() as $key => $file) {
                 // Check if the input is a file and it is valid
@@ -183,9 +183,9 @@ class TiangRepository
                     $data->{$key} = $destinationPath . $filename;
 
                     // Copy the file to the second location
-                    $sourcePath = $imageStoreUrlPath . $filename;
-                    $destinationPath2 = $externalPath . $filename;
-                     copy($sourcePath, $destinationPath2);
+                //    $sourcePath = $imageStoreUrlPath . $filename;
+                //    $destinationPath2 = $externalPath . $filename;
+               //      copy($sourcePath, $destinationPath2);
                 }
 
             }

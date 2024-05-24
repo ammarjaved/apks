@@ -25,7 +25,7 @@ class uploadImagesContoller extends Controller
         if ($data) {
             $destinationPath = 'assets/images/';
             $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
-            $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/';
+        //    $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/';
 
             foreach ($request->allFiles() as $key => $file) {
                 // Check if the input is a file and it is valid
@@ -39,9 +39,9 @@ class uploadImagesContoller extends Controller
                     $data->{$key} = $destinationPath . $filename;
 
                     // Copy the file to the second location
-                    $sourcePath = $imageStoreUrlPath . $filename;
-                    $destinationPath2 = $externalPath . $filename;
-                     copy($sourcePath, $destinationPath2);
+                    // $sourcePath = $imageStoreUrlPath . $filename;
+                    // $destinationPath2 = $externalPath . $filename;
+                    //  copy($sourcePath, $destinationPath2);
                 }
 
             }
@@ -92,7 +92,7 @@ class uploadImagesContoller extends Controller
         if ($data) {
             $destinationPath = 'assets/images/';
             $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
-            $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/';
+           // $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/';
 
 
             foreach ($request->all() as $mainkey => $mainvalue) {
@@ -120,9 +120,9 @@ class uploadImagesContoller extends Controller
                             $arr[$key] = $destinationPath.$filename;
 
                             // Copy the file to the second location
-                            $sourcePath = $imageStoreUrlPath . $filename;
-                            $destinationPath2 = $externalPath . $filename;
-                             copy($sourcePath, $destinationPath2);
+                            // $sourcePath = $imageStoreUrlPath . $filename;
+                            // $destinationPath2 = $externalPath . $filename;
+                            //  copy($sourcePath, $destinationPath2);
                         }
 
                     }
@@ -161,9 +161,9 @@ class uploadImagesContoller extends Controller
                             $data[$mainkey] = $destinationPath.$filename ;
 
                             // Copy the file to the second location
-                            $sourcePath = $imageStoreUrlPath . $filename;
-                            $destinationPath2 = $externalPath . $filename;
-                             copy($sourcePath, $destinationPath2);
+                            // $sourcePath = $imageStoreUrlPath . $filename;
+                            // $destinationPath2 = $externalPath . $filename;
+                            //  copy($sourcePath, $destinationPath2);
                         }
 
 

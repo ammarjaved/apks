@@ -99,10 +99,10 @@ class SubstationRepository
         }
         $data->building_status = json_encode($building);
         $data->total_defects = $total_defects;
-        
+
         $destinationPath = 'assets/images/link-box/';
         $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
-        $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/link-box/';
+       // $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/link-box/';
 
         foreach ($request->allFiles() as $key => $file) {
             // Check if the input is a file and it is valid
@@ -116,9 +116,9 @@ class SubstationRepository
                 $data->{$key} = $destinationPath . $filename;
 
                 // Copy the file to the second location
-                $sourcePath = $imageStoreUrlPath . $filename;
-                $destinationPath2 = $externalPath . $filename;
-                copy($sourcePath, $destinationPath2);
+             //   $sourcePath = $imageStoreUrlPath . $filename;
+            //    $destinationPath2 = $externalPath . $filename;
+           //     copy($sourcePath, $destinationPath2);
             }
 
         }
