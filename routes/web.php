@@ -21,6 +21,7 @@ use App\Http\Controllers\web\Substation\SubstationExcelController;
 use App\Http\Controllers\web\excel\ThirdPartyExcelController;
 use App\Http\Controllers\web\Tiang\TiangExcelController;
 use App\Http\Controllers\web\FeederPillar\FeederPillarMapController;
+use App\Http\Controllers\web\FeederPillar\FeederPillarPembersihanByDefect;
 use App\Http\Controllers\web\FeederPillar\FeederPillarPembersihanController;
 use App\Http\Controllers\web\FeederPillar\FeederPillarSearchController;
 use App\Http\Controllers\web\LinkBox\LinkBoxController;
@@ -52,10 +53,12 @@ use App\Http\Controllers\web\SAVT\SAVTController;
 use App\Http\Controllers\web\SAVT\SAVTExcelController;
 use App\Http\Controllers\web\SAVT\SAVTMapController;
 use App\Http\Controllers\web\SAVT\SAVTSearchController;
+use App\Http\Controllers\web\Substation\SubstationPembersihanByDefect;
 use App\Http\Controllers\web\Substation\SubstationPembersihanController;
 use App\Http\Controllers\web\Substation\SubstationSearchController;
 use App\Http\Controllers\web\Substation\SubstationTOCController;
 use App\Http\Controllers\web\Tiang\TiangDocumentsRedirectController;
+use App\Http\Controllers\web\Tiang\TiangPembersihanByDefect;
 use App\Http\Controllers\web\Tiang\TiangSBUMReportController;
 use App\Http\Controllers\web\Tiang\TiangSearchController;
 use App\Http\Controllers\web\Tiang\TiangPembersihanController;
@@ -140,6 +143,7 @@ Route::group(
                 Route::get('remove-tiang-talian-vt-and-vr/{id}',[TiangContoller::class ,'destroyTiang'])->name("remove-tiang-talian-vt-and-vr");
                 Route::get('/search/find-substation-in-tiang-cordinated/{q}/{searchBy}',[TiangSearchController::class ,'seacrhSubstationCoordinated'])->name("find-substation-in-tiang-cordinated");
                 Route::get('/search/find-substation-in-tiang/{type}/{q}',[TiangSearchController::class ,'seacrhSubstation'])->name("find-substation-in-tiang");
+                Route::post('/generate-tiang-talian-vt-and-vr-pembersihan-by-defect', [TiangPembersihanByDefect::class, 'pembersihan'])->name('generate-tiang-talian-vt-and-vr-pembersihan-by-defect');
 
 
 
@@ -200,6 +204,7 @@ Route::group(
                 Route::post('/generate-substation-toc-claim', [SubstationTOCController::class, 'generateTOC'])->name('generate-substation-toc-claim');
                 Route::get('/search/substation-by-polygon',[SubstationSearchController::class,'getSubstationByPolygon'])->name('search-substation-by-polygon');
                 Route::get('remove-substation/{id}',[SubstationController::class ,'destroySubstation'])->name("remove-substation");
+                Route::post('/generate-substation-pembersihan-by-defect', [SubstationPembersihanByDefect::class, 'pembersihan'])->name('generate-substation-pembersihan-by-defect');
 
 
 
@@ -220,6 +225,7 @@ Route::group(
                 Route::post('/generate-feeder-pillar-pembersihan', [FeederPillarPembersihanController::class, 'pembersihan'])->name('generate-feeder-pillar-pembersihan');
                 Route::get('/search/feeder-pillar-by-polygon',[FeederPillarSearchController::class,'getFeederPillarByPolygon'])->name('search-feeder-pillar-by-polygon');
                 Route::get('remove-feeder-pillar/{id}',[FPController::class ,'destroyFeederPillar'])->name("remove-feeder-pillar");
+                Route::post('/generate-feeder-pillar-pembersihan-by-defect', [FeederPillarPembersihanByDefect::class, 'pembersihan'])->name('generate-feeder-pillar-pembersihan-by-defect');
 
 
                 // SAVT routes

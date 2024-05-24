@@ -102,8 +102,8 @@ class FeederPillarPembersihanController extends Controller
                     $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
                     $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
 
-                    $imagePath = public_path($gate->image_gate); // Provide the path to your image file
-                    if ($gate->image_gate !='' && file_exists($imagePath))
+                    $imagePath = config('globals.APP_IMAGES_URL').$gate->image_gate; // Provide the path to your image file
+                    if ($gate->image_gate !='' )
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
@@ -113,8 +113,8 @@ class FeederPillarPembersihanController extends Controller
                         $image->setWorksheet($gateWorkSheet);
                     }
 
-                      $imagePath1 = public_path($gate->image_gate_2); // Provide the path to your image file
-                    if ($gate->image_gate_2 !='' && file_exists($imagePath1))
+                      $imagePath1 = config('globals.APP_IMAGES_URL').$gate->image_gate_2; // Provide the path to your image file
+                    if ($gate->image_gate_2 !='' )
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath1);
@@ -165,8 +165,8 @@ class FeederPillarPembersihanController extends Controller
                     $advertiseSheet->mergeCells('B'.$g.':H'.$k);
                     $advertiseSheet->mergeCells('I'.$g.':O'.$k);
 
-                    $imagePath = public_path($advertise->images_advertise_poster);
-                    if ($advertise->images_advertise_poster != '' && file_exists($imagePath))
+                    $imagePath = config('globals.APP_IMAGES_URL').$advertise->images_advertise_poster;
+                    if ($advertise->images_advertise_poster != '' )
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
@@ -176,8 +176,8 @@ class FeederPillarPembersihanController extends Controller
                         $image->setWorksheet($advertiseSheet);
                     }
 
-                    $imagePath1 = public_path($advertise->image_advertisement_after_1);
-                    if ($advertise->image_advertisement_after_1 !='' && file_exists($imagePath1))
+                    $imagePath1 = config('globals.APP_IMAGES_URL').$advertise->image_advertisement_after_1;
+                    if ($advertise->image_advertisement_after_1 !='' )
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath1);

@@ -282,8 +282,8 @@
         var url = "patrolling";
         var auth_ba = "{{Auth::user()->ba}}";
 
-            //this function just add and remove boundary 
-        function addRemoveBundary(param, paramY, paramX) 
+            //this function just add and remove boundary
+        function addRemoveBundary(param, paramY, paramX)
         {
 
             var q_cql = "ba ILIKE '%" + param + "%' "
@@ -345,7 +345,7 @@
             }, {
                 buffer: 10
             });
-            // map.addLayer(pano_layer);    
+            // map.addLayer(pano_layer);
 
 
             addpanolayer();
@@ -364,12 +364,12 @@
 
 
             // add group over layes
-        function addGroupOverLays() 
+        function addGroupOverLays()
         {
             if (layerControl != '') {
                 map.removeControl(layerControl);
             }
-            
+
             groupedOverlays = {
                 "POI": {
                     'Boundary': boundary,
@@ -454,8 +454,8 @@
                     {
                         render: function(data, type, full) {
                             if (full.image_reading_start !== '') {
-                                return ` <a href="{{ URL::asset('${full.image_reading_start}') }}" data-lightbox="roadtrip">
-                                    <img height="70" src="{{ URL::asset('${full.image_reading_start}') }}" ></a>`;
+                                return ` <a href="{{ config('globals.APP_IMAGES_URL').'${full.image_reading_start}'}}" data-lightbox="roadtrip">
+                                    <img height="70" src="{{ config('globals.APP_IMAGES_URL').'${full.image_reading_start}' }}" ></a>`;
                             }
                             return `<td></td>`;
                         },
@@ -464,8 +464,8 @@
                     {
                         render: function(data, type, full) {
                             if (full.image_reading_end !== '') {
-                                return ` <a href="{{ URL::asset('${full.image_reading_end}') }}" data-lightbox="roadtrip">
-                                    <img height="70" src="{{ URL::asset('${full.image_reading_end}') }}" ></a>`;
+                                return ` <a href="{{ config('globals.APP_IMAGES_URL').'${full.image_reading_end}' }}" data-lightbox="roadtrip">
+                                    <img height="70" src="{{ config('globals.APP_IMAGES_URL').'${full.image_reading_end}'}}" ></a>`;
                             }
                             return `<td></td>`;
                         },

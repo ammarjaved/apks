@@ -172,7 +172,7 @@ class TiangExcelController extends Controller
                 $secondWorksheet->setCellValue('C1', $ba);
                 $secondWorksheet->setCellValue('B3', 'Tarikh Pemeriksaan : ' .date('Y-m-d'));
 
-                 
+
                 //return $res;
                 foreach ($res as $secondRec) {
                     // echo "test <br>";
@@ -285,7 +285,7 @@ class TiangExcelController extends Controller
                     $images = '';
                     foreach ($defectsImg as $defImg) {
                         if ($secondRec->{$defImg} != '') {
-                            $images .=' http://121.121.232.53:8090/'.$secondRec->{$defImg};
+                            $images .=' '.config('globals.APP_IMAGES_URL').$secondRec->{$defImg};
 
                         }
                     }
@@ -663,7 +663,7 @@ class TiangExcelController extends Controller
                     $images = '';
                     foreach ($defectsImg as $defImg) {
                         if ($secondRec->{$defImg} != '') {
-                            $images .=' http://121.121.232.53:8090/'.$secondRec->{$defImg};
+                            $images .=' '.config('globals.APP_IMAGES_URL').$secondRec->{$defImg};
 
                         }
                     }

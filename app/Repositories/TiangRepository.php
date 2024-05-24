@@ -56,7 +56,7 @@ class TiangRepository
             // $talian = $talian != '' ? explode(',',$talian) : '';
             if ($data->talian_utama_connection != '') {
                 # code...
-            
+
                 if (str_contains($data->talian_utama_connection , ',')) {
                     $talian = explode(',',$talian);
                     $data['service_line'] = isset($talian[0]) ? $talian[0] : '';
@@ -65,8 +65,8 @@ class TiangRepository
                     $data['service_line'] = $data->talian_utama_connection == 's' ? 's' : '';
                     $data['main_line'] = $data->talian_utama_connection  == 'm' ? 'm' : '';
                 }
-            }   
-           
+            }
+
 
         }
 
@@ -168,16 +168,27 @@ class TiangRepository
 
         $defectsImg = TiangConstants::TIANG_IMAGES;
         $destinationPath = 'assets/images/tiang/';
+        $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
+      //  $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/tiang/';
 
-        foreach ($defectsImg as $file) {
-            if (is_a($request->{$file}, 'Illuminate\Http\UploadedFile') && $request->{$file}->isValid()) {
-                $uploadedFile = $request->{$file};
-                $img_ext = $request->{$file}->getClientOriginalExtension();
-                $filename = $file . '-' . strtotime(now()) .rand(10,100) . '.' . $img_ext;
-                $uploadedFile->move($destinationPath, $filename);
-                $data->{$file} = $destinationPath . $filename;
+            foreach ($request->allFiles() as $key => $file) {
+                // Check if the input is a file and it is valid
+                if ($request->hasFile($key) && $request->file($key)->isValid()) {
+                    $uploadedFile = $request->file($key);
+                    $img_ext = $uploadedFile->getClientOriginalExtension();
+                    $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
+
+                    // Move the file to the first location
+                    $uploadedFile->move($imageStoreUrlPath, $filename);
+                    $data->{$key} = $destinationPath . $filename;
+
+                    // Copy the file to the second location
+                //    $sourcePath = $imageStoreUrlPath . $filename;
+                //    $destinationPath2 = $externalPath . $filename;
+               //      copy($sourcePath, $destinationPath2);
+                }
+
             }
-        }
 
         $data->total_defects = $total_defects;
         $data->talian_spec = $request->talian_spec;

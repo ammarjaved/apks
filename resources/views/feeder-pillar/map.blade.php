@@ -124,9 +124,9 @@
                     <label for="fp_with_defects">Surveyed with defects</label>
                 </div>
                 {{-- @if (Auth::user()->ba != '') --}}
-                    
-                
-                
+
+
+
                 <div class=" mx-4 d-flex">
                     <input type="radio" name="select_layer" id="fp_unsurveyed" value="fp_unsurveyed" class="unsurveyed"
                         onchange="selectLayer(this.value)">
@@ -229,7 +229,7 @@
     </div>
 
 
-    
+
     <div class="modal fade bd-example-modal-lg " id="myLargeModalLabel" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content" style="width:1100px;">
@@ -352,7 +352,7 @@
     <div class="modal fade" id="removeConfirm">
         <div class="modal-dialog">
             <div class="modal-content ">
-    
+
                 <!-- Modal Header -->
                 <div class="modal-header">
                     <h4 class="modal-title">Remove Recored</h4>
@@ -361,7 +361,7 @@
                 <form action="" id="remove-foam" method="POST">
                     @method('DELETE')
                     @csrf
-    
+
                     <div class="modal-body">
                         Are You Sure ?
                         <input type="hidden" name="id" id="remove-modal-id">
@@ -371,7 +371,7 @@
                         <button type="button" class="btn btn-danger" onclick="removeRecord()">Remove</button>
                     </div>
                 </form>
-    
+
             </div>
         </div>
     </div>
@@ -577,13 +577,13 @@
                                                 <td>${status}</td>
                                                 <td>${element.created_by}</td>
                                                 <td>
-                                                    <a href="http://121.121.232.53:8090/${element.feeder_pillar_image_1}" target="_blank" />
-                                                        <img src="http://121.121.232.53:8090/${element.feeder_pillar_image_1}" style="height:50px;" >
+                                                    <a href="{{config('globals.APP_IMAGES_URL')}}${element.feeder_pillar_image_1}" target="_blank" />
+                                                        <img src="{{config('globals.APP_IMAGES_URL')}}${element.feeder_pillar_image_1}" style="height:50px;" >
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="http://121.121.232.53:8090/${element.feeder_pillar_image_2}" target="_blank" />
-                                                        <img src="http://121.121.232.53:8090/${element.feeder_pillar_image_2}" style="height:50px;"  />
+                                                    <a href="{{config('globals.APP_IMAGES_URL')}}${element.feeder_pillar_image_2}" target="_blank" />
+                                                        <img src="{{config('globals.APP_IMAGES_URL')}}${element.feeder_pillar_image_2}" style="height:50px;"  />
                                                     </a>
                                                 </td>
                                                 <td>
@@ -692,7 +692,7 @@
         function addRemoveBundary(param, paramY, paramX) {
 
 
-            var q_cql = '';             
+            var q_cql = '';
             var boundaryFilter = '';
             var baFilter = '';
 
@@ -781,7 +781,7 @@
         function updateLayers(q_cql , baFilter) {
 
 
-           
+
             if (fp_without_defects != '') {
                 map.removeLayer(fp_without_defects)
             }
@@ -819,8 +819,8 @@
             fp_with_defects.bringToFront()
 
             // if (ba !== '') {
-                
-           
+
+
             if (fp_reject != '') {
                 map.removeLayer(fp_reject)
             }
@@ -891,7 +891,7 @@
 
         }
 
-       
+
 
         // add group overlayes
         function addGroupOverLays() {

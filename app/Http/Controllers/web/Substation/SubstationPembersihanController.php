@@ -101,36 +101,44 @@ class SubstationPembersihanController extends Controller
                     $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
                     $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
 
-                    $imagePath = public_path($gate->image_gate); // Provide the path to your image file
-                    if ($gate->image_gate !='' && file_exists($imagePath))
+                    $imagePath = config('globals.APP_IMAGES_URL').$gate->image_gate; // Provide the path to your image file
+                    if ($gate->image_gate !=''
+                    // && file_exists($imagePath)
+                    )
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
-                        $image->setCoordinates('B' . $g); // Cell coordinate where you want to insert the image
-                        $image->setWidth(300); // Set the width of the image (adjust as needed)
-                        $image->setHeight(300); // Set the height of the image (adjust as needed)
+                        $image->setCoordinates('B' . $g);
+                        $image->setWidth(300);
+                        $image->setHeight(300);
                         $image->setWorksheet($gateWorkSheet);
                     }
 
                     $imagePath1 = '' ;// Provide the path to your image file
-                    if ($gate->images_gate_after_lock !='' && file_exists( public_path($gate->images_gate_after_lock)))
+                    if ($gate->images_gate_after_lock !=''
+                    // && file_exists( public_path($gate->images_gate_after_lock))
+                    )
                     {
-                        $imagePath1 =  public_path($gate->images_gate_after_lock);
+                        $imagePath1 =  config('globals.APP_IMAGES_URL').$gate->images_gate_after_lock;
                     }
-                    elseif($gate->images_gate_after_lock_2 !='' && file_exists( public_path($gate->images_gate_after_lock_2)))
+                    elseif($gate->images_gate_after_lock_2 !=''
+                    // && file_exists( public_path($gate->images_gate_after_lock_2))
+                    )
                     {
-                        $imagePath1 =  public_path($gate->images_gate_after_lock_2);
+                        $imagePath1 =  config('globals.APP_IMAGES_URL').$gate->images_gate_after_lock_2;
                     }
-                    elseif($gate->image_gate_2 !='' && file_exists( public_path($gate->image_gate_2))){
-                        $imagePath1 =  public_path($gate->image_gate_2);
+                    elseif($gate->image_gate_2 !=''
+                    // && file_exists( public_path($gate->image_gate_2))
+                    ){
+                        $imagePath1 =  config('globals.APP_IMAGES_URL').$gate->image_gate_2;
                     }
                     if ($imagePath1 != '') {
 
                         $image1 = new Drawing();
                         $image1->setPath($imagePath1);
-                        $image1->setCoordinates('I' . $g); // Cell coordinate where you want to insert the image
-                        $image1->setWidth(300); // Set the width of the image (adjust as needed)
-                        $image1->setHeight(300); // Set the height of the image (adjust as needed)
+                        $image1->setCoordinates('I' . $g);
+                        $image1->setWidth(300);
+                        $image1->setHeight(300);
                         $image1->setWorksheet($gateWorkSheet);
                     }
                     $g += 16;
@@ -172,25 +180,29 @@ class SubstationPembersihanController extends Controller
                     $advertiseSheet->mergeCells('B'.$g.':H'.$k);
                     $advertiseSheet->mergeCells('I'.$g.':O'.$k);
 
-                    $imagePath = public_path($advertise->image_advertisement_before_1);
-                    if ($advertise->image_advertisement_before_1 != '' && file_exists($imagePath))
+                    $imagePath = config('globals.APP_IMAGES_URL').$advertise->image_advertisement_before_1;
+                    if ($advertise->image_advertisement_before_1 != ''
+                    // && file_exists($imagePath)
+                    )
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
-                        $image->setCoordinates('B' . $g); // Cell coordinate where you want to insert the image
-                        $image->setWidth(300); // Set the width of the image (adjust as needed)
-                        $image->setHeight(300); // Set the height of the image (adjust as needed)
+                        $image->setCoordinates('B' . $g);
+                        $image->setWidth(300);
+                        $image->setHeight(300);
                         $image->setWorksheet($advertiseSheet);
                     }
 
-                    $imagePath1 = public_path($advertise->image_advertisement_after_1);
-                    if ($advertise->image_advertisement_after_1 !='' && file_exists($imagePath1))
+                    $imagePath1 = config('globals.APP_IMAGES_URL').$advertise->image_advertisement_after_1;
+                    if ($advertise->image_advertisement_after_1 !=''
+                    // && file_exists($imagePath1)
+                    )
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath1);
-                        $image1->setCoordinates('I' . $g); // Cell coordinate where you want to insert the image
-                        $image1->setWidth(300); // Set the width of the image (adjust as needed)
-                        $image1->setHeight(300); // Set the height of the image (adjust as needed)
+                        $image1->setCoordinates('I' . $g);
+                        $image1->setWidth(300);
+                        $image1->setHeight(300);
                         $image1->setWorksheet($advertiseSheet);
                     }
 

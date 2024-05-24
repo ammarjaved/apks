@@ -24,18 +24,38 @@ class uploadImagesContoller extends Controller
 
         if ($data) {
             $destinationPath = 'assets/images/';
+            $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
+        //    $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/';
 
+            foreach ($request->allFiles() as $key => $file) {
+                // Check if the input is a file and it is valid
+                if ($request->hasFile($key) && $request->file($key)->isValid()) {
+                    $uploadedFile = $request->file($key);
+                    $img_ext = $uploadedFile->getClientOriginalExtension();
+                    $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
 
-                foreach ($req->all() as $key => $file) {
-                    // Check if the input is a file and it is valid
-                    if ($req->hasFile($key) && $req->file($key)->isValid()) {
-                        $uploadedFile = $req->file($key);
-                        $img_ext = $uploadedFile->getClientOriginalExtension();
-                        $filename = $key . '-' . strtotime(now()). $data->id . '.' . $img_ext;
-                        $uploadedFile->move($destinationPath, $filename);
-                        $data->{$key} = $destinationPath . $filename;
-                    }
+                    // Move the file to the first location
+                    $uploadedFile->move($imageStoreUrlPath, $filename);
+                    $data->{$key} = $destinationPath . $filename;
+
+                    // Copy the file to the second location
+                    // $sourcePath = $imageStoreUrlPath . $filename;
+                    // $destinationPath2 = $externalPath . $filename;
+                    //  copy($sourcePath, $destinationPath2);
                 }
+
+            }
+
+                // foreach ($req->all() as $key => $file) {
+                //     // Check if the input is a file and it is valid
+                //     if ($req->hasFile($key) && $req->file($key)->isValid()) {
+                //         $uploadedFile = $req->file($key);
+                //         $img_ext = $uploadedFile->getClientOriginalExtension();
+                //         $filename = $key . '-' . strtotime(now()). $data->id . '.' . $img_ext;
+                //         $uploadedFile->move($imageStoreUrlPath, $filename);
+                //         $data->{$key} = $destinationPath . $filename;
+                //     }
+                // }
                 $data->save();
 
                 $message = 'Images uploaded successfully';
@@ -71,44 +91,82 @@ class uploadImagesContoller extends Controller
 
         if ($data) {
             $destinationPath = 'assets/images/';
+            $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
+           // $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/';
 
 
             foreach ($request->all() as $mainkey => $mainvalue) {
                 if (is_array($mainvalue)) {
                     $arr = [];
                     if ($data->{$mainkey} != '') {
-                        $before = json_decode( $data->{$mainkey}); 
+                        $before = json_decode( $data->{$mainkey});
                         foreach($before as $bKey => $bname){
                             $arr[$bKey]=$bname;
                         }
                     }
-                    
-                   
-                  
-                   
-   
-                    foreach ($mainvalue as $key => $file) {
+
+
+
+
+                    foreach ($request->allFiles() as $key => $file) {
+                        // Check if the input is a file and it is valid
                         if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
                             $uploadedFile = $file;
                             $img_ext = $uploadedFile->getClientOriginalExtension();
-                            $filename = $key . '-' . strtotime(now()). $data->id . '.' . $img_ext;
-                           
-                            $uploadedFile->move($destinationPath, $filename);
+                            $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
+
+                            // Move the file to the first location
+                            $uploadedFile->move($imageStoreUrlPath, $filename);
                             $arr[$key] = $destinationPath.$filename;
-                        
-                            
+
+                            // Copy the file to the second location
+                            // $sourcePath = $imageStoreUrlPath . $filename;
+                            // $destinationPath2 = $externalPath . $filename;
+                            //  copy($sourcePath, $destinationPath2);
                         }
+
                     }
+
+                    // foreach ($mainvalue as $key => $file) {
+                    //     if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
+                    //         $uploadedFile = $file;
+                    //         $img_ext = $uploadedFile->getClientOriginalExtension();
+                    //         $filename = $key . '-' . strtotime(now()). $data->id . '.' . $img_ext;
+
+                    //         $uploadedFile->move($imageStoreUrlPath, $filename);
+                    //         $arr[$key] = $destinationPath.$filename;
+
+
+                    //     }
+                    // }
                     $data[$mainkey] = json_encode($arr);
                 }else{
 
-                    if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
-                        $uploadedFile = $mainvalue;
-                        $img_ext = $uploadedFile->getClientOriginalExtension();
-                        $filename = $mainkey . '-' . strtotime(now()). $data->id . '.' . $img_ext;
-                        $uploadedFile->move($destinationPath, $filename);
-                        $data[$mainkey] = $destinationPath.$filename ;
-                    }
+                    // if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
+                    //     $uploadedFile = $mainvalue;
+                    //     $img_ext = $uploadedFile->getClientOriginalExtension();
+                    //     $filename = $mainkey . '-' . strtotime(now()). $data->id . '.' . $img_ext;
+                    //     $uploadedFile->move($imageStoreUrlPath, $filename);
+                    //     $data[$mainkey] = $destinationPath.$filename ;
+                    // }
+
+
+                        if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
+                            $uploadedFile = $mainvalue;
+                            $img_ext = $uploadedFile->getClientOriginalExtension();
+                            $filename = $mainkey . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
+
+                            // Move the file to the first location
+                            $uploadedFile->move($imageStoreUrlPath, $filename);
+                            $data[$mainkey] = $destinationPath.$filename ;
+
+                            // Copy the file to the second location
+                            // $sourcePath = $imageStoreUrlPath . $filename;
+                            // $destinationPath2 = $externalPath . $filename;
+                            //  copy($sourcePath, $destinationPath2);
+                        }
+
+
 
                 }
             }

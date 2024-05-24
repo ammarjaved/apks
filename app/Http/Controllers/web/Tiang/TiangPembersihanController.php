@@ -119,8 +119,10 @@ class TiangPembersihanController extends Controller
                     $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
                     $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
 
-                    $imagePath = public_path($gate->pole_image_1); // Provide the path to your image file
-                    if ($gate->pole_image_1 !='' && file_exists($imagePath))
+                    $imagePath = config('globals.APP_IMAGES_URL').$gate->pole_image_1; // Provide the path to your image file
+                    if ($gate->pole_image_1 !=''
+                    // && file_exists($imagePath)
+                    )
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
@@ -130,8 +132,9 @@ class TiangPembersihanController extends Controller
                         $image->setWorksheet($gateWorkSheet);
                     }
 
-                    $imagePath1 = public_path($gate->remove_creepers_image); // Provide the path to your image file
-                    if ($gate->remove_creepers_image !='' && file_exists($imagePath1))
+                    $imagePath1 = config('globals.APP_IMAGES_URL').$gate->remove_creepers_image; // Provide the path to your image file
+                    if ($gate->remove_creepers_image !='' //&& file_exists($imagePath1)
+                    )
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath1);
@@ -180,8 +183,9 @@ class TiangPembersihanController extends Controller
                     $advertiseSheet->mergeCells('B'.$g.':H'.$k);
                     $advertiseSheet->mergeCells('I'.$g.':O'.$k);
 
-                    $imagePath = public_path($advertise->pole_image_2);
-                    if ($advertise->pole_image_2 != '' && file_exists($imagePath))
+                    $imagePath = config('globals.APP_IMAGES_URL').$advertise->pole_image_2;
+                    if ($advertise->pole_image_2 != '' //&& file_exists($imagePath)
+                    )
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
@@ -191,8 +195,9 @@ class TiangPembersihanController extends Controller
                         $image->setWorksheet($advertiseSheet);
                     }
 
-                    $imagePath1 = public_path($advertise->clean_banner_image);
-                    if ($advertise->clean_banner_image !='' && file_exists($imagePath1))
+                    $imagePath1 = config('globals.APP_IMAGES_URL').$advertise->clean_banner_image;
+                    if ($advertise->clean_banner_image !='' //&& file_exists($imagePath1)
+                    )
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath1);

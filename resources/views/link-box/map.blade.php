@@ -608,13 +608,13 @@
                                       <td>${status}</td>
                                       <td>${element.created_by}</td>
                                       <td>
-                                          <a href="http://121.121.232.53:8090/${element.link_box_image_1}" target="_blank" />
-                                              <img src="http://121.121.232.53:8090/${element.link_box_image_1}" style="height:50px;" >
+                                          <a href="{{config('globals.APP_IMAGES_URL')}}${element.link_box_image_1}" target="_blank" />
+                                              <img src="{{config('globals.APP_IMAGES_URL')}}${element.link_box_image_1}" style="height:50px;" >
                                           </a>
                                       </td>
                                       <td>
-                                          <a href="http://121.121.232.53:8090/${element.link_box_image_2}" target="_blank" />
-                                              <img src="http://121.121.232.53:8090/${element.link_box_image_2}" style="height:50px;"  />
+                                          <a href="{{config('globals.APP_IMAGES_URL')}}${element.link_box_image_2}" target="_blank" />
+                                              <img src="{{config('globals.APP_IMAGES_URL')}}${element.link_box_image_2}" style="height:50px;"  />
                                           </a>
                                       </td>
                                       <td>

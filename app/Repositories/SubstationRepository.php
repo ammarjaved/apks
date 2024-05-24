@@ -99,30 +99,41 @@ class SubstationRepository
         }
         $data->building_status = json_encode($building);
         $data->total_defects = $total_defects;
-        $destinationPath = 'assets/images/link-box/';
 
-        foreach ($request->all() as $key => $file) {
+        $destinationPath = 'assets/images/link-box/';
+        $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
+       // $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/link-box/';
+
+        foreach ($request->allFiles() as $key => $file) {
             // Check if the input is a file and it is valid
             if ($request->hasFile($key) && $request->file($key)->isValid()) {
                 $uploadedFile = $request->file($key);
                 $img_ext = $uploadedFile->getClientOriginalExtension();
-                $filename = $key . '-' . strtotime(now()).rand(10,100) . '.' . $img_ext;
-                $uploadedFile->move($destinationPath, $filename);
+                $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
+
+                // Move the file to the first location
+                $uploadedFile->move($imageStoreUrlPath, $filename);
                 $data->{$key} = $destinationPath . $filename;
+
+                // Copy the file to the second location
+             //   $sourcePath = $imageStoreUrlPath . $filename;
+            //    $destinationPath2 = $externalPath . $filename;
+           //     copy($sourcePath, $destinationPath2);
             }
+
         }
 
         return $data;
     }
 
     public function getSubstation($id )  {
-        
+
 
         $data = Substation::find($id);
         if ($data) {
             $data->gate_status = json_decode($data->gate_status);
             $data->building_status = json_decode($data->building_status);
-        
+
             return $data;
         }
         return '';

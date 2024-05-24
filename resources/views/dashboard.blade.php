@@ -41,62 +41,44 @@
         }
     </style>
 @endsection
+
 @section('content')
 
     <div class=" px-4 mt-2">
         <div class="row dashboard-counts">
-            {{-- <div class="col-md-2">
-        <div class="card p-3">
 
-                <h3 class="text-center">   3rd Party Digging </h3>
-                <p class="text-center mb-0 pb-0"><span>0</span></p>
-
-          </div>
-    </div> --}}
-
+                {{-- PATROLLING START --}}
             <div class="col-md-12">
                 <div class="card card-success">
                     <div class="card-header">{{ __('messages.patroling') }}</div>
                     <div class="card-body">
                         <div class="row">
+
+                            {{-- TOTAL PATROLLING DONE --}}
                             <div class="col-md-4">
                                 <div class="card p-3">
-
                                     <h3 class="text-center"> {{ __('messages.total_patrollig_done') }}</h3>
-                                    <p class="text-center mb-0 pb-0"><span id="total_km"></span> KM
-                                    </p>
-
+                                    <p class="text-center mb-0 pb-0"><span id="total_km"></span> KM </p>
                                 </div>
                             </div>
 
+                            {{-- TOTAL NOTICE GENERATED --}}
                             <div class="col-md-4">
                                 <div class="card p-3">
-
                                     <h3 class="text-center">{{ __('messages.total_notice_generated') }} </h3>
-                                    <p class="text-center mb-0 pb-0"><span
-                                            id="total_notice"></span></p>
-
+                                    <p class="text-center mb-0 pb-0"><span id="total_notice"></span></p>
                                 </div>
                             </div>
 
+                            {{-- TOTAL SUPERVISION --}}
                             <div class="col-md-4">
                                 <div class="card p-3">
-
                                     <h3 class="text-center"> {{ __('messages.total_supervision') }} </h3>
-                                    <p class="text-center mb-0 pb-0"><span
-                                            id="total_supervision"></span></p>
-
+                                    <p class="text-center mb-0 pb-0"><span id="total_supervision"></span></p>
                                 </div>
                             </div>
 
-
-
-                            <!-- <div class="col-md-6">
-                                                            <div class="card p-3">
-                                                            <div id="suryed_patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
-                                                            </div>
-                                                        </div> -->
-
+                            {{-- PATROLLING GRAPH --}}
                             <div class="col-md-12">
                                 <div class="card p-3">
                                     <div id="patrolling-container" style="width:100%; height: 400px; margin: 0 auto"></div>
@@ -106,40 +88,41 @@
                     </div>
                 </div>
             </div>
+                {{-- PATROLLING END --}}
 
 
+
+                {{-- SUBSATION START --}}
             <div class="col-md-12">
                 <div class="card card-warning">
                     <div class="card-header text-white">{{ __('messages.substation') }}</div>
                     <div class="card-body">
                         <div class="row">
+
+                            {{-- TOTAL SUBSTATION VISITED --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-
                                     <h3 class="text-center"> {{ __('messages.total_substation_visited') }}</h3>
-                                    <p class="text-center mb-0 pb-0"><span id="substation"> </span>
-                                    </p>
-
+                                    <p class="text-center mb-0 pb-0"> <span id="substation"></span> </p>
                                 </div>
                             </div>
 
+                            {{-- SUM SUBSTATION DEFECTS --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-
                                     <h3 class="text-center"> {{ __('messages.total_substation_defects') }}</h3>
-                                    <p class="text-center mb-0 pb-0"><span
-                                            id="substation_defects"> </span></p>
-
+                                    <p class="text-center mb-0 pb-0"> <span id="substation_defects"></span> </p>
                                 </div>
                             </div>
 
-
+                            {{-- TOTAL SUBSTATION VISITED GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-                                    <div id="suryed_substation-container"
-                                        style="width:100%; height: 400px; margin: 0 auto"></div>
+                                    <div id="suryed_substation-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
+
+                            {{-- SUM SUBSTATION DEFECTS GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
                                     <div id="substation-container" style="width:100%; height: 400px; margin: 0 auto">
@@ -147,44 +130,43 @@
                                 </div>
                             </div>
 
-
-
                         </div>
                     </div>
                 </div>
             </div>
+                {{-- SUBSATION END --}}
 
+
+                {{-- FEEDER PILLAR START --}}
             <div class="col-md-12">
                 <div class="card card-info">
                     <div class="card-header">{{ __('messages.feeder_pillar') }}</div>
                     <div class="card-body">
                         <div class="row">
+                            {{-- TOTAL VISITED --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-
                                     <h3 class="text-center">{{ __('messages.total_feeder_pillar_visited') }}</h3>
-                                    <p class="text-center mb-0 pb-0"><span
-                                            id="feeder_pillar"> </span></p>
-
+                                    <p class="text-center mb-0 pb-0"><span id="feeder_pillar"> </span></p>
                                 </div>
                             </div>
 
+                            {{-- DEFECTS SUM --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-
                                     <h3 class="text-center"> {{ __('messages.total_feeder_pillar_defects') }}</h3>
-                                    <p class="text-center mb-0 pb-0"><span id="feeder_pillar_defect"> </span>
-                                    </p>
-
+                                    <p class="text-center mb-0 pb-0"><span id="feeder_pillar_defect"></span></p>
                                 </div>
                             </div>
 
+                            {{-- TOTAL VISITED GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-                                    <div id="suryed_feeder_pillar-container"
-                                        style="width:100%; height: 400px; margin: 0 auto"></div>
+                                    <div id="suryed_feeder_pillar-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
+
+                            {{-- DEFECTS GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
                                     <div id="feeder_pillar-container" style="width:100%; height: 400px; margin: 0 auto">
@@ -192,114 +174,116 @@
                                 </div>
                             </div>
 
-
-
                         </div>
                     </div>
                 </div>
             </div>
+                {{-- FEEDER PILLAR END --}}
 
-
+                {{-- TIANG SATRT --}}
             <div class="col-md-12">
                 <div class="card card-success">
                     <div class="card-header">{{ __('messages.tiang') }}</div>
                     <div class="card-body">
                         <div class="row">
 
+                            {{-- TOTAL VISITED --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-
                                     <h3 class="text-center">{{ __('messages.total_tiang_visited') }} </h3>
                                     <p class="text-center mb-0 pb-0"><span id="tiang"> </span></p>
-
                                 </div>
                             </div>
 
-
+                            {{-- DEFECTS SUM --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-
                                     <h3 class="text-center"> {{ __('messages.total_tiang_defects') }}</h3>
                                     <p class="text-center mb-0 pb-0"><span id="tiang_defect"> </span></p>
-
                                 </div>
                             </div>
+
+                            {{-- VISITED GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-                                    <div id="suryed_tiang-container" style="width:100%; height: 400px; margin: 0 auto">
-                                    </div>
+                                    <div id="suryed_tiang-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
+
+                            {{-- DEFECTS GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
                                     <div id="tiang-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
 
-
-
                         </div>
                     </div>
                 </div>
             </div>
+                {{-- TIANG END --}}
 
+
+                {{-- LINK BOX START --}}
             <div class="col-md-12">
                 <div class="card card-primary">
                     <div class="card-header">{{ __('messages.link_box') }}</div>
                     <div class="card-body">
                         <div class="row">
+
+                            {{-- TOTAL VISITED --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-
                                     <h3 class="text-center"> {{ __('messages.total_link_box_visited') }} </h3>
-                                    <p class="text-center mb-0 pb-0"><span id="link_box"></span>
-                                    </p>
-
+                                    <p class="text-center mb-0 pb-0"><span id="link_box"></span></p>
                                 </div>
                             </div>
 
-
+                            {{-- DEFECTS SUM --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-
                                     <h3 class="text-center"> {{ __('messages.total_link_box_defects') }} </h3>
                                     <p class="text-center mb-0 pb-0"><span id="link_box_defect"> </span></p>
-
                                 </div>
                             </div>
+
+                            {{-- VISITED GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-                                    <div id="suryed_link_box-container" style="width:100%; height: 400px; margin: 0 auto">
-                                    </div>
+                                    <div id="suryed_link_box-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
+
+                            {{-- DEFECTS GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
                                     <div id="link_box-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
 
-
                         </div>
                     </div>
                 </div>
             </div>
+                {{-- LINK BOX END --}}
 
 
+                {{-- CABLE BRIDGE START --}}
             <div class="col-md-12">
                 <div class="card card-danger">
                     <div class="card-header"> {{ __('messages.cable_bridge') }}</div>
                     <div class="card-body">
                         <div class="row">
+
+                            {{-- TOTAL VISITED --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-
                                     <h3 class="text-center"> {{ __('messages.total_cable_bridge_visited') }}</h3>
-                                    <p class="text-center mb-0 pb-0"><span
-                                            id="cable_bridge"></span></p>
-
+                                    <p class="text-center mb-0 pb-0"><span id="cable_bridge"></span></p>
                                 </div>
                             </div>
+
+                            {{-- DEFECTS SUM --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
 
@@ -310,12 +294,15 @@
                                 </div>
                             </div>
 
+                            {{-- VISITED GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
                                     <div id="suryed_cable_bridge-container"
                                         style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
+
+                            {{-- DEFECTS GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
                                     <div id="cable_bridge-container" style="width:100%; height: 400px; margin: 0 auto">
@@ -323,45 +310,44 @@
                                 </div>
                             </div>
 
-
-
                         </div>
-
                     </div>
                 </div>
             </div>
+                {{-- CABLE BRIDGE END --}}
 
 
+                {{-- SAVT START --}}
             <div class="col-md-12">
                 <div class="card card-danger">
                     <div class="card-header"> SAVT</div>
                     <div class="card-body">
                         <div class="row">
+
+                            {{-- TOTAL VISITED --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-
                                     <h3 class="text-center"> {{ __('messages.total_savt_visited') }}</h3>
-                                    <p class="text-center mb-0 pb-0"><span
-                                            id="savt"></span></p>
-
+                                    <p class="text-center mb-0 pb-0"><span id="savt"></span></p>
                                 </div>
                             </div>
+
+                            {{-- DEFECTS SUM --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-
                                     <h3 class="text-center"> {{ __('messages.total_savt_defects') }} </h3>
-                                    <p class="text-center mb-0 pb-0"><span
-                                            id="savt_defect"></span></p>
-
+                                    <p class="text-center mb-0 pb-0"><span id="savt_defect"></span></p>
                                 </div>
                             </div>
 
+                            {{-- VISITED GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
-                                    <div id="suryed_savt-container"
-                                        style="width:100%; height: 400px; margin: 0 auto"></div>
+                                    <div id="suryed_savt-container" style="width:100%; height: 400px; margin: 0 auto"></div>
                                 </div>
                             </div>
+
+                            {{-- DEFECTS GRAPH --}}
                             <div class="col-md-6">
                                 <div class="card p-3">
                                     <div id="savt-container" style="width:100%; height: 400px; margin: 0 auto">
@@ -369,15 +355,12 @@
                                 </div>
                             </div>
 
-
-
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
+            {{-- SAVT END --}}
     </div>
 @endsection
 
@@ -387,9 +370,6 @@
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="https://code.highcharts.com/modules/export-data.js"></script>
-
-
-
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs5/dt-1.11.3/datatables.min.js"></script>
     <script src="{{ asset('assets/js/dashboard.js') }}"></script>
