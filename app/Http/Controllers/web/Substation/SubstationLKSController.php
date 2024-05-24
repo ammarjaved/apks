@@ -13,6 +13,7 @@ use Dompdf\Options;
 use Illuminate\Support\Facades\Auth;
 use PDF;
 use Illuminate\Support\Facades\File;
+use App\Constants\SubstationConstants;
 
 
 class SubstationLKSController extends Controller
@@ -20,15 +21,20 @@ class SubstationLKSController extends Controller
    use Filter;
 
     public function index(){
+        $defects = SubstationConstants::PE_DEFECTS;
         $button =[];
         $button=[
             ['url'=>'generate-substation-lks' , 'name'=>'Generate LKS'],
-            ['url'=>'generate-substation-pembersihan' , 'name'=>'Generate Pembersihan'],
             ['url'=>'generate-substation-toc-claim' , 'name'=>'TOC Claim'],
-
-
+            ['url'=>'generate-substation-pembersihan' , 'name'=>'Generate Pembersihan'],
         ];
-        return view('lks.generate-lks',['title'=>'substation' ,'buttons'=>$button]);
+
+        return view('lks.generate-lks',[
+            'title'=>'substation' ,
+            'buttons'=>$button,
+            'defects'=>$defects ,
+            'modalButton'=>'generate-substation-pembersihan-by-defect'  
+        ]);
     }
 
 

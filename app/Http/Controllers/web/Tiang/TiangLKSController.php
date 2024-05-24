@@ -22,6 +22,7 @@ class TiangLKSController extends Controller
 
     public function index()
     {
+        $defects = TiangConstants::TIANG_DEFECTS_KEYS;
         $button =[];
         $button=[
             ['url'=>'generate-tiang-talian-vt-and-vr-lks' , 'name'=>'Generate LKS'],
@@ -29,7 +30,13 @@ class TiangLKSController extends Controller
 
             // ['url'=>'tiang-talian-vt-and-vr-SBUM-report' , 'name'=>'SBUM Report'],
         ];
-        return view('lks.generate-lks',['title'=>'tiang' , 'url'=>'tiang-talian-vt-and-vr-lks','buttons'=>$button]);
+        return view('lks.generate-lks',[
+                        'title'=>'tiang' , 
+                        'url'=>'tiang-talian-vt-and-vr-lks',
+                        'buttons'=>$button,
+                        'defects'=>$defects ,
+                        'modalButton'=>'generate-tiang-talian-vt-and-vr-pembersihan-by-defect' 
+                    ]);
     }
 
 

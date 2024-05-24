@@ -3,6 +3,7 @@
 
 namespace App\Http\Controllers\web\FeederPillar;
 
+use App\Constants\FeederPillarConstants;
 use App\Http\Controllers\Controller;
 use App\Models\FeederPillar;
 use Illuminate\Http\Request;
@@ -22,13 +23,19 @@ class FeederPillarLKSController extends Controller
 
     public function index()
     {
+        $defects = FeederPillarConstants::FP_DEFECTS;
         $button =[];
         $button=[
             ['url'=>'generate-feeder-pillar-lks' , 'name'=>'Generate LKS'],
             // ['url'=>'generate-feeder-pillar-ops' , 'name'=>'Generate OPS'],
             ['url'=>'generate-feeder-pillar-pembersihan' , 'name'=>'Generate Pembersihan'],
         ];
-        return view('lks.generate-lks',['title'=>'feeder_pillar' ,'buttons'=>$button]);
+        return view('lks.generate-lks',[
+                            'title'=>'feeder_pillar',
+                            'buttons'=>$button, 
+                            'defects'=>$defects ,
+                            'modalButton'=>'generate-feeder-pillar-pembersihan-by-defect'  
+                    ]);
 
     }
 
