@@ -100,10 +100,58 @@ class SubstationRepository
         $data->building_status = json_encode($building);
         $data->total_defects = $total_defects;
 
+        // $destinationPath = 'assets/images/link-box/';
+        // $serverBasePath = "http://121.121.232.53:89/".$destinationPath;
+        // $fullServerPath = $serverBasePath . $destinationPath;
+
+        // foreach ($request->allFiles() as $key => $file) {
+        //     // Check if the input is a file and it is valid
+        //     if ($request->hasFile($key) && $request->file($key)->isValid()) {
+        //         $uploadedFile = $request->file($key);
+        //         $img_ext = $uploadedFile->getClientOriginalExtension();
+        //         $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
+        //         $filePath = $fullServerPath . $filename;
+
+        //         // Read file content and write to the desired location
+        //         $fileContents = file_get_contents($uploadedFile->getRealPath());
+        //         file_put_contents($filePath, $fileContents);
+
+        //         // Set the URL path for the saved file
+        //         $data->{$key} = $destinationPath . $filename;
+        //     }
+        // }
+        // return $data;
+
+
         $destinationPath = 'assets/images/link-box/';
         $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
-       // $externalPath = config('globals.APP_IMAGES_STORE_URL_TEMP').'/link-box/';
+        // $localStoragePath = public_path($destinationPath);
 
+
+
+            foreach ($request->allFiles() as $key => $file) {
+                // Check if the input is a file and it is valid
+                if ($request->hasFile($key) && $request->file($key)->isValid()) {
+                    $uploadedFile = $request->file($key);
+                    $img_ext = $uploadedFile->getClientOriginalExtension();
+                    $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
+                    $filePath = $imageStoreUrlPath   . $filename;
+
+                    // Read file content and write to the desired location
+                    $fileContents = file_get_contents($uploadedFile->getRealPath());
+                    file_put_contents($filePath, $fileContents);
+
+                    $data->{$key} = $destinationPath . $filename;
+
+                }
+            }
+        return $data;
+
+        if (is_writeable($imageStoreUrlPath)) {
+            dd("true");
+        }else{
+            dd("false");
+        }
         foreach ($request->allFiles() as $key => $file) {
             // Check if the input is a file and it is valid
             if ($request->hasFile($key) && $request->file($key)->isValid()) {
