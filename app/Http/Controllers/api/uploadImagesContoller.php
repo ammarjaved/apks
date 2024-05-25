@@ -27,10 +27,10 @@ class uploadImagesContoller extends Controller
             $imageStoreUrlPath = config('globals.APP_IMAGES_STORE_URL').$destinationPath;
 
 
-            foreach ($request->allFiles() as $key => $file) {
+            foreach ($req->allFiles() as $key => $file) {
                 // Check if the input is a file and it is valid
-                if ($request->hasFile($key) && $request->file($key)->isValid()) {
-                    $uploadedFile = $request->file($key);
+                if ($req->hasFile($key) && $req->file($key)->isValid()) {
+                    $uploadedFile = $req->file($key);
                     $img_ext = $uploadedFile->getClientOriginalExtension();
                     $filename = $key . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
                     $filePath = $imageStoreUrlPath   . $filename;
@@ -157,7 +157,7 @@ class uploadImagesContoller extends Controller
                     // }
 
 
-                        if (is_a($file, 'Illuminate\Http\UploadedFile') && $file->isValid()) {
+                        if (is_a($mainvalue, 'Illuminate\Http\UploadedFile') && $mainvalue->isValid()) {
                             $uploadedFile = $mainvalue;
                             $img_ext = $uploadedFile->getClientOriginalExtension();
                             $filename = $mainkey . '-' . strtotime(now()) . rand(10, 100) . '.' . $img_ext;
