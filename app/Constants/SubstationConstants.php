@@ -7,7 +7,7 @@ class SubstationConstants
     public const PE_DEFECTS_AND_IMAGES = [
         'unlocked'                  =>  ['image_gate', 'images_gate_after_lock'],
         'demaged'                   =>  ['image_building', 'image_building_2'],
-        'broken_roof'               =>  ['image_building', 'image_building_2'],
+        'broken_roof'               =>  ['substation_image_1', 'substation_image_2'],
         'broken_gutter'             =>  ['substation_image_1', 'substation_image_2'],
         'broken_base'               =>  ['substation_image_1', 'substation_image_2'],
         'advertise_poster_status'   =>  ['image_advertisement_before_1', 'image_advertisement_after_1'],
@@ -29,14 +29,14 @@ class SubstationConstants
     public const PE_DEFECTS_DB_NAME = [
         'unlocked'                      => "gate_status->>'unlocked'",
         'demaged'                       => "gate_status->>'demaged'",
-        'broken_roof'                   => "building_status->>'broken_roof'",  
-        'broken_gutter'                 => "building_status->>'broken_gutter'",  
-        'broken_base'                   => "building_status->>'broken_base'",  
+        'broken_roof'                   => "building_status->>'broken_roof'",
+        'broken_gutter'                 => "building_status->>'broken_gutter'",
+        'broken_base'                   => "building_status->>'broken_base'",
         'advertise_poster_status'       => "advertise_poster_status",
-        'tree_branches_status'          => "tree_branches_status",     
+        'tree_branches_status'          => "tree_branches_status",
         'grass_status'                  => "grass_status"
     ];
- 
+
 
 
 }

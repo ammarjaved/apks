@@ -30,32 +30,21 @@ class SubstationController extends Controller
      */
     public function index(Request $request)
     {
-        // return strtotime(now());
-        if ($request->ajax()) {
+
+        if ($request->ajax())
+        {
             $result = Substation::query();
 
             $result = $this->filter($result, 'visit_date', $request);
-
             $result->when(true, function ($query) {
                 return $query->select('id','updated_at', 'name', DB::raw("CASE WHEN (gate_status->>'unlocked')::text='true' THEN 'Yes' ELSE 'No' END as unlocked"), DB::raw("CASE WHEN (gate_status->>'demaged')::text='true' THEN 'Yes' ELSE 'No' END as demaged"), DB::raw("CASE WHEN (gate_status->>'other')::text='true' THEN 'Yes' ELSE 'No' END as other_gate"), DB::raw("CASE WHEN (building_status->>'broken_roof')::text='true' THEN 'Yes' ELSE 'No' END as broken_roof"), DB::raw("CASE WHEN (building_status->>'broken_gutter')::text='true' THEN 'Yes' ELSE 'No' END as broken_gutter"), DB::raw("CASE WHEN (building_status->>'broken_base')::text='true' THEN 'Yes' ELSE 'No' END as broken_base"), DB::raw("CASE WHEN (building_status->>'other')::text='true' THEN 'Yes' ELSE 'No' END as building_other"), 'grass_status', 'tree_branches_status', 'advertise_poster_status', 'total_defects', 'visit_date', 'substation_image_1', 'substation_image_2', 'qa_status' ,'reject_remarks');
             });
 
             return datatables()
                 ->of($result->get())->addColumn('substation_id', function ($row) {
-                    
                     return "SUB-" .$row->id;
-                })  
-                ->make(true);
+                })->make(true);
 
-                // $result->orderBy('visit_date', 'desc');
- 
-
-                // $result->orderBy('created_at', 'desc');
-                // $dataTable = new DataTables;
-    
-                // $dataTable = $dataTable->eloquent($result)
-                //     ->make(true);
-                //     return $dataTable;
 
         }
 
@@ -91,12 +80,12 @@ class SubstationController extends Controller
             // $data->qa_status = 'pending';
 
             $res = $this->substationRepository->store($data, $request);
-
             $res->save();
 
             Session::flash('success', 'Request Success');
 
         } catch (\Throwable $th) {
+            // return $th->getMessage();
             Session::flash('failed', 'Request Failed');
         }
 
@@ -112,7 +101,7 @@ class SubstationController extends Controller
     public function show($language, $id)
     {
         $data = $this->substationRepository->getSubstation($id );
-       
+
         if ($data) {
             return view('substation.show', ['data' => $data, 'disabled' => true]);
         }
@@ -151,10 +140,10 @@ class SubstationController extends Controller
             if (!$data) {
                return abort(404);
             }
-        
+
             $user = Auth::user()->name;
             // $data->updated_by = $user;
-           
+
             $res = $this->substationRepository->store($data, $request);
             $res->update();
         Session::flash('success', 'Request Success');
@@ -193,9 +182,9 @@ class SubstationController extends Controller
         try {
             Substation::find($id)->delete();
             return response()->json(['success'=>true],200);
-        } 
-        catch (\Throwable $th) 
-        { 
+        }
+        catch (\Throwable $th)
+        {
             return response()->json(['success'=>false],400);
         }
     }
@@ -211,7 +200,7 @@ class SubstationController extends Controller
                 $qa_data->reject_remarks = $req->reject_remakrs;
             }
             $user = Auth::user()->name;
-            
+
             $qa_data->qc_by = $user;
             $qa_data->qc_at = now();
 

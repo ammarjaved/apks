@@ -101,7 +101,7 @@ class SubstationPembersihanController extends Controller
                     $gateWorkSheet->mergeCells('B'.$g.':H'.$k);
                     $gateWorkSheet->mergeCells('I'.$g.':O'.$k);
 
-                    $imagePath = config('globals.APP_IMAGES_URL').$gate->image_gate; // Provide the path to your image file
+                    $imagePath = config('globals.APP_IMAGES_LOCALE_PATH').$gate->image_gate; // Provide the path to your image file
                     if ($gate->image_gate !=''
                     // && file_exists($imagePath)
                     )
@@ -119,18 +119,18 @@ class SubstationPembersihanController extends Controller
                     // && file_exists( public_path($gate->images_gate_after_lock))
                     )
                     {
-                        $imagePath1 =  config('globals.APP_IMAGES_URL').$gate->images_gate_after_lock;
+                        $imagePath1 =  config('globals.APP_IMAGES_LOCALE_PATH').$gate->images_gate_after_lock;
                     }
                     elseif($gate->images_gate_after_lock_2 !=''
                     // && file_exists( public_path($gate->images_gate_after_lock_2))
                     )
                     {
-                        $imagePath1 =  config('globals.APP_IMAGES_URL').$gate->images_gate_after_lock_2;
+                        $imagePath1 =  config('globals.APP_IMAGES_LOCALE_PATH').$gate->images_gate_after_lock_2;
                     }
                     elseif($gate->image_gate_2 !=''
                     // && file_exists( public_path($gate->image_gate_2))
                     ){
-                        $imagePath1 =  config('globals.APP_IMAGES_URL').$gate->image_gate_2;
+                        $imagePath1 =  config('globals.APP_IMAGES_LOCALE_PATH').$gate->image_gate_2;
                     }
                     if ($imagePath1 != '') {
 
@@ -180,7 +180,7 @@ class SubstationPembersihanController extends Controller
                     $advertiseSheet->mergeCells('B'.$g.':H'.$k);
                     $advertiseSheet->mergeCells('I'.$g.':O'.$k);
 
-                    $imagePath = config('globals.APP_IMAGES_URL').$advertise->image_advertisement_before_1;
+                    $imagePath = config('globals.APP_IMAGES_LOCALE_PATH').$advertise->image_advertisement_before_1;
                     if ($advertise->image_advertisement_before_1 != ''
                     // && file_exists($imagePath)
                     )
@@ -193,7 +193,7 @@ class SubstationPembersihanController extends Controller
                         $image->setWorksheet($advertiseSheet);
                     }
 
-                    $imagePath1 = config('globals.APP_IMAGES_URL').$advertise->image_advertisement_after_1;
+                    $imagePath1 = config('globals.APP_IMAGES_LOCALE_PATH').$advertise->image_advertisement_after_1;
                     if ($advertise->image_advertisement_after_1 !=''
                     // && file_exists($imagePath1)
                     )
