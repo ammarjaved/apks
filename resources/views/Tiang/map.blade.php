@@ -689,14 +689,18 @@
                                                     </a>
                                                 </td>
                                                 <td>
-                                                    <a href="{{config('globals.APP_IMAGES_URL')}}${element.from_pole_image_1}" target="_blank" />
+                                                    ${element.from_pole_image_1 !== null && element.from_pole_image_1 !== 'undefined' ? `
+                                                    <a href="{{config('globals.APP_IMAGES_URL')}}${element.from_pole_image_1}" target="_blank">
                                                         <img src="{{config('globals.APP_IMAGES_URL')}}${element.from_pole_image_1}" style="height:50px;" />
                                                     </a>
+                                                    ` : ''}
                                                 </td>
                                                 <td>
-                                                    <a href="{{config('globals.APP_IMAGES_URL')}}${element.from_pole_image_2}" target="_blank" />
-                                                        <img src="{{config('globals.APP_IMAGES_URL')}}${element.from_pole_image_2}" style="height:50px;"  />
+                                                    ${element.from_pole_image_2 !== null && element.from_pole_image_2 !== 'undefined' ? `
+                                                    <a href="{{config('globals.APP_IMAGES_URL')}}${element.from_pole_image_2}" target="_blank">
+                                                        <img src="{{config('globals.APP_IMAGES_URL')}}${element.from_pole_image_2}" style="height:50px;" />
                                                     </a>
+                                                    ` : ''}
                                                 </td>
                                                 <td>
                                                     <div class='d-flex'>
