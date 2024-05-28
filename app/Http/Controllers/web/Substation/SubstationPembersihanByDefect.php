@@ -23,6 +23,7 @@ class SubstationPembersihanByDefect extends Controller
 
     public function pembersihan(Request $req) {
 
+
         try {
             if (empty($req->defect)) {
                 return redirect()->back()->with('failed', 'Request Failed Select Defect');
@@ -33,6 +34,8 @@ class SubstationPembersihanByDefect extends Controller
         // return $defect;
         $query = $this->filter(Substation::query() , 'visit_date' , $req)
                     ->where('qa_status', 'Accept')
+                    ->whereNotNull($images[0])
+                    ->whereNotNull($images[1])
                     ->whereRaw("($defect)::text IN ('true', 'Yes')");
         $totalCounts = clone $query;
         $totalCounts = $totalCounts->selectRaw('visit_date, COUNT(*) as count')
@@ -91,6 +94,7 @@ class SubstationPembersihanByDefect extends Controller
                 $sr = 1;
                 foreach ($advertisePoster as $advertise)
                 {
+
                     $advertiseSheet->mergeCells('B'.$g.':H'.$g);
                     $advertiseSheet->setCellValue('B'.$g, 'SEBELUM');
 
@@ -103,9 +107,8 @@ class SubstationPembersihanByDefect extends Controller
                     $advertiseSheet->mergeCells('B'.$g.':H'.$k);
                     $advertiseSheet->mergeCells('I'.$g.':O'.$k);
 
-                    $imagePath = config('globals.APP_IMAGES_URL').$advertise->image_1;
-                    if ($advertise->image_1 != '' //&& file_exists($imagePath)
-                    )
+                    $imagePath = config('globals.APP_IMAGES_LOCALE_PATH').$advertise->image_1;
+                    if ($advertise->image_1 != '' && file_exists($imagePath))
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
@@ -115,9 +118,8 @@ class SubstationPembersihanByDefect extends Controller
                         $image->setWorksheet($advertiseSheet);
                     }
 
-                    $imagePath1 = config('globals.APP_IMAGES_URL').$advertise->image_2;
-                    if ($advertise->image_2 !='' //&& file_exists($imagePath1)
-                    )
+                    $imagePath1 = config('globals.APP_IMAGES_LOCALE_PATH').$advertise->image_2;
+                    if ($advertise->image_2 !='' && file_exists($imagePath1) )
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath1);
@@ -126,7 +128,7 @@ class SubstationPembersihanByDefect extends Controller
                         $image1->setHeight(300); // Set the height of the image (adjust as needed)
                         $image1->setWorksheet($advertiseSheet);
                     }
-
+                    // return $advertise->image_2;
                     $g += 16;
                     // return $g;
                     $advertiseSheet->mergeCells('B'.$g.':O'.$g+3);
@@ -149,6 +151,7 @@ class SubstationPembersihanByDefect extends Controller
             return response()->download(public_path('assets/updated-excels/') . $filename)->deleteFileAfterSend(true);
         //code...
         } catch (\Throwable $th) {
+            return $th->getMessage();
             return redirect()->back()->with('failed', 'Request Failed');
         }
 

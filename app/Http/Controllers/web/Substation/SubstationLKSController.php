@@ -122,21 +122,18 @@ class SubstationLKSController extends Controller
 
 
             $fpdf->Cell(80, 6, 'Nama : '.$row->name,0);
-            if ($row->substation_image_1 != ''
-            // && file_exists(public_path($row->substation_image_1))
-            )
+            $substation_image_1 = config('globals.APP_IMAGES_LOCALE_PATH').$row->substation_image_1;
+            if ($row->substation_image_1 != '' && file_exists($substation_image_1) )
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->substation_image_1, $fpdf->GetX(), $fpdf->GetY(), 40, 45);
+                $fpdf->Image($substation_image_1, $fpdf->GetX(), $fpdf->GetY(), 40, 45);
             }
             $fpdf->Cell(120,6);
             // $fpdf->Ln();
 
-
-            if ($row->substation_image_2 != ''
-            // && file_exists(public_path($row->substation_image_2))
-            )
+            $substation_image_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->substation_image_2;
+            if ($row->substation_image_2 != '' && file_exists($substation_image_2) )
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->substation_image_2, $fpdf->GetX(), $fpdf->GetY(), 40, 45);
+                $fpdf->Image($substation_image_2, $fpdf->GetX(), $fpdf->GetY(), 40, 45);
             }
             $fpdf->Ln();
             $fpdf->Cell(50, 6, 'Tarikh Lawatan : '.$row->visit_date,0,1);          //VISIT  DATE
@@ -206,55 +203,53 @@ class SubstationLKSController extends Controller
 
 
 
-
-            if ($row->image_gate != ''
-            // && file_exists(public_path($row->image_gate))
-            )
+            $image_gate = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_gate;
+            if ($row->image_gate != '' && file_exists($image_gate))
             {
                 $fpdf->Cell(7, 25);
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_gate, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image($image_gate, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Cell(29, 25);
-
 
             if($row->other_gate == 'Ya'){
-            if ($row->other_image != ''
-            // && file_exists(public_path($row->other_image))
-            )
-            {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->other_image, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
-            }
-            $fpdf->Cell(29, 25);
+                $other_image = config('globals.APP_IMAGES_LOCALE_PATH').$row->other_image;
+
+                if ($row->other_image != '' && file_exists($other_image))
+                {
+                    $fpdf->Image(config('globals.APP_IMAGES_URL').$row->other_image, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                }
+                $fpdf->Cell(29, 25);
             }
 
 
 
             $fpdf->Cell(4, 25);
-            if ($row->image_grass != ''
-            //  && file_exists(public_path($row->image_grass))
-            )
+
+            $image_grass = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_grass;
+
+            if ($row->image_grass != ''  && file_exists($image_grass))
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_grass, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image($image_grass, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Cell(36, 25);
 
 
             $fpdf->Cell(4, 25);
-            if ($row->image_tree_branches !=''
-            // && file_exists(public_path($row->image_tree_branches))
-            )
+            $image_tree_branches = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_tree_branches;
+
+            if ($row->image_tree_branches !='' && file_exists($image_tree_branches))
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_tree_branches, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image($image_tree_branches, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Cell(26, 25);
 
 
             $fpdf->Cell(20, 25);
-            if ($row->image_building !=''
-            // && file_exists(public_path($row->image_building))
-            )
+            $image_building = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_building;
+
+            if ($row->image_building !=''  && file_exists($image_building))
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_building, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image($image_building, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Cell(50, 25);
 
@@ -263,11 +258,11 @@ class SubstationLKSController extends Controller
 
 
             $fpdf->Cell(4, 25);
-            if ($row->image_advertisement_before_1 != ''
-            // && file_exists(public_path($row->image_advertisement_before_1))
-            )
+            $image_advertisement_before_1 = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_advertisement_before_1;
+
+            if ($row->image_advertisement_before_1 != '' && file_exists($image_advertisement_before_1))
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_advertisement_before_1, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
+                $fpdf->Image($image_advertisement_before_1, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Cell(55, 25);
 
