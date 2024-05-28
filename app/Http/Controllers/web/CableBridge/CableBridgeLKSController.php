@@ -66,19 +66,19 @@ class CableBridgeLKSController extends Controller
             $fpdf->Ln();
 
             $fpdf->Cell(155, 6, 'ID : CB-' . $row->id);
-            if ($row->cable_bridge_image_1 != '' //&& file_exists(public_path($row->cable_bridge_image_1))
-            )
+
+            $cable_bridge_image_1 = config('globals.APP_IMAGES_LOCALE_PATH').$row->cable_bridge_image_1;
+            if ($row->cable_bridge_image_1 != '' && file_exists($cable_bridge_image_1))
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->cable_bridge_image_1, $fpdf->GetX(), $fpdf->GetY(), 40, 40);
+                $fpdf->Image($cable_bridge_image_1, $fpdf->GetX(), $fpdf->GetY(), 40, 40);
             }
             $fpdf->Cell(50,6);
             // $fpdf->Ln();
 
-
-            if ($row->cable_bridge_image_2 != '' //&& file_exists(public_path($row->cable_bridge_image_2))
-            )
+            $cable_bridge_image_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->cable_bridge_image_2;
+            if ($row->cable_bridge_image_2 != '' && file_exists($cable_bridge_image_2))
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->cable_bridge_image_2, $fpdf->GetX(), $fpdf->GetY(), 40, 40);
+                $fpdf->Image($cable_bridge_image_2, $fpdf->GetX(), $fpdf->GetY(), 40, 40);
             }
             $fpdf->Ln();
             $fpdf->Cell(60, 6, 'Tarikh Lawatan : ' . $row->visit_date);                         //VISIT  DATE
@@ -119,9 +119,10 @@ class CableBridgeLKSController extends Controller
 
             $fpdf->Ln();
 
-            if ($row->image_vandalism != '' //&& file_exists(public_path($row->image_vandalism))
-            ) {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_vandalism, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
+            $image_vandalism = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_vandalism;
+            if ($row->image_vandalism != '' && file_exists($image_vandalism))
+            {
+                $fpdf->Image($image_vandalism, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
                 $fpdf->Cell(27);
             } else {
                 $fpdf->Cell(27, 7, '');
@@ -129,73 +130,82 @@ class CableBridgeLKSController extends Controller
 
             // $fpdf->Ln();
 
-            if ($row->image_vandalism_2 != '' //&& file_exists(public_path($row->image_vandalism_2))
-            ) {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_vandalism_2, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
+            $image_vandalism_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_vandalism_2;
+            if ($row->image_vandalism_2 != '' && file_exists($image_vandalism_2))
+            {
+                $fpdf->Image($image_vandalism_2, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
                 $fpdf->Cell(27);
             } else {
                 $fpdf->Cell(27, 7, '');
             }
 
-            if ($row->image_collapsed != ''// && file_exists(public_path($row->image_collapsed))
-            ) {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_collapsed, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
+            $image_collapsed = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_collapsed;
+            if ($row->image_collapsed != '' && file_exists($image_collapsed))
+            {
+                $fpdf->Image($image_collapsed, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
                 $fpdf->Cell(27);
             } else {
                 $fpdf->Cell(27, 7, '');
             }
 
-            if ($row->image_collapsed_2 != '' //&& file_exists(public_path($row->image_collapsed_2))
-            ) {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_collapsed_2, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
+            $image_collapsed_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_collapsed_2;
+            if ($row->image_collapsed_2 != '' && file_exists($image_collapsed_2))
+            {
+                $fpdf->Image($image_collapsed_2, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
                 $fpdf->Cell(27);
             } else {
                 $fpdf->Cell(27, 7, '');
             }
 
-            if ($row->image_rust != '' //&& file_exists(public_path($row->image_rust))
-            ) {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_rust, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
+            $image_rust = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_rust;
+            if ($row->image_rust != '' && file_exists($image_rust))
+            {
+                $fpdf->Image($image_rust, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
                 $fpdf->Cell(27);
             } else {
                 $fpdf->Cell(27, 7, '');
             }
 
-            if ($row->image_rust_2 != '' //&& file_exists(public_path($row->image_rust_2))
-            ) {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_rust_2, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
+            $image_rust_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_rust_2;
+            if ($row->image_rust_2 != '' && file_exists($image_rust_2))
+            {
+                $fpdf->Image($image_rust_2, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
                 $fpdf->Cell(27);
             } else {
                 $fpdf->Cell(27, 7, '');
             }
 
-            if ($row->images_bushes != '' //&& file_exists(public_path($row->images_bushes))
-            ) {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->images_bushes, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
+            $images_bushes = config('globals.APP_IMAGES_LOCALE_PATH').$row->images_bushes;
+            if ($row->images_bushes != '' && file_exists($images_bushes))
+            {
+                $fpdf->Image($images_bushes, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
                 $fpdf->Cell(27);
             } else {
                 $fpdf->Cell(27, 7, '');
             }
 
-            if ($row->images_bushes_2 != '' //&& file_exists(public_path($row->images_bushes_2))
-            ) {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->images_bushes_2, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
+            $images_bushes_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->images_bushes_2;
+            if ($row->images_bushes_2 != '' && file_exists($images_bushes_2))
+            {
+                $fpdf->Image($images_bushes_2, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
                 $fpdf->Cell(27);
             } else {
                 $fpdf->Cell(27, 7, '');
             }
 
-            if ($row->image_pipe != '' //&& file_exists(public_path($row->image_pipe))
-            ) {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_pipe, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
+            $image_pipe = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_pipe;
+            if ($row->image_pipe != '' && file_exists($image_pipe))
+            {
+                $fpdf->Image($image_pipe, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
                 $fpdf->Cell(27);
             } else {
                 $fpdf->Cell(27, 7, '');
             }
 
-            if ($row->image_pipe_2 != '' //&& file_exists(public_path($row->image_pipe_2))
-            ) {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_pipe_2, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
+            $image_pipe_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_pipe_2;
+            if ($row->image_pipe_2 != '' && file_exists($image_pipe_2))
+            {
+                $fpdf->Image($image_pipe_2, $fpdf->GetX(), $fpdf->GetY(), 27, 30);
                 $fpdf->Cell(27);
             } else {
                 $fpdf->Cell(27, 7, '');
