@@ -73,19 +73,17 @@ class LinkBoxLKSController extends Controller
 
             $fpdf->Cell(145, 6, 'ID : LB-'.$row->id );
 
-
-            if ($row->link_box_image_1 != '' //&& file_exists(public_path($row->link_box_image_1))
-            )
+            $link_box_image_1 = config('globals.APP_IMAGES_LOCALE_PATH').$row->link_box_image_1;
+            if ($row->link_box_image_1 != '' && file_exists($link_box_image_1))
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->link_box_image_1, $fpdf->GetX(), $fpdf->GetY(), 30, 30);
+                $fpdf->Image($link_box_image_1, $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             }
             $fpdf->Cell(40,6);
 
-
-            if ($row->link_box_image_2 != '' //&& file_exists(public_path($row->link_box_image_2))
-            )
+            $link_box_image_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->link_box_image_2;
+            if ($row->link_box_image_2 != '' && file_exists($link_box_image_2))
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->link_box_image_2, $fpdf->GetX(), $fpdf->GetY(), 30, 30);
+                $fpdf->Image($link_box_image_2, $fpdf->GetX(), $fpdf->GetY(), 30, 30);
             }
             $fpdf->Ln();
 
@@ -129,11 +127,10 @@ class LinkBoxLKSController extends Controller
 
 
             $fpdf->Ln();
-
-            if ($row->image_cover != '' //&& file_exists(public_path($row->image_cover))
-            )
+            $image_cover = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_cover;
+            if ($row->image_cover != '' && file_exists($image_cover))
             {
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_cover, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+                $fpdf->Image($image_cover, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
                 $fpdf->Cell(23);
 
             }else{
@@ -142,11 +139,11 @@ class LinkBoxLKSController extends Controller
 
 
             // $fpdf->Ln();
+            $image_cover_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_cover_2;
+            if ($row->image_cover_2 != '' && file_exists($image_cover_2))
+            {
 
-            if ($row->image_cover_2 != '' //&& file_exists(public_path($row->image_cover_2))
-            ) {
-
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_cover_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+                $fpdf->Image($image_cover_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
                 $fpdf->Cell(23);
 
             }else{
@@ -154,11 +151,11 @@ class LinkBoxLKSController extends Controller
             }
 
 
+            $image_vandalism = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_vandalism;
+            if ($row->image_vandalism != '' && file_exists($image_vandalism))
+            {
 
-            if ($row->image_vandalism != '' //&& file_exists(public_path($row->image_vandalism))
-            ) {
-
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_vandalism, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+                $fpdf->Image($image_vandalism, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
                 $fpdf->Cell(23);
 
             }else{
@@ -167,11 +164,33 @@ class LinkBoxLKSController extends Controller
 
 
             // $fpdf->Ln();
+            $image_vandalism_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_vandalism_2;
+            if ($row->image_vandalism_2 != '' && file_exists($image_vandalism_2))
+            {
 
-            if ($row->image_vandalism_2 != '' //&& file_exists(public_path($row->image_vandalism_2))
-            ) {
+                $fpdf->Image($image_vandalism_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+                $fpdf->Cell(23);
 
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_vandalism_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+            }else{
+                $fpdf->Cell(23, 7, '');
+            }
+
+            $image_leaning = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_leaning;
+            if ($row->image_leaning != '' && file_exists($image_leaning))
+            {
+
+                $fpdf->Image($image_leaning, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+                $fpdf->Cell(23);
+
+            }else{
+                $fpdf->Cell(23, 7, '');
+            }
+
+            $image_leaning_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_leaning_2;
+            if ($row->image_leaning_2 !='' && file_exists($image_leaning_2))
+            {
+
+                $fpdf->Image($image_leaning_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
                 $fpdf->Cell(23);
 
             }else{
@@ -179,64 +198,46 @@ class LinkBoxLKSController extends Controller
             }
 
 
-            if ($row->image_leaning != '' //&& file_exists(public_path($row->image_leaning))
-            ) {
 
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_leaning, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+
+            $image_rust = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_rust;
+            if ($row->image_rust != '' && file_exists($image_rust))
+            {
+
+                $fpdf->Image($image_rust, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
                 $fpdf->Cell(23);
 
             }else{
                 $fpdf->Cell(23, 7, '');
             }
 
-            if ($row->image_leaning_2 !='' //&& file_exists(public_path($row->image_leaning_2))
-            ) {
+            $image_rust_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_rust_2;
+            if ($row->image_rust_2 != '' && file_exists($image_rust_2))
+            {
 
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_leaning_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+                $fpdf->Image($image_rust_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
                 $fpdf->Cell(23);
 
             }else{
                 $fpdf->Cell(23, 7, '');
             }
 
+            $images_bushes = config('globals.APP_IMAGES_LOCALE_PATH').$row->images_bushes;
+            if ($row->images_bushes != '' && file_exists($images_bushes))
+            {
 
-
-
-
-            if ($row->image_rust != '' //&& file_exists(public_path($row->image_rust))
-            ) {
-
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_rust, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+                $fpdf->Image($images_bushes, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
                 $fpdf->Cell(23);
 
             }else{
                 $fpdf->Cell(23, 7, '');
             }
 
-            if ($row->image_rust_2 != '' //&& file_exists(public_path($row->image_rust_2))
-            ) {
+            $images_bushes_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->images_bushes_2;
+            if ($row->images_bushes_2 != '' && file_exists($images_bushes_2))
+            {
 
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->image_rust_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
-                $fpdf->Cell(23);
-
-            }else{
-                $fpdf->Cell(23, 7, '');
-            }
-
-            if ($row->images_bushes != '' //&& file_exists(public_path($row->images_bushes))
-            ) {
-
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->images_bushes, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
-                $fpdf->Cell(23);
-
-            }else{
-                $fpdf->Cell(23, 7, '');
-            }
-
-            if ($row->images_bushes_2 != '' //&& file_exists(public_path($row->images_bushes_2))
-            ) {
-
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->images_bushes_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+                $fpdf->Image($images_bushes_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
                 $fpdf->Cell(23);
 
             }else{
@@ -244,21 +245,22 @@ class LinkBoxLKSController extends Controller
                 $fpdf->Cell(23, 7, '');
             }
 
+            $images_advertise_poster = config('globals.APP_IMAGES_LOCALE_PATH').$row->images_advertise_poster;
+            if ($row->images_advertise_poster != '' && file_exists($images_advertise_poster))
+            {
 
-            if ($row->images_advertise_poster != '' //&& file_exists(public_path($row->images_advertise_poster))
-            ) {
-
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->images_advertise_poster, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+                $fpdf->Image($images_advertise_poster, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
                 $fpdf->Cell(23);
 
             }else{
                 $fpdf->Cell(23, 7, '');
             }
 
-            if ($row->images_advertise_poster_2 != '' //&& file_exists(public_path($row->images_advertise_poster_2))
-            ) {
+            $images_advertise_poster_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->images_advertise_poster_2;
+            if ($row->images_advertise_poster_2 != '' && file_exists($images_advertise_poster_2))
+            {
 
-                $fpdf->Image(config('globals.APP_IMAGES_URL').$row->images_advertise_poster_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
+                $fpdf->Image($images_advertise_poster_2, $fpdf->GetX(), $fpdf->GetY(), 23, 30);
                 $fpdf->Cell(23);
 
             }else{

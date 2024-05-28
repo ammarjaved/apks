@@ -88,7 +88,7 @@ class TiangPembersihanByDefect extends Controller
                 $g = 4;
                 $sr = 1;
 
-                $imageDestiantionPath = config('globals.APP_IMAGES_URL');
+                $imageDestiantionPath = config('globals.APP_IMAGES_LOCALE_PATH');
                 foreach ($advertisePoster as $advertise)
                 {
                     $advertiseSheet->mergeCells('B'.$g.':H'.$g);
@@ -117,9 +117,7 @@ class TiangPembersihanByDefect extends Controller
                     $advertiseSheet->mergeCells('AD'.$g.':AJ'.$k);
 
                     $imagePath = $imageDestiantionPath.$advertise->pole_image_1;
-                    if ($advertise->pole_image_1 != ''
-                    //  && file_exists($imagePath)
-                    )
+                    if ($advertise->pole_image_1 != '' && file_exists($imagePath))
                     {
                         $image = new Drawing();
                         $image->setPath($imagePath);
@@ -130,8 +128,7 @@ class TiangPembersihanByDefect extends Controller
                     }
 
                     $imagePath1 = $imageDestiantionPath.$advertise->pole_image_2;
-                    if ($advertise->pole_image_2 !='' //&& file_exists($imagePath1)
-                    )
+                    if ($advertise->pole_image_2 !='' && file_exists($imagePath1))
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath1);
@@ -142,8 +139,7 @@ class TiangPembersihanByDefect extends Controller
                     }
 
                     $imagePath2 = $imageDestiantionPath.$advertise->pole_image_3;
-                    if ($advertise->pole_image_3 !='' //&& file_exists($imagePath2)
-                    )
+                    if ($advertise->pole_image_3 !='' && file_exists($imagePath2))
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath2);
@@ -154,8 +150,7 @@ class TiangPembersihanByDefect extends Controller
                     }
 
                     $imagePath3 = $imageDestiantionPath.$advertise->pole_image_4;
-                    if ($advertise->pole_image_4 !='' //&& file_exists($imagePath3)
-                    )
+                    if ($advertise->pole_image_4 !='' && file_exists($imagePath3))
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath3);
@@ -166,8 +161,7 @@ class TiangPembersihanByDefect extends Controller
                     }
 
                     $imagePath4 = $imageDestiantionPath.$advertise->pole_image_5;
-                    if ($advertise->pole_image_5 !='' //&& file_exists($imagePath4)
-                    )
+                    if ($advertise->pole_image_5 !='' && file_exists($imagePath4))
                     {
                         $image1 = new Drawing();
                         $image1->setPath($imagePath4);
