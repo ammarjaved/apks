@@ -42,17 +42,17 @@ class SubstationController extends Controller
 
             return datatables()
                 ->of($result->get())->addColumn('substation_id', function ($row) {
-                    
+
                     return "SUB-" .$row->id;
-                })  
+                })
                 ->make(true);
 
                 // $result->orderBy('visit_date', 'desc');
- 
+
 
                 // $result->orderBy('created_at', 'desc');
                 // $dataTable = new DataTables;
-    
+
                 // $dataTable = $dataTable->eloquent($result)
                 //     ->make(true);
                 //     return $dataTable;
@@ -97,6 +97,7 @@ class SubstationController extends Controller
             Session::flash('success', 'Request Success');
 
         } catch (\Throwable $th) {
+            return $th->getMessage();
             Session::flash('failed', 'Request Failed');
         }
 
@@ -112,7 +113,7 @@ class SubstationController extends Controller
     public function show($language, $id)
     {
         $data = $this->substationRepository->getSubstation($id );
-       
+
         if ($data) {
             return view('substation.show', ['data' => $data, 'disabled' => true]);
         }
@@ -151,10 +152,10 @@ class SubstationController extends Controller
             if (!$data) {
                return abort(404);
             }
-        
+
             $user = Auth::user()->name;
             // $data->updated_by = $user;
-           
+
             $res = $this->substationRepository->store($data, $request);
             $res->update();
         Session::flash('success', 'Request Success');
@@ -193,9 +194,9 @@ class SubstationController extends Controller
         try {
             Substation::find($id)->delete();
             return response()->json(['success'=>true],200);
-        } 
-        catch (\Throwable $th) 
-        { 
+        }
+        catch (\Throwable $th)
+        {
             return response()->json(['success'=>false],400);
         }
     }
@@ -211,7 +212,7 @@ class SubstationController extends Controller
                 $qa_data->reject_remarks = $req->reject_remakrs;
             }
             $user = Auth::user()->name;
-            
+
             $qa_data->qc_by = $user;
             $qa_data->qc_at = now();
 
