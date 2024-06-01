@@ -482,7 +482,7 @@
         <div class="row">
             <div class="col-md-6"><label for="jarak_kelegaan">{{ __('messages.Clearance_Distance') }}</label></div>
             <div class="col-md-6">
-                <input type="number" name="jarak_kelegaan" value="{{ $data->jarak_kelegaan }}" id="jarak_kelegaan" class="form-control">
+                <input type="text" name="jarak_kelegaan" value="{{ $data->jarak_kelegaan }}" id="jarak_kelegaan" class="form-control">
             </div>
         </div>
 
