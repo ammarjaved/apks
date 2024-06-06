@@ -201,19 +201,19 @@
 
                             {{-- POLE SIZE BILL 7.5 --}}
                             <div class="d-flex col-md-4">
-                                <input type="radio" name="size_tiang" value="7.5" id="st7" {{ $data->size_tiang == '7.5' ? 'checked' : '' }}class="  ">
+                                <input type="radio" name="size_tiang" value="7.5" id="st7" {{ $data->size_tiang === '7.5' ? 'checked' : '' }} class="  ">
                                 <label for="st7" class="fw-400"> 7.5</label>
                             </div>
 
                             {{-- POLE SIZE BILL 9 --}}
                             <div class="d-flex col-md-4">
-                                <input type="radio" name="size_tiang" value="9" id="st9" {{ $data->size_tiang == '9' ? 'checked' : '' }} class=" ">
+                                <input type="radio" name="size_tiang" value="9" id="st9" {{ $data->size_tiang === '9' ? 'checked' : '' }} class=" ">
                                 <label for="st9" class="fw-400"> 9</label>
                             </div>
 
                             {{-- POLE SIZE BILL SIZE TIANG --}}
                             <div class="d-flex col-md-4">
-                                <input type="radio" name="size_tiang" value="10" id="st10" {{ $data->size_tiang == '10' ? 'checked' : '' }} class=" ">
+                                <input type="radio" name="size_tiang" value="10" id="st10" {{ $data->size_tiang === '10' ? 'checked' : '' }} class=" ">
                                 <label for="st10" class="fw-400"> 10</label>
                             </div>
                         </div>
