@@ -85,10 +85,10 @@ class SubstationLKSController extends Controller
         // return response()->json($response);
 
         $fpdf->AddPage('L', 'A4');
-        $fpdf->SetFont('Arial', 'B', 22);
+        $fpdf->SetFont('Arial', 'B', 18);
 
-        $fpdf->Cell(180, 25, $req->ba .' ' .$req->visit_date );
-        $fpdf->Ln();
+        $fpdf->Cell(180, 15, $req->ba .' ' .$req->visit_date );
+        //$fpdf->Ln();
         $fpdf->SetFont('Arial', 'B', 16);
 
         $fpdf->Cell(50,7,'Jumlah Rekod',1);
@@ -106,42 +106,46 @@ class SubstationLKSController extends Controller
         $sr_no= 0;
         foreach ($data as $row)
         {
+            // if ( $sr_no > 0) {
+            //     $fpdf->AddPage('L', 'A4');
+            // }
 
-            if ($sr_no % 2 == 1 && $sr_no > 0) {
+            if ($sr_no % 2 == 0 && $sr_no > 0) {
                 $fpdf->AddPage('L', 'A4');
             }
             $sr_no++;
-            $fpdf->Cell(100, 6, 'SR # : '.$sr_no ,0);
+
+            $fpdf->Cell(80, 6, 'SR # : '.$sr_no ,0);
 
             // add substation image 1 and substation image 2
-            $fpdf->Cell(120, 6, 'Pencawang Gambar 1' ,0);
+            $fpdf->Cell(90, 6, 'Pencawang Gambar 1' ,0);
             $fpdf->Cell(100, 6, 'Pencawang Gambar 2' ,0);
             $fpdf->Ln();
 
 
 
 
-            $fpdf->Cell(80, 6, 'Nama : '.$row->name,0);
+            $fpdf->Cell(80, 5, 'Nama : '.$row->name,0);
             $substation_image_1 = config('globals.APP_IMAGES_LOCALE_PATH').$row->substation_image_1;
             if ($row->substation_image_1 != '' && file_exists($substation_image_1) )
             {
-                $fpdf->Image($substation_image_1, $fpdf->GetX(), $fpdf->GetY(), 40, 45);
+                $fpdf->Image($substation_image_1, $fpdf->GetX(), $fpdf->GetY(), 30, 25);
             }
-            $fpdf->Cell(120,6);
+            $fpdf->Cell(90,5);
             // $fpdf->Ln();
 
             $substation_image_2 = config('globals.APP_IMAGES_LOCALE_PATH').$row->substation_image_2;
             if ($row->substation_image_2 != '' && file_exists($substation_image_2) )
             {
-                $fpdf->Image($substation_image_2, $fpdf->GetX(), $fpdf->GetY(), 40, 45);
+                $fpdf->Image($substation_image_2, $fpdf->GetX(), $fpdf->GetY(), 30, 25);
             }
             $fpdf->Ln();
             $fpdf->Cell(50, 6, 'Tarikh Lawatan : '.$row->visit_date,0,1);          //VISIT  DATE
-            $fpdf->Cell(60, 6, 'Koordinat : '.$row->y . ' , ' . $row->x ,0,1);
+            $fpdf->Cell(70, 6, 'Koordinat : '.$row->y . ' , ' . $row->x ,0,1);
             $fpdf->Cell(50, 6, 'Bil Janggal : ' .$row->total_defects,0,1);         // total defects
             $fpdf->Ln();
-            $fpdf->Ln();
-            $fpdf->Ln();
+            //$fpdf->Ln();
+            //$fpdf->Ln();
 
 
 
@@ -162,38 +166,38 @@ class SubstationLKSController extends Controller
 
             $fpdf->Ln();
 
-            $fpdf->Cell(22, 7, 'Tidak Berkunci', 1,0,'L',true);   //unlocked
-            $fpdf->Cell(11, 7, 'Rosak', 1,0,'L',true);    //damaged
-            $fpdf->Cell(27, 7, 'Lain', 1,0,'L',true);      //other
+            $fpdf->Cell(22, 6, 'Tidak Berkunci', 1,0,'L',true);   //unlocked
+            $fpdf->Cell(11, 6, 'Rosak', 1,0,'L',true);    //damaged
+            $fpdf->Cell(27, 6, 'Lain', 1,0,'L',true);      //other
 
-            $fpdf->Cell(40, 7, 'Bersemak/Rumput Panjang', 1,0,'L',true);    //branches in p.e
-            $fpdf->Cell(30, 7, 'Dahan Pokok', 1,0,'L',true);    //branches in p.e
+            $fpdf->Cell(40, 6, 'Bersemak/Rumput Panjang', 1,0,'L',true);    //branches in p.e
+            $fpdf->Cell(30, 6, 'Dahan Pokok', 1,0,'L',true);    //branches in p.e
 
-            $fpdf->Cell(15, 7, 'Bumbung', 1,0,'L',true);   //roof
-            $fpdf->Cell(15, 7, 'Gutter', 1,0,'L',true); //gutter
-            $fpdf->Cell(15, 7, 'Base', 1,0,'L',true);   //base
-            $fpdf->Cell(30, 7, 'Lain', 1,0,'L',true);  //other
+            $fpdf->Cell(15, 6, 'Bumbung', 1,0,'L',true);   //roof
+            $fpdf->Cell(15, 6, 'Gutter', 1,0,'L',true); //gutter
+            $fpdf->Cell(15, 6, 'Base', 1,0,'L',true);   //base
+            $fpdf->Cell(30, 6, 'Lain', 1,0,'L',true);  //other
 
-            $fpdf->Cell(60, 7, '/ Banner', 'RBL', 0,'C',true); //advertisement
+            $fpdf->Cell(60, 6, '/ Banner', 'RBL', 0,'C',true); //advertisement
 
            // $fpdf->Cell(50, 7, '& Menutup Pintu Pencawang atau','RL', 0,'C',true); //GRASS
 
 
             $fpdf->SetFillColor(255, 255, 255);
             $fpdf->Ln();
-            $fpdf->Cell(22, 7, $row->unlocked, 1);
-            $fpdf->Cell(11, 7, $row->demaged, 1);
-            $fpdf->Cell(27, 7, $row->other_gate == 'Ya' ? $row->gate_other_value : '', 1);
+            $fpdf->Cell(22, 6, $row->unlocked, 1);
+            $fpdf->Cell(11, 6, $row->demaged, 1);
+            $fpdf->Cell(27, 6, $row->other_gate == 'Ya' ? $row->gate_other_value : '', 1);
 
-            $fpdf->Cell(40, 7, $row->grass_status =='Yes' ?'Ya' : 'Tidak', 1);
-            $fpdf->Cell(30, 7, $row->tree_branches_status =='Yes' ?'Ya' : 'Tidak', 1);
+            $fpdf->Cell(40, 6, $row->grass_status =='Yes' ?'Ya' : 'Tidak', 1);
+            $fpdf->Cell(30, 6, $row->tree_branches_status =='Yes' ?'Ya' : 'Tidak', 1);
 
-            $fpdf->Cell(15, 7, $row->broken_roof, 1);
-            $fpdf->Cell(15, 7, $row->broken_gutter, 1);
-            $fpdf->Cell(15, 7, $row->broken_base, 1);
-            $fpdf->Cell(30, 7, $row->building_other == 'Ya' ? $row->building_status_other_value : '' , 1);
+            $fpdf->Cell(15, 6, $row->broken_roof, 1);
+            $fpdf->Cell(15, 6, $row->broken_gutter, 1);
+            $fpdf->Cell(15, 6, $row->broken_base, 1);
+            $fpdf->Cell(30, 6, $row->building_other == 'Ya' ? $row->building_status_other_value : '' , 1);
 
-            $fpdf->Cell(60, 7, $row->advertise_poster_status=='Yes' ?'Ya' : 'Tidak', 1);
+            $fpdf->Cell(60, 6, $row->advertise_poster_status=='Yes' ?'Ya' : 'Tidak', 1);
 
 
             $fpdf->SetFillColor(169, 169, 169);
@@ -206,7 +210,7 @@ class SubstationLKSController extends Controller
             $image_gate = config('globals.APP_IMAGES_LOCALE_PATH').$row->image_gate;
             if ($row->image_gate != '' && file_exists($image_gate))
             {
-                $fpdf->Cell(7, 25);
+                $fpdf->Cell(6, 25);
                 $fpdf->Image($image_gate, $fpdf->GetX(), $fpdf->GetY(), 20, 20);
             }
             $fpdf->Cell(29, 25);

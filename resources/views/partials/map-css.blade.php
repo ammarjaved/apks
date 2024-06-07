@@ -86,6 +86,13 @@
         border-color: #FF0000;
     }
 
+
+    input[type="radio"].kiv {
+
+    background-color: #000000;
+    border-color: #000000;
+    }
+
     input[type="radio"]:checked.reject {
         background-color: #FF0000;
         border-color: #FF0000;

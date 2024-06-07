@@ -137,6 +137,12 @@
                             onchange="selectLayer(this.value)" class="reject">
                         <label for="select_layer_reject">Reject </label>
                     </div>
+
+                    <div class=" mx-4">
+                        <input type="radio" name="select_layer" id="select_layer_kiv" value="sub_kiv"
+                            onchange="selectLayer(this.value)" class="kiv">
+                        <label for="select_layer_reject">KIV </label>
+                    </div>
                 {{-- @endif --}}
 
                 <div class=" mx-4">
@@ -795,6 +801,8 @@
             boundary.bringToFront()
 
 
+
+
             if (pano_layer !== '') {
                 map.removeLayer(pano_layer)
             }
@@ -843,6 +851,21 @@
 
             map.addLayer(substation_without_defects)
             substation_without_defects.bringToFront()
+
+
+            if (kiv != '') {
+                map.removeLayer(kiv)
+            }
+            kiv = L.tileLayer.wms("http://121.121.232.54:7090/geoserver/cite/wms", {
+                layers: 'cite:sub_kiv',
+                format: 'image/png',
+                maxZoom: 21,
+                transparent: true
+            }, {
+                buffer: 10
+            })
+            map.addLayer(kiv)
+            kiv.bringToFront()
 
 
 
@@ -959,6 +982,7 @@
                     'With defects': substation_with_defects,
                     'Without defects': substation_without_defects,
                     'Unsurveyed': unservey,
+                    'KIV':kiv,
                     '5_x_5_grid':g5_x_5_grid,
                     'Work Package': work_package,
                     'Pending': sub_pending,

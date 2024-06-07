@@ -71,6 +71,7 @@ var unservey = '';
 var pano_layer = '';
 
 var work_package = '';
+var kiv='';
 
 
 
@@ -136,6 +137,12 @@ var g5_x_5_grid = '';
                 sel_lyr = sub_pending;
 
             }
+
+            else if (param == 'sub_kiv') {
+                sel_lyr = kiv;
+
+            }
+
             else if (param == 'substation_without_defects') {
                 sel_lyr = substation_without_defects;
 
@@ -230,7 +237,7 @@ var g5_x_5_grid = '';
 
             }
 
-            
+
             else if (param == 'savt_unsurveyed') {
                 sel_lyr = savt_unsurveyed;
 

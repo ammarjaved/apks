@@ -60,6 +60,16 @@
 
                             @csrf
 
+
+                            <div class="row ">
+                                <div class="col-md-4"><label for="id">Permission Status </label></div>
+                                <div class="col-md-4">
+                                    <input type="text" value="{{ $data->is_surveyed }}" disabled
+                                        class="form-control disabled">
+                                </div>
+                            </div>
+
+
                             <div class="row ">
                                 <div class="col-md-4"><label for="id">ID </label></div>
                                 <div class="col-md-4">
@@ -90,6 +100,7 @@
                                         <option value="{{ $data->qa_status }}" hidden>{{ $data->qa_status }}</option>
                                         <option value="Accept">Accept</option>
                                         <option value="Reject">Reject</option>
+                                        <option value="KIV">KIV</option>
                                     </select>
                                 </div>
                             </div>
@@ -123,13 +134,13 @@
 @section('script')
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.15.0/jquery.validate.js"></script>
     <script>
-       
+
         $(document).ready(function() {
             $("#myForm").validate();
         });
 
 
-        function onChangeQa(status) 
+        function onChangeQa(status)
         {
             if (status === 'Accept') {
                 $('#reject-reason').addClass('d-none');
@@ -137,9 +148,9 @@
                 $('#reject-reason').removeClass('d-none');
             }
         }
-       
 
-        function getStatus(event) 
+
+        function getStatus(event)
         {
             var val = event.value;
 
@@ -151,7 +162,7 @@
         }
 
 
-        function bulidingStatus(event) 
+        function bulidingStatus(event)
         {
             var val = event.value;
 
@@ -162,9 +173,9 @@
             }
         }
 
-        
+
          // Function to remove a record
-         function removeRecord(paramId) 
+         function removeRecord(paramId)
          {
             var confrim = confirm('Are you sure?')
             if (confrim) {
